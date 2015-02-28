@@ -25,7 +25,7 @@
     "buildArgs": "--global react:window.React"
   },
   "config":{
-    "port": 8000
+    "port": 8001
   },
   "scripts": {
     "example": "webpack -d && rc-tools run jsx2html",
