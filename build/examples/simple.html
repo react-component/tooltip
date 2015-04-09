@@ -241,6 +241,10 @@ var Test = React.createClass({
     });
   },
 
+  preventDefault(e){
+    e.preventDefault();
+  },
+
   render() {
     console.log(this.state);
     var trigger = this.state.trigger;
@@ -278,7 +282,7 @@ var Test = React.createClass({
         <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span> <span class="hljs-attribute">placement</span>=<span class="hljs-value">{this.state.placement}</span>
           <span class="hljs-attribute">trigger</span>=<span class="hljs-value">{Object.keys(this.state.trigger)}</span>
           <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{&lt;span</span>&gt;</span>i am a tooltip<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>} transitionName={this.state.transitionName}&gt;
-          <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">'#'</span>&gt;</span>trigger<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">'#'</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{this.preventDefault}</span>&gt;</span>trigger<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>;
