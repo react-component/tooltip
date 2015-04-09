@@ -57,6 +57,10 @@ var Test = React.createClass({
     });
   },
 
+  preventDefault(e){
+    e.preventDefault();
+  },
+
   render() {
     console.log(this.state);
     var trigger = this.state.trigger;
@@ -94,7 +98,7 @@ var Test = React.createClass({
         <Tooltip placement={this.state.placement}
           trigger={Object.keys(this.state.trigger)}
           overlay={<span>i am a tooltip</span>} transitionName={this.state.transitionName}>
-          <a href='#'>trigger</a>
+          <a href='#' onClick={this.preventDefault}>trigger</a>
         </Tooltip>
       </div>
     </div>;
