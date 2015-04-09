@@ -29,7 +29,7 @@ tooltip ui component for react
 
 ## Screenshots
 
-<img src="http://gtms03.alicdn.com/tps/i3/TB1NQUSHpXXXXaUXFXXlQqyZXXX-1312-572.png" width="288"/>
+<img src="http://gtms03.alicdn.com/tps/i3/TB1NQUSHpXXXXaUXFXXlQqyZXXX-1312-572.png" width="600"/>
 
 ## Feature
 
