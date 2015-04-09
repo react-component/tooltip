@@ -1,1 +1,1 @@
-module.exports = require('./lib/Tip');
+module.exports = require('./lib/Tooltip');
