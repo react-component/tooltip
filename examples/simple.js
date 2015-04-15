@@ -3,26 +3,7 @@ var Tooltip = require('rc-tooltip');
 require('rc-tooltip/assets/bootstrap.css');
 var assign = require('object-assign');
 var packageJson = require('../package.json');
-
-var style = `
-.example-enter {
-opacity: 0.01;
-transition: opacity 0.4s ease-in;
-}
-
-.example-enter.example-enter-active {
-  opacity: 1;
-}
-
-.example-leave {
-  opacity: 1;
-  transition: opacity 0.4s ease-in;
-}
-
-.example-leave.example-leave-active {
-  opacity: 0.01;
-}
-`;
+require('./anim.css');
 
 var Test = React.createClass({
   getInitialState() {
@@ -66,7 +47,6 @@ var Test = React.createClass({
     var trigger = this.state.trigger;
     return <div >
       <h1>{packageJson.name}@{packageJson.version}</h1>
-      <style dangerouslySetInnerHTML={{__html: style}}></style>
       <div style={{margin: '10px 20px'}}>
         <label>
           placement:
@@ -79,7 +59,7 @@ var Test = React.createClass({
         </label>
       &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
-          <input value='example' type='checkbox' onChange={this.onTransitionChange}/>
+          <input value='zoom-down' type='checkbox' onChange={this.onTransitionChange}/>
           transitionName
         </label>
 
