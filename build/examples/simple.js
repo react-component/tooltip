@@ -11,29 +11,10 @@ webpackJsonp([0,1],[
 
 	var React = __webpack_require__(2);
 	var Tooltip = __webpack_require__(3);
-	__webpack_require__(7);
+	__webpack_require__(8);
 	var assign = __webpack_require__(4);
 	var packageJson = __webpack_require__(5);
-
-	var style = ("\n.example-enter {\nopacity: 0.01;\ntransition: opacity 0.4s ease-in;\n}\n\n.example-enter.example-enter-active {\n  opacity: 1;\n}\n\n.example-leave {\n  opacity: 1;\n  transition: opacity 0.4s ease-in;\n}\n\n.example-leave.example-leave-active {\n  opacity: 0.01;\n}\n"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	);
+	__webpack_require__(6);
 
 	var Test = React.createClass({displayName: "Test",
 	  getInitialState:function() {
@@ -77,7 +58,6 @@ webpackJsonp([0,1],[
 	    var trigger = this.state.trigger;
 	    return React.createElement("div", null, 
 	      React.createElement("h1", null, packageJson.name, "@", packageJson.version), 
-	      React.createElement("style", {dangerouslySetInnerHTML: {__html: style}}), 
 	      React.createElement("div", {style: {margin: '10px 20px'}}, 
 	        React.createElement("label", null, 
 	          "placement:", 
@@ -90,7 +70,7 @@ webpackJsonp([0,1],[
 	        ), 
 	      "    ", 
 	        React.createElement("label", null, 
-	          React.createElement("input", {value: "example", type: "checkbox", onChange: this.onTransitionChange}), 
+	          React.createElement("input", {value: "zoom-down", type: "checkbox", onChange: this.onTransitionChange}), 
 	          "transitionName"
 	        ), 
 
@@ -129,7 +109,7 @@ webpackJsonp([0,1],[
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(6);
+	module.exports = __webpack_require__(10);
 
 
 /***/ },
@@ -240,16 +220,76 @@ webpackJsonp([0,1],[
 /* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(7);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(11)(content, {});
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		module.hot.accept("!!/Users/yiminghe/code/react-components/tooltip/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/yiminghe/code/react-components/tooltip/examples/anim.css", function() {
+			var newContent = require("!!/Users/yiminghe/code/react-components/tooltip/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/yiminghe/code/react-components/tooltip/examples/anim.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(12)();
+	exports.push([module.id, ".in-enter{opacity:0.01;transition:opacity 4s ease-in}.in-enter.in-enter-active{opacity:1}.in-leave{opacity:1;transition:opacity 4s ease-in}.in-leave.in-leave-active{opacity:0.01}.zoom-down{-webkit-animation-duration:0.3s;animation-duration:0.3s;-webkit-animation-fill-mode:both;animation-fill-mode:both}.zoom-down-enter{opacity:0;-webkit-animation-duration:0.3s;animation-duration:0.3s;-webkit-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-timing-function:cubic-bezier(.18, .89, .32, 1.28);animation-timing-function:cubic-bezier(.18, .89, .32, 1.28);-webkit-animation-play-state:paused;animation-play-state:paused}.zoom-down-leave{-webkit-animation-duration:0.3s;animation-duration:0.3s;-webkit-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-timing-function:cubic-bezier(.6, -0.3, .74, .05);animation-timing-function:cubic-bezier(.6, -0.3, .74, .05);-webkit-animation-play-state:paused;animation-play-state:paused}.zoom-down-enter.zoom-down-enter-active{-webkit-animation-name:zoomDownIn;animation-name:zoomDownIn;-webkit-animation-play-state:running;animation-play-state:running}.zoom-down-leave.zoom-down-leave-active{-webkit-animation-name:zoomDownOut;animation-name:zoomDownOut;-webkit-animation-play-state:running;animation-play-state:running}@-webkit-keyframes zoomIn{0%{opacity:0;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}100%{opacity:1;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}}@keyframes zoomIn{0%{opacity:0;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}100%{opacity:1;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}}@-webkit-keyframes zoomOut{0%{opacity:1;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}100%{opacity:0;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}}@keyframes zoomOut{0%{opacity:1;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}100%{opacity:0;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}}@-webkit-keyframes zoomUpIn{0%{opacity:0;-webkit-transform-origin:50% 0%;transform-origin:50% 0%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}100%{opacity:1;-webkit-transform-origin:50% 0%;transform-origin:50% 0%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}}@keyframes zoomUpIn{0%{opacity:0;-webkit-transform-origin:50% 0%;transform-origin:50% 0%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}100%{opacity:1;-webkit-transform-origin:50% 0%;transform-origin:50% 0%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}}@-webkit-keyframes zoomUpOut{0%{opacity:1;-webkit-transform-origin:50% 0%;transform-origin:50% 0%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}100%{opacity:0;-webkit-transform-origin:50% 0%;transform-origin:50% 0%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}}@keyframes zoomUpOut{0%{opacity:1;-webkit-transform-origin:50% 0%;transform-origin:50% 0%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}100%{opacity:0;-webkit-transform-origin:50% 0%;transform-origin:50% 0%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}}@-webkit-keyframes zoomLeftIn{0%{opacity:0;-webkit-transform-origin:0% 50%;transform-origin:0% 50%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}100%{opacity:1;-webkit-transform-origin:0% 50%;transform-origin:0% 50%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}}@keyframes zoomLeftIn{0%{opacity:0;-webkit-transform-origin:0% 50%;transform-origin:0% 50%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}100%{opacity:1;-webkit-transform-origin:0% 50%;transform-origin:0% 50%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}}@-webkit-keyframes zoomLeftOut{0%{opacity:1;-webkit-transform-origin:0% 50%;transform-origin:0% 50%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}100%{opacity:0;-webkit-transform-origin:0% 50%;transform-origin:0% 50%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}}@keyframes zoomLeftOut{0%{opacity:1;-webkit-transform-origin:0% 50%;transform-origin:0% 50%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}100%{opacity:0;-webkit-transform-origin:0% 50%;transform-origin:0% 50%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}}@-webkit-keyframes zoomRightIn{0%{opacity:0;-webkit-transform-origin:100% 50%;transform-origin:100% 50%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}100%{opacity:1;-webkit-transform-origin:100% 50%;transform-origin:100% 50%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}}@keyframes zoomRightIn{0%{opacity:0;-webkit-transform-origin:100% 50%;transform-origin:100% 50%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}100%{opacity:1;-webkit-transform-origin:100% 50%;transform-origin:100% 50%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}}@-webkit-keyframes zoomRightOut{0%{opacity:1;-webkit-transform-origin:100% 50%;transform-origin:100% 50%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}100%{opacity:0;-webkit-transform-origin:100% 50%;transform-origin:100% 50%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}}@keyframes zoomRightOut{0%{opacity:1;-webkit-transform-origin:100% 50%;transform-origin:100% 50%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}100%{opacity:0;-webkit-transform-origin:100% 50%;transform-origin:100% 50%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}}@-webkit-keyframes zoomDownIn{0%{opacity:0;-webkit-transform-origin:50% 100%;transform-origin:50% 100%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}100%{opacity:1;-webkit-transform-origin:50% 100%;transform-origin:50% 100%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}}@keyframes zoomDownIn{0%{opacity:0;-webkit-transform-origin:50% 100%;transform-origin:50% 100%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}100%{opacity:1;-webkit-transform-origin:50% 100%;transform-origin:50% 100%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}}@-webkit-keyframes zoomDownOut{0%{opacity:1;-webkit-transform-origin:50% 100%;transform-origin:50% 100%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}100%{opacity:0;-webkit-transform-origin:50% 100%;transform-origin:50% 100%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}}@keyframes zoomDownOut{0%{opacity:1;-webkit-transform-origin:50% 100%;transform-origin:50% 100%;-webkit-transform:scale(1, 1);transform:scale(1, 1)}100%{opacity:0;-webkit-transform-origin:50% 100%;transform-origin:50% 100%;-webkit-transform:scale(0, 0);transform:scale(0, 0)}}", ""]);
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(9);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(11)(content, {});
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		module.hot.accept("!!/Users/yiminghe/code/react-components/tooltip/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/yiminghe/code/react-components/tooltip/assets/bootstrap.css", function() {
+			var newContent = require("!!/Users/yiminghe/code/react-components/tooltip/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/yiminghe/code/react-components/tooltip/assets/bootstrap.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(12)();
+	exports.push([module.id, ".rc-tooltip {\n  position: absolute;\n  left: -9999px;\n  top: -9999px;\n  z-index: 1070;\n  display: block;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-size: 12px;\n  font-weight: normal;\n  line-height: 1.4;\n}\n.rc-tooltip-placement-left {\n  margin-left: -3px;\n  padding: 0 5px;\n}\n.rc-tooltip-placement-top {\n  margin-top: -3px;\n  padding: 5px 0;\n}\n.rc-tooltip-placement-bottom {\n  margin-top: 3px;\n  padding: 5px 0;\n}\n.rc-tooltip-placement-right {\n  margin-left: 3px;\n  padding: 0 5px;\n}\n.rc-tooltip-arrow {\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-color: transparent;\n  border-style: solid;\n}\n.rc-tooltip-placement-right > .rc-tooltip-arrow {\n  top: 50%;\n  left: 0;\n  margin-top: -5px;\n  border-width: 5px 5px 5px 0;\n  border-right-color: #000000;\n}\n.rc-tooltip-placement-bottom > .rc-tooltip-arrow {\n  top: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 0 5px 5px;\n  border-bottom-color: #000000;\n}\n.rc-tooltip-placement-top > .rc-tooltip-arrow {\n  bottom: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 5px 5px 0;\n  border-top-color: #000000;\n}\n.rc-tooltip-placement-left > .rc-tooltip-arrow {\n  top: 50%;\n  right: 0;\n  margin-top: -5px;\n  border-width: 5px 0 5px 5px;\n  border-left-color: #000000;\n}\n.rc-tooltip-inner {\n  padding: 3px 8px;\n  color: #ffffff;\n  text-align: center;\n  text-decoration: none;\n  background-color: #000000;\n  border-radius: 4px;\n}\n", ""]);
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/** @jsx React.DOM */
 
 	/**
 	 * @author yiminghe@gmail.com
 	 */
 	var React = __webpack_require__(2);
-	var rcUtil = __webpack_require__(12);
+	var rcUtil = __webpack_require__(14);
 	var createChainedFunction = rcUtil.createChainedFunction;
-	var domAlign = __webpack_require__(13);
-	var Popup = __webpack_require__(10);
+	var domAlign = __webpack_require__(15);
+	var Popup = __webpack_require__(13);
 
 	var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____Class0.hasOwnProperty(____Class0____Key)){Tooltip[____Class0____Key]=____Class0[____Class0____Key];}}var ____SuperProtoOf____Class0=____Class0===null?null:____Class0.prototype;Tooltip.prototype=Object.create(____SuperProtoOf____Class0);Tooltip.prototype.constructor=Tooltip;Tooltip.__superConstructor__=____Class0;
 	  function Tooltip(props) {"use strict";
@@ -366,37 +406,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(8);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(9)(content, {});
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		module.hot.accept("!!/Users/yiminghe/code/react-components/tooltip/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/yiminghe/code/react-components/tooltip/assets/bootstrap.css", function() {
-			var newContent = require("!!/Users/yiminghe/code/react-components/tooltip/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/yiminghe/code/react-components/tooltip/assets/bootstrap.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(11)();
-	exports.push([module.id, ".rc-tooltip {\n  position: absolute;\n  left: -9999px;\n  top: -9999px;\n  z-index: 1070;\n  display: block;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-size: 12px;\n  font-weight: normal;\n  line-height: 1.4;\n}\n.rc-tooltip-placement-left {\n  margin-left: -3px;\n  padding: 0 5px;\n}\n.rc-tooltip-placement-top {\n  margin-top: -3px;\n  padding: 5px 0;\n}\n.rc-tooltip-placement-bottom {\n  margin-top: 3px;\n  padding: 5px 0;\n}\n.rc-tooltip-placement-right {\n  margin-left: 3px;\n  padding: 0 5px;\n}\n.rc-tooltip-arrow {\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-color: transparent;\n  border-style: solid;\n}\n.rc-tooltip-placement-right > .rc-tooltip-arrow {\n  top: 50%;\n  left: 0;\n  margin-top: -5px;\n  border-width: 5px 5px 5px 0;\n  border-right-color: #000000;\n}\n.rc-tooltip-placement-bottom > .rc-tooltip-arrow {\n  top: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 0 5px 5px;\n  border-bottom-color: #000000;\n}\n.rc-tooltip-placement-top > .rc-tooltip-arrow {\n  bottom: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 5px 5px 0;\n  border-top-color: #000000;\n}\n.rc-tooltip-placement-left > .rc-tooltip-arrow {\n  top: 50%;\n  right: 0;\n  margin-top: -5px;\n  border-width: 5px 0 5px 5px;\n  border-left-color: #000000;\n}\n.rc-tooltip-inner {\n  padding: 3px 8px;\n  color: #ffffff;\n  text-align: center;\n  text-decoration: none;\n  background-color: #000000;\n  border-radius: 4px;\n}\n", ""]);
-
-/***/ },
-/* 9 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -592,7 +602,28 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 10 */
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function() {
+		var list = [];
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+		return list;
+	}
+
+/***/ },
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */
@@ -602,7 +633,7 @@ webpackJsonp([0,1],[
 	 */
 
 	var React = __webpack_require__(2);
-	var CSSTransitionGroup = __webpack_require__(14);
+	var CSSTransitionGroup = __webpack_require__(27);
 
 	var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____Class1.hasOwnProperty(____Class1____Key)){Popup[____Class1____Key]=____Class1[____Class1____Key];}}var ____SuperProtoOf____Class1=____Class1===null?null:____Class1.prototype;Popup.prototype=Object.create(____SuperProtoOf____Class1);Popup.prototype.constructor=Popup;Popup.__superConstructor__=____Class1;function Popup(){"use strict";if(____Class1!==null){____Class1.apply(this,arguments);}}
 	  Object.defineProperty(Popup.prototype,"getPlacementCss",{writable:true,configurable:true,value:function() {"use strict";
@@ -645,50 +676,29 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function() {
-		var list = [];
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-		return list;
-	}
-
-/***/ },
-/* 12 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  guid: __webpack_require__(15),
-	  classSet: __webpack_require__(16),
-	  joinClasses: __webpack_require__(17),
-	  KeyCode: __webpack_require__(18),
-	  PureRenderMixin: __webpack_require__(19),
-	  shallowEqual: __webpack_require__(20),
-	  createChainedFunction: __webpack_require__(21),
+	  guid: __webpack_require__(16),
+	  classSet: __webpack_require__(17),
+	  joinClasses: __webpack_require__(18),
+	  KeyCode: __webpack_require__(19),
+	  PureRenderMixin: __webpack_require__(20),
+	  shallowEqual: __webpack_require__(21),
+	  createChainedFunction: __webpack_require__(22),
 	  Dom: {
-	    addEventListener: __webpack_require__(22),
-	    contains: __webpack_require__(23)
+	    addEventListener: __webpack_require__(23),
+	    contains: __webpack_require__(24)
 	  },
 	  Children: {
-	    toArray: __webpack_require__(24)
+	    toArray: __webpack_require__(25)
 	  }
 	};
 
 
 /***/ },
-/* 13 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -696,7 +706,7 @@ webpackJsonp([0,1],[
 	 * @author yiminghe@gmail.com
 	 */
 
-	var utils = __webpack_require__(25);
+	var utils = __webpack_require__(26);
 
 	// http://yiminghe.iteye.com/blog/1124720
 
@@ -1068,14 +1078,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(26);
-
-
-/***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var seed = 0;
@@ -1085,7 +1088,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1130,7 +1133,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1177,7 +1180,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1704,7 +1707,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1720,7 +1723,7 @@ webpackJsonp([0,1],[
 
 	"use strict";
 
-	var shallowEqual = __webpack_require__(20);
+	var shallowEqual = __webpack_require__(21);
 
 	/**
 	 * If your React component's render function is "pure", e.g. it will render the
@@ -1757,7 +1760,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1805,7 +1808,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1832,7 +1835,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function (target, eventType, callback) {
@@ -1855,7 +1858,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function (root, node) {
@@ -1871,7 +1874,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(2);
@@ -1886,7 +1889,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var RE_NUM = /[\-+]?(?:\d*\.|)\d+(?:[eE][\-+]?\d+|)/.source;
@@ -2299,14 +2302,21 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 26 */
+/* 27 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(28);
+
+
+/***/ },
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */
 
 	var React = __webpack_require__(2);
-	var ReactTransitionChildMapping = __webpack_require__(27);
-	var CSSTransitionGroupChild = __webpack_require__(28);
+	var ReactTransitionChildMapping = __webpack_require__(29);
+	var CSSTransitionGroupChild = __webpack_require__(30);
 
 	var CSSTransitionGroup = React.createClass({displayName: "CSSTransitionGroup",
 	  protoTypes: {
@@ -2457,7 +2467,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 27 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	function inChildren(children, child) {
@@ -2518,7 +2528,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 28 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2537,8 +2547,8 @@ webpackJsonp([0,1],[
 
 	var React = __webpack_require__(2);
 
-	var CSSCore = __webpack_require__(29);
-	var ReactTransitionEvents = __webpack_require__(30);
+	var CSSCore = __webpack_require__(31);
+	var ReactTransitionEvents = __webpack_require__(32);
 
 	var TICK = 17;
 
@@ -2626,7 +2636,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 29 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var SPACE = ' ';
@@ -2656,7 +2666,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 30 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
