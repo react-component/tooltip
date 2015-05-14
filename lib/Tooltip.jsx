@@ -87,18 +87,22 @@ class Tooltip extends React.Component {
       if (state.visible) {
         var rootNode = React.findDOMNode(this);
         var tipNode = tooltip.getRootNode();
-        var points = ['cr', 'cl'];
         var placement = this.props.placement;
-        if (placement === 'right') {
-          points = ['cl', 'cr'];
-        } else if (placement === 'top') {
-          points = ['bc', 'tc'];
-        } else if (placement === 'bottom') {
-          points = ['tc', 'bc'];
+        if (placement && placement.points) {
+          domAlign(tipNode, rootNode, placement);
+        } else {
+          var points = ['cr', 'cl'];
+          if (placement === 'right') {
+            points = ['cl', 'cr'];
+          } else if (placement === 'top') {
+            points = ['bc', 'tc'];
+          } else if (placement === 'bottom') {
+            points = ['tc', 'bc'];
+          }
+          domAlign(tipNode, rootNode, {
+            points: points
+          });
         }
-        domAlign(tipNode, rootNode, {
-          points: points
-        });
       }
     });
   }
