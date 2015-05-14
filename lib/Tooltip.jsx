@@ -13,11 +13,22 @@ class Tooltip extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false
+      visible: !!props.defaultVisible
     };
+    if ('visible' in props) {
+      this.state.visible = !!props.visible;
+    }
     ['toggle', 'show', 'hide'].forEach((m)=> {
       this[m] = this[m].bind(this);
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if ('visible' in nextProps) {
+      this.setState({
+        visible: !!nextProps.visible
+      });
+    }
   }
 
   getTipContainer() {
@@ -43,21 +54,27 @@ class Tooltip extends React.Component {
   }
 
   toggle() {
+    if (this.state.visible) {
+      this.hide();
+    } else {
+      this.show();
+    }
+  }
+
+  setVisible(visible) {
     this.setState({
-      visible: !this.state.visible
+      visible: visible
+    }, () => {
+      this.props.onVisibleChange(this.state.visible);
     });
   }
 
   show() {
-    this.setState({
-      visible: true
-    });
+    this.setVisible(true);
   }
 
   hide() {
-    this.setState({
-      visible: false
-    });
+    this.setVisible(false);
   }
 
   componentDidMount() {
@@ -111,11 +128,14 @@ class Tooltip extends React.Component {
 Tooltip.propTypes = {
   trigger: React.PropTypes.arrayOf(React.PropTypes.oneOf(['click', 'hover', 'focus'])),
   placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  onVisibleChange: React.PropTypes.func,
   overlay: React.PropTypes.node.isRequired
 };
 
 Tooltip.defaultProps = {
   prefixCls: 'rc-tooltip',
+  onVisibleChange: function () {
+  },
   placement: 'right',
   trigger: ['hover']
 };

@@ -87,6 +87,24 @@ online example: http://react-component.github.io/tooltip/build/examples/
           <td>same as https://github.com/react-component/css-transition-group</td>
         </tr>
         <tr>
+          <td>onVisibleChange</td>
+          <td>Function</td>
+          <td></td>
+          <td>call when visible is changed</td>
+        </tr>
+        <tr>
+          <td>visible</td>
+          <td>boolean</td>
+          <td></td>
+          <td>whether tooltip is visible</td>
+        </tr>
+        <tr>
+          <td>defaultVisible</td>
+          <td>boolean</td>
+          <td></td>
+          <td>whether tooltip is visible initially</td>
+        </tr>
+        <tr>
           <td>placement</td>
           <td>String</td>
           <td></td>

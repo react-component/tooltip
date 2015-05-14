@@ -38,8 +38,12 @@ var Test = React.createClass({
     });
   },
 
-  preventDefault(e){
+  preventDefault(e) {
     e.preventDefault();
+  },
+
+  onVisibleChange(visible) {
+    console.log('tooltip', visible);
   },
 
   render() {
@@ -77,7 +81,9 @@ var Test = React.createClass({
       <div style={{margin: 100}}>
         <Tooltip placement={this.state.placement}
           trigger={Object.keys(this.state.trigger)}
-          overlay={<span>i am a tooltip</span>} transitionName={this.state.transitionName}>
+          onVisibleChange={this.onVisibleChange}
+          overlay={<span>i am a tooltip</span>}
+          transitionName={this.state.transitionName}>
           <a href='#' onClick={this.preventDefault}>trigger</a>
         </Tooltip>
       </div>
