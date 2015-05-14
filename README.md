@@ -108,7 +108,7 @@ online example: http://react-component.github.io/tooltip/build/examples/
           <td>placement</td>
           <td>String|Object</td>
           <td></td>
-          <td>one of ['left','right','top','bottom'] or alignConfig of [dom-align](https://github.com/yiminghe/dom-align)</td>
+          <td>one of ['left','right','top','bottom'] or alignConfig of [dom-align](https://github.com/yiminghe/dom-align) </td>
         </tr>
         <tr>
           <td>overlay</td>
