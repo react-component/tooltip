@@ -12,7 +12,11 @@ class Popup extends React.Component {
     var props = this.props;
     var prefixCls = props.prefixCls;
     var placement = props.placement;
-    return `${prefixCls}-placement-${placement}`;
+    if (typeof placement === 'string') {
+      return `${prefixCls}-placement-${placement}`;
+    } else {
+      return '';
+    }
   }
 
   getRootNode() {
