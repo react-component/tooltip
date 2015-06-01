@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+'use strict';
 
 /**
  * @author yiminghe@gmail.com

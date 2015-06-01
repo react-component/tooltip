@@ -1,1 +1,3 @@
-module.exports = require('./lib/Tooltip');
+'use strict';
+
+module.exports = require('./src/');

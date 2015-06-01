@@ -1,4 +1,6 @@
+*.iml
 *.log
+.idea/
 .ipr
 .iws
 *~
@@ -17,13 +19,8 @@ Thumbs.db
 *.pyo
 .build
 node_modules
-_site
-sea-modules
-spm_modules
 .cache
 dist
-build/
-.idea/
-*.iml
-**/*.css
-
+assets/**/*.css
+build
+lib
