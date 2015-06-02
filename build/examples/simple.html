@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" type="text/css" rel="stylesheet"/>
     <style>
         .hljs {
             display: block;
@@ -182,6 +183,8 @@
 <script src="simple.js?nowrap"></script>
 <div class="highlight">
 <pre>
+<span class="hljs-string">'use strict'</span>;
+
 <span class="hljs-keyword">var</span> React = require(<span class="hljs-string">'react'</span>);
 <span class="hljs-keyword">var</span> Tooltip = require(<span class="hljs-string">'rc-tooltip'</span>);
 require(<span class="hljs-string">'rc-tooltip/assets/bootstrap.css'</span>);
@@ -222,8 +225,12 @@ require(<span class="hljs-string">'./anim.css'</span>);
     });
   },
 
-  preventDefault(e){
+  preventDefault(e) {
     e.preventDefault();
+  },
+
+  onVisibleChange(visible) {
+    console.log(<span class="hljs-string">'tooltip'</span>, visible);
   },
 
   render() {
@@ -261,7 +268,9 @@ require(<span class="hljs-string">'./anim.css'</span>);
       &lt;div style={{margin: <span class="hljs-number">100</span>}}&gt;
         &lt;Tooltip placement={<span class="hljs-keyword">this</span>.state.placement}
           trigger={Object.keys(<span class="hljs-keyword">this</span>.state.trigger)}
-          overlay={&lt;span&gt;i am a tooltip&lt;/span&gt;} transitionName={<span class="hljs-keyword">this</span>.state.transitionName}&gt;
+          onVisibleChange={<span class="hljs-keyword">this</span>.onVisibleChange}
+          overlay={&lt;span&gt;i am a tooltip&lt;/span&gt;}
+          transitionName={<span class="hljs-keyword">this</span>.state.transitionName}&gt;
           &lt;a href=<span class="hljs-string">'#'</span> onClick={<span class="hljs-keyword">this</span>.preventDefault}&gt;trigger&lt;/a&gt;
         &lt;/Tooltip&gt;
       &lt;/div&gt;
