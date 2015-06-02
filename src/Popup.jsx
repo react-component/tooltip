@@ -6,26 +6,16 @@
 
 var React = require('react');
 var CSSTransitionGroup = require('rc-css-transition-group');
+var utils = require('./utils');
 
 class Popup extends React.Component {
-  getPlacementCss() {
-    var props = this.props;
-    var prefixCls = props.prefixCls;
-    var placement = props.placement;
-    if (typeof placement === 'string') {
-      return `${prefixCls}-placement-${placement}`;
-    } else {
-      return '';
-    }
-  }
-
   getRootNode() {
     return React.findDOMNode(this.refs.popup);
   }
 
   render() {
     var props = this.props;
-    var className = `${props.prefixCls} ${this.getPlacementCss()}`;
+    var className = utils.getToolTipClassByPlacement(props.prefixCls, props.placement);
     if (props.className) {
       className += ' ' + props.className;
     }

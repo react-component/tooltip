@@ -8,6 +8,7 @@ var rcUtil = require('rc-util');
 var createChainedFunction = rcUtil.createChainedFunction;
 var domAlign = require('dom-align');
 var Popup = require('./Popup');
+var utils = require('./utils');
 
 class Tooltip extends React.Component {
   constructor(props) {
@@ -88,10 +89,13 @@ class Tooltip extends React.Component {
         var rootNode = React.findDOMNode(this);
         var tipNode = tooltip.getRootNode();
         var placement = this.props.placement;
+        var points;
         if (placement && placement.points) {
-          domAlign(tipNode, rootNode, placement);
+          var props = this.props;
+          var align = domAlign(tipNode, rootNode, placement);
+          tipNode.className = utils.getToolTipClassByPlacement(props.prefixCls, align);
         } else {
-          var points = ['cr', 'cl'];
+          points = ['cr', 'cl'];
           if (placement === 'right') {
             points = ['cl', 'cr'];
           } else if (placement === 'top') {
