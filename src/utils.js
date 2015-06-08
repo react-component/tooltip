@@ -11,9 +11,7 @@ module.exports = {
         offsetClass = `${prefixCls}-placement-offset-x-${offset[0]} ${prefixCls}-placement-offset-y-${offset[1]}`;
       }
       var points = placement.points;
-      return `${prefixCls}
-          ${offsetClass}
-          ${prefixCls}-placement-points-${points[0]}-${points[1]}`;
+      return `${prefixCls} ${offsetClass} ${prefixCls}-placement-points-${points[0]}-${points[1]}`;
     }
   }
 };
