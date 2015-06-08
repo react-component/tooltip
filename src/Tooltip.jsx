@@ -65,6 +65,9 @@ class Tooltip extends React.Component {
   }
 
   getPopupElement() {
+    if (!this.popupRendered) {
+      return null;
+    }
     var props = this.props;
     var state = this.state;
     return <Popup prefixCls={props.prefixCls}
@@ -117,12 +120,13 @@ class Tooltip extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.visible) {
-      this.componentDidUpdate();
-    }
+    this.componentDidUpdate();
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (!this.popupRendered) {
+      return;
+    }
     prevState = prevState || {};
     this.renderToolTip((tooltip)=> {
       this.popupDomNode = tooltip.getRootNode();
@@ -131,6 +135,9 @@ class Tooltip extends React.Component {
   }
 
   render() {
+    if (this.state.visible) {
+      this.popupRendered = true;
+    }
     var props = this.props;
     var children = props.children;
     var child = React.Children.only(children);
