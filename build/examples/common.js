@@ -98,6 +98,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 	
 	function ToObject(val) {
 		if (val == null) {
@@ -107,6 +108,18 @@
 		return Object(val);
 	}
 	
+	function ownEnumerableKeys(obj) {
+		var keys = Object.getOwnPropertyNames(obj);
+	
+		if (Object.getOwnPropertySymbols) {
+			keys = keys.concat(Object.getOwnPropertySymbols(obj));
+		}
+	
+		return keys.filter(function (key) {
+			return propIsEnumerable.call(obj, key);
+		});
+	}
+	
 	module.exports = Object.assign || function (target, source) {
 		var from;
 		var keys;
@@ -114,7 +127,7 @@
 	
 		for (var s = 1; s < arguments.length; s++) {
 			from = arguments[s];
-			keys = Object.keys(Object(from));
+			keys = ownEnumerableKeys(Object(from));
 	
 			for (var i = 0; i < keys.length; i++) {
 				to[keys[i]] = from[keys[i]];
@@ -144,6 +157,16 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	var _extends = Object.assign || function (target) {
+	  for (var i = 1; i < arguments.length; i++) {
+	    var source = arguments[i];for (var key in source) {
+	      if (Object.prototype.hasOwnProperty.call(source, key)) {
+	        target[key] = source[key];
+	      }
+	    }
+	  }return target;
+	};
 	
 	var _createClass = (function () {
 	  function defineProperties(target, props) {
@@ -192,10 +215,9 @@
 	 */
 	var React = __webpack_require__(3);
 	var rcUtil = __webpack_require__(6);
+	var contains = rcUtil.Dom.contains;
 	var createChainedFunction = rcUtil.createChainedFunction;
-	var domAlign = __webpack_require__(17);
-	var Popup = __webpack_require__(19);
-	var utils = __webpack_require__(26);
+	var Popup = __webpack_require__(17);
 	
 	var Tooltip = (function (_React$Component) {
 	  function Tooltip(props) {
@@ -210,7 +232,7 @@
 	    if ('visible' in props) {
 	      this.state.visible = !!props.visible;
 	    }
-	    ['toggle', 'show', 'hide'].forEach(function (m) {
+	    ['toggle', 'show', 'hide', 'handleDocumentClick'].forEach(function (m) {
 	      _this[m] = _this[m].bind(_this);
 	    });
 	  }
@@ -227,6 +249,33 @@
 	      }
 	    }
 	  }, {
+	    key: 'handleDocumentClick',
+	    value: function handleDocumentClick(e) {
+	      var wrap = React.findDOMNode(this);
+	      var popupDomNode = this.getPopupDomNode();
+	      var target = e.target;
+	      if (target !== wrap && target !== popupDomNode && !contains(popupDomNode, target) && !contains(wrap, target)) {
+	        this.setVisible(false);
+	      }
+	    }
+	  }, {
+	    key: 'monitorDocumentClick',
+	    value: function monitorDocumentClick(prevState) {
+	      var state = this.state;
+	      if (this.props.trigger.indexOf('click') !== -1) {
+	        if (state.visible && !prevState.visible) {
+	          if (!this.documentClickHander) {
+	            this.documentClickHander = rcUtil.Dom.addEventListener(document, 'click', this.handleDocumentClick);
+	          }
+	        } else if (prevState.visible && !state.visible) {
+	          if (this.documentClickHander) {
+	            this.documentClickHander.remove();
+	            this.documentClickHander = null;
+	          }
+	        }
+	      }
+	    }
+	  }, {
 	    key: 'getTipContainer',
 	    value: function getTipContainer() {
 	      if (!this.tipContainer) {
@@ -236,16 +285,33 @@
 	      return this.tipContainer;
 	    }
 	  }, {
-	    key: 'renderToolTip',
-	    value: function renderToolTip(callback) {
+	    key: 'getPopupElement',
+	    value: function getPopupElement() {
 	      var props = this.props;
 	      var state = this.state;
-	      React.render(React.createElement(Popup, { prefixCls: props.prefixCls,
+	      return React.createElement(Popup, { prefixCls: props.prefixCls,
+	        ref: props.renderPopupToBody ? null : 'popup',
 	        visible: state.visible,
 	        placement: props.placement,
-	        transitionName: props.transitionName }, props.overlay), this.getTipContainer(), function () {
-	        callback(this);
-	      });
+	        animation: props.animation,
+	        wrap: this,
+	        transitionName: props.transitionName }, props.overlay);
+	    }
+	  }, {
+	    key: 'getPopupDomNode',
+	    value: function getPopupDomNode() {
+	      return this.popupDomNode || React.findDOMNode(this.refs.popup);
+	    }
+	  }, {
+	    key: 'renderToolTip',
+	    value: function renderToolTip(callback) {
+	      if (this.props.renderPopupToBody) {
+	        React.render(this.getPopupElement(), this.getTipContainer(), function () {
+	          callback(this);
+	        });
+	      } else {
+	        callback(this.refs.popup);
+	      }
 	    }
 	  }, {
 	    key: 'toggle',
@@ -280,39 +346,20 @@
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this.componentDidUpdate();
+	      if (this.state.visible) {
+	        this.componentDidUpdate();
+	      }
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
+	    value: function componentDidUpdate(prevProps, prevState) {
 	      var _this3 = this;
 	
-	      var state = this.state;
+	      prevState = prevState || {};
 	      this.renderToolTip(function (tooltip) {
-	        if (state.visible) {
-	          var rootNode = React.findDOMNode(_this3);
-	          var tipNode = tooltip.getRootNode();
-	          var placement = _this3.props.placement;
-	          var points;
-	          if (placement && placement.points) {
-	            var props = _this3.props;
-	            var align = domAlign(tipNode, rootNode, placement);
-	            tipNode.className = utils.getToolTipClassByPlacement(props.prefixCls, align);
-	          } else {
-	            points = ['cr', 'cl'];
-	            if (placement === 'right') {
-	              points = ['cl', 'cr'];
-	            } else if (placement === 'top') {
-	              points = ['bc', 'tc'];
-	            } else if (placement === 'bottom') {
-	              points = ['tc', 'bc'];
-	            }
-	            domAlign(tipNode, rootNode, {
-	              points: points
-	            });
-	          }
-	        }
+	        _this3.popupDomNode = tooltip.getRootNode();
 	      });
+	      this.monitorDocumentClick(prevState);
 	    }
 	  }, {
 	    key: 'render',
@@ -323,18 +370,22 @@
 	      var childProps = child.props || {};
 	      var newChildProps = {};
 	      var trigger = props.trigger;
+	      var mouseProps = {};
 	      if (trigger.indexOf('click') !== -1) {
 	        newChildProps.onClick = createChainedFunction(this.toggle, childProps.onClick);
 	      }
 	      if (trigger.indexOf('hover') !== -1) {
-	        newChildProps.onMouseEnter = createChainedFunction(this.show, childProps.onMouseEnter);
-	        newChildProps.onMouseLeave = createChainedFunction(this.hide, childProps.onMouseLeave);
+	        mouseProps.onMouseEnter = createChainedFunction(this.show, childProps.onMouseEnter);
+	        mouseProps.onMouseLeave = createChainedFunction(this.hide, childProps.onMouseLeave);
 	      }
 	      if (trigger.indexOf('focus') !== -1) {
 	        newChildProps.onFocus = createChainedFunction(this.show, childProps.onFocus);
 	        newChildProps.onBlur = createChainedFunction(this.hide, childProps.onBlur);
 	      }
-	      return React.cloneElement(child, newChildProps);
+	
+	      var popupElement = props.renderPopupToBody ? null : this.getPopupElement();
+	
+	      return React.createElement('span', _extends({ className: '' + props.prefixCls + '-wrap' }, mouseProps), React.cloneElement(child, newChildProps), ' ', popupElement);
 	    }
 	  }]);
 	
@@ -342,14 +393,16 @@
 	})(React.Component);
 	
 	Tooltip.propTypes = {
-	  trigger: React.PropTypes.arrayOf(React.PropTypes.oneOf(['click', 'hover', 'focus'])),
-	  placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+	  trigger: React.PropTypes.any,
+	  placement: React.PropTypes.any,
 	  onVisibleChange: React.PropTypes.func,
+	  renderPopupToBody: React.PropTypes.bool,
 	  overlay: React.PropTypes.node.isRequired
 	};
 	
 	Tooltip.defaultProps = {
 	  prefixCls: 'rc-tooltip',
+	  renderPopupToBody: true,
 	  onVisibleChange: function onVisibleChange() {},
 	  placement: 'right',
 	  trigger: ['hover']
@@ -1194,6 +1247,337 @@
 /* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
+	var _createClass = (function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+	    }
+	  }return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	  };
+	})();
+	
+	function _classCallCheck(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError('Cannot call a class as a function');
+	  }
+	}
+	
+	function _inherits(subClass, superClass) {
+	  if (typeof superClass !== 'function' && superClass !== null) {
+	    throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
+	}
+	
+	/**
+	 * @author yiminghe@gmail.com
+	 */
+	
+	var React = __webpack_require__(3);
+	var anim = __webpack_require__(18);
+	var utils = __webpack_require__(21);
+	var assign = __webpack_require__(2);
+	var domAlign = __webpack_require__(22);
+	
+	var Popup = (function (_React$Component) {
+	  function Popup() {
+	    _classCallCheck(this, Popup);
+	
+	    if (_React$Component != null) {
+	      _React$Component.apply(this, arguments);
+	    }
+	  }
+	
+	  _inherits(Popup, _React$Component);
+	
+	  _createClass(Popup, [{
+	    key: 'getRootNode',
+	    value: function getRootNode() {
+	      return React.findDOMNode(this.refs.popup);
+	    }
+	  }, {
+	    key: 'alignRootNode',
+	    value: function alignRootNode() {
+	      var props = this.props;
+	      if (props.visible) {
+	        var wrapDomNode = React.findDOMNode(props.wrap);
+	        var popupDomNode = this.getRootNode();
+	        var placement = props.placement;
+	        var points;
+	        if (placement && placement.points) {
+	          var align = domAlign(popupDomNode, wrapDomNode, placement);
+	          popupDomNode.className = utils.getToolTipClassByPlacement(props.prefixCls, align);
+	        } else {
+	          points = ['cr', 'cl'];
+	          if (placement === 'right') {
+	            points = ['cl', 'cr'];
+	          } else if (placement === 'top') {
+	            points = ['bc', 'tc'];
+	          } else if (placement === 'bottom') {
+	            points = ['tc', 'bc'];
+	          }
+	          domAlign(popupDomNode, wrapDomNode, {
+	            points: points
+	          });
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'animateRootNode',
+	    value: function animateRootNode(prevProps) {
+	      var props = this.props;
+	      var transitionName = props.transitionName;
+	      if (!transitionName && props.animation) {
+	        transitionName = '' + props.prefixCls + '-' + props.animation;
+	      }
+	      if (transitionName) {
+	        var domNode = this.getRootNode();
+	        if (props.visible && !prevProps.visible) {
+	          anim(domNode, '' + transitionName + '-enter');
+	        } else if (!props.visible && prevProps.visible) {
+	          domNode.style.display = 'block';
+	          anim(domNode, '' + transitionName + '-leave', function () {
+	            domNode.style.display = 'none';
+	          });
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate(prevProps) {
+	      prevProps = prevProps || {};
+	      this.alignRootNode();
+	      this.animateRootNode(prevProps);
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.componentDidUpdate();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var props = this.props;
+	      var className = utils.getToolTipClassByPlacement(props.prefixCls, props.placement);
+	      if (props.className) {
+	        className += ' ' + props.className;
+	      }
+	      var style = this.style;
+	      if (!props.visible) {
+	        style = assign({}, style, {
+	          display: 'none'
+	        });
+	      }
+	      var arrowClassName = '' + props.prefixCls + '-arrow';
+	      var innerClassname = '' + props.prefixCls + '-inner';
+	      return React.createElement('div', { className: className,
+	        key: 'popup',
+	        ref: 'popup',
+	        style: style }, React.createElement('div', { className: arrowClassName }), React.createElement('div', { className: innerClassname }, props.children));
+	    }
+	  }]);
+	
+	  return Popup;
+	})(React.Component);
+	
+	module.exports = Popup;
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var Event = __webpack_require__(19);
+	var Css = __webpack_require__(20);
+	
+	module.exports = function (node, transitionName, callback) {
+	  var className = transitionName;
+	  var activeClassName = className + '-active';
+	
+	  if (node.rcEndListener) {
+	    node.rcEndListener();
+	  }
+	
+	  node.rcEndListener = function (e) {
+	    if (e && e.target !== node) {
+	      return;
+	    }
+	
+	    if (node.rcAnimTimeout) {
+	      clearTimeout(node.rcAnimTimeout);
+	      node.rcAnimTimeout = null;
+	    }
+	
+	    Css.removeClass(node, className);
+	    Css.removeClass(node, activeClassName);
+	
+	    Event.removeEndEventListener(node, node.rcEndListener);
+	    node.rcEndListener = null;
+	
+	    // Usually this optional callback is used for informing an owner of
+	    // a leave animation and telling it to remove the child.
+	    if (callback) {
+	      callback();
+	    }
+	  };
+	
+	  Event.addEndEventListener(node, node.rcEndListener);
+	
+	  Css.addClass(node, className);
+	
+	  node.rcAnimTimeout = setTimeout(function () {
+	    Css.addClass(node, activeClassName);
+	    node.rcAnimTimeout = null;
+	  }, 0);
+	};
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	'use strict';
+	
+	var EVENT_NAME_MAP = {
+	  transitionend: {
+	    transition: 'transitionend',
+	    WebkitTransition: 'webkitTransitionEnd',
+	    MozTransition: 'mozTransitionEnd',
+	    OTransition: 'oTransitionEnd',
+	    msTransition: 'MSTransitionEnd'
+	  },
+	
+	  animationend: {
+	    animation: 'animationend',
+	    WebkitAnimation: 'webkitAnimationEnd',
+	    MozAnimation: 'mozAnimationEnd',
+	    OAnimation: 'oAnimationEnd',
+	    msAnimation: 'MSAnimationEnd'
+	  }
+	};
+	
+	var endEvents = [];
+	
+	function detectEvents() {
+	  var testEl = document.createElement('div');
+	  var style = testEl.style;
+	
+	  if (!('AnimationEvent' in window)) {
+	    delete EVENT_NAME_MAP.animationend.animation;
+	  }
+	
+	  if (!('TransitionEvent' in window)) {
+	    delete EVENT_NAME_MAP.transitionend.transition;
+	  }
+	
+	  for (var baseEventName in EVENT_NAME_MAP) {
+	    var baseEvents = EVENT_NAME_MAP[baseEventName];
+	    for (var styleName in baseEvents) {
+	      if (styleName in style) {
+	        endEvents.push(baseEvents[styleName]);
+	        break;
+	      }
+	    }
+	  }
+	}
+	
+	if (typeof window !== 'undefined') {
+	  detectEvents();
+	}
+	
+	function addEventListener(node, eventName, eventListener) {
+	  node.addEventListener(eventName, eventListener, false);
+	}
+	
+	function removeEventListener(node, eventName, eventListener) {
+	  node.removeEventListener(eventName, eventListener, false);
+	}
+	
+	var ReactTransitionEvents = {
+	  addEndEventListener: function addEndEventListener(node, eventListener) {
+	    if (endEvents.length === 0) {
+	      window.setTimeout(eventListener, 0);
+	      return;
+	    }
+	    endEvents.forEach(function (endEvent) {
+	      addEventListener(node, endEvent, eventListener);
+	    });
+	  },
+	
+	  endEvents: endEvents,
+	
+	  removeEndEventListener: function removeEndEventListener(node, eventListener) {
+	    if (endEvents.length === 0) {
+	      return;
+	    }
+	    endEvents.forEach(function (endEvent) {
+	      removeEventListener(node, endEvent, eventListener);
+	    });
+	  }
+	};
+	
+	module.exports = ReactTransitionEvents;
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var SPACE = ' ';
+	var RE_CLASS = /[\n\t\r]/g;
+	
+	var norm = function norm(elemClass) {
+	  return (SPACE + elemClass + SPACE).replace(RE_CLASS, SPACE);
+	};
+	
+	module.exports = {
+	  addClass: function addClass(elem, className) {
+	    elem.className += ' ' + className;
+	  },
+	
+	  removeClass: function removeClass(elem, needle) {
+	    var elemClass = elem.className.trim();
+	    var className = norm(elemClass);
+	    needle = needle.trim();
+	    needle = SPACE + needle + SPACE;
+	    // 一个 cls 有可能多次出现：'link link2 link link3 link'
+	    while (className.indexOf(needle) >= 0) {
+	      className = className.replace(needle, SPACE);
+	    }
+	    elem.className = className.trim();
+	  }
+	};
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = {
+	  getToolTipClassByPlacement: function getToolTipClassByPlacement(prefixCls, placement) {
+	    if (typeof placement === 'string') {
+	      return '' + prefixCls + ' ' + prefixCls + '-placement-' + placement;
+	    } else {
+	      var offset = placement.offset;
+	      var offsetClass = '';
+	      if (offset && offset.length) {
+	        offsetClass = '' + prefixCls + '-placement-offset-x-' + offset[0] + ' ' + prefixCls + '-placement-offset-y-' + offset[1];
+	      }
+	      var points = placement.points;
+	      return '' + prefixCls + '\n          ' + offsetClass + '\n          ' + prefixCls + '-placement-points-' + points[0] + '-' + points[1];
+	    }
+	  }
+	};
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/**
 	 * align dom node flexibly
 	 * @author yiminghe@gmail.com
@@ -1201,7 +1585,7 @@
 	
 	'use strict';
 	
-	var utils = __webpack_require__(18);
+	var utils = __webpack_require__(23);
 	
 	// http://yiminghe.iteye.com/blog/1124720
 	
@@ -1556,7 +1940,7 @@
 	// document.documentElement, so check for that too.
 
 /***/ },
-/* 18 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1973,690 +2357,16 @@
 	mix(utils, domUtils);
 
 /***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _createClass = (function () {
-	  function defineProperties(target, props) {
-	    for (var i = 0; i < props.length; i++) {
-	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-	    }
-	  }return function (Constructor, protoProps, staticProps) {
-	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-	  };
-	})();
-	
-	function _classCallCheck(instance, Constructor) {
-	  if (!(instance instanceof Constructor)) {
-	    throw new TypeError('Cannot call a class as a function');
-	  }
-	}
-	
-	function _inherits(subClass, superClass) {
-	  if (typeof superClass !== 'function' && superClass !== null) {
-	    throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
-	}
-	
-	/**
-	 * @author yiminghe@gmail.com
-	 */
-	
-	var React = __webpack_require__(3);
-	var CSSTransitionGroup = __webpack_require__(20);
-	var utils = __webpack_require__(26);
-	
-	var Popup = (function (_React$Component) {
-	  function Popup() {
-	    _classCallCheck(this, Popup);
-	
-	    if (_React$Component != null) {
-	      _React$Component.apply(this, arguments);
-	    }
-	  }
-	
-	  _inherits(Popup, _React$Component);
-	
-	  _createClass(Popup, [{
-	    key: 'getRootNode',
-	    value: function getRootNode() {
-	      return React.findDOMNode(this.refs.popup);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var props = this.props;
-	      var className = utils.getToolTipClassByPlacement(props.prefixCls, props.placement);
-	      if (props.className) {
-	        className += ' ' + props.className;
-	      }
-	      var arrowClassName = '' + props.prefixCls + '-arrow';
-	      var innerClassname = '' + props.prefixCls + '-inner';
-	      var content = props.visible ? [React.createElement('div', { className: className,
-	        key: 'popup',
-	        ref: 'popup',
-	        style: this.style }, React.createElement('div', { className: arrowClassName }), React.createElement('div', { className: innerClassname }, props.children))] : [];
-	      if (props.transitionName) {
-	        return React.createElement(CSSTransitionGroup, { transitionName: props.transitionName }, content);
-	      } else {
-	        return content[0] || null;
-	      }
-	    }
-	  }]);
-	
-	  return Popup;
-	})(React.Component);
-	
-	module.exports = Popup;
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = __webpack_require__(21);
-
-/***/ },
-/* 21 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(3);
-	var ReactTransitionChildMapping = __webpack_require__(22);
-	var CSSTransitionGroupChild = __webpack_require__(23);
-	
-	var CSSTransitionGroup = React.createClass({
-	  displayName: 'CSSTransitionGroup',
-	
-	  protoTypes: {
-	    component: React.PropTypes.any,
-	    transitionName: React.PropTypes.string.isRequired,
-	    transitionEnter: React.PropTypes.bool,
-	    transitionLeave: React.PropTypes.bool
-	  },
-	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      component: 'span',
-	      transitionEnter: true,
-	      transitionLeave: true
-	    };
-	  },
-	
-	  getInitialState: function getInitialState() {
-	    var ret = [];
-	    React.Children.forEach(this.props.children, function (c) {
-	      ret.push(c);
-	    });
-	    return {
-	      children: ret
-	    };
-	  },
-	
-	  componentWillMount: function componentWillMount() {
-	    this.currentlyTransitioningKeys = {};
-	    this.keysToEnter = [];
-	    this.keysToLeave = [];
-	  },
-	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    var _this = this;
-	
-	    var nextChildMapping = [];
-	    var showProp = this.props.showProp;
-	    var exclusive = this.props.exclusive;
-	
-	    React.Children.forEach(nextProps.children, function (c) {
-	      nextChildMapping.push(c);
-	    });
-	
-	    // // last props children if exclusive
-	    var prevChildMapping = exclusive ? this.props.children : this.state.children;
-	
-	    var newChildren = ReactTransitionChildMapping.mergeChildMappings(prevChildMapping, nextChildMapping);
-	
-	    if (showProp) {
-	      newChildren = newChildren.map(function (c) {
-	        if (!c.props[showProp] && ReactTransitionChildMapping.isShownInChildren(prevChildMapping, c, showProp)) {
-	          var newProps = {};
-	          newProps[showProp] = true;
-	          c = React.cloneElement(c, newProps);
-	        }
-	        return c;
-	      });
-	    }
-	
-	    if (exclusive) {
-	      // make middle state children invalid
-	      // restore to last props children
-	      newChildren.forEach(function (c) {
-	        _this.stop(c.key);
-	      });
-	    }
-	
-	    this.setState({
-	      children: newChildren
-	    });
-	
-	    nextChildMapping.forEach(function (c) {
-	      var key = c.key;
-	      var hasPrev = prevChildMapping && ReactTransitionChildMapping.inChildren(prevChildMapping, c);
-	      if (showProp) {
-	        if (hasPrev) {
-	          var showInPrev = ReactTransitionChildMapping.isShownInChildren(prevChildMapping, c, showProp);
-	          var showInNow = c.props[showProp];
-	          if (!showInPrev && showInNow && !_this.currentlyTransitioningKeys[key]) {
-	            _this.keysToEnter.push(key);
-	          }
-	        }
-	      } else if (!hasPrev && !_this.currentlyTransitioningKeys[key]) {
-	        _this.keysToEnter.push(key);
-	      }
-	    });
-	
-	    prevChildMapping.forEach(function (c) {
-	      var key = c.key;
-	      var hasNext = nextChildMapping && ReactTransitionChildMapping.inChildren(nextChildMapping, c);
-	      if (showProp) {
-	        if (hasNext) {
-	          var showInNext = ReactTransitionChildMapping.isShownInChildren(nextChildMapping, c, showProp);
-	          var showInNow = c.props[showProp];
-	          if (!showInNext && showInNow && !_this.currentlyTransitioningKeys[key]) {
-	            _this.keysToLeave.push(key);
-	          }
-	        }
-	      } else if (!hasNext && !_this.currentlyTransitioningKeys[key]) {
-	        _this.keysToLeave.push(key);
-	      }
-	    });
-	  },
-	
-	  performEnter: function performEnter(key) {
-	    this.currentlyTransitioningKeys[key] = true;
-	    var component = this.refs[key];
-	    if (component.componentWillEnter) {
-	      component.componentWillEnter(this._handleDoneEntering.bind(this, key));
-	    } else {
-	      this._handleDoneEntering(key);
-	    }
-	  },
-	
-	  _handleDoneEntering: function _handleDoneEntering(key) {
-	    //console.log('_handleDoneEntering, ', key);
-	    delete this.currentlyTransitioningKeys[key];
-	    var currentChildMapping = this.props.children;
-	    var showProp = this.props.showProp;
-	    if (!currentChildMapping || !showProp && !ReactTransitionChildMapping.inChildrenByKey(currentChildMapping, key) || showProp && !ReactTransitionChildMapping.isShownInChildrenByKey(currentChildMapping, key, showProp)) {
-	      // This was removed before it had fully entered. Remove it.
-	      //console.log('releave ',key);
-	      this.performLeave(key);
-	    } else {
-	      this.setState({ children: currentChildMapping });
-	    }
-	  },
-	
-	  stop: function stop(key) {
-	    delete this.currentlyTransitioningKeys[key];
-	    var component = this.refs[key];
-	    if (component) {
-	      component.stop();
-	    }
-	  },
-	
-	  performLeave: function performLeave(key) {
-	    this.currentlyTransitioningKeys[key] = true;
-	
-	    var component = this.refs[key];
-	    if (component.componentWillLeave) {
-	      component.componentWillLeave(this._handleDoneLeaving.bind(this, key));
-	    } else {
-	      // Note that this is somewhat dangerous b/c it calls setState()
-	      // again, effectively mutating the component before all the work
-	      // is done.
-	      this._handleDoneLeaving(key);
-	    }
-	  },
-	
-	  _handleDoneLeaving: function _handleDoneLeaving(key) {
-	    //console.log('_handleDoneLeaving, ', key);
-	    delete this.currentlyTransitioningKeys[key];
-	    var showProp = this.props.showProp;
-	    var currentChildMapping = this.props.children;
-	    if (showProp && currentChildMapping && ReactTransitionChildMapping.isShownInChildrenByKey(currentChildMapping, key, showProp)) {
-	      this.performEnter(key);
-	    } else if (!showProp && currentChildMapping && ReactTransitionChildMapping.inChildrenByKey(currentChildMapping, key)) {
-	      // This entered again before it fully left. Add it again.
-	      //console.log('reenter ',key);
-	      this.performEnter(key);
-	    } else {
-	      this.setState({ children: currentChildMapping });
-	    }
-	  },
-	
-	  componentDidUpdate: function componentDidUpdate() {
-	    var keysToEnter = this.keysToEnter;
-	    this.keysToEnter = [];
-	    keysToEnter.forEach(this.performEnter);
-	    var keysToLeave = this.keysToLeave;
-	    this.keysToLeave = [];
-	    keysToLeave.forEach(this.performLeave);
-	  },
-	
-	  render: function render() {
-	    var props = this.props;
-	    var children = this.state.children.map(function (child) {
-	      return React.createElement(
-	        CSSTransitionGroupChild,
-	        {
-	          key: child.key,
-	          ref: child.key,
-	          name: props.transitionName,
-	          enter: props.transitionEnter,
-	          leave: props.transitionLeave },
-	        child
-	      );
-	    });
-	    var Component = this.props.component;
-	    return React.createElement(
-	      Component,
-	      this.props,
-	      children
-	    );
-	  }
-	});
-	module.exports = CSSTransitionGroup;
-
-/***/ },
-/* 22 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	function inChildren(children, child) {
-	  var found = 0;
-	  children.forEach(function (c) {
-	    if (found) {
-	      return;
-	    }
-	    found = c.key === child.key;
-	  });
-	  return found;
-	}
-	
-	module.exports = {
-	  inChildren: inChildren,
-	
-	  isShownInChildren: function isShownInChildren(children, child, showProp) {
-	    var found = 0;
-	    children.forEach(function (c) {
-	      if (found) {
-	        return;
-	      }
-	      found = c.key === child.key && c.props[showProp];
-	    });
-	    return found;
-	  },
-	
-	  inChildrenByKey: function inChildrenByKey(children, key) {
-	    var found = 0;
-	    children.forEach(function (c) {
-	      if (found) {
-	        return;
-	      }
-	      found = c.key === key;
-	    });
-	    return found;
-	  },
-	
-	  isShownInChildrenByKey: function isShownInChildrenByKey(children, key, showProp) {
-	    var found = 0;
-	    children.forEach(function (c) {
-	      if (found) {
-	        return;
-	      }
-	      found = c.key === key && c.props[showProp];
-	    });
-	    return found;
-	  },
-	
-	  mergeChildMappings: function mergeChildMappings(prev, next) {
-	    var ret = [];
-	
-	    // For each key of `next`, the list of keys to insert before that key in
-	    // the combined list
-	    var nextChildrenPending = {};
-	    var pendingChildren = [];
-	    prev.forEach(function (c) {
-	      if (inChildren(next, c)) {
-	        if (pendingChildren.length) {
-	          nextChildrenPending[c.key] = pendingChildren;
-	          pendingChildren = [];
-	        }
-	      } else {
-	        pendingChildren.push(c);
-	      }
-	    });
-	
-	    next.forEach(function (c) {
-	      if (nextChildrenPending.hasOwnProperty(c.key)) {
-	        ret = ret.concat(nextChildrenPending[c.key]);
-	      }
-	      ret.push(c);
-	    });
-	
-	    ret = ret.concat(pendingChildren);
-	
-	    return ret;
-	  }
-	};
-
-/***/ },
-/* 23 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @typechecks
-	 * @providesModule ReactCSSTransitionGroupChild
-	 */
-	
-	'use strict';
-	
-	var React = __webpack_require__(3);
-	
-	var CSSCore = __webpack_require__(24);
-	var ReactTransitionEvents = __webpack_require__(25);
-	
-	var TICK = 17;
-	
-	var ReactCSSTransitionGroupChild = React.createClass({
-	  displayName: 'ReactCSSTransitionGroupChild',
-	
-	  transition: function transition(animationType, finishCallback) {
-	    var _this = this;
-	
-	    var node = this.getDOMNode();
-	    var className = this.props.name + '-' + animationType;
-	    var activeClassName = className + '-active';
-	
-	    if (this.endListener) {
-	      this.endListener();
-	    }
-	
-	    this.endListener = function (e) {
-	      if (e && e.target !== node) {
-	        return;
-	      }
-	
-	      CSSCore.removeClass(node, className);
-	      CSSCore.removeClass(node, activeClassName);
-	
-	      ReactTransitionEvents.removeEndEventListener(node, _this.endListener);
-	      _this.endListener = null;
-	
-	      // Usually this optional callback is used for informing an owner of
-	      // a leave animation and telling it to remove the child.
-	      if (finishCallback) {
-	        finishCallback();
-	      }
-	    };
-	
-	    ReactTransitionEvents.addEndEventListener(node, this.endListener);
-	
-	    CSSCore.addClass(node, className);
-	
-	    // Need to do this to actually trigger a transition.
-	    this.queueClass(activeClassName);
-	  },
-	
-	  queueClass: function queueClass(className) {
-	    this.classNameQueue.push(className);
-	
-	    if (!this.timeout) {
-	      this.timeout = setTimeout(this.flushClassNameQueue, TICK);
-	    }
-	  },
-	
-	  stop: function stop() {
-	    //console.log('force stop')
-	    if (this.timeout) {
-	      clearTimeout(this.timeout);
-	      this.classNameQueue.length = 0;
-	      this.timeout = null;
-	    }
-	    if (this.endListener) {
-	      this.endListener();
-	    }
-	  },
-	
-	  flushClassNameQueue: function flushClassNameQueue() {
-	    if (this.isMounted()) {
-	      this.classNameQueue.forEach(CSSCore.addClass.bind(CSSCore, this.getDOMNode()));
-	    }
-	    this.classNameQueue.length = 0;
-	    this.timeout = null;
-	  },
-	
-	  componentWillMount: function componentWillMount() {
-	    this.classNameQueue = [];
-	  },
-	
-	  componentWillUnmount: function componentWillUnmount() {
-	    if (this.timeout) {
-	      clearTimeout(this.timeout);
-	    }
-	  },
-	
-	  componentWillEnter: function componentWillEnter(done) {
-	    if (this.props.enter) {
-	      this.transition('enter', done);
-	    } else {
-	      done();
-	    }
-	  },
-	
-	  componentWillLeave: function componentWillLeave(done) {
-	    if (this.props.leave) {
-	      this.transition('leave', done);
-	    } else {
-	      done();
-	    }
-	  },
-	
-	  render: function render() {
-	    return this.props.children;
-	  }
-	});
-	
-	module.exports = ReactCSSTransitionGroupChild;
-
-/***/ },
 /* 24 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var SPACE = ' ';
-	var RE_CLASS = /[\n\t\r]/g;
-	
-	var norm = function norm(elemClass) {
-	  return (SPACE + elemClass + SPACE).replace(RE_CLASS, SPACE);
-	};
-	
-	module.exports = {
-	  addClass: function addClass(elem, className) {
-	    elem.className += ' ' + className;
-	  },
-	
-	  removeClass: function removeClass(elem, needle) {
-	    var elemClass = elem.className.trim();
-	    var className = norm(elemClass);
-	    needle = needle.trim();
-	    needle = SPACE + needle + SPACE;
-	    // 一个 cls 有可能多次出现：'link link2 link link3 link'
-	    while (className.indexOf(needle) >= 0) {
-	      className = className.replace(needle, SPACE);
-	    }
-	    elem.className = className.trim();
-	  }
-	};
-
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactTransitionEvents
-	 */
-	
-	'use strict';
-	/**
-	 * EVENT_NAME_MAP is used to determine which event fired when a
-	 * transition/animation ends, based on the style property used to
-	 * define that event.
-	 */
-	var EVENT_NAME_MAP = {
-	  transitionend: {
-	    transition: 'transitionend',
-	    WebkitTransition: 'webkitTransitionEnd',
-	    MozTransition: 'mozTransitionEnd',
-	    OTransition: 'oTransitionEnd',
-	    msTransition: 'MSTransitionEnd'
-	  },
-	
-	  animationend: {
-	    animation: 'animationend',
-	    WebkitAnimation: 'webkitAnimationEnd',
-	    MozAnimation: 'mozAnimationEnd',
-	    OAnimation: 'oAnimationEnd',
-	    msAnimation: 'MSAnimationEnd'
-	  }
-	};
-	
-	var endEvents = [];
-	
-	function detectEvents() {
-	  var testEl = document.createElement('div');
-	  var style = testEl.style;
-	
-	  // On some platforms, in particular some releases of Android 4.x,
-	  // the un-prefixed "animation" and "transition" properties are defined on the
-	  // style object but the events that fire will still be prefixed, so we need
-	  // to check if the un-prefixed events are useable, and if not remove them
-	  // from the map
-	  if (!('AnimationEvent' in window)) {
-	    delete EVENT_NAME_MAP.animationend.animation;
-	  }
-	
-	  if (!('TransitionEvent' in window)) {
-	    delete EVENT_NAME_MAP.transitionend.transition;
-	  }
-	
-	  for (var baseEventName in EVENT_NAME_MAP) {
-	    var baseEvents = EVENT_NAME_MAP[baseEventName];
-	    for (var styleName in baseEvents) {
-	      if (styleName in style) {
-	        endEvents.push(baseEvents[styleName]);
-	        break;
-	      }
-	    }
-	  }
-	}
-	
-	if (typeof window !== 'undefined') {
-	  detectEvents();
-	}
-	
-	// We use the raw {add|remove}EventListener() call because EventListener
-	// does not know how to remove event listeners and we really should
-	// clean up. Also, these events are not triggered in older browsers
-	// so we should be A-OK here.
-	
-	function addEventListener(node, eventName, eventListener) {
-	  node.addEventListener(eventName, eventListener, false);
-	}
-	
-	function removeEventListener(node, eventName, eventListener) {
-	  node.removeEventListener(eventName, eventListener, false);
-	}
-	
-	var ReactTransitionEvents = {
-	  addEndEventListener: function addEndEventListener(node, eventListener) {
-	    if (endEvents.length === 0) {
-	      // If CSS transitions are not supported, trigger an "end animation"
-	      // event immediately.
-	      window.setTimeout(eventListener, 0);
-	      return;
-	    }
-	    endEvents.forEach(function (endEvent) {
-	      addEventListener(node, endEvent, eventListener);
-	    });
-	  },
-	
-	  endEvents: endEvents,
-	
-	  removeEndEventListener: function removeEndEventListener(node, eventListener) {
-	    if (endEvents.length === 0) {
-	      return;
-	    }
-	    endEvents.forEach(function (endEvent) {
-	      removeEventListener(node, endEvent, eventListener);
-	    });
-	  }
-	};
-	
-	module.exports = ReactTransitionEvents;
-
-/***/ },
-/* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = {
-	  getToolTipClassByPlacement: function getToolTipClassByPlacement(prefixCls, placement) {
-	    if (typeof placement === 'string') {
-	      return '' + prefixCls + ' ' + prefixCls + '-placement-' + placement;
-	    } else {
-	      var offset = placement.offset;
-	      var offsetClass;
-	      if (offset && offset.length) {
-	        offsetClass = '' + prefixCls + '-placement-offset-x-' + offset[0] + ' ' + prefixCls + '-placement-offset-y-' + offset[1];
-	      }
-	      var points = placement.points;
-	      return '' + prefixCls + '\n          ' + offsetClass + '\n          ' + prefixCls + '-placement-points-' + points[0] + '-' + points[1];
-	    }
-	  }
-	};
-
-/***/ },
-/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(28);
+	var content = __webpack_require__(25);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(30)(content, {});
+	var update = __webpack_require__(27)(content, {});
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
@@ -2670,14 +2380,14 @@
 	}
 
 /***/ },
-/* 28 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(29)();
-	exports.push([module.id, ".rc-tooltip {\n  position: absolute;\n  left: -9999px;\n  top: -9999px;\n  z-index: 1070;\n  display: block;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-size: 12px;\n  font-weight: normal;\n  line-height: 1.4;\n}\n.rc-tooltip-placement-left {\n  margin-left: -3px;\n  padding: 0 5px;\n}\n.rc-tooltip-placement-top {\n  margin-top: -3px;\n  padding: 5px 0;\n}\n.rc-tooltip-placement-bottom {\n  margin-top: 3px;\n  padding: 5px 0;\n}\n.rc-tooltip-placement-right {\n  margin-left: 3px;\n  padding: 0 5px;\n}\n.rc-tooltip-arrow {\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-color: transparent;\n  border-style: solid;\n}\n.rc-tooltip-placement-right > .rc-tooltip-arrow {\n  top: 50%;\n  left: 0;\n  margin-top: -5px;\n  border-width: 5px 5px 5px 0;\n  border-right-color: #000000;\n}\n.rc-tooltip-placement-bottom > .rc-tooltip-arrow {\n  top: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 0 5px 5px;\n  border-bottom-color: #000000;\n}\n.rc-tooltip-placement-top > .rc-tooltip-arrow {\n  bottom: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 5px 5px 0;\n  border-top-color: #000000;\n}\n.rc-tooltip-placement-left > .rc-tooltip-arrow {\n  top: 50%;\n  right: 0;\n  margin-top: -5px;\n  border-width: 5px 0 5px 5px;\n  border-left-color: #000000;\n}\n.rc-tooltip-inner {\n  padding: 3px 8px;\n  color: #ffffff;\n  text-align: center;\n  text-decoration: none;\n  background-color: #000000;\n  border-radius: 4px;\n}\n", ""]);
+	exports = module.exports = __webpack_require__(26)();
+	exports.push([module.id, ".rc-tooltip {\n  position: absolute;\n  left: -9999px;\n  top: -9999px;\n  z-index: 1070;\n  display: block;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-size: 12px;\n  font-weight: normal;\n  line-height: 1.4;\n}\n.rc-tooltip-placement-left {\n  margin-left: -3px;\n  padding: 0 5px;\n}\n.rc-tooltip-placement-left > .rc-tooltip-arrow {\n  top: 50%;\n  right: 0;\n  margin-top: -5px;\n  border-width: 5px 0 5px 5px;\n  border-left-color: #000000;\n}\n.rc-tooltip-placement-top {\n  margin-top: -3px;\n  padding: 5px 0;\n}\n.rc-tooltip-placement-top > .rc-tooltip-arrow {\n  bottom: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 5px 5px 0;\n  border-top-color: #000000;\n}\n.rc-tooltip-placement-bottom {\n  margin-top: 3px;\n  padding: 5px 0;\n}\n.rc-tooltip-placement-bottom > .rc-tooltip-arrow {\n  top: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 0 5px 5px;\n  border-bottom-color: #000000;\n}\n.rc-tooltip-placement-right {\n  margin-left: 3px;\n  padding: 0 5px;\n}\n.rc-tooltip-placement-right > .rc-tooltip-arrow {\n  top: 50%;\n  left: 0;\n  margin-top: -5px;\n  border-width: 5px 5px 5px 0;\n  border-right-color: #000000;\n}\n.rc-tooltip-arrow {\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-color: transparent;\n  border-style: solid;\n}\n.rc-tooltip-inner {\n  padding: 3px 8px;\n  color: #ffffff;\n  text-align: center;\n  text-decoration: none;\n  background-color: #000000;\n  border-radius: 4px;\n}\n", ""]);
 
 /***/ },
-/* 29 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function() {
@@ -2698,7 +2408,7 @@
 	}
 
 /***/ },
-/* 30 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -2894,12 +2604,12 @@
 
 
 /***/ },
-/* 31 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
 		"name": "rc-tooltip",
-		"version": "1.2.0",
+		"version": "2.0.0",
 		"description": "tooltip ui component for react",
 		"keywords": [
 			"react",
@@ -2951,8 +2661,9 @@
 			"precommit"
 		],
 		"dependencies": {
+			"css-animation": "^1.0.2",
 			"dom-align": "1.x",
-			"rc-css-transition-group": "2.x",
+			"object-assign": "~3.0.0",
 			"rc-util": "2.x"
 		}
 	}

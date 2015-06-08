@@ -3,21 +3,21 @@ webpackJsonp([1],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(34);
+	module.exports = __webpack_require__(31);
 
 
 /***/ },
 
-/***/ 34:
+/***/ 31:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(3);
 	var Tooltip = __webpack_require__(4);
-	__webpack_require__(27);
+	__webpack_require__(24);
 	var assign = __webpack_require__(2);
-	var packageJson = __webpack_require__(31);
+	var packageJson = __webpack_require__(28);
 	var placement = {
 	  points: ['tc', 'bc'],
 	  offset: [11, 3],
