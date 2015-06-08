@@ -75,6 +75,12 @@ online example: http://react-component.github.io/tooltip/build/examples/
           <td>additional css class of root dom node</td>
         </tr>
         <tr>
+          <td>renderPopupToBody</td>
+          <td>true</td>
+          <td></td>
+          <td>whether render popup to body</td>
+        </tr>
+        <tr>
           <td>prefixCls</td>
           <td>String</td>
           <td>rc-tooltip</td>

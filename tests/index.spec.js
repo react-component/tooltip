@@ -30,20 +30,20 @@ describe('rc-tooltip', function () {
 
   describe('trigger', ()=> {
     it('click works', (done)=> {
-      var tooltip = React.render(<Tooltip trigger={['click']} placement="left" overlay={<strong className='x-content'>tooltip</strong>}>
+      var tooltip = React.render(<Tooltip trigger={['click']} placement="left" overlay={<strong className='x-content'>tooltip2</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = React.findDOMNode(tooltip);
+      var domNode = React.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       async.series([timeout(20), (next)=> {
-        var popupDomNode = $('.rc-tooltip')[0];
-        expect($(popupDomNode).find('.x-content').html()).to.be('tooltip');
+        var popupDomNode = tooltip.getPopupDomNode();
+        expect($(popupDomNode).find('.x-content').html()).to.be('tooltip2');
         expect(popupDomNode).to.be.ok();
         Simulate.click(domNode);
         next();
       }, timeout(20), (next)=> {
-        var popupDomNode = $('.rc-tooltip')[0];
-        expect(popupDomNode).not.to.be.ok();
+        var popupDomNode = tooltip.getPopupDomNode();
+        expect(popupDomNode.style.display).to.be('none');
         next();
       }], done);
     });
@@ -52,17 +52,17 @@ describe('rc-tooltip', function () {
       var tooltip = React.render(<Tooltip trigger={['hover']} placement="left" overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var target = scryRenderedDOMComponentsWithClass(tooltip, 'target')[0];
+      var target = scryRenderedDOMComponentsWithClass(tooltip, 'rc-tooltip-wrap')[0];
       // can not simulate mouseenter
       target.props.onMouseEnter();
       async.series([timeout(20), (next)=> {
-        var popupDomNode = $('.rc-tooltip')[0];
+        var popupDomNode = tooltip.getPopupDomNode();
         expect(popupDomNode).to.be.ok();
         target.props.onMouseLeave();
         next();
       }, timeout(20), (next)=> {
-        var popupDomNode = $('.rc-tooltip')[0];
-        expect(popupDomNode).not.to.be.ok();
+        var popupDomNode = tooltip.getPopupDomNode();
+        expect(popupDomNode.style.display).to.be('none');
         next();
       }], done);
     });
@@ -73,10 +73,10 @@ describe('rc-tooltip', function () {
       var tooltip = React.render(<Tooltip trigger={['click']} placement="left" overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = React.findDOMNode(tooltip);
+      var domNode = React.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       setTimeout(()=> {
-        var popupDomNode = $('.rc-tooltip')[0];
+        var popupDomNode =tooltip.getPopupDomNode();
         expect(popupDomNode).to.be.ok();
         var targetOffset = $(domNode).offset();
         var popupOffset = $(popupDomNode).offset();
@@ -90,10 +90,10 @@ describe('rc-tooltip', function () {
       var tooltip = React.render(<Tooltip trigger={['click']} placement="right" overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = React.findDOMNode(tooltip);
+      var domNode = React.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       setTimeout(()=> {
-        var popupDomNode = $('.rc-tooltip')[0];
+        var popupDomNode = tooltip.getPopupDomNode();
         expect(popupDomNode).to.be.ok();
         var targetOffset = $(domNode).offset();
         var popupOffset = $(popupDomNode).offset();
@@ -108,10 +108,10 @@ describe('rc-tooltip', function () {
       var tooltip = React.render(<Tooltip trigger={['click']} placement="bottom" overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = React.findDOMNode(tooltip);
+      var domNode = React.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       setTimeout(()=> {
-        var popupDomNode = $('.rc-tooltip')[0];
+        var popupDomNode = tooltip.getPopupDomNode();
         expect(popupDomNode).to.be.ok();
         var targetOffset = $(domNode).offset();
         var popupOffset = $(popupDomNode).offset();
@@ -126,10 +126,10 @@ describe('rc-tooltip', function () {
       var tooltip = React.render(<Tooltip trigger={['click']} placement="top" overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = React.findDOMNode(tooltip);
+      var domNode = React.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       setTimeout(()=> {
-        var popupDomNode = $('.rc-tooltip')[0];
+        var popupDomNode = tooltip.getPopupDomNode();
         expect(popupDomNode).to.be.ok();
         var targetOffset = $(domNode).offset();
         var popupOffset = $(popupDomNode).offset();
@@ -150,20 +150,19 @@ describe('rc-tooltip', function () {
         overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = React.findDOMNode(tooltip);
+      var domNode = React.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       async.series([
           timeout(100),
           (next)=> {
-            var popupDomNode = $('.rc-tooltip')[0];
+            var popupDomNode = tooltip.getPopupDomNode();
             expect(popupDomNode).to.be.ok();
-            console.log($(popupDomNode).css('opacity'))
             expect($(popupDomNode).css('opacity')).not.to.be('1');
             next();
           },
           timeout(500),
           (next)=> {
-            var popupDomNode = $('.rc-tooltip')[0];
+            var popupDomNode = tooltip.getPopupDomNode();
             expect(popupDomNode).to.be.ok();
             expect($(popupDomNode).css('opacity')).to.be('1');
             Simulate.click(domNode);
@@ -171,15 +170,15 @@ describe('rc-tooltip', function () {
           },
           timeout(100),
           (next)=> {
-            var popupDomNode = $('.rc-tooltip')[0];
+            var popupDomNode = tooltip.getPopupDomNode();
             expect(popupDomNode).to.be.ok();
             expect($(popupDomNode).css('opacity')).not.to.be('1');
             next();
           },
           timeout(500),
           (next)=> {
-            var popupDomNode = $('.rc-tooltip')[0];
-            expect(popupDomNode).not.to.be.ok();
+            var popupDomNode = tooltip.getPopupDomNode();
+            expect(popupDomNode.style.display).to.be('none');
             next();
           }],
         done);

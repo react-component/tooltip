@@ -6,7 +6,7 @@ module.exports = {
       return `${prefixCls} ${prefixCls}-placement-${placement}`;
     } else {
       var offset = placement.offset;
-      var offsetClass;
+      var offsetClass = '';
       if (offset && offset.length) {
         offsetClass = `${prefixCls}-placement-offset-x-${offset[0]} ${prefixCls}-placement-offset-y-${offset[1]}`;
       }

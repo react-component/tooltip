@@ -1,4 +1,6 @@
-.rc-tooltip {
+@tooltipPrefixCls: rc-tooltip;
+
+.@{tooltipPrefixCls} {
   position: absolute;
   left: -9999px;
   top: -9999px;
@@ -8,74 +10,76 @@
   font-size: 12px;
   font-weight: normal;
   line-height: 1.4;
-}
 
-.rc-tooltip-placement-left {
-  margin-left: -3px;
-  padding: 0 5px;
-}
+  &-placement {
+    &-left {
+      margin-left: -3px;
+      padding: 0 5px;
 
-.rc-tooltip-placement-top {
-  margin-top: -3px;
-  padding: 5px 0;
-}
+      & > .rc-tooltip-arrow {
+        top: 50%;
+        right: 0;
+        margin-top: -5px;
+        border-width: 5px 0 5px 5px;
+        border-left-color: #000000;
+      }
+    }
 
-.rc-tooltip-placement-bottom {
-  margin-top: 3px;
-  padding: 5px 0;
+    &-top {
+      margin-top: -3px;
+      padding: 5px 0;
 
-}
+      & > .@{tooltipPrefixCls}-arrow {
+        bottom: 0;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px 5px 0;
+        border-top-color: #000000;
+      }
+    }
 
-.rc-tooltip-placement-right {
-  margin-left: 3px;
-  padding: 0 5px;
-}
+    &-bottom {
+      margin-top: 3px;
+      padding: 5px 0;
 
-.rc-tooltip-arrow {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-}
+      & > .@{tooltipPrefixCls}-arrow {
+        top: 0;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 0 5px 5px;
+        border-bottom-color: #000000;
+      }
 
-.rc-tooltip-placement-right > .rc-tooltip-arrow {
-  top: 50%;
-  left: 0;
-  margin-top: -5px;
-  border-width: 5px 5px 5px 0;
-  border-right-color: #000000;
-}
+    }
 
-.rc-tooltip-placement-bottom > .rc-tooltip-arrow {
-  top: 0;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 0 5px 5px;
-  border-bottom-color: #000000;
-}
+    &-right {
+      margin-left: 3px;
+      padding: 0 5px;
 
-.rc-tooltip-placement-top > .rc-tooltip-arrow {
-  bottom: 0;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px 5px 0;
-  border-top-color: #000000;
-}
+      & > .@{tooltipPrefixCls}-arrow {
+        top: 50%;
+        left: 0;
+        margin-top: -5px;
+        border-width: 5px 5px 5px 0;
+        border-right-color: #000000;
+      }
+    }
+  }
 
-.rc-tooltip-placement-left > .rc-tooltip-arrow {
-  top: 50%;
-  right: 0;
-  margin-top: -5px;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #000000;
-}
+  &-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+  }
 
-.rc-tooltip-inner {
-  padding: 3px 8px;
-  color: #ffffff;
-  text-align: center;
-  text-decoration: none;
-  background-color: #000000;
-  border-radius: 4px;
+  &-inner {
+    padding: 3px 8px;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    background-color: #000000;
+    border-radius: 4px;
+  }
 }

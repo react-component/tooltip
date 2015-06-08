@@ -52,7 +52,6 @@ var Test = React.createClass({
     console.log(this.state);
     var trigger = this.state.trigger;
     return <div >
-      <h1>{packageJson.name}@{packageJson.version}</h1>
       <div style={{margin: '10px 20px'}}>
         <label>
           placement:
@@ -65,7 +64,7 @@ var Test = React.createClass({
         </label>
       &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
-          <input value='zoom-down' type='checkbox' onChange={this.onTransitionChange}/>
+          <input value='zoom-down' type='checkbox' onChange={this.onTransitionChange}  checked={this.state.transitionName ==='zoom-down'}/>
           transitionName
         </label>
 
@@ -82,6 +81,7 @@ var Test = React.createClass({
       </div>
       <div style={{margin: 100}}>
         <Tooltip placement={this.state.placement}
+          renderPopupToBody={this.props.renderPopupToBody}
           trigger={Object.keys(this.state.trigger)}
           onVisibleChange={this.onVisibleChange}
           overlay={<span>i am a tooltip</span>}
@@ -93,4 +93,10 @@ var Test = React.createClass({
   }
 });
 
-React.render(<Test/>, document.getElementById("__react-content"));
+React.render(<div>
+  <h1>{packageJson.name}@{packageJson.version}</h1>
+  <h2>renderPopupToBody=true</h2>
+  <Test/>
+  <h2>renderPopupToBody=false</h2>
+  <Test renderPopupToBody={false}/>
+</div>, document.getElementById("__react-content"));
