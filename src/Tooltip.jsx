@@ -32,10 +32,10 @@ class Tooltip extends React.Component {
   }
 
   handleDocumentClick(e) {
-    var wrap = React.findDOMNode(this);
+    var targetDomNode = React.findDOMNode(this).firstChild;
     var popupDomNode = this.getPopupDomNode();
     var target = e.target;
-    if (target !== wrap && target !== popupDomNode && !contains(popupDomNode, target) && !contains(wrap, target)) {
+    if (target !== targetDomNode && target !== popupDomNode && !contains(popupDomNode, target) && !contains(targetDomNode, target)) {
       this.setVisible(false);
     }
   }
@@ -95,7 +95,8 @@ class Tooltip extends React.Component {
     }
   }
 
-  toggle() {
+  toggle(e) {
+    e.preventDefault();
     if (this.state.visible) {
       this.hide();
     } else {

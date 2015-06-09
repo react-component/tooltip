@@ -19,12 +19,12 @@ class Popup extends React.Component {
   alignRootNode() {
     var props = this.props;
     if (props.visible) {
-      var wrapDomNode = React.findDOMNode(props.wrap);
+      var targetDomNode = React.findDOMNode(props.wrap).firstChild;
       var popupDomNode = this.getRootNode();
       var placement = props.placement;
       var points;
       if (placement && placement.points) {
-        var align = domAlign(popupDomNode, wrapDomNode, placement);
+        var align = domAlign(popupDomNode, targetDomNode, placement);
         popupDomNode.className = utils.getToolTipClassByPlacement(props.prefixCls, align);
       } else {
         points = ['cr', 'cl'];
@@ -35,7 +35,7 @@ class Popup extends React.Component {
         } else if (placement === 'bottom') {
           points = ['tc', 'bc'];
         }
-        domAlign(popupDomNode, wrapDomNode, {
+        domAlign(popupDomNode, targetDomNode, {
           points: points
         });
       }

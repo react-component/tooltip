@@ -86,7 +86,7 @@ var Test = React.createClass({
           onVisibleChange={this.onVisibleChange}
           overlay={<span>i am a tooltip</span>}
           transitionName={this.state.transitionName}>
-          <a href='#' onClick={this.preventDefault}>trigger</a>
+          <a href='#' style={{margin:20}} onClick={this.preventDefault}>trigger</a>
         </Tooltip>
       </div>
     </div>;
