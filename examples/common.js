@@ -251,10 +251,10 @@
 	  }, {
 	    key: 'handleDocumentClick',
 	    value: function handleDocumentClick(e) {
-	      var wrap = React.findDOMNode(this);
+	      var targetDomNode = React.findDOMNode(this).firstChild;
 	      var popupDomNode = this.getPopupDomNode();
 	      var target = e.target;
-	      if (target !== wrap && target !== popupDomNode && !contains(popupDomNode, target) && !contains(wrap, target)) {
+	      if (target !== targetDomNode && target !== popupDomNode && !contains(popupDomNode, target) && !contains(targetDomNode, target)) {
 	        this.setVisible(false);
 	      }
 	    }
@@ -287,6 +287,9 @@
 	  }, {
 	    key: 'getPopupElement',
 	    value: function getPopupElement() {
+	      if (!this.popupRendered) {
+	        return null;
+	      }
 	      var props = this.props;
 	      var state = this.state;
 	      return React.createElement(Popup, { prefixCls: props.prefixCls,
@@ -315,7 +318,8 @@
 	    }
 	  }, {
 	    key: 'toggle',
-	    value: function toggle() {
+	    value: function toggle(e) {
+	      e.preventDefault();
 	      if (this.state.visible) {
 	        this.hide();
 	      } else {
@@ -346,15 +350,16 @@
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      if (this.state.visible) {
-	        this.componentDidUpdate();
-	      }
+	      this.componentDidUpdate();
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate(prevProps, prevState) {
 	      var _this3 = this;
 	
+	      if (!this.popupRendered) {
+	        return;
+	      }
 	      prevState = prevState || {};
 	      this.renderToolTip(function (tooltip) {
 	        _this3.popupDomNode = tooltip.getRootNode();
@@ -364,6 +369,9 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      if (this.state.visible) {
+	        this.popupRendered = true;
+	      }
 	      var props = this.props;
 	      var children = props.children;
 	      var child = React.Children.only(children);
@@ -385,7 +393,7 @@
 	
 	      var popupElement = props.renderPopupToBody ? null : this.getPopupElement();
 	
-	      return React.createElement('span', _extends({ className: '' + props.prefixCls + '-wrap' }, mouseProps), React.cloneElement(child, newChildProps), ' ', popupElement);
+	      return React.createElement('span', _extends({ className: '' + props.prefixCls + '-wrap' }, mouseProps), [React.cloneElement(child, newChildProps), popupElement]);
 	    }
 	  }]);
 	
@@ -1302,12 +1310,12 @@
 	    value: function alignRootNode() {
 	      var props = this.props;
 	      if (props.visible) {
-	        var wrapDomNode = React.findDOMNode(props.wrap);
+	        var targetDomNode = React.findDOMNode(props.wrap).firstChild;
 	        var popupDomNode = this.getRootNode();
 	        var placement = props.placement;
 	        var points;
 	        if (placement && placement.points) {
-	          var align = domAlign(popupDomNode, wrapDomNode, placement);
+	          var align = domAlign(popupDomNode, targetDomNode, placement);
 	          popupDomNode.className = utils.getToolTipClassByPlacement(props.prefixCls, align);
 	        } else {
 	          points = ['cr', 'cl'];
@@ -1318,7 +1326,7 @@
 	          } else if (placement === 'bottom') {
 	            points = ['tc', 'bc'];
 	          }
-	          domAlign(popupDomNode, wrapDomNode, {
+	          domAlign(popupDomNode, targetDomNode, {
 	            points: points
 	          });
 	        }
@@ -1569,7 +1577,7 @@
 	        offsetClass = '' + prefixCls + '-placement-offset-x-' + offset[0] + ' ' + prefixCls + '-placement-offset-y-' + offset[1];
 	      }
 	      var points = placement.points;
-	      return '' + prefixCls + '\n          ' + offsetClass + '\n          ' + prefixCls + '-placement-points-' + points[0] + '-' + points[1];
+	      return '' + prefixCls + ' ' + offsetClass + ' ' + prefixCls + '-placement-points-' + points[0] + '-' + points[1];
 	    }
 	  }
 	};
@@ -2609,7 +2617,7 @@
 
 	module.exports = {
 		"name": "rc-tooltip",
-		"version": "2.0.0",
+		"version": "2.0.4",
 		"description": "tooltip ui component for react",
 		"keywords": [
 			"react",

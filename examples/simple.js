@@ -138,7 +138,7 @@ webpackJsonp([0],{
 	            transitionName: this.state.transitionName },
 	          React.createElement(
 	            'a',
-	            { href: '#', onClick: this.preventDefault },
+	            { href: '#', style: { margin: 20 }, onClick: this.preventDefault },
 	            'trigger'
 	          )
 	        )
