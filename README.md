@@ -52,7 +52,7 @@ React.render(<Tooltip placement="left" trigger={['click']} overlay={<span>toolti
 
 http://localhost:8000/examples/index.md
 
-online example: http://react-component.github.io/tooltip/build/examples/
+online example: http://react-component.github.io/tooltip/examples/
 
 ## API
 
