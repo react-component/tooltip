@@ -161,7 +161,7 @@ class Tooltip extends React.Component {
     var popupElement = props.renderPopupToBody ? null : this.getPopupElement();
 
     return (<span className={`${props.prefixCls}-wrap`} {...mouseProps}>
-    {React.cloneElement(child, newChildProps)} {popupElement}
+    {[React.cloneElement(child, newChildProps), popupElement]}
     </span>);
   }
 }
