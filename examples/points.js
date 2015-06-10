@@ -1,22 +1,20 @@
-webpackJsonp([1],{
-
-/***/ 0:
+webpackJsonp([0],[
+/* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(31);
+	module.exports = __webpack_require__(1);
 
 
 /***/ },
-
-/***/ 31:
+/* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var React = __webpack_require__(3);
-	var Tooltip = __webpack_require__(4);
+	var React = __webpack_require__(2);
+	var Tooltip = __webpack_require__(3);
 	__webpack_require__(24);
-	var assign = __webpack_require__(2);
+	var assign = __webpack_require__(21);
 	var packageJson = __webpack_require__(28);
 	var placement = {
 	  points: ['tc', 'bc'],
@@ -74,6 +72,5 @@ webpackJsonp([1],{
 	React.render(React.createElement(Test, null), document.getElementById('__react-content'));
 
 /***/ }
-
-});
+]);
 //# sourceMappingURL=points.js.map

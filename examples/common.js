@@ -76,7 +76,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"simple","1":"points"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"points","1":"simple"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -97,63 +97,18 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-	
-	function ToObject(val) {
-		if (val == null) {
-			throw new TypeError('Object.assign cannot be called with null or undefined');
-		}
-	
-		return Object(val);
-	}
-	
-	function ownEnumerableKeys(obj) {
-		var keys = Object.getOwnPropertyNames(obj);
-	
-		if (Object.getOwnPropertySymbols) {
-			keys = keys.concat(Object.getOwnPropertySymbols(obj));
-		}
-	
-		return keys.filter(function (key) {
-			return propIsEnumerable.call(obj, key);
-		});
-	}
-	
-	module.exports = Object.assign || function (target, source) {
-		var from;
-		var keys;
-		var to = ToObject(target);
-	
-		for (var s = 1; s < arguments.length; s++) {
-			from = arguments[s];
-			keys = ownEnumerableKeys(Object(from));
-	
-			for (var i = 0; i < keys.length; i++) {
-				to[keys[i]] = from[keys[i]];
-			}
-		}
-	
-		return to;
-	};
-
+	module.exports = React;
 
 /***/ },
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = React;
+	'use strict';
+	
+	module.exports = __webpack_require__(4);
 
 /***/ },
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = __webpack_require__(5);
-
-/***/ },
-/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -213,11 +168,11 @@
 	/**
 	 * @author yiminghe@gmail.com
 	 */
-	var React = __webpack_require__(3);
-	var rcUtil = __webpack_require__(6);
+	var React = __webpack_require__(2);
+	var rcUtil = __webpack_require__(5);
 	var contains = rcUtil.Dom.contains;
 	var createChainedFunction = rcUtil.createChainedFunction;
-	var Popup = __webpack_require__(17);
+	var Popup = __webpack_require__(16);
 	
 	var Tooltip = (function (_React$Component) {
 	  function Tooltip(props) {
@@ -419,29 +374,29 @@
 	module.exports = Tooltip;
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  guid: __webpack_require__(8),
-	  classSet: __webpack_require__(9),
-	  joinClasses: __webpack_require__(10),
-	  KeyCode: __webpack_require__(11),
-	  PureRenderMixin: __webpack_require__(12),
-	  shallowEqual: __webpack_require__(7),
-	  createChainedFunction: __webpack_require__(13),
+	  guid: __webpack_require__(7),
+	  classSet: __webpack_require__(8),
+	  joinClasses: __webpack_require__(9),
+	  KeyCode: __webpack_require__(10),
+	  PureRenderMixin: __webpack_require__(11),
+	  shallowEqual: __webpack_require__(6),
+	  createChainedFunction: __webpack_require__(12),
 	  Dom: {
-	    addEventListener: __webpack_require__(14),
-	    contains: __webpack_require__(15)
+	    addEventListener: __webpack_require__(13),
+	    contains: __webpack_require__(14)
 	  },
 	  Children: {
-	    toArray: __webpack_require__(16)
+	    toArray: __webpack_require__(15)
 	  }
 	};
 
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -489,7 +444,7 @@
 
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var seed = 0;
@@ -499,7 +454,7 @@
 
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -544,7 +499,7 @@
 
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -591,7 +546,7 @@
 
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1118,7 +1073,7 @@
 
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1134,7 +1089,7 @@
 	
 	"use strict";
 	
-	var shallowEqual = __webpack_require__(7);
+	var shallowEqual = __webpack_require__(6);
 	
 	/**
 	 * If your React component's render function is "pure", e.g. it will render the
@@ -1171,7 +1126,7 @@
 
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1198,7 +1153,7 @@
 
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function (target, eventType, callback) {
@@ -1221,7 +1176,7 @@
 
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function (root, node) {
@@ -1237,10 +1192,10 @@
 
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(3);
+	var React = __webpack_require__(2);
 	
 	module.exports = function (children) {
 	  var ret = [];
@@ -1252,7 +1207,7 @@
 
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1283,10 +1238,10 @@
 	 * @author yiminghe@gmail.com
 	 */
 	
-	var React = __webpack_require__(3);
-	var anim = __webpack_require__(18);
-	var utils = __webpack_require__(21);
-	var assign = __webpack_require__(2);
+	var React = __webpack_require__(2);
+	var anim = __webpack_require__(17);
+	var utils = __webpack_require__(20);
+	var assign = __webpack_require__(21);
 	var domAlign = __webpack_require__(22);
 	
 	var Popup = (function (_React$Component) {
@@ -1393,13 +1348,13 @@
 	module.exports = Popup;
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Event = __webpack_require__(19);
-	var Css = __webpack_require__(20);
+	var Event = __webpack_require__(18);
+	var Css = __webpack_require__(19);
 	
 	module.exports = function (node, transitionName, callback) {
 	  var className = transitionName;
@@ -1443,7 +1398,7 @@
 	};
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -1504,7 +1459,7 @@
 	  node.removeEventListener(eventName, eventListener, false);
 	}
 	
-	var ReactTransitionEvents = {
+	var TransitionEvents = {
 	  addEndEventListener: function addEndEventListener(node, eventListener) {
 	    if (endEvents.length === 0) {
 	      window.setTimeout(eventListener, 0);
@@ -1527,10 +1482,10 @@
 	  }
 	};
 	
-	module.exports = ReactTransitionEvents;
+	module.exports = TransitionEvents;
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1561,7 +1516,7 @@
 	};
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1581,6 +1536,51 @@
 	    }
 	  }
 	};
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+	
+	function ToObject(val) {
+		if (val == null) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
+		}
+	
+		return Object(val);
+	}
+	
+	function ownEnumerableKeys(obj) {
+		var keys = Object.getOwnPropertyNames(obj);
+	
+		if (Object.getOwnPropertySymbols) {
+			keys = keys.concat(Object.getOwnPropertySymbols(obj));
+		}
+	
+		return keys.filter(function (key) {
+			return propIsEnumerable.call(obj, key);
+		});
+	}
+	
+	module.exports = Object.assign || function (target, source) {
+		var from;
+		var keys;
+		var to = ToObject(target);
+	
+		for (var s = 1; s < arguments.length; s++) {
+			from = arguments[s];
+			keys = ownEnumerableKeys(Object(from));
+	
+			for (var i = 0; i < keys.length; i++) {
+				to[keys[i]] = from[keys[i]];
+			}
+		}
+	
+		return to;
+	};
+
 
 /***/ },
 /* 22 */

@@ -1,24 +1,24 @@
-webpackJsonp([0],{
+webpackJsonp([1],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(1);
+	module.exports = __webpack_require__(29);
 
 
 /***/ },
 
-/***/ 1:
+/***/ 29:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var React = __webpack_require__(3);
-	var Tooltip = __webpack_require__(4);
+	var React = __webpack_require__(2);
+	var Tooltip = __webpack_require__(3);
 	__webpack_require__(24);
-	var assign = __webpack_require__(2);
+	var assign = __webpack_require__(21);
 	var packageJson = __webpack_require__(28);
-	__webpack_require__(29);
+	__webpack_require__(30);
 	
 	var Test = React.createClass({
 	  displayName: 'Test',
@@ -173,13 +173,13 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 29:
+/***/ 30:
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(30);
+	var content = __webpack_require__(31);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(27)(content, {});
@@ -197,7 +197,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 30:
+/***/ 31:
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(26)();
