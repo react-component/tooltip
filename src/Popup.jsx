@@ -7,7 +7,6 @@
 var React = require('react');
 var anim = require('css-animation');
 var utils = require('./utils');
-var assign = require('object-assign');
 var domAlign = require('dom-align');
 
 class Popup extends React.Component {
@@ -53,10 +52,7 @@ class Popup extends React.Component {
       if (props.visible && !prevProps.visible) {
         anim(domNode, `${transitionName}-enter`);
       } else if (!props.visible && prevProps.visible) {
-        domNode.style.display = 'block';
-        anim(domNode, `${transitionName}-leave`, ()=> {
-          domNode.style.display = 'none';
-        });
+        anim(domNode, `${transitionName}-leave`);
       }
     }
   }
@@ -79,9 +75,7 @@ class Popup extends React.Component {
     }
     var style = this.props.style;
     if (!props.visible) {
-      style = assign({}, style, {
-        display: 'none'
-      });
+      className += ` ${props.prefixCls}-hidden`;
     }
     var arrowClassName = `${props.prefixCls}-arrow`;
     var innerClassname = `${props.prefixCls}-inner`;

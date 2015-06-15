@@ -5,7 +5,6 @@ var Tooltip = require('rc-tooltip');
 require('rc-tooltip/assets/bootstrap.css');
 var assign = require('object-assign');
 var packageJson = require('../package.json');
-require('./anim.css');
 
 var Test = React.createClass({
   getInitialState() {
@@ -64,7 +63,7 @@ var Test = React.createClass({
         </label>
       &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
-          <input value='zoom-down' type='checkbox' onChange={this.onTransitionChange}  checked={this.state.transitionName ==='zoom-down'}/>
+          <input value='rc-tooltip-zoom' type='checkbox' onChange={this.onTransitionChange}  checked={this.state.transitionName ==='rc-tooltip-zoom'}/>
           transitionName
         </label>
 
