@@ -77,7 +77,7 @@ class Popup extends React.Component {
     if (props.className) {
       className += ' ' + props.className;
     }
-    var style = this.style;
+    var style = this.props.style;
     if (!props.visible) {
       style = assign({}, style, {
         display: 'none'

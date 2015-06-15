@@ -1,6 +1,11 @@
 # History
 ----
 
+### 2.1.0 / 2015-06-15
+
+- support overlayStyle props
+- support wrapStyle props
+
 ### 2.0.0 / 2015-06-08
 
 - support click document to hide

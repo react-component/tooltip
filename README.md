@@ -69,11 +69,17 @@ online example: http://react-component.github.io/tooltip/examples/
     </thead>
     <tbody>
         <tr>
-          <td>className</td>
-          <td>String</td>
+          <td>overlayStyle</td>
+          <td>Object</td>
           <td></td>
-          <td>additional css class of root dom node</td>
+          <td>additional style of overlay node</td>
         </tr>
+         <tr>
+           <td>wrapStyle</td>
+           <td>Object</td>
+           <td></td>
+           <td>additional style  of wrap node</td>
+         </tr>
         <tr>
           <td>renderPopupToBody</td>
           <td>true</td>

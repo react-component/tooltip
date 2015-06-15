@@ -76,6 +76,7 @@ class Tooltip extends React.Component {
       placement={props.placement}
       animation={props.animation}
       wrap={this}
+      style={props.overlayStyle}
       transitionName={props.transitionName}>
       {props.overlay}
     </Popup>;
@@ -160,7 +161,7 @@ class Tooltip extends React.Component {
 
     var popupElement = props.renderPopupToBody ? null : this.getPopupElement();
 
-    return (<span className={`${props.prefixCls}-wrap`} {...mouseProps}>
+    return (<span className={`${props.prefixCls}-wrap`} {...mouseProps} style={props.wrapStyle}>
     {[React.cloneElement(child, newChildProps), popupElement]}
     </span>);
   }
@@ -171,7 +172,9 @@ Tooltip.propTypes = {
   placement: React.PropTypes.any,
   onVisibleChange: React.PropTypes.func,
   renderPopupToBody: React.PropTypes.bool,
-  overlay: React.PropTypes.node.isRequired
+  overlay: React.PropTypes.node.isRequired,
+  overlayStyle: React.PropTypes.object,
+  wrapStyle: React.PropTypes.object
 };
 
 Tooltip.defaultProps = {
@@ -179,6 +182,8 @@ Tooltip.defaultProps = {
   renderPopupToBody: true,
   onVisibleChange: function () {
   },
+  overlayStyle: {},
+  wrapStyle: {},
   placement: 'right',
   trigger: ['hover']
 };
