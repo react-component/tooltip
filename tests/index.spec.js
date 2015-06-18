@@ -43,7 +43,7 @@ describe('rc-tooltip', function () {
         next();
       }, timeout(20), (next)=> {
         var popupDomNode = tooltip.getPopupDomNode();
-        expect(popupDomNode.style.display).to.be('none');
+        expect($(popupDomNode).css('display')).to.be('none');
         next();
       }], done);
     });
@@ -62,7 +62,7 @@ describe('rc-tooltip', function () {
         next();
       }, timeout(20), (next)=> {
         var popupDomNode = tooltip.getPopupDomNode();
-        expect(popupDomNode.style.display).to.be('none');
+        expect($(popupDomNode).css('display')).to.be('none');
         next();
       }], done);
     });
@@ -178,7 +178,7 @@ describe('rc-tooltip', function () {
           timeout(500),
           (next)=> {
             var popupDomNode = tooltip.getPopupDomNode();
-            expect(popupDomNode.style.display).to.be('none');
+            expect($(popupDomNode).css('display')).to.be('none');
             next();
           }],
         done);
