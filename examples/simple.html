@@ -2,225 +2,231 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" type="text/css" rel="stylesheet"/>
-    <style>
-        .hljs {
-            display: block;
-            overflow-x: auto;
-            padding: 0.5em;
-            color: #333;
-            background: #f8f8f8;
-            -webkit-text-size-adjust: none;
-        }
+  <title>rc-tooltip-simple</title>
+  <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" type="text/css" rel="stylesheet"/>
+  <style>
+      .hljs {
+          display: block;
+          overflow-x: auto;
+          padding: 0.5em;
+          color: #333;
+          background: #f8f8f8;
+          -webkit-text-size-adjust: none;
+      }
 
-        .hljs-comment,
-        .diff .hljs-header,
-        .hljs-javadoc {
-            color: #998;
-            font-style: italic;
-        }
+      .hljs-comment,
+      .diff .hljs-header,
+      .hljs-javadoc {
+          color: #998;
+          font-style: italic;
+      }
 
-        .hljs-keyword,
-        .css .rule .hljs-keyword,
-        .hljs-winutils,
-        .nginx .hljs-title,
-        .hljs-subst,
-        .hljs-request,
-        .hljs-status {
-            color: #333;
-            font-weight: bold;
-        }
+      .hljs-keyword,
+      .css .rule .hljs-keyword,
+      .hljs-winutils,
+      .nginx .hljs-title,
+      .hljs-subst,
+      .hljs-request,
+      .hljs-status {
+          color: #333;
+          font-weight: bold;
+      }
 
-        .hljs-number,
-        .hljs-hexcolor,
-        .ruby .hljs-constant {
-            color: #008080;
-        }
+      .hljs-number,
+      .hljs-hexcolor,
+      .ruby .hljs-constant {
+          color: #008080;
+      }
 
-        .hljs-string,
-        .hljs-tag .hljs-value,
-        .hljs-phpdoc,
-        .hljs-dartdoc,
-        .tex .hljs-formula {
-            color: #d14;
-        }
+      .hljs-string,
+      .hljs-tag .hljs-value,
+      .hljs-phpdoc,
+      .hljs-dartdoc,
+      .tex .hljs-formula {
+          color: #d14;
+      }
 
-        .hljs-title,
-        .hljs-id,
-        .scss .hljs-preprocessor {
-            color: #900;
-            font-weight: bold;
-        }
+      .hljs-title,
+      .hljs-id,
+      .scss .hljs-preprocessor {
+          color: #900;
+          font-weight: bold;
+      }
 
-        .hljs-list .hljs-keyword,
-        .hljs-subst {
-            font-weight: normal;
-        }
+      .hljs-list .hljs-keyword,
+      .hljs-subst {
+          font-weight: normal;
+      }
 
-        .hljs-class .hljs-title,
-        .hljs-type,
-        .vhdl .hljs-literal,
-        .tex .hljs-command {
-            color: #458;
-            font-weight: bold;
-        }
+      .hljs-class .hljs-title,
+      .hljs-type,
+      .vhdl .hljs-literal,
+      .tex .hljs-command {
+          color: #458;
+          font-weight: bold;
+      }
 
-        .hljs-tag,
-        .hljs-tag .hljs-title,
-        .hljs-rules .hljs-property,
-        .django .hljs-tag .hljs-keyword {
-            color: #000080;
-            font-weight: normal;
-        }
+      .hljs-tag,
+      .hljs-tag .hljs-title,
+      .hljs-rules .hljs-property,
+      .django .hljs-tag .hljs-keyword {
+          color: #000080;
+          font-weight: normal;
+      }
 
-        .hljs-attribute,
-        .hljs-variable,
-        .lisp .hljs-body {
-            color: #008080;
-        }
+      .hljs-attribute,
+      .hljs-variable,
+      .lisp .hljs-body {
+          color: #008080;
+      }
 
-        .hljs-regexp {
-            color: #009926;
-        }
+      .hljs-regexp {
+          color: #009926;
+      }
 
-        .hljs-symbol,
-        .ruby .hljs-symbol .hljs-string,
-        .lisp .hljs-keyword,
-        .clojure .hljs-keyword,
-        .scheme .hljs-keyword,
-        .tex .hljs-special,
-        .hljs-prompt {
-            color: #990073;
-        }
+      .hljs-symbol,
+      .ruby .hljs-symbol .hljs-string,
+      .lisp .hljs-keyword,
+      .clojure .hljs-keyword,
+      .scheme .hljs-keyword,
+      .tex .hljs-special,
+      .hljs-prompt {
+          color: #990073;
+      }
 
-        .hljs-built_in {
-            color: #0086b3;
-        }
+      .hljs-built_in {
+          color: #0086b3;
+      }
 
-        .hljs-preprocessor,
-        .hljs-pragma,
-        .hljs-pi,
-        .hljs-doctype,
-        .hljs-shebang,
-        .hljs-cdata {
-            color: #999;
-            font-weight: bold;
-        }
+      .hljs-preprocessor,
+      .hljs-pragma,
+      .hljs-pi,
+      .hljs-doctype,
+      .hljs-shebang,
+      .hljs-cdata {
+          color: #999;
+          font-weight: bold;
+      }
 
-        .hljs-deletion {
-            background: #fdd;
-        }
+      .hljs-deletion {
+          background: #fdd;
+      }
 
-        .hljs-addition {
-            background: #dfd;
-        }
+      .hljs-addition {
+          background: #dfd;
+      }
 
-        .diff .hljs-change {
-            background: #0086b3;
-        }
+      .diff .hljs-change {
+          background: #0086b3;
+      }
 
-        .hljs-chunk {
-            color: #aaa;
-        }
-        .highlight {
-            background-color: transparent;
-            padding-top: 1px;
-            position: relative;
-        }
+      .hljs-chunk {
+          color: #aaa;
+      }
+      .highlight {
+          background-color: transparent;
+          padding-top: 1px;
+          position: relative;
+      }
 
-        .highlight pre {
-            font-family: Consolas, "Liberation Mono", Courier, monospace;
-            margin: 6px 0;
-            border: 1px solid #eee;
-            padding: 6px 10px;
-            overflow: auto;
-            border-radius: 2px;
-            background-color: #f8f8f9;
-            line-height: 19px;
-            font-size: 13px;
-            white-space: pre;
-        }
+      .highlight pre {
+          font-family: Consolas, "Liberation Mono", Courier, monospace;
+          margin: 6px 0;
+          border: 1px solid #eee;
+          padding: 6px 10px;
+          overflow: auto;
+          border-radius: 2px;
+          background-color: #f8f8f9;
+          line-height: 19px;
+          font-size: 13px;
+          white-space: pre;
+      }
 
-        .highlight pre code {
-            color: #5D6A6A;
-            background-color: transparent;
-            margin: auto;
-            padding: 0;
-        }
-    </style>
-    <!--[if lt IE 9]>
-    <script>
-    // Console-polyfill. MIT license.
-    // https://github.com/paulmillr/console-polyfill
-    // Make it safe to do console.log() always.
-    (function(global) {
-      'use strict';
-      global.console = global.console || {};
-      var con = global.console;
-      var prop, method;
-      var empty = {};
-      var dummy = function() {};
-      var properties = 'memory'.split(',');
-      var methods = ('assert,clear,count,debug,dir,dirxml,error,exception,group,' +
-         'groupCollapsed,groupEnd,info,log,markTimeline,profile,profiles,profileEnd,' +
-         'show,table,time,timeEnd,timeline,timelineEnd,timeStamp,trace,warn').split(',');
-      while (prop = properties.pop()) con[prop] = con[prop] || empty;
-      while (method = methods.pop()) con[method] = con[method] || dummy;
-    })(typeof window === 'undefined' ? this : window);
-    // Using `this` for web workers while maintaining compatibility with browser
-    // targeted script loaders such as Browserify or Webpack where the only way to
-    // get to the global object is via `window`.
-    </script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.0/es5-shim.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.0/es5-sham.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
-    <![endif]-->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+      .highlight pre code {
+          color: #5D6A6A;
+          background-color: transparent;
+          margin: auto;
+          padding: 0;
+      }
+  </style>
+  <!--[if lt IE 9]>
+  <script>
+  // Console-polyfill. MIT license.
+  // https://github.com/paulmillr/console-polyfill
+  // Make it safe to do console.log() always.
+  (function(global) {
+    'use strict';
+    global.console = global.console || {};
+    var con = global.console;
+    var prop, method;
+    var empty = {};
+    var dummy = function() {};
+    var properties = 'memory'.split(',');
+    var methods = ('assert,clear,count,debug,dir,dirxml,error,exception,group,' +
+       'groupCollapsed,groupEnd,info,log,markTimeline,profile,profiles,profileEnd,' +
+       'show,table,time,timeEnd,timeline,timelineEnd,timeStamp,trace,warn').split(',');
+    while (prop = properties.pop()) con[prop] = con[prop] || empty;
+    while (method = methods.pop()) con[method] = con[method] || dummy;
+  })(typeof window === 'undefined' ? this : window);
+  // Using `this` for web workers while maintaining compatibility with browser
+  // targeted script loaders such as Browserify or Webpack where the only way to
+  // get to the global object is via `window`.
+  </script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.0/es5-shim.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.0/es5-sham.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+  <![endif]-->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
 </head>
 <body>
+<h1>rc-tooltip@2.2.3</h1>
 <div id="__react-content"></div>
 <script src="common.js?nowrap"></script>
 <script src="simple.js?nowrap"></script>
 <div class="highlight">
 <pre>
-<span class="xml">'use strict';
+<span class="hljs-string">'use strict'</span>;
 
-var React = require('react');
-var Tooltip = require('rc-tooltip');
-require('rc-tooltip/assets/bootstrap.css');
-var assign = require('object-assign');
-var packageJson = require('../package.json');
-require('./anim.css');
+<span class="hljs-keyword">var</span> React = require(<span class="hljs-string">'react'</span>);
+<span class="hljs-keyword">var</span> Tooltip = require(<span class="hljs-string">'rc-tooltip'</span>);
+require(<span class="hljs-string">'rc-tooltip/assets/bootstrap.css'</span>);
+<span class="hljs-keyword">var</span> assign = require(<span class="hljs-string">'object-assign'</span>);
 
-var Test = React.createClass({
+<span class="hljs-keyword">var</span> Test = React.createClass({
   getInitialState() {
-    return {
-      placement: 'right',
+    <span class="hljs-keyword">return</span> {
+      placement: <span class="hljs-string">'right'</span>,
       trigger: {
-        hover: 1
+        hover: <span class="hljs-number">1</span>
       }
     };
   },
   onPlacementChange(e) {
-    this.setState({
-      placement: e.target.value
+    <span class="hljs-keyword">this</span>.setState({
+      placement: e.target.<span class="hljs-keyword">value</span>
     });
   },
 
   onTransitionChange(e) {
-    this.setState({
-      transitionName: e.target.checked ? e.target.value : ''
+    <span class="hljs-keyword">this</span>.setState({
+      transitionName: e.target.<span class="hljs-keyword">checked</span> ? e.target.<span class="hljs-keyword">value</span> : <span class="hljs-string">''</span>
     });
   },
 
   onTriggerChange(e) {
-    var trigger = assign({}, this.state.trigger);
-    if (e.target.checked) {
-      trigger[e.target.value] = 1;
-    } else {
-      delete trigger[e.target.value];
+    <span class="hljs-keyword">var</span> trigger = assign({}, <span class="hljs-keyword">this</span>.state.trigger);
+    <span class="hljs-keyword">if</span> (e.target.<span class="hljs-keyword">checked</span>) {
+      trigger[e.target.<span class="hljs-keyword">value</span>] = <span class="hljs-number">1</span>;
+      <span class="hljs-keyword">if</span> (e.target.<span class="hljs-keyword">value</span> === <span class="hljs-string">'click'</span>) {
+        delete trigger.hover;
+      } <span class="hljs-function"><span class="hljs-keyword">else</span> <span class="hljs-title">if</span> (<span class="hljs-params">e.target.<span class="hljs-keyword">value</span> === <span class="hljs-string">'hover'</span></span>) </span>{
+        delete trigger.click;
+      }
+    } <span class="hljs-keyword">else</span> {
+      delete trigger[e.target.<span class="hljs-keyword">value</span>];
     }
-    this.setState({
+    <span class="hljs-keyword">this</span>.setState({
       trigger: trigger
     });
   },
@@ -230,62 +236,61 @@ var Test = React.createClass({
   },
 
   onVisibleChange(visible) {
-    console.log('tooltip', visible);
+    console.log(<span class="hljs-string">'tooltip'</span>, visible);
   },
 
   render() {
-    console.log(this.state);
-    var trigger = this.state.trigger;
-    return <span class="hljs-tag">&lt;<span class="hljs-title">div</span> &gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">margin</span>: '10<span class="hljs-variable">px</span> 20<span class="hljs-variable">px</span>'}}</span><span class="xml"><span class="hljs-tag">&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
+    console.log(<span class="hljs-keyword">this</span>.state);
+    <span class="hljs-keyword">var</span> trigger = <span class="hljs-keyword">this</span>.state.trigger;
+    <span class="hljs-keyword">return</span> &lt;div &gt;
+      &lt;div style={{margin: <span class="hljs-string">'10px 20px'</span>}}&gt;
+        &lt;label&gt;
           placement:
-          <span class="hljs-tag">&lt;<span class="hljs-title">select</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">{this.state.placement}</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onPlacementChange}</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>left<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>top<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-          <span class="hljs-tag">&lt;/<span class="hljs-title">select</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+          &lt;<span class="hljs-keyword">select</span> <span class="hljs-keyword">value</span>={<span class="hljs-keyword">this</span>.state.placement} onChange={<span class="hljs-keyword">this</span>.onPlacementChange}&gt;
+            &lt;option&gt;left&lt;/option&gt;
+            &lt;option&gt;right&lt;/option&gt;
+            &lt;option&gt;top&lt;/option&gt;
+            &lt;option&gt;bottom&lt;/option&gt;
+          &lt;/<span class="hljs-keyword">select</span>&gt;
+        &lt;/label&gt;
       &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-        <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">'zoom-down'</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'checkbox'</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onTransitionChange}</span>  <span class="hljs-attribute">checked</span>=<span class="hljs-value">{this.state.transitionName</span> =<span class="hljs-value">=='zoom-down'}</span>/&gt;</span>
+        &lt;label&gt;
+          &lt;input <span class="hljs-keyword">value</span>=<span class="hljs-string">'rc-tooltip-zoom'</span> type=<span class="hljs-string">'checkbox'</span> onChange={<span class="hljs-keyword">this</span>.onTransitionChange}  <span class="hljs-keyword">checked</span>={<span class="hljs-keyword">this</span>.state.transitionName === <span class="hljs-string">'rc-tooltip-zoom'</span>}/&gt;
           transitionName
-        <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+        &lt;/label&gt;
 
       &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-        <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
+        &lt;label&gt;
           trigger:
-          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">'hover'</span> <span class="hljs-attribute">checked</span>=<span class="hljs-value">{trigger.hover}</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'checkbox'</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onTriggerChange}</span>/&gt;</span>
+          &lt;input <span class="hljs-keyword">value</span>=<span class="hljs-string">'hover'</span> <span class="hljs-keyword">checked</span>={trigger.hover} type=<span class="hljs-string">'checkbox'</span> onChange={<span class="hljs-keyword">this</span>.onTriggerChange}/&gt;
           hover
-          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">'focus'</span> <span class="hljs-attribute">checked</span>=<span class="hljs-value">{trigger.focus}</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'checkbox'</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onTriggerChange}</span>/&gt;</span>
+          &lt;input <span class="hljs-keyword">value</span>=<span class="hljs-string">'focus'</span> <span class="hljs-keyword">checked</span>={trigger.focus} type=<span class="hljs-string">'checkbox'</span> onChange={<span class="hljs-keyword">this</span>.onTriggerChange}/&gt;
           focus
-          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">'click'</span> <span class="hljs-attribute">checked</span>=<span class="hljs-value">{trigger.click}</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'checkbox'</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onTriggerChange}</span>/&gt;</span>
+          &lt;input <span class="hljs-keyword">value</span>=<span class="hljs-string">'click'</span> <span class="hljs-keyword">checked</span>={trigger.click} type=<span class="hljs-string">'checkbox'</span> onChange={<span class="hljs-keyword">this</span>.onTriggerChange}/&gt;
           click
-        <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">margin</span>: 100}}</span><span class="xml"><span class="hljs-tag">&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span> <span class="hljs-attribute">placement</span>=<span class="hljs-value">{this.state.placement}</span>
-          <span class="hljs-attribute">renderPopupToBody</span>=<span class="hljs-value">{this.props.renderPopupToBody}</span>
-          <span class="hljs-attribute">trigger</span>=<span class="hljs-value">{Object.keys(this.state.trigger)}</span>
-          <span class="hljs-attribute">onVisibleChange</span>=<span class="hljs-value">{this.onVisibleChange}</span>
-          <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{&lt;span</span>&gt;</span>i am a tooltip<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>}
-          transitionName={this.state.transitionName}&gt;
-          <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">'#'</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">margin</span>:20}}</span><span class="xml"><span class="hljs-tag"> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{this.preventDefault}</span>&gt;</span>trigger<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>;
+        &lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div style={{margin: <span class="hljs-number">100</span>}}&gt;
+        &lt;Tooltip placement={<span class="hljs-keyword">this</span>.state.placement}
+          renderPopupToBody={<span class="hljs-keyword">this</span>.props.renderPopupToBody}
+          trigger={Object.keys(<span class="hljs-keyword">this</span>.state.trigger)}
+          onVisibleChange={<span class="hljs-keyword">this</span>.onVisibleChange}
+          overlay={&lt;span&gt;i am a tooltip&lt;/span&gt;}
+          transitionName={<span class="hljs-keyword">this</span>.state.transitionName}&gt;
+          &lt;a href=<span class="hljs-string">'#'</span> style={{margin: <span class="hljs-number">20</span>}} onClick={<span class="hljs-keyword">this</span>.preventDefault}&gt;trigger&lt;/a&gt;
+        &lt;/Tooltip&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;;
   }
 });
 
-React.render(<span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>{packageJson.name}@{packageJson.version}<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>renderPopupToBody=true<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">Test</span>/&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>renderPopupToBody=false<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">Test</span> <span class="hljs-attribute">renderPopupToBody</span>=<span class="hljs-value">{false}</span>/&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>, document.getElementById("__react-content"));
-</span>
+React.render(&lt;div&gt;
+  &lt;h2&gt;renderPopupToBody=<span class="hljs-keyword">true</span>&lt;/h2&gt;
+  &lt;Test/&gt;
+  &lt;h2&gt;renderPopupToBody=<span class="hljs-keyword">false</span>&lt;/h2&gt;
+  &lt;Test renderPopupToBody={<span class="hljs-keyword">false</span>}/&gt;
+&lt;/div&gt;, document.getElementById(<span class="hljs-string">"__react-content"</span>));
+
 </pre>
 </div>
 </body>

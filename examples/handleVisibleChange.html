@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>rc-tooltip-points</title>
+  <title>rc-tooltip-handleVisibleChange</title>
   <meta http-equiv=Content-Type content="text/html;charset=utf-8">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" type="text/css" rel="stylesheet"/>
   <style>
@@ -183,7 +183,7 @@
 <h1>rc-tooltip@2.2.3</h1>
 <div id="__react-content"></div>
 <script src="common.js?nowrap"></script>
-<script src="points.js?nowrap"></script>
+<script src="handleVisibleChange.js?nowrap"></script>
 <div class="highlight">
 <pre>
 <span class="hljs-pi">'use strict'</span>;
@@ -191,52 +191,40 @@
 <span class="hljs-keyword">var</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>);
 <span class="hljs-keyword">var</span> Tooltip = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-tooltip'</span>);
 <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-tooltip/assets/bootstrap.css'</span>);
-<span class="hljs-keyword">var</span> placement = {
-  points: [<span class="hljs-string">'tc'</span>, <span class="hljs-string">'bc'</span>],
-  offset:[<span class="hljs-number">11</span>,<span class="hljs-number">3</span>],
-  overflow: {
-    adjustX: <span class="hljs-number">1</span>,
-    adjustY: <span class="hljs-number">1</span>
-  }
-};
-
-<span class="hljs-keyword">var</span> style=<span class="hljs-string">`
-.rc-tooltip-placement-points-tc-bc, .rc-tooltip-placement-points-bc-tc {
-  padding: 5px 0;
-}
-
-.rc-tooltip-placement-points-tc-bc &gt; .rc-tooltip-arrow{
-  top: 0;
-  margin-left: -5px;
-  border-width: 0 5px 5px;
-  border-bottom-color: #000000;
-}
-
-.rc-tooltip-placement-offset-x-11 &gt; .rc-tooltip-arrow {
-  left: 11px;
-}
-
-.rc-tooltip-placement-points-bc-tc &gt; .rc-tooltip-arrow{
-  bottom: 0;
-  margin-left: -5px;
-  border-width: 5px 5px 0;
-  border-top-color: #000000;
-}
-`</span>;
-
 
 <span class="hljs-keyword">var</span> Test = React.createClass({
+  getInitialState() {
+    <span class="hljs-keyword">return</span> {
+      visible: <span class="hljs-literal">false</span>
+    };
+  },
+  handleVisibleChange(visible) {
+    <span class="hljs-keyword">this</span>.setState({
+      visible: visible
+    });
+  },
+  handleDestroy(){
+    <span class="hljs-keyword">this</span>.setState({
+      destroy:<span class="hljs-literal">true</span>
+    });
+  },
   render() {
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.state.destroy){
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    }
     <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> &gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">style</span> <span class="hljs-attribute">dangerouslySetInnerHTML</span>=<span class="hljs-value">{{__html:style}}</span>/&gt;</span><span class="css">
-      &lt;<span class="hljs-tag">div</span> <span class="hljs-tag">style</span>=<span class="hljs-rules">{{<span class="hljs-rule"><span class="hljs-attribute">marginTop</span>:<span class="hljs-value"> <span class="hljs-number">300</span>,marginLeft:<span class="hljs-number">100</span>,marginBottom:<span class="hljs-number">100</span>}}&gt;
-        &lt;Tooltip placement={placement}
-          trigger=<span class="hljs-string">"click"</span>
-          overlay={&lt;span&gt;i am a tooltip&lt;/span&gt;}&gt;
-          &lt;a href=<span class="hljs-string">'#'</span> onClick={preventDefault}&gt;trigger&lt;/a&gt;
-        &lt;/Tooltip&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;</span></span>;</span></span></span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{marginTop:</span> <span class="hljs-attribute">300</span>, <span class="hljs-attribute">marginLeft:</span> <span class="hljs-attribute">100</span>, <span class="hljs-attribute">marginBottom:</span> <span class="hljs-attribute">100</span>}}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span>
+          <span class="hljs-attribute">visible</span>=<span class="hljs-value">{this.state.visible}</span>
+          <span class="hljs-attribute">animation</span>=<span class="hljs-value">"zoom"</span>
+          <span class="hljs-attribute">onVisibleChange</span>=<span class="hljs-value">{this.handleVisibleChange}</span>
+          <span class="hljs-attribute">trigger</span>=<span class="hljs-value">"click"</span>
+          <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{&lt;span</span>&gt;</span>i am a tooltip<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>}&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">'#'</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{preventDefault}</span>&gt;</span>trigger<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{this.handleDestroy}</span>&gt;</span>destroy<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>;</span>
   }
 });
 

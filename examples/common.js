@@ -30,7 +30,7 @@
 /******/ 	// "0" means "already loaded"
 /******/ 	// Array means "loading", array contains callbacks
 /******/ 	var installedChunks = {
-/******/ 		2:0
+/******/ 		3:0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -76,7 +76,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"points","1":"simple"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"handleVisibleChange","1":"points","2":"simple"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -95,7 +95,7 @@
 /* 0 */,
 /* 1 */,
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports = React;
 
@@ -137,7 +137,7 @@
 	  var _again = true;_function: while (_again) {
 	    var object = _x,
 	        property = _x2,
-	        receiver = _x3;desc = parent = getter = undefined;_again = false;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
+	        receiver = _x3;desc = parent = getter = undefined;_again = false;if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
 	      var parent = Object.getPrototypeOf(object);if (parent === null) {
 	        return undefined;
 	      } else {
@@ -170,9 +170,8 @@
 	 */
 	var React = __webpack_require__(2);
 	var rcUtil = __webpack_require__(5);
-	var contains = rcUtil.Dom.contains;
 	var createChainedFunction = rcUtil.createChainedFunction;
-	var Popup = __webpack_require__(16);
+	var Popup = __webpack_require__(17);
 	
 	var Tooltip = (function (_React$Component) {
 	  function Tooltip(props) {
@@ -187,7 +186,7 @@
 	    if ('visible' in props) {
 	      this.state.visible = !!props.visible;
 	    }
-	    ['toggle', 'show', 'hide', 'handleDocumentClick'].forEach(function (m) {
+	    ['toggle', 'show', 'hide'].forEach(function (m) {
 	      _this[m] = _this[m].bind(_this);
 	    });
 	  }
@@ -195,39 +194,18 @@
 	  _inherits(Tooltip, _React$Component);
 	
 	  _createClass(Tooltip, [{
+	    key: 'getPopupDomNode',
+	    value: function getPopupDomNode() {
+	      // for test
+	      return this.refs.popup ? this.refs.popup.getPopupDomNode() : this.popupInstance.getPopupDomNode();
+	    }
+	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
 	      if ('visible' in nextProps) {
 	        this.setState({
 	          visible: !!nextProps.visible
 	        });
-	      }
-	    }
-	  }, {
-	    key: 'handleDocumentClick',
-	    value: function handleDocumentClick(e) {
-	      var targetDomNode = React.findDOMNode(this).firstChild;
-	      var popupDomNode = this.getPopupDomNode();
-	      var target = e.target;
-	      if (target !== targetDomNode && target !== popupDomNode && !contains(popupDomNode, target) && !contains(targetDomNode, target)) {
-	        this.setVisible(false);
-	      }
-	    }
-	  }, {
-	    key: 'monitorDocumentClick',
-	    value: function monitorDocumentClick(prevState) {
-	      var state = this.state;
-	      if (this.props.trigger.indexOf('click') !== -1) {
-	        if (state.visible && !prevState.visible) {
-	          if (!this.documentClickHander) {
-	            this.documentClickHander = rcUtil.Dom.addEventListener(document, 'click', this.handleDocumentClick);
-	          }
-	        } else if (prevState.visible && !state.visible) {
-	          if (this.documentClickHander) {
-	            this.documentClickHander.remove();
-	            this.documentClickHander = null;
-	          }
-	        }
 	      }
 	    }
 	  }, {
@@ -247,29 +225,20 @@
 	      }
 	      var props = this.props;
 	      var state = this.state;
-	      return React.createElement(Popup, { prefixCls: props.prefixCls,
-	        ref: props.renderPopupToBody ? null : 'popup',
+	      var ref = {};
+	      if (!props.renderPopupToBody) {
+	        ref.ref = 'popup';
+	      }
+	      return React.createElement(Popup, _extends({ prefixCls: props.prefixCls
+	      }, ref, {
 	        visible: state.visible,
+	        trigger: props.trigger,
 	        placement: props.placement,
 	        animation: props.animation,
 	        wrap: this,
-	        transitionName: props.transitionName }, props.overlay);
-	    }
-	  }, {
-	    key: 'getPopupDomNode',
-	    value: function getPopupDomNode() {
-	      return this.popupDomNode || React.findDOMNode(this.refs.popup);
-	    }
-	  }, {
-	    key: 'renderToolTip',
-	    value: function renderToolTip(callback) {
-	      if (this.props.renderPopupToBody) {
-	        React.render(this.getPopupElement(), this.getTipContainer(), function () {
-	          callback(this);
-	        });
-	      } else {
-	        callback(this.refs.popup);
-	      }
+	        onClickOutside: this.hide,
+	        style: props.overlayStyle,
+	        transitionName: props.transitionName }), props.overlay);
 	    }
 	  }, {
 	    key: 'toggle',
@@ -284,13 +253,12 @@
 	  }, {
 	    key: 'setVisible',
 	    value: function setVisible(visible) {
-	      var _this2 = this;
-	
-	      this.setState({
-	        visible: visible
-	      }, function () {
-	        _this2.props.onVisibleChange(_this2.state.visible);
-	      });
+	      if (this.state.visible !== visible) {
+	        this.setState({
+	          visible: visible
+	        });
+	        this.props.onVisibleChange(visible);
+	      }
 	    }
 	  }, {
 	    key: 'show',
@@ -309,17 +277,22 @@
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate(prevProps, prevState) {
-	      var _this3 = this;
-	
+	    value: function componentDidUpdate() {
 	      if (!this.popupRendered) {
 	        return;
 	      }
-	      prevState = prevState || {};
-	      this.renderToolTip(function (tooltip) {
-	        _this3.popupDomNode = tooltip.getRootNode();
-	      });
-	      this.monitorDocumentClick(prevState);
+	      if (this.props.renderPopupToBody) {
+	        this.popupInstance = React.render(this.getPopupElement(), this.getTipContainer());
+	      }
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      if (this.tipContainer) {
+	        React.unmountComponentAtNode(this.tipContainer);
+	        document.body.removeChild(this.tipContainer);
+	        this.tipContainer = null;
+	      }
 	    }
 	  }, {
 	    key: 'render',
@@ -347,8 +320,13 @@
 	      }
 	
 	      var popupElement = props.renderPopupToBody ? null : this.getPopupElement();
+	      var className = props.prefixCls + '-wrap';
 	
-	      return React.createElement('span', _extends({ className: '' + props.prefixCls + '-wrap' }, mouseProps), [React.cloneElement(child, newChildProps), popupElement]);
+	      if (this.state.visible) {
+	        className += ' ' + props.prefixCls + '-wrap-open';
+	      }
+	
+	      return React.createElement('span', _extends({ className: className }, mouseProps, { style: props.wrapStyle }), rcUtil.Children.mapSelf([React.cloneElement(child, newChildProps), popupElement]));
 	    }
 	  }]);
 	
@@ -360,13 +338,17 @@
 	  placement: React.PropTypes.any,
 	  onVisibleChange: React.PropTypes.func,
 	  renderPopupToBody: React.PropTypes.bool,
-	  overlay: React.PropTypes.node.isRequired
+	  overlay: React.PropTypes.node.isRequired,
+	  overlayStyle: React.PropTypes.object,
+	  wrapStyle: React.PropTypes.object
 	};
 	
 	Tooltip.defaultProps = {
 	  prefixCls: 'rc-tooltip',
 	  renderPopupToBody: true,
 	  onVisibleChange: function onVisibleChange() {},
+	  overlayStyle: {},
+	  wrapStyle: {},
 	  placement: 'right',
 	  trigger: ['hover']
 	};
@@ -378,74 +360,27 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  guid: __webpack_require__(7),
-	  classSet: __webpack_require__(8),
-	  joinClasses: __webpack_require__(9),
-	  KeyCode: __webpack_require__(10),
-	  PureRenderMixin: __webpack_require__(11),
-	  shallowEqual: __webpack_require__(6),
+	  guid: __webpack_require__(6),
+	  classSet: __webpack_require__(7),
+	  joinClasses: __webpack_require__(8),
+	  KeyCode: __webpack_require__(9),
+	  PureRenderMixin: __webpack_require__(10),
+	  shallowEqual: __webpack_require__(11),
 	  createChainedFunction: __webpack_require__(12),
 	  Dom: {
 	    addEventListener: __webpack_require__(13),
 	    contains: __webpack_require__(14)
 	  },
 	  Children: {
-	    toArray: __webpack_require__(15)
+	    toArray: __webpack_require__(15),
+	    mapSelf: __webpack_require__(16)
 	  }
 	};
 
 
 /***/ },
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule shallowEqual
-	 */
-	
-	"use strict";
-	
-	/**
-	 * Performs equality by iterating through keys on an object and returning
-	 * false when any key has values which are not strictly equal between
-	 * objA and objB. Returns true when the values of all keys are strictly equal.
-	 *
-	 * @return {boolean}
-	 */
-	function shallowEqual(objA, objB) {
-	  if (objA === objB) {
-	    return true;
-	  }
-	  var key;
-	  // Test for A's keys different from B.
-	  for (key in objA) {
-	    if (objA.hasOwnProperty(key) &&
-	        (!objB.hasOwnProperty(key) || objA[key] !== objB[key])) {
-	      return false;
-	    }
-	  }
-	  // Test for B's keys missing from A.
-	  for (key in objB) {
-	    if (objB.hasOwnProperty(key) && !objA.hasOwnProperty(key)) {
-	      return false;
-	    }
-	  }
-	  return true;
-	}
-	
-	module.exports = shallowEqual;
-
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	var seed = 0;
 	module.exports = function () {
@@ -454,8 +389,8 @@
 
 
 /***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
+/* 7 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright 2013-2014, Facebook, Inc.
@@ -499,8 +434,8 @@
 
 
 /***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
+/* 8 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright 2013-2014, Facebook, Inc.
@@ -546,8 +481,8 @@
 
 
 /***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
+/* 9 */
+/***/ function(module, exports) {
 
 	/**
 	 * @ignore
@@ -1073,7 +1008,7 @@
 
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1089,7 +1024,7 @@
 	
 	"use strict";
 	
-	var shallowEqual = __webpack_require__(6);
+	var shallowEqual = __webpack_require__(11);
 	
 	/**
 	 * If your React component's render function is "pure", e.g. it will render the
@@ -1126,8 +1061,56 @@
 
 
 /***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule shallowEqual
+	 */
+	
+	"use strict";
+	
+	/**
+	 * Performs equality by iterating through keys on an object and returning
+	 * false when any key has values which are not strictly equal between
+	 * objA and objB. Returns true when the values of all keys are strictly equal.
+	 *
+	 * @return {boolean}
+	 */
+	function shallowEqual(objA, objB) {
+	  if (objA === objB) {
+	    return true;
+	  }
+	  var key;
+	  // Test for A's keys different from B.
+	  for (key in objA) {
+	    if (objA.hasOwnProperty(key) &&
+	        (!objB.hasOwnProperty(key) || objA[key] !== objB[key])) {
+	      return false;
+	    }
+	  }
+	  // Test for B's keys missing from A.
+	  for (key in objB) {
+	    if (objB.hasOwnProperty(key) && !objA.hasOwnProperty(key)) {
+	      return false;
+	    }
+	  }
+	  return true;
+	}
+	
+	module.exports = shallowEqual;
+
+
+/***/ },
 /* 12 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	/**
 	 * Safe chained function
@@ -1154,7 +1137,7 @@
 
 /***/ },
 /* 13 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports = function (target, eventType, callback) {
 	  if (target.addEventListener) {
@@ -1177,7 +1160,7 @@
 
 /***/ },
 /* 14 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports = function (root, node) {
 	  while (node) {
@@ -1210,6 +1193,22 @@
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var React = __webpack_require__(2);
+	
+	function mirror(o) {
+	  return o;
+	}
+	
+	module.exports = function (children) {
+	  // return ReactFragment
+	  return React.Children.map(children, mirror);
+	};
+
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
 	var _createClass = (function () {
@@ -1221,6 +1220,26 @@
 	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
 	  };
 	})();
+	
+	var _get = function get(_x, _x2, _x3) {
+	  var _again = true;_function: while (_again) {
+	    var object = _x,
+	        property = _x2,
+	        receiver = _x3;desc = parent = getter = undefined;_again = false;if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
+	      var parent = Object.getPrototypeOf(object);if (parent === null) {
+	        return undefined;
+	      } else {
+	        _x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
+	      }
+	    } else if ('value' in desc) {
+	      return desc.value;
+	    } else {
+	      var getter = desc.get;if (getter === undefined) {
+	        return undefined;
+	      }return getter.call(receiver);
+	    }
+	  }
+	};
 	
 	function _classCallCheck(instance, Constructor) {
 	  if (!(instance instanceof Constructor)) {
@@ -1239,39 +1258,40 @@
 	 */
 	
 	var React = __webpack_require__(2);
-	var anim = __webpack_require__(17);
-	var utils = __webpack_require__(20);
-	var assign = __webpack_require__(21);
+	var anim = __webpack_require__(18);
+	var utils = __webpack_require__(21);
 	var domAlign = __webpack_require__(22);
 	
 	var Popup = (function (_React$Component) {
 	  function Popup() {
 	    _classCallCheck(this, Popup);
 	
-	    if (_React$Component != null) {
-	      _React$Component.apply(this, arguments);
-	    }
+	    _get(Object.getPrototypeOf(Popup.prototype), 'constructor', this).apply(this, arguments);
 	  }
 	
 	  _inherits(Popup, _React$Component);
 	
 	  _createClass(Popup, [{
-	    key: 'getRootNode',
-	    value: function getRootNode() {
+	    key: 'getPopupDomNode',
+	    value: function getPopupDomNode() {
 	      return React.findDOMNode(this.refs.popup);
 	    }
 	  }, {
 	    key: 'alignRootNode',
-	    value: function alignRootNode() {
+	    value: function alignRootNode(prevProps) {
 	      var props = this.props;
-	      if (props.visible) {
+	      if (props.visible && !prevProps.visible) {
 	        var targetDomNode = React.findDOMNode(props.wrap).firstChild;
-	        var popupDomNode = this.getRootNode();
+	        var popupDomNode = this.getPopupDomNode();
 	        var placement = props.placement;
 	        var points;
 	        if (placement && placement.points) {
+	          var originalClassName = utils.getToolTipClassByPlacement(props.prefixCls, placement);
 	          var align = domAlign(popupDomNode, targetDomNode, placement);
-	          popupDomNode.className = utils.getToolTipClassByPlacement(props.prefixCls, align);
+	          var nextClassName = utils.getToolTipClassByPlacement(props.prefixCls, align);
+	          if (nextClassName !== originalClassName) {
+	            popupDomNode.className = popupDomNode.className.replace(originalClassName, nextClassName);
+	          }
 	        } else {
 	          points = ['cr', 'cl'];
 	          if (placement === 'right') {
@@ -1293,17 +1313,14 @@
 	      var props = this.props;
 	      var transitionName = props.transitionName;
 	      if (!transitionName && props.animation) {
-	        transitionName = '' + props.prefixCls + '-' + props.animation;
+	        transitionName = props.prefixCls + '-' + props.animation;
 	      }
 	      if (transitionName) {
-	        var domNode = this.getRootNode();
+	        var domNode = this.getPopupDomNode();
 	        if (props.visible && !prevProps.visible) {
-	          anim(domNode, '' + transitionName + '-enter');
+	          anim(domNode, transitionName + '-enter');
 	        } else if (!props.visible && prevProps.visible) {
-	          domNode.style.display = 'block';
-	          anim(domNode, '' + transitionName + '-leave', function () {
-	            domNode.style.display = 'none';
-	          });
+	          anim(domNode, transitionName + '-leave');
 	        }
 	      }
 	    }
@@ -1311,7 +1328,7 @@
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate(prevProps) {
 	      prevProps = prevProps || {};
-	      this.alignRootNode();
+	      this.alignRootNode(prevProps);
 	      this.animateRootNode(prevProps);
 	    }
 	  }, {
@@ -1327,18 +1344,27 @@
 	      if (props.className) {
 	        className += ' ' + props.className;
 	      }
-	      var style = this.style;
+	      var style = this.props.style;
+	      var maskStyle = {
+	        position: 'fixed',
+	        left: 0,
+	        top: 0,
+	        background: '#000',
+	        opacity: 0,
+	        filter: 'alpha(opacity=0)',
+	        width: '100%',
+	        height: '100%',
+	        zIndex: '-1'
+	      };
 	      if (!props.visible) {
-	        style = assign({}, style, {
-	          display: 'none'
-	        });
+	        className += ' ' + props.prefixCls + '-hidden';
+	        maskStyle.display = 'none';
 	      }
-	      var arrowClassName = '' + props.prefixCls + '-arrow';
-	      var innerClassname = '' + props.prefixCls + '-inner';
+	      var arrowClassName = props.prefixCls + '-arrow';
+	      var innerClassname = props.prefixCls + '-inner';
 	      return React.createElement('div', { className: className,
-	        key: 'popup',
 	        ref: 'popup',
-	        style: style }, React.createElement('div', { className: arrowClassName }), React.createElement('div', { className: innerClassname }, props.children));
+	        style: style }, props.trigger.indexOf('click') !== -1 ? React.createElement('div', { style: maskStyle, onClick: props.onClickOutside }) : null, React.createElement('div', { className: arrowClassName }), React.createElement('div', { className: innerClassname }, props.children));
 	    }
 	  }]);
 	
@@ -1348,13 +1374,13 @@
 	module.exports = Popup;
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Event = __webpack_require__(18);
-	var Css = __webpack_require__(19);
+	var Event = __webpack_require__(19);
+	var Css = __webpack_require__(20);
 	
 	module.exports = function (node, transitionName, callback) {
 	  var className = transitionName;
@@ -1397,9 +1423,10 @@
 	  }, 0);
 	};
 
+
 /***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
+/* 19 */
+/***/ function(module, exports) {
 
 	
 	'use strict';
@@ -1484,9 +1511,10 @@
 	
 	module.exports = TransitionEvents;
 
+
 /***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
+/* 20 */
+/***/ function(module, exports) {
 
 	'use strict';
 	
@@ -1516,71 +1544,26 @@
 	};
 
 /***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
+/* 21 */
+/***/ function(module, exports) {
 
 	'use strict';
 	
 	module.exports = {
 	  getToolTipClassByPlacement: function getToolTipClassByPlacement(prefixCls, placement) {
 	    if (typeof placement === 'string') {
-	      return '' + prefixCls + ' ' + prefixCls + '-placement-' + placement;
+	      return prefixCls + ' ' + prefixCls + '-placement-' + placement;
 	    } else {
-	      var offset = placement.offset;
+	      var offset = placement.offset || [0, 0];
 	      var offsetClass = '';
 	      if (offset && offset.length) {
-	        offsetClass = '' + prefixCls + '-placement-offset-x-' + offset[0] + ' ' + prefixCls + '-placement-offset-y-' + offset[1];
+	        offsetClass = prefixCls + '-placement-offset-x-' + offset[0] + ' ' + prefixCls + '-placement-offset-y-' + offset[1];
 	      }
 	      var points = placement.points;
-	      return '' + prefixCls + ' ' + offsetClass + ' ' + prefixCls + '-placement-points-' + points[0] + '-' + points[1];
+	      return prefixCls + ' ' + offsetClass + ' ' + prefixCls + '-placement-points-' + points[0] + '-' + points[1];
 	    }
 	  }
 	};
-
-/***/ },
-/* 21 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-	
-	function ToObject(val) {
-		if (val == null) {
-			throw new TypeError('Object.assign cannot be called with null or undefined');
-		}
-	
-		return Object(val);
-	}
-	
-	function ownEnumerableKeys(obj) {
-		var keys = Object.getOwnPropertyNames(obj);
-	
-		if (Object.getOwnPropertySymbols) {
-			keys = keys.concat(Object.getOwnPropertySymbols(obj));
-		}
-	
-		return keys.filter(function (key) {
-			return propIsEnumerable.call(obj, key);
-		});
-	}
-	
-	module.exports = Object.assign || function (target, source) {
-		var from;
-		var keys;
-		var to = ToObject(target);
-	
-		for (var s = 1; s < arguments.length; s++) {
-			from = arguments[s];
-			keys = ownEnumerableKeys(Object(from));
-	
-			for (var i = 0; i < keys.length; i++) {
-				to[keys[i]] = from[keys[i]];
-			}
-		}
-	
-		return to;
-	};
-
 
 /***/ },
 /* 22 */
@@ -1949,7 +1932,7 @@
 
 /***/ },
 /* 23 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
 	
@@ -2392,11 +2375,11 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(26)();
-	exports.push([module.id, ".rc-tooltip {\n  position: absolute;\n  left: -9999px;\n  top: -9999px;\n  z-index: 1070;\n  display: block;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-size: 12px;\n  font-weight: normal;\n  line-height: 1.4;\n}\n.rc-tooltip-placement-left {\n  margin-left: -3px;\n  padding: 0 5px;\n}\n.rc-tooltip-placement-left > .rc-tooltip-arrow {\n  top: 50%;\n  right: 0;\n  margin-top: -5px;\n  border-width: 5px 0 5px 5px;\n  border-left-color: #000000;\n}\n.rc-tooltip-placement-top {\n  margin-top: -3px;\n  padding: 5px 0;\n}\n.rc-tooltip-placement-top > .rc-tooltip-arrow {\n  bottom: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 5px 5px 0;\n  border-top-color: #000000;\n}\n.rc-tooltip-placement-bottom {\n  margin-top: 3px;\n  padding: 5px 0;\n}\n.rc-tooltip-placement-bottom > .rc-tooltip-arrow {\n  top: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 0 5px 5px;\n  border-bottom-color: #000000;\n}\n.rc-tooltip-placement-right {\n  margin-left: 3px;\n  padding: 0 5px;\n}\n.rc-tooltip-placement-right > .rc-tooltip-arrow {\n  top: 50%;\n  left: 0;\n  margin-top: -5px;\n  border-width: 5px 5px 5px 0;\n  border-right-color: #000000;\n}\n.rc-tooltip-arrow {\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-color: transparent;\n  border-style: solid;\n}\n.rc-tooltip-inner {\n  padding: 3px 8px;\n  color: #ffffff;\n  text-align: center;\n  text-decoration: none;\n  background-color: #000000;\n  border-radius: 4px;\n}\n", ""]);
+	exports.push([module.id, ".rc-tooltip {\n  position: absolute;\n  left: -9999px;\n  top: -9999px;\n  z-index: 1070;\n  display: block;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-size: 12px;\n  font-weight: normal;\n  line-height: 1.4;\n}\n.rc-tooltip-hidden {\n  display: none;\n}\n.rc-tooltip-placement-left {\n  margin-left: -3px;\n  padding: 0 5px;\n}\n.rc-tooltip-placement-left > .rc-tooltip-arrow {\n  top: 50%;\n  right: 0;\n  margin-top: -5px;\n  border-width: 5px 0 5px 5px;\n  border-left-color: #000000;\n}\n.rc-tooltip-placement-top {\n  margin-top: -3px;\n  padding: 5px 0;\n}\n.rc-tooltip-placement-top > .rc-tooltip-arrow {\n  bottom: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 5px 5px 0;\n  border-top-color: #000000;\n}\n.rc-tooltip-placement-bottom {\n  margin-top: 3px;\n  padding: 5px 0;\n}\n.rc-tooltip-placement-bottom > .rc-tooltip-arrow {\n  top: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 0 5px 5px;\n  border-bottom-color: #000000;\n}\n.rc-tooltip-placement-right {\n  margin-left: 3px;\n  padding: 0 5px;\n}\n.rc-tooltip-placement-right > .rc-tooltip-arrow {\n  top: 50%;\n  left: 0;\n  margin-top: -5px;\n  border-width: 5px 5px 5px 0;\n  border-right-color: #000000;\n}\n.rc-tooltip-arrow {\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-color: transparent;\n  border-style: solid;\n}\n.rc-tooltip-inner {\n  padding: 3px 8px;\n  color: #ffffff;\n  text-align: center;\n  text-decoration: none;\n  background-color: #000000;\n  border-radius: 4px;\n}\n.rc-tooltip.rc-tooltip-zoom-enter,\n.rc-tooltip.rc-tooltip-zoom-leave {\n  display: block;\n}\n.rc-tooltip-zoom-enter {\n  opacity: 0;\n  -webkit-animation-duration: 0.3s;\n          animation-duration: 0.3s;\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-animation-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);\n          animation-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);\n  -webkit-animation-play-state: paused;\n          animation-play-state: paused;\n}\n.rc-tooltip-zoom-leave {\n  -webkit-animation-duration: 0.3s;\n          animation-duration: 0.3s;\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-animation-timing-function: cubic-bezier(0.6, -0.3, 0.74, 0.05);\n          animation-timing-function: cubic-bezier(0.6, -0.3, 0.74, 0.05);\n  -webkit-animation-play-state: paused;\n          animation-play-state: paused;\n}\n.rc-tooltip-zoom-enter.rc-tooltip-zoom-enter-active {\n  -webkit-animation-name: rcToolTipZoomIn;\n          animation-name: rcToolTipZoomIn;\n  -webkit-animation-play-state: running;\n          animation-play-state: running;\n}\n.rc-tooltip-zoom-leave.rc-tooltip-zoom-leave-active {\n  -webkit-animation-name: rcToolTipZoomOut;\n          animation-name: rcToolTipZoomOut;\n  -webkit-animation-play-state: running;\n          animation-play-state: running;\n}\n@-webkit-keyframes rcToolTipZoomIn {\n  0% {\n    opacity: 0;\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    -webkit-transform: scale(0, 0);\n            transform: scale(0, 0);\n  }\n  100% {\n    opacity: 1;\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    -webkit-transform: scale(1, 1);\n            transform: scale(1, 1);\n  }\n}\n@keyframes rcToolTipZoomIn {\n  0% {\n    opacity: 0;\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    -webkit-transform: scale(0, 0);\n            transform: scale(0, 0);\n  }\n  100% {\n    opacity: 1;\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    -webkit-transform: scale(1, 1);\n            transform: scale(1, 1);\n  }\n}\n@-webkit-keyframes rcToolTipZoomOut {\n  0% {\n    opacity: 1;\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    -webkit-transform: scale(1, 1);\n            transform: scale(1, 1);\n  }\n  100% {\n    opacity: 0;\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    -webkit-transform: scale(0, 0);\n            transform: scale(0, 0);\n  }\n}\n@keyframes rcToolTipZoomOut {\n  0% {\n    opacity: 1;\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    -webkit-transform: scale(1, 1);\n            transform: scale(1, 1);\n  }\n  100% {\n    opacity: 0;\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    -webkit-transform: scale(0, 0);\n            transform: scale(0, 0);\n  }\n}\n", ""]);
 
 /***/ },
 /* 26 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports = function() {
 		var list = [];
@@ -2610,71 +2593,6 @@
 		}
 	}
 
-
-/***/ },
-/* 28 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = {
-		"name": "rc-tooltip",
-		"version": "2.0.4",
-		"description": "tooltip ui component for react",
-		"keywords": [
-			"react",
-			"react-component",
-			"react-tooltip",
-			"tooltip"
-		],
-		"main": "lib/index",
-		"homepage": "http://github.com/react-component/tooltip",
-		"maintainers": [
-			"yiminghe@gmail.com"
-		],
-		"repository": {
-			"type": "git",
-			"url": "git@github.com:react-component/tooltip.git"
-		},
-		"bugs": {
-			"url": "http://github.com/react-component/tooltip/issues"
-		},
-		"licenses": "MIT",
-		"config": {
-			"port": 8000
-		},
-		"scripts": {
-			"build": "rc-tools run build",
-			"precommit": "rc-tools run precommit",
-			"less": "rc-tools run less",
-			"gh-pages": "rc-tools run gh-pages",
-			"history": "rc-tools run history",
-			"start": "node --harmony node_modules/.bin/rc-server",
-			"publish": "rc-tools run tag",
-			"lint": "rc-tools run lint",
-			"saucelabs": "node --harmony node_modules/.bin/rc-tools run saucelabs",
-			"browser-test": "node --harmony node_modules/.bin/rc-tools run browser-test",
-			"browser-test-cover": "node --harmony node_modules/.bin/rc-tools run browser-test-cover"
-		},
-		"devDependencies": {
-			"async": "~0.9.0",
-			"bootstrap": "~3.3.2",
-			"expect.js": "~0.3.1",
-			"jquery": "~1.11.2",
-			"object-assign": "~2.0.0",
-			"precommit-hook": "^1.0.7",
-			"rc-server": "3.x",
-			"rc-tools": "3.x",
-			"react": "^0.13.0"
-		},
-		"precommit": [
-			"precommit"
-		],
-		"dependencies": {
-			"css-animation": "^1.0.2",
-			"dom-align": "1.x",
-			"object-assign": "~3.0.0",
-			"rc-util": "2.x"
-		}
-	}
 
 /***/ }
 /******/ ]);
