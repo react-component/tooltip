@@ -106,6 +106,14 @@ class Tooltip extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    if (this.tipContainer) {
+      React.unmountComponentAtNode(this.tipContainer);
+      document.body.removeChild(this.tipContainer);
+      this.tipContainer = null;
+    }
+  }
+
   render() {
     if (this.state.visible) {
       this.popupRendered = true;

@@ -15,7 +15,15 @@ var Test = React.createClass({
       visible: visible
     });
   },
+  handleDestroy(){
+    this.setState({
+      destroy:true
+    });
+  },
   render() {
+    if(this.state.destroy){
+      return null;
+    }
     return <div >
       <div style={{marginTop: 300, marginLeft: 100, marginBottom: 100}}>
         <Tooltip
@@ -27,6 +35,7 @@ var Test = React.createClass({
           <a href='#' onClick={preventDefault}>trigger</a>
         </Tooltip>
       </div>
+      <button onClick={this.handleDestroy}>destroy</button>
     </div>;
   }
 });
