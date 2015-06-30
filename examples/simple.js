@@ -30,6 +30,11 @@ var Test = React.createClass({
     var trigger = assign({}, this.state.trigger);
     if (e.target.checked) {
       trigger[e.target.value] = 1;
+      if (e.target.value === 'click') {
+        delete trigger.hover;
+      } else if (e.target.value === 'hover') {
+        delete trigger.click;
+      }
     } else {
       delete trigger[e.target.value];
     }
@@ -62,7 +67,7 @@ var Test = React.createClass({
         </label>
       &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
-          <input value='rc-tooltip-zoom' type='checkbox' onChange={this.onTransitionChange}  checked={this.state.transitionName ==='rc-tooltip-zoom'}/>
+          <input value='rc-tooltip-zoom' type='checkbox' onChange={this.onTransitionChange}  checked={this.state.transitionName === 'rc-tooltip-zoom'}/>
           transitionName
         </label>
 
@@ -84,7 +89,7 @@ var Test = React.createClass({
           onVisibleChange={this.onVisibleChange}
           overlay={<span>i am a tooltip</span>}
           transitionName={this.state.transitionName}>
-          <a href='#' style={{margin:20}} onClick={this.preventDefault}>trigger</a>
+          <a href='#' style={{margin: 20}} onClick={this.preventDefault}>trigger</a>
         </Tooltip>
       </div>
     </div>;

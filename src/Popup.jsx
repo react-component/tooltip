@@ -10,21 +10,24 @@ var utils = require('./utils');
 var domAlign = require('dom-align');
 
 class Popup extends React.Component {
-  getRootNode() {
+  getPopupNode() {
     return React.findDOMNode(this.refs.popup);
   }
 
-
-  alignRootNode() {
+  alignRootNode(prevProps) {
     var props = this.props;
-    if (props.visible) {
+    if (props.visible && !prevProps.visible) {
       var targetDomNode = React.findDOMNode(props.wrap).firstChild;
-      var popupDomNode = this.getRootNode();
+      var popupDomNode = this.getPopupNode();
       var placement = props.placement;
       var points;
       if (placement && placement.points) {
+        var originalClassName = utils.getToolTipClassByPlacement(props.prefixCls, placement);
         var align = domAlign(popupDomNode, targetDomNode, placement);
-        popupDomNode.className = utils.getToolTipClassByPlacement(props.prefixCls, align);
+        var nextClassName = utils.getToolTipClassByPlacement(props.prefixCls, align);
+        if (nextClassName !== originalClassName) {
+          popupDomNode.className = popupDomNode.className.replace(originalClassName, nextClassName);
+        }
       } else {
         points = ['cr', 'cl'];
         if (placement === 'right') {
@@ -48,7 +51,7 @@ class Popup extends React.Component {
       transitionName = `${props.prefixCls}-${props.animation}`;
     }
     if (transitionName) {
-      var domNode = this.getRootNode();
+      var domNode = this.getPopupNode();
       if (props.visible && !prevProps.visible) {
         anim(domNode, `${transitionName}-enter`);
       } else if (!props.visible && prevProps.visible) {
@@ -59,7 +62,7 @@ class Popup extends React.Component {
 
   componentDidUpdate(prevProps) {
     prevProps = prevProps || {};
-    this.alignRootNode();
+    this.alignRootNode(prevProps);
     this.animateRootNode(prevProps);
   }
 
@@ -74,18 +77,22 @@ class Popup extends React.Component {
       className += ' ' + props.className;
     }
     var style = this.props.style;
+    var maskClassName = `${props.prefixCls}-mask`;
     if (!props.visible) {
       className += ` ${props.prefixCls}-hidden`;
+      maskClassName += ` ${props.prefixCls}-mask-hidden`;
     }
     var arrowClassName = `${props.prefixCls}-arrow`;
     var innerClassname = `${props.prefixCls}-inner`;
-    return <div className={className}
-      key="popup"
-      ref="popup"
-      style={style}>
-      <div className={arrowClassName}></div>
-      <div className={innerClassname}>
+    return <div>
+    {props.trigger.indexOf('click') !== -1 ? <div className={maskClassName} onClick={props.onClickOutside}></div> : null}
+      <div className={className}
+        ref="popup"
+        style={style}>
+        <div className={arrowClassName}></div>
+        <div className={innerClassname}>
     {props.children}
+        </div>
       </div>
     </div>;
   }

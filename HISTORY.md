@@ -1,6 +1,10 @@
 # History
 ----
 
+### 2.2.0 / 2015-06-30
+
+- use mask instead of document click
+
 ### 2.1.0 / 2015-06-15
 
 - support overlayStyle props
