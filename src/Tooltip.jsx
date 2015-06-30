@@ -167,7 +167,7 @@ class Tooltip extends React.Component {
     }
 
     return (<span className={className} {...mouseProps} style={props.wrapStyle}>
-    {[React.cloneElement(child, newChildProps), popupElement]}
+    {rcUtil.Children.mapSelf([React.cloneElement(child, newChildProps), popupElement])}
     </span>);
   }
 }

@@ -4,7 +4,6 @@ var React = require('react');
 var Tooltip = require('rc-tooltip');
 require('rc-tooltip/assets/bootstrap.css');
 var assign = require('object-assign');
-var packageJson = require('../package.json');
 
 var Test = React.createClass({
   getInitialState() {
@@ -93,7 +92,6 @@ var Test = React.createClass({
 });
 
 React.render(<div>
-  <h1>{packageJson.name}@{packageJson.version}</h1>
   <h2>renderPopupToBody=true</h2>
   <Test/>
   <h2>renderPopupToBody=false</h2>

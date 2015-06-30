@@ -3,8 +3,6 @@
 var React = require('react');
 var Tooltip = require('rc-tooltip');
 require('rc-tooltip/assets/bootstrap.css');
-var assign = require('object-assign');
-var packageJson = require('../package.json');
 var placement = {
   points: ['tc', 'bc'],
   offset:[11,3],
@@ -43,7 +41,6 @@ var Test = React.createClass({
   render() {
     return <div >
       <style dangerouslySetInnerHTML={{__html:style}}/>
-      <h1>{packageJson.name}@{packageJson.version}</h1>
       <div style={{marginTop: 300,marginLeft:100,marginBottom:100}}>
         <Tooltip placement={placement}
           trigger="click"
