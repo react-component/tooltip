@@ -145,7 +145,7 @@ describe('rc-tooltip', function () {
     it('transitionName works', (done)=> {
       var tooltip = React.render(<Tooltip
         trigger={['click']}
-        transitionName="example"
+        transitionName="fade"
         placement="top"
         overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
@@ -172,6 +172,7 @@ describe('rc-tooltip', function () {
           (next)=> {
             var popupDomNode = tooltip.getPopupDomNode();
             expect(popupDomNode).to.be.ok();
+
             expect($(popupDomNode).css('opacity')).not.to.be('1');
             next();
           },

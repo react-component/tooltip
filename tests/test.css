@@ -1,26 +1,53 @@
 .rc-tooltip {
-  width:100px;
+  width: 100px;
 }
 
 .target {
-  width:100px;
-  height:100px;
+  width: 100px;
+  height: 100px;
 }
 
-.example-enter {
-  opacity: 0.01;
-  transition: opacity 0.5s ease-in;
+.fade-enter {
+  display: block;
+  opacity: 0;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
+  animation-play-state: paused;
 }
 
-.example-enter.example-enter-active {
-  opacity: 1;
+.fade-leave {
+  display: block;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
+  animation-play-state: paused;
 }
 
-.example-leave {
-  opacity: 1;
-  transition: opacity 0.5s ease-in;
+.fade-enter.fade-enter-active {
+  animation-name: rcDialogFadeIn;
+  animation-play-state: running;
 }
 
-.example-leave.example-leave-active {
-  opacity: 0.01;
+.fade-leave.fade-leave-active {
+  animation-name: rcDialogFadeOut;
+  animation-play-state: running;
+}
+
+@keyframes rcDialogFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes rcDialogFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
