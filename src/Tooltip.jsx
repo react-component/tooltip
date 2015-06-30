@@ -22,6 +22,11 @@ class Tooltip extends React.Component {
     });
   }
 
+  getPopupDomNode() {
+    // for test
+    return this.refs.popup ? this.refs.popup.getPopupDomNode() : this.popupInstance.getPopupDomNode();
+  }
+
   componentWillReceiveProps(nextProps) {
     if ('visible' in nextProps) {
       this.setState({
@@ -44,7 +49,12 @@ class Tooltip extends React.Component {
     }
     var props = this.props;
     var state = this.state;
+    var ref = {};
+    if (!props.renderPopupToBody) {
+      ref.ref = 'popup';
+    }
     return <Popup prefixCls={props.prefixCls}
+      {...ref}
       visible={state.visible}
       trigger={props.trigger}
       placement={props.placement}
@@ -92,7 +102,7 @@ class Tooltip extends React.Component {
       return;
     }
     if (this.props.renderPopupToBody) {
-      React.render(this.getPopupElement(), this.getTipContainer());
+      this.popupInstance = React.render(this.getPopupElement(), this.getTipContainer());
     }
   }
 

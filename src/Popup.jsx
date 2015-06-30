@@ -10,7 +10,7 @@ var utils = require('./utils');
 var domAlign = require('dom-align');
 
 class Popup extends React.Component {
-  getPopupNode() {
+  getPopupDomNode() {
     return React.findDOMNode(this.refs.popup);
   }
 
@@ -18,7 +18,7 @@ class Popup extends React.Component {
     var props = this.props;
     if (props.visible && !prevProps.visible) {
       var targetDomNode = React.findDOMNode(props.wrap).firstChild;
-      var popupDomNode = this.getPopupNode();
+      var popupDomNode = this.getPopupDomNode();
       var placement = props.placement;
       var points;
       if (placement && placement.points) {
@@ -51,7 +51,7 @@ class Popup extends React.Component {
       transitionName = `${props.prefixCls}-${props.animation}`;
     }
     if (transitionName) {
-      var domNode = this.getPopupNode();
+      var domNode = this.getPopupDomNode();
       if (props.visible && !prevProps.visible) {
         anim(domNode, `${transitionName}-enter`);
       } else if (!props.visible && prevProps.visible) {

@@ -7,7 +7,7 @@ var Simulate = TestUtils.Simulate;
 var $ = require('jquery');
 window.$ = $;
 require('../assets/bootstrap.css');
-var Tooltip = require('../');
+var Tooltip = require('../index');
 var scryRenderedDOMComponentsWithClass = TestUtils.scryRenderedDOMComponentsWithClass;
 require('./test.css');
 var async = require('async');
