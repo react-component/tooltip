@@ -98,7 +98,9 @@ class Popup extends React.Component {
     return <div className={className}
       ref="popup"
       style={style}>
-      {props.trigger.indexOf('click') !== -1 ? <div style={maskStyle} onClick={props.onClickOutside}></div> : null}
+      {props.trigger.indexOf('click') !== -1 ? <div style={maskStyle}
+        onTouchStart={props.onClickOutside}
+        onClick={props.onClickOutside}></div> : null}
       <div className={arrowClassName}></div>
       <div className={innerClassname}>
     {props.children}
