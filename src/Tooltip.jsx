@@ -78,6 +78,13 @@ class Tooltip extends React.Component {
 
   setVisible(visible) {
     if (this.state.visible !== visible) {
+      var now = Date.now();
+      if (this.lastVisibleChanged &&
+          now - this.lastVisibleChanged < 30) {
+        // triggered too frequently so we should reject it
+        return;
+      }
+      this.lastVisibleChanged = now;
       this.setState({
         visible: visible
       });
