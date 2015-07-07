@@ -1,6 +1,10 @@
 # History
 ----
 
+### 2.3.0 / 2015-07-07
+
+`new` [#7](https://github.com/react-component/tooltip/issues/7) support delay prop
+
 ### 2.2.0 / 2015-06-30
 
 - use mask instead of document click

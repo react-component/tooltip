@@ -84,6 +84,7 @@ var Test = React.createClass({
       </div>
       <div style={{margin: 100}}>
         <Tooltip placement={this.state.placement}
+          delay={0.1}
           renderPopupToBody={this.props.renderPopupToBody}
           trigger={Object.keys(this.state.trigger)}
           onVisibleChange={this.onVisibleChange}

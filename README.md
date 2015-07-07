@@ -69,6 +69,12 @@ online example: http://react-component.github.io/tooltip/examples/
     </thead>
     <tbody>
         <tr>
+          <td>delay</td>
+          <td>number</td>
+          <td></td>
+          <td>delay time to show or hide, only valid for hover trigger.unit: s.</td>
+        </tr>
+        <tr>
           <td>overlayStyle</td>
           <td>Object</td>
           <td></td>

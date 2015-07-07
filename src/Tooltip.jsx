@@ -85,12 +85,27 @@ class Tooltip extends React.Component {
     }
   }
 
-  show() {
-    this.setVisible(true);
+  delaySetVisible(visible, e) {
+    var delay = this.props.delay * 1000;
+    if (delay && e && e.type.indexOf('mouse') !== -1) {
+      if (this.delayTimer) {
+        clearTimeout(this.delayTimer);
+      }
+      this.delayTimer = setTimeout(() => {
+        this.setVisible(visible);
+        this.delayTimer = null;
+      }, delay);
+    } else {
+      this.setVisible(visible);
+    }
   }
 
-  hide() {
-    this.setVisible(false);
+  show(e) {
+    this.delaySetVisible(true, e);
+  }
+
+  hide(e) {
+    this.delaySetVisible(false, e);
   }
 
   componentDidMount() {
@@ -157,7 +172,8 @@ Tooltip.propTypes = {
   renderPopupToBody: React.PropTypes.bool,
   overlay: React.PropTypes.node.isRequired,
   overlayStyle: React.PropTypes.object,
-  wrapStyle: React.PropTypes.object
+  wrapStyle: React.PropTypes.object,
+  delay: React.PropTypes.number
 };
 
 Tooltip.defaultProps = {
@@ -165,6 +181,7 @@ Tooltip.defaultProps = {
   renderPopupToBody: true,
   onVisibleChange: function () {
   },
+  delay: 0,
   overlayStyle: {},
   wrapStyle: {},
   placement: 'right',
