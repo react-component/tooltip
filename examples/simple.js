@@ -10,8 +10,10 @@ var Test = React.createClass({
     return {
       placement: 'right',
       trigger: {
-        hover: 1
-      }
+        focus: 1,
+        click: 1
+      },
+      transitionName: 'rc-tooltip-zoom'
     };
   },
   onPlacementChange(e) {
@@ -45,6 +47,11 @@ var Test = React.createClass({
 
   preventDefault(e) {
     e.preventDefault();
+  },
+
+  test(e) {
+    e.preventDefault();
+    console.log(`// ${e.type}ed!`);
   },
 
   onVisibleChange(visible) {
@@ -90,7 +97,7 @@ var Test = React.createClass({
           onVisibleChange={this.onVisibleChange}
           overlay={<span>i am a tooltip</span>}
           transitionName={this.state.transitionName}>
-          <a href='#' style={{margin: 20}} onClick={this.preventDefault}>trigger</a>
+          <a href='#' style={{margin: 20}} onClick={this.test} onFocus={this.test}>trigger</a>
         </Tooltip>
       </div>
     </div>;
