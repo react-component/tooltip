@@ -49,18 +49,20 @@ describe('rc-tooltip', function () {
     });
 
     it('hover works', (done)=> {
-      var tooltip = React.render(<Tooltip trigger={['hover']} placement="left" overlay={<strong>tooltip</strong>}>
+      var tooltip = React.render(<Tooltip trigger={['hover']}
+        placement="left"
+        overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
       var target = scryRenderedDOMComponentsWithClass(tooltip, 'rc-tooltip-wrap')[0];
       // can not simulate mouseenter
       target.props.onMouseEnter();
-      async.series([timeout(20), (next)=> {
+      async.series([timeout(200), (next)=> {
         var popupDomNode = tooltip.getPopupDomNode();
         expect(popupDomNode).to.be.ok();
         target.props.onMouseLeave();
         next();
-      }, timeout(20), (next)=> {
+      }, timeout(200), (next)=> {
         var popupDomNode = tooltip.getPopupDomNode();
         expect($(popupDomNode).css('display')).to.be('none');
         next();

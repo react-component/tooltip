@@ -1,6 +1,10 @@
 # History
 ----
 
+### 2.4.0 / 2015-07-08
+
+revert to document click and fix focus/click conflict [#13](https://github.com/react-component/tooltip/issues/6)
+
 ### 2.3.0 / 2015-07-07
 
 `new` [#7](https://github.com/react-component/tooltip/issues/7) support delay prop

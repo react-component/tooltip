@@ -78,29 +78,14 @@ class Popup extends React.Component {
       className += ' ' + props.className;
     }
     var style = this.props.style;
-    var maskStyle = {
-      position: 'fixed',
-      left: 0,
-      top: 0,
-      background: '#000',
-      opacity: 0,
-      filter: 'alpha(opacity=0)',
-      width: '100%',
-      height: '100%',
-      zIndex: '-1'
-    };
     if (!props.visible) {
       className += ` ${props.prefixCls}-hidden`;
-      maskStyle.display = 'none';
     }
     var arrowClassName = `${props.prefixCls}-arrow`;
     var innerClassname = `${props.prefixCls}-inner`;
     return <div className={className}
       ref="popup"
       style={style}>
-      {props.trigger.indexOf('click') !== -1 ? <div style={maskStyle}
-        onTouchStart={props.onClickOutside}
-        onClick={props.onClickOutside}></div> : null}
       <div className={arrowClassName}></div>
       <div className={innerClassname}>
     {props.children}

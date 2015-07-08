@@ -30,11 +30,6 @@ var Test = React.createClass({
     var trigger = assign({}, this.state.trigger);
     if (e.target.checked) {
       trigger[e.target.value] = 1;
-      if (e.target.value === 'click') {
-        delete trigger.hover;
-      } else if (e.target.value === 'hover') {
-        delete trigger.click;
-      }
     } else {
       delete trigger[e.target.value];
     }
@@ -72,12 +67,18 @@ var Test = React.createClass({
         </label>
 
       &nbsp;&nbsp;&nbsp;&nbsp;
+
+        trigger:
+
         <label>
-          trigger:
           <input value='hover' checked={trigger.hover} type='checkbox' onChange={this.onTriggerChange}/>
           hover
+        </label>
+        <label>
           <input value='focus' checked={trigger.focus} type='checkbox' onChange={this.onTriggerChange}/>
           focus
+        </label>
+        <label>
           <input value='click' checked={trigger.click} type='checkbox' onChange={this.onTriggerChange}/>
           click
         </label>
