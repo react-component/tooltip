@@ -11,6 +11,11 @@ var domAlign = require('dom-align');
 
 
 class Popup extends React.Component {
+  // optimize for speed
+  shouldComponentUpdate(nextProps) {
+    return this.props.visible || nextProps.visible;
+  }
+
   getPopupDomNode() {
     return React.findDOMNode(this.refs.popup);
   }
