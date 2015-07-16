@@ -180,53 +180,48 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
 </head>
 <body>
-<h1>rc-tooltip@2.2.3</h1>
+<h1>rc-tooltip@2.4.1</h1>
 <div id="__react-content"></div>
 <script src="common.js?nowrap"></script>
 <script src="simple.js?nowrap"></script>
 <div class="highlight">
 <pre>
-<span class="hljs-string">'use strict'</span>;
+<span class="xml">'use strict';
 
-<span class="hljs-keyword">var</span> React = require(<span class="hljs-string">'react'</span>);
-<span class="hljs-keyword">var</span> Tooltip = require(<span class="hljs-string">'rc-tooltip'</span>);
-require(<span class="hljs-string">'rc-tooltip/assets/bootstrap.css'</span>);
-<span class="hljs-keyword">var</span> assign = require(<span class="hljs-string">'object-assign'</span>);
+var React = require('react');
+var Tooltip = require('rc-tooltip');
+require('rc-tooltip/assets/bootstrap.css');
+var assign = require('object-assign');
 
-<span class="hljs-keyword">var</span> Test = React.createClass({
+var Test = React.createClass({
   getInitialState() {
-    <span class="hljs-keyword">return</span> {
-      placement: <span class="hljs-string">'right'</span>,
+    return {
+      placement: 'right',
       trigger: {
-        hover: <span class="hljs-number">1</span>
+        hover: 1
       }
     };
   },
   onPlacementChange(e) {
-    <span class="hljs-keyword">this</span>.setState({
-      placement: e.target.<span class="hljs-keyword">value</span>
+    this.setState({
+      placement: e.target.value
     });
   },
 
   onTransitionChange(e) {
-    <span class="hljs-keyword">this</span>.setState({
-      transitionName: e.target.<span class="hljs-keyword">checked</span> ? e.target.<span class="hljs-keyword">value</span> : <span class="hljs-string">''</span>
+    this.setState({
+      transitionName: e.target.checked ? e.target.value : ''
     });
   },
 
   onTriggerChange(e) {
-    <span class="hljs-keyword">var</span> trigger = assign({}, <span class="hljs-keyword">this</span>.state.trigger);
-    <span class="hljs-keyword">if</span> (e.target.<span class="hljs-keyword">checked</span>) {
-      trigger[e.target.<span class="hljs-keyword">value</span>] = <span class="hljs-number">1</span>;
-      <span class="hljs-keyword">if</span> (e.target.<span class="hljs-keyword">value</span> === <span class="hljs-string">'click'</span>) {
-        delete trigger.hover;
-      } <span class="hljs-function"><span class="hljs-keyword">else</span> <span class="hljs-title">if</span> (<span class="hljs-params">e.target.<span class="hljs-keyword">value</span> === <span class="hljs-string">'hover'</span></span>) </span>{
-        delete trigger.click;
-      }
-    } <span class="hljs-keyword">else</span> {
-      delete trigger[e.target.<span class="hljs-keyword">value</span>];
+    var trigger = assign({}, this.state.trigger);
+    if (e.target.checked) {
+      trigger[e.target.value] = 1;
+    } else {
+      delete trigger[e.target.value];
     }
-    <span class="hljs-keyword">this</span>.setState({
+    this.setState({
       trigger: trigger
     });
   },
@@ -236,61 +231,68 @@ require(<span class="hljs-string">'rc-tooltip/assets/bootstrap.css'</span>);
   },
 
   onVisibleChange(visible) {
-    console.log(<span class="hljs-string">'tooltip'</span>, visible);
+    console.log('tooltip', visible);
   },
 
   render() {
-    console.log(<span class="hljs-keyword">this</span>.state);
-    <span class="hljs-keyword">var</span> trigger = <span class="hljs-keyword">this</span>.state.trigger;
-    <span class="hljs-keyword">return</span> &lt;div &gt;
-      &lt;div style={{margin: <span class="hljs-string">'10px 20px'</span>}}&gt;
-        &lt;label&gt;
+    console.log(this.state);
+    var trigger = this.state.trigger;
+    return <span class="hljs-tag">&lt;<span class="hljs-title">div</span> &gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">margin</span>: '10<span class="hljs-variable">px</span> 20<span class="hljs-variable">px</span>'}}</span><span class="xml"><span class="hljs-tag">&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
           placement:
-          &lt;<span class="hljs-keyword">select</span> <span class="hljs-keyword">value</span>={<span class="hljs-keyword">this</span>.state.placement} onChange={<span class="hljs-keyword">this</span>.onPlacementChange}&gt;
-            &lt;option&gt;left&lt;/option&gt;
-            &lt;option&gt;right&lt;/option&gt;
-            &lt;option&gt;top&lt;/option&gt;
-            &lt;option&gt;bottom&lt;/option&gt;
-          &lt;/<span class="hljs-keyword">select</span>&gt;
-        &lt;/label&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-title">select</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">{this.state.placement}</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onPlacementChange}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>left<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>top<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-title">select</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
       &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-        &lt;label&gt;
-          &lt;input <span class="hljs-keyword">value</span>=<span class="hljs-string">'rc-tooltip-zoom'</span> type=<span class="hljs-string">'checkbox'</span> onChange={<span class="hljs-keyword">this</span>.onTransitionChange}  <span class="hljs-keyword">checked</span>={<span class="hljs-keyword">this</span>.state.transitionName === <span class="hljs-string">'rc-tooltip-zoom'</span>}/&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">'rc-tooltip-zoom'</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'checkbox'</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onTransitionChange}</span>  <span class="hljs-attribute">checked</span>=<span class="hljs-value">{this.state.transitionName</span> =<span class="hljs-value">==</span> '<span class="hljs-attribute">rc-tooltip-zoom</span>'}/&gt;</span>
           transitionName
-        &lt;/label&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
 
       &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-        &lt;label&gt;
-          trigger:
-          &lt;input <span class="hljs-keyword">value</span>=<span class="hljs-string">'hover'</span> <span class="hljs-keyword">checked</span>={trigger.hover} type=<span class="hljs-string">'checkbox'</span> onChange={<span class="hljs-keyword">this</span>.onTriggerChange}/&gt;
+
+        trigger:
+
+        <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">'hover'</span> <span class="hljs-attribute">checked</span>=<span class="hljs-value">{trigger.hover}</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'checkbox'</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onTriggerChange}</span>/&gt;</span>
           hover
-          &lt;input <span class="hljs-keyword">value</span>=<span class="hljs-string">'focus'</span> <span class="hljs-keyword">checked</span>={trigger.focus} type=<span class="hljs-string">'checkbox'</span> onChange={<span class="hljs-keyword">this</span>.onTriggerChange}/&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">'focus'</span> <span class="hljs-attribute">checked</span>=<span class="hljs-value">{trigger.focus}</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'checkbox'</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onTriggerChange}</span>/&gt;</span>
           focus
-          &lt;input <span class="hljs-keyword">value</span>=<span class="hljs-string">'click'</span> <span class="hljs-keyword">checked</span>={trigger.click} type=<span class="hljs-string">'checkbox'</span> onChange={<span class="hljs-keyword">this</span>.onTriggerChange}/&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">'click'</span> <span class="hljs-attribute">checked</span>=<span class="hljs-value">{trigger.click}</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'checkbox'</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onTriggerChange}</span>/&gt;</span>
           click
-        &lt;/label&gt;
-      &lt;/div&gt;
-      &lt;div style={{margin: <span class="hljs-number">100</span>}}&gt;
-        &lt;Tooltip placement={<span class="hljs-keyword">this</span>.state.placement}
-          renderPopupToBody={<span class="hljs-keyword">this</span>.props.renderPopupToBody}
-          trigger={Object.keys(<span class="hljs-keyword">this</span>.state.trigger)}
-          onVisibleChange={<span class="hljs-keyword">this</span>.onVisibleChange}
-          overlay={&lt;span&gt;i am a tooltip&lt;/span&gt;}
-          transitionName={<span class="hljs-keyword">this</span>.state.transitionName}&gt;
-          &lt;a href=<span class="hljs-string">'#'</span> style={{margin: <span class="hljs-number">20</span>}} onClick={<span class="hljs-keyword">this</span>.preventDefault}&gt;trigger&lt;/a&gt;
-        &lt;/Tooltip&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;;
+        <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">margin</span>: 100}}</span><span class="xml"><span class="hljs-tag">&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span> <span class="hljs-attribute">placement</span>=<span class="hljs-value">{this.state.placement}</span>
+          <span class="hljs-attribute">delay</span>=<span class="hljs-value">{0.1}</span>
+          <span class="hljs-attribute">renderPopupToBody</span>=<span class="hljs-value">{this.props.renderPopupToBody}</span>
+          <span class="hljs-attribute">trigger</span>=<span class="hljs-value">{Object.keys(this.state.trigger)}</span>
+          <span class="hljs-attribute">onVisibleChange</span>=<span class="hljs-value">{this.onVisibleChange}</span>
+          <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{&lt;span</span>&gt;</span>i am a tooltip<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>}
+          transitionName={this.state.transitionName}&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">'#'</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">margin</span>: 20}}</span><span class="xml"><span class="hljs-tag"> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{this.preventDefault}</span>&gt;</span>trigger<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>;
   }
 });
 
-React.render(&lt;div&gt;
-  &lt;h2&gt;renderPopupToBody=<span class="hljs-keyword">true</span>&lt;/h2&gt;
-  &lt;Test/&gt;
-  &lt;h2&gt;renderPopupToBody=<span class="hljs-keyword">false</span>&lt;/h2&gt;
-  &lt;Test renderPopupToBody={<span class="hljs-keyword">false</span>}/&gt;
-&lt;/div&gt;, document.getElementById(<span class="hljs-string">"__react-content"</span>));
-
+React.render(<span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>renderPopupToBody=true<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">Test</span>/&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>renderPopupToBody=false<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">Test</span> <span class="hljs-attribute">renderPopupToBody</span>=<span class="hljs-value">{false}</span>/&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>, document.getElementById("__react-content"));
+</span>
 </pre>
 </div>
 </body>

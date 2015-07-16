@@ -1,14 +1,14 @@
-webpackJsonp([2],{
+webpackJsonp([3],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(29);
+	module.exports = __webpack_require__(30);
 
 
 /***/ },
 
-/***/ 29:
+/***/ 30:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16,7 +16,7 @@ webpackJsonp([2],{
 	var React = __webpack_require__(2);
 	var Tooltip = __webpack_require__(3);
 	__webpack_require__(24);
-	var assign = __webpack_require__(30);
+	var assign = __webpack_require__(31);
 	
 	var Test = React.createClass({
 	  displayName: 'Test',
@@ -45,11 +45,6 @@ webpackJsonp([2],{
 	    var trigger = assign({}, this.state.trigger);
 	    if (e.target.checked) {
 	      trigger[e.target.value] = 1;
-	      if (e.target.value === 'click') {
-	        delete trigger.hover;
-	      } else if (e.target.value === 'hover') {
-	        delete trigger.click;
-	      }
 	    } else {
 	      delete trigger[e.target.value];
 	    }
@@ -111,15 +106,22 @@ webpackJsonp([2],{
 	          React.createElement('input', { value: 'rc-tooltip-zoom', type: 'checkbox', onChange: this.onTransitionChange, checked: this.state.transitionName === 'rc-tooltip-zoom' }),
 	          'transitionName'
 	        ),
-	        '    ',
+	        '     trigger:',
 	        React.createElement(
 	          'label',
 	          null,
-	          'trigger:',
 	          React.createElement('input', { value: 'hover', checked: trigger.hover, type: 'checkbox', onChange: this.onTriggerChange }),
-	          'hover',
+	          'hover'
+	        ),
+	        React.createElement(
+	          'label',
+	          null,
 	          React.createElement('input', { value: 'focus', checked: trigger.focus, type: 'checkbox', onChange: this.onTriggerChange }),
-	          'focus',
+	          'focus'
+	        ),
+	        React.createElement(
+	          'label',
+	          null,
 	          React.createElement('input', { value: 'click', checked: trigger.click, type: 'checkbox', onChange: this.onTriggerChange }),
 	          'click'
 	        )
@@ -130,6 +132,7 @@ webpackJsonp([2],{
 	        React.createElement(
 	          Tooltip,
 	          { placement: this.state.placement,
+	            delay: 0.1,
 	            renderPopupToBody: this.props.renderPopupToBody,
 	            trigger: Object.keys(this.state.trigger),
 	            onVisibleChange: this.onVisibleChange,
@@ -169,7 +172,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 30:
+/***/ 31:
 /***/ function(module, exports) {
 
 	'use strict';

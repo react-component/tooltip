@@ -1,14 +1,12 @@
-webpackJsonp([1],{
-
-/***/ 0:
+webpackJsonp([0],[
+/* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(28);
+	module.exports = __webpack_require__(1);
 
 
 /***/ },
-
-/***/ 28:
+/* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25,14 +23,14 @@ webpackJsonp([1],{
 	      visible: false
 	    };
 	  },
-	  handleVisibleChange: function handleVisibleChange(visible) {
-	    this.setState({
-	      visible: visible
-	    });
-	  },
 	  handleDestroy: function handleDestroy() {
 	    this.setState({
 	      destroy: true
+	    });
+	  },
+	  handleChange: function handleChange(e) {
+	    this.setState({
+	      visible: !e.target.value
 	    });
 	  },
 	  render: function render() {
@@ -44,24 +42,19 @@ webpackJsonp([1],{
 	      null,
 	      React.createElement(
 	        'div',
-	        { style: { marginTop: 300, marginLeft: 100, marginBottom: 100 } },
+	        { style: { marginTop: 100, marginLeft: 100, marginBottom: 100 } },
 	        React.createElement(
 	          Tooltip,
 	          {
 	            visible: this.state.visible,
 	            animation: 'zoom',
-	            onVisibleChange: this.handleVisibleChange,
-	            trigger: 'click',
+	            trigger: '',
 	            overlay: React.createElement(
 	              'span',
 	              null,
-	              'i am a tooltip'
+	              '必填哦'
 	            ) },
-	          React.createElement(
-	            'a',
-	            { href: '#', onClick: preventDefault },
-	            'trigger'
-	          )
+	          React.createElement('input', { onChange: this.handleChange })
 	        )
 	      ),
 	      React.createElement(
@@ -73,13 +66,8 @@ webpackJsonp([1],{
 	  }
 	});
 	
-	function preventDefault(e) {
-	  e.preventDefault();
-	}
-	
 	React.render(React.createElement(Test, null), document.getElementById('__react-content'));
 
 /***/ }
-
-});
-//# sourceMappingURL=handleVisibleChange.js.map
+]);
+//# sourceMappingURL=formError.js.map
