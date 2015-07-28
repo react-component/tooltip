@@ -1,8 +1,8 @@
 'use strict';
 
-var React = require('react');
-var Tooltip = require('rc-tooltip');
-require('rc-tooltip/assets/bootstrap.css');
+import React from 'react';
+import Tooltip from 'rc-tooltip';
+import 'rc-tooltip/assets/bootstrap.css';
 
 var Test = React.createClass({
   getInitialState() {

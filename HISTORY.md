@@ -1,6 +1,10 @@
 # History
 ----
 
+### 2.5.0 / 2015-07-28
+
+use rc-animate & rc-align
+
 ### 2.4.0 / 2015-07-08
 
 revert to document click and fix focus/click conflict [#13](https://github.com/react-component/tooltip/issues/6)

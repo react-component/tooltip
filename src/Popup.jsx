@@ -1,84 +1,55 @@
 'use strict';
 
-/**
- * @author yiminghe@gmail.com
- */
+import React from 'react';
+import {getToolTipClassByPlacement} from './utils';
+import Align from 'rc-align';
+import Animate from 'rc-animate';
 
-var React = require('react');
-var anim = require('css-animation');
-var utils = require('./utils');
-var domAlign = require('dom-align');
+var placementAlignMap = {
+  left: {points: ['cr', 'cl']},
+  right: {points: ['cl', 'cr']},
+  top: {points: ['bc', 'tc']},
+  bottom: {points: ['tc', 'bc']}
+};
 
-
-class Popup extends React.Component {
+var Popup = React.createClass({
   // optimize for speed
   shouldComponentUpdate(nextProps) {
     return this.props.visible || nextProps.visible;
-  }
+  },
 
   getPopupDomNode() {
-    return React.findDOMNode(this.refs.popup);
-  }
+    return React.findDOMNode(this);
+  },
 
-  alignRootNode(prevProps) {
-    var props = this.props;
-    if (props.visible && !prevProps.visible) {
-      var targetDomNode = React.findDOMNode(props.wrap).firstChild;
-      var popupDomNode = this.getPopupDomNode();
-      var placement = props.placement;
-      var points;
-      if (placement && placement.points) {
-        var originalClassName = utils.getToolTipClassByPlacement(props.prefixCls, placement);
-        var align = domAlign(popupDomNode, targetDomNode, placement);
-        var nextClassName = utils.getToolTipClassByPlacement(props.prefixCls, align);
-        if (nextClassName !== originalClassName) {
-          popupDomNode.className = popupDomNode.className.replace(originalClassName, nextClassName);
-        }
-      } else {
-        points = ['cr', 'cl'];
-        if (placement === 'right') {
-          points = ['cl', 'cr'];
-        } else if (placement === 'top') {
-          points = ['bc', 'tc'];
-        } else if (placement === 'bottom') {
-          points = ['tc', 'bc'];
-        }
-        domAlign(popupDomNode, targetDomNode, {
-          points: points
-        });
-      }
-    }
-  }
+  getTarget() {
+    return React.findDOMNode(this.props.wrap).firstChild;
+  },
 
-  animateRootNode(prevProps) {
+  getTransitionName() {
     var props = this.props;
     var transitionName = props.transitionName;
     if (!transitionName && props.animation) {
       transitionName = `${props.prefixCls}-${props.animation}`;
     }
-    if (transitionName) {
-      var domNode = this.getPopupDomNode();
-      if (props.visible && !prevProps.visible) {
-        anim(domNode, `${transitionName}-enter`);
-      } else if (!props.visible && prevProps.visible) {
-        anim(domNode, `${transitionName}-leave`);
+    return transitionName;
+  },
+
+  handleAlign(popupDomNode, align) {
+    var props = this.props;
+    var placement = props.placement;
+    if (placement && placement.points) {
+      var originalClassName = getToolTipClassByPlacement(props.prefixCls, placement);
+      var nextClassName = getToolTipClassByPlacement(props.prefixCls, align);
+      if (nextClassName !== originalClassName) {
+        popupDomNode.className = popupDomNode.className.replace(originalClassName, nextClassName);
       }
     }
-  }
-
-  componentDidUpdate(prevProps) {
-    prevProps = prevProps || {};
-    this.alignRootNode(prevProps);
-    this.animateRootNode(prevProps);
-  }
-
-  componentDidMount() {
-    this.componentDidUpdate();
-  }
+  },
 
   render() {
     var props = this.props;
-    var className = utils.getToolTipClassByPlacement(props.prefixCls, props.placement);
+    var className = getToolTipClassByPlacement(props.prefixCls, props.placement);
     if (props.className) {
       className += ' ' + props.className;
     }
@@ -88,15 +59,36 @@ class Popup extends React.Component {
     }
     var arrowClassName = `${props.prefixCls}-arrow`;
     var innerClassname = `${props.prefixCls}-inner`;
-    return <div className={className}
-      ref="popup"
-      style={style}>
-      <div className={arrowClassName}></div>
-      <div className={innerClassname}>
-    {props.children}
-      </div>
-    </div>;
-  }
-}
 
-module.exports = Popup;
+    var placement = props.placement;
+    var align;
+    if (placement && placement.points) {
+      align = placement;
+    } else {
+      align = placementAlignMap[placement];
+    }
+
+    return <Animate component=""
+                    exclusive={true}
+                    animateMount={true}
+                    transitionName={this.getTransitionName()}
+                    showProp="data-visible">
+      <Align target={this.getTarget}
+             key="popup"
+             data-visible={props.visible}
+             disabled={!props.visible}
+             align={align}
+             onAlign={this.handleAlign}>
+        <div className={className}
+             style={style}>
+          <div className={arrowClassName}></div>
+          <div className={innerClassname}>
+            {props.children}
+          </div>
+        </div>
+      </Align>
+    </Animate>;
+  }
+});
+
+export default Popup;

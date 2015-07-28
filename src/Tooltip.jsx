@@ -1,13 +1,8 @@
 'use strict';
 
-/**
- * @author yiminghe@gmail.com
- */
-var React = require('react');
-var rcUtil = require('rc-util');
-var createChainedFunction = rcUtil.createChainedFunction;
-var Popup = require('./Popup');
-
+import React from 'react';
+import rcUtil, {createChainedFunction} from 'rc-util';
+import Popup from './Popup';
 
 class Tooltip extends React.Component {
   constructor(props) {
@@ -268,4 +263,4 @@ Tooltip.defaultProps = {
   trigger: ['hover']
 };
 
-module.exports = Tooltip;
+export default Tooltip;
