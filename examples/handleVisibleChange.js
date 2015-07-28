@@ -3,21 +3,29 @@ webpackJsonp([1],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(28);
+	module.exports = __webpack_require__(35);
 
 
 /***/ },
 
-/***/ 28:
+/***/ 35:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var React = __webpack_require__(2);
-	var Tooltip = __webpack_require__(3);
-	__webpack_require__(24);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var Test = React.createClass({
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _rcTooltip = __webpack_require__(3);
+	
+	var _rcTooltip2 = _interopRequireDefault(_rcTooltip);
+	
+	__webpack_require__(31);
+	
+	var Test = _react2['default'].createClass({
 	  displayName: 'Test',
 	
 	  getInitialState: function getInitialState() {
@@ -39,32 +47,32 @@ webpackJsonp([1],{
 	    if (this.state.destroy) {
 	      return null;
 	    }
-	    return React.createElement(
+	    return _react2['default'].createElement(
 	      'div',
 	      null,
-	      React.createElement(
+	      _react2['default'].createElement(
 	        'div',
 	        { style: { marginTop: 300, marginLeft: 100, marginBottom: 100 } },
-	        React.createElement(
-	          Tooltip,
+	        _react2['default'].createElement(
+	          _rcTooltip2['default'],
 	          {
 	            visible: this.state.visible,
-	            animation: 'zoom',
+	            animation: "zoom",
 	            onVisibleChange: this.handleVisibleChange,
-	            trigger: 'click',
-	            overlay: React.createElement(
+	            trigger: "click",
+	            overlay: _react2['default'].createElement(
 	              'span',
 	              null,
 	              'i am a tooltip'
 	            ) },
-	          React.createElement(
+	          _react2['default'].createElement(
 	            'a',
 	            { href: '#', onClick: preventDefault },
 	            'trigger'
 	          )
 	        )
 	      ),
-	      React.createElement(
+	      _react2['default'].createElement(
 	        'button',
 	        { onClick: this.handleDestroy },
 	        'destroy'
@@ -77,7 +85,7 @@ webpackJsonp([1],{
 	  e.preventDefault();
 	}
 	
-	React.render(React.createElement(Test, null), document.getElementById('__react-content'));
+	_react2['default'].render(_react2['default'].createElement(Test, null), document.getElementById("__react-content"));
 
 /***/ }
 

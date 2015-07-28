@@ -3,22 +3,33 @@ webpackJsonp([3],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(30);
+	module.exports = __webpack_require__(37);
 
 
 /***/ },
 
-/***/ 30:
+/***/ 37:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var React = __webpack_require__(2);
-	var Tooltip = __webpack_require__(3);
-	__webpack_require__(24);
-	var assign = __webpack_require__(31);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var Test = React.createClass({
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _rcTooltip = __webpack_require__(3);
+	
+	var _rcTooltip2 = _interopRequireDefault(_rcTooltip);
+	
+	__webpack_require__(31);
+	
+	var _objectAssign = __webpack_require__(38);
+	
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+	
+	var Test = _react2['default'].createClass({
 	  displayName: 'Test',
 	
 	  getInitialState: function getInitialState() {
@@ -42,7 +53,7 @@ webpackJsonp([3],{
 	  },
 	
 	  onTriggerChange: function onTriggerChange(e) {
-	    var trigger = assign({}, this.state.trigger);
+	    var trigger = (0, _objectAssign2['default'])({}, this.state.trigger);
 	    if (e.target.checked) {
 	      trigger[e.target.value] = 1;
 	    } else {
@@ -64,35 +75,35 @@ webpackJsonp([3],{
 	  render: function render() {
 	    console.log(this.state);
 	    var trigger = this.state.trigger;
-	    return React.createElement(
+	    return _react2['default'].createElement(
 	      'div',
 	      null,
-	      React.createElement(
+	      _react2['default'].createElement(
 	        'div',
 	        { style: { margin: '10px 20px' } },
-	        React.createElement(
+	        _react2['default'].createElement(
 	          'label',
 	          null,
 	          'placement:',
-	          React.createElement(
+	          _react2['default'].createElement(
 	            'select',
 	            { value: this.state.placement, onChange: this.onPlacementChange },
-	            React.createElement(
+	            _react2['default'].createElement(
 	              'option',
 	              null,
 	              'left'
 	            ),
-	            React.createElement(
+	            _react2['default'].createElement(
 	              'option',
 	              null,
 	              'right'
 	            ),
-	            React.createElement(
+	            _react2['default'].createElement(
 	              'option',
 	              null,
 	              'top'
 	            ),
-	            React.createElement(
+	            _react2['default'].createElement(
 	              'option',
 	              null,
 	              'bottom'
@@ -100,49 +111,49 @@ webpackJsonp([3],{
 	          )
 	        ),
 	        '    ',
-	        React.createElement(
+	        _react2['default'].createElement(
 	          'label',
 	          null,
-	          React.createElement('input', { value: 'rc-tooltip-zoom', type: 'checkbox', onChange: this.onTransitionChange, checked: this.state.transitionName === 'rc-tooltip-zoom' }),
+	          _react2['default'].createElement('input', { value: 'rc-tooltip-zoom', type: 'checkbox', onChange: this.onTransitionChange, checked: this.state.transitionName === 'rc-tooltip-zoom' }),
 	          'transitionName'
 	        ),
 	        '     trigger:',
-	        React.createElement(
+	        _react2['default'].createElement(
 	          'label',
 	          null,
-	          React.createElement('input', { value: 'hover', checked: trigger.hover, type: 'checkbox', onChange: this.onTriggerChange }),
+	          _react2['default'].createElement('input', { value: 'hover', checked: trigger.hover, type: 'checkbox', onChange: this.onTriggerChange }),
 	          'hover'
 	        ),
-	        React.createElement(
+	        _react2['default'].createElement(
 	          'label',
 	          null,
-	          React.createElement('input', { value: 'focus', checked: trigger.focus, type: 'checkbox', onChange: this.onTriggerChange }),
+	          _react2['default'].createElement('input', { value: 'focus', checked: trigger.focus, type: 'checkbox', onChange: this.onTriggerChange }),
 	          'focus'
 	        ),
-	        React.createElement(
+	        _react2['default'].createElement(
 	          'label',
 	          null,
-	          React.createElement('input', { value: 'click', checked: trigger.click, type: 'checkbox', onChange: this.onTriggerChange }),
+	          _react2['default'].createElement('input', { value: 'click', checked: trigger.click, type: 'checkbox', onChange: this.onTriggerChange }),
 	          'click'
 	        )
 	      ),
-	      React.createElement(
+	      _react2['default'].createElement(
 	        'div',
 	        { style: { margin: 100 } },
-	        React.createElement(
-	          Tooltip,
+	        _react2['default'].createElement(
+	          _rcTooltip2['default'],
 	          { placement: this.state.placement,
 	            delay: 0.1,
 	            renderPopupToBody: this.props.renderPopupToBody,
 	            trigger: Object.keys(this.state.trigger),
 	            onVisibleChange: this.onVisibleChange,
-	            overlay: React.createElement(
+	            overlay: _react2['default'].createElement(
 	              'span',
 	              null,
 	              'i am a tooltip'
 	            ),
 	            transitionName: this.state.transitionName },
-	          React.createElement(
+	          _react2['default'].createElement(
 	            'a',
 	            { href: '#', style: { margin: 20 }, onClick: this.preventDefault },
 	            'trigger'
@@ -153,26 +164,26 @@ webpackJsonp([3],{
 	  }
 	});
 	
-	React.render(React.createElement(
+	_react2['default'].render(_react2['default'].createElement(
 	  'div',
 	  null,
-	  React.createElement(
+	  _react2['default'].createElement(
 	    'h2',
 	    null,
 	    'renderPopupToBody=true'
 	  ),
-	  React.createElement(Test, null),
-	  React.createElement(
+	  _react2['default'].createElement(Test, null),
+	  _react2['default'].createElement(
 	    'h2',
 	    null,
 	    'renderPopupToBody=false'
 	  ),
-	  React.createElement(Test, { renderPopupToBody: false })
-	), document.getElementById('__react-content'));
+	  _react2['default'].createElement(Test, { renderPopupToBody: false })
+	), document.getElementById("__react-content"));
 
 /***/ },
 
-/***/ 31:
+/***/ 38:
 /***/ function(module, exports) {
 
 	'use strict';
