@@ -88,8 +88,8 @@ online example: http://react-component.github.io/tooltip/examples/
          </tr>
         <tr>
           <td>renderPopupToBody</td>
+          <td>boolean</td>
           <td>true</td>
-          <td></td>
           <td>whether render popup to body</td>
         </tr>
         <tr>
