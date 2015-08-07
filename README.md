@@ -50,7 +50,7 @@ React.render(<Tooltip placement="left" trigger={['click']} overlay={<span>toolti
 
 ## Example
 
-http://localhost:8000/examples/index.md
+http://localhost:8007/examples/index.md
 
 online example: http://react-component.github.io/tooltip/examples/
 
@@ -147,11 +147,11 @@ npm start
 
 ## Test Case
 
-http://localhost:8000/tests/runner.html?coverage
+http://localhost:8007/tests/runner.html?coverage
 
 ## Coverage
 
-http://localhost:8000/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:8000/tests/runner.html?coverage
+http://localhost:8007/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:8007/tests/runner.html?coverage
 
 ## License
 

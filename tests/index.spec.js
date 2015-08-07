@@ -6,10 +6,10 @@ var TestUtils = React.addons.TestUtils;
 var Simulate = TestUtils.Simulate;
 var $ = require('jquery');
 window.$ = $;
-require('../assets/bootstrap.css');
+require('../assets/bootstrap.less');
 var Tooltip = require('../index');
 var scryRenderedDOMComponentsWithClass = TestUtils.scryRenderedDOMComponentsWithClass;
-require('./test.css');
+require('./test.less');
 var async = require('async');
 
 function timeout(ms) {
@@ -30,7 +30,8 @@ describe('rc-tooltip', function () {
 
   describe('trigger', ()=> {
     it('click works', (done)=> {
-      var tooltip = React.render(<Tooltip trigger={['click']} placement="left" overlay={<strong className='x-content'>tooltip2</strong>}>
+      var tooltip = React.render(<Tooltip trigger={['click']} placement="left"
+                                          overlay={<strong className='x-content'>tooltip2</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
       var domNode = React.findDOMNode(tooltip).firstChild;
@@ -50,8 +51,8 @@ describe('rc-tooltip', function () {
 
     it('hover works', (done)=> {
       var tooltip = React.render(<Tooltip trigger={['hover']}
-        placement="left"
-        overlay={<strong>tooltip</strong>}>
+                                          placement="left"
+                                          overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
       var target = scryRenderedDOMComponentsWithClass(tooltip, 'rc-tooltip-wrap')[0];
@@ -78,7 +79,7 @@ describe('rc-tooltip', function () {
       var domNode = React.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       setTimeout(()=> {
-        var popupDomNode =tooltip.getPopupDomNode();
+        var popupDomNode = tooltip.getPopupDomNode();
         expect(popupDomNode).to.be.ok();
         var targetOffset = $(domNode).offset();
         var popupOffset = $(popupDomNode).offset();

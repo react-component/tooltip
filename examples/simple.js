@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Tooltip from 'rc-tooltip';
-import 'rc-tooltip/assets/bootstrap.css';
+import 'rc-tooltip/assets/bootstrap.less';
 import assign from 'object-assign';
 
 var Test = React.createClass({

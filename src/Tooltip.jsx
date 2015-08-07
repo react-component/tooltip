@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import rcUtil, {createChainedFunction} from 'rc-util';
 import Popup from './Popup';
@@ -8,121 +6,104 @@ class Tooltip extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: !!props.defaultVisible
+      visible: !!props.defaultVisible,
     };
     if ('visible' in props) {
       this.state.visible = !!props.visible;
     }
-    ['handleClick', 'handleMouseEnter',
-      'handleMouseDown', 'handleTouchStart',
-      'handleMouseLeave', 'handleFocus',
-      'handleBlur', 'handleOutsideClick'].forEach((m)=> {
+    ['onClick', 'onMouseEnter',
+      'onMouseDown', 'onTouchStart',
+      'onMouseLeave', 'onFocus',
+      'onBlur', 'onDocumentClick'].forEach((m)=> {
         this[m] = this[m].bind(this);
       });
   }
 
-  getPopupDomNode() {
-    // for test
-    return this.refs.popup ? this.refs.popup.getPopupDomNode() : this.popupInstance.getPopupDomNode();
+  componentDidMount() {
+    this.componentDidUpdate();
   }
 
   componentWillReceiveProps(nextProps) {
     if ('visible' in nextProps) {
       this.setState({
-        visible: !!nextProps.visible
+        visible: !!nextProps.visible,
       });
     }
   }
 
-  getTipContainer() {
-    if (!this.tipContainer) {
-      this.tipContainer = document.createElement('div');
-      document.body.appendChild(this.tipContainer);
-    }
-    return this.tipContainer;
-  }
-
-  getPopupElement() {
+  componentDidUpdate() {
     if (!this.popupRendered) {
-      return null;
+      return;
     }
-    var props = this.props;
-    var state = this.state;
-    var ref = {};
-    if (!props.renderPopupToBody) {
-      ref.ref = 'popup';
+    if (this.props.renderPopupToBody) {
+      this.popupInstance = React.render(this.getPopupElement(), this.getTipContainer());
     }
-    return <Popup prefixCls={props.prefixCls}
-      {...ref}
-      visible={state.visible}
-      trigger={props.trigger}
-      placement={props.placement}
-      animation={props.animation}
-      wrap={this}
-      style={props.overlayStyle}
-      transitionName={props.transitionName}>
-      {props.overlay}
-    </Popup>;
-  }
-
-  setVisible(visible) {
-    if (this.state.visible !== visible) {
-      var currentVisible = this.state.visible;
-      this.props.onVisibleChange(visible);
-      // avoid redundant render
-      // user do not modify visible
-      if (currentVisible === this.state.visible) {
-        this.setState({
-          visible: visible
-        });
+    const props = this.props;
+    if (props.trigger.indexOf('click') !== -1) {
+      if (this.state.visible) {
+        if (!this.clickOutsideHandler) {
+          this.clickOutsideHandler = rcUtil.Dom.addEventListener(document, 'mousedown', this.onDocumentClick);
+          this.touchOutsideHandler = rcUtil.Dom.addEventListener(document, 'touchstart', this.onDocumentClick);
+        }
+        return;
       }
     }
-  }
-
-  delaySetVisible(visible) {
-    var delay = this.props.delay * 1000;
-    if (delay) {
-      if (this.delayTimer) {
-        clearTimeout(this.delayTimer);
-      }
-      this.delayTimer = setTimeout(() => {
-        this.setVisible(visible);
-        this.delayTimer = null;
-      }, delay);
-    } else {
-      this.setVisible(visible);
+    if (this.clickOutsideHandler) {
+      this.clickOutsideHandler.remove();
+      this.touchOutsideHandler.remove();
+      this.clickOutsideHandler = null;
+      this.touchOutsideHandler = null;
     }
   }
 
-  handleMouseEnter() {
+  componentWillUnmount() {
+    const tipContainer = this.tipContainer;
+    if (tipContainer) {
+      React.unmountComponentAtNode(tipContainer);
+      document.body.removeChild(tipContainer);
+      this.tipContainer = null;
+    }
+    if (this.delayTimer) {
+      clearTimeout(this.delayTimer);
+      this.delayTimer = null;
+    }
+    if (this.clickOutsideHandler) {
+      this.clickOutsideHandler.remove();
+      this.touchOutsideHandler.remove();
+      this.clickOutsideHandler = null;
+      this.touchOutsideHandler = null;
+    }
+  }
+
+  onMouseEnter() {
     this.delaySetVisible(true);
   }
 
-  handleMouseLeave() {
+  onMouseLeave() {
     this.delaySetVisible(false);
   }
 
-  handleFocus() {
+  onFocus() {
     this.focusTime = Date.now();
     this.setVisible(true);
   }
 
-  handleMouseDown() {
+  onMouseDown() {
     this.preClickTime = Date.now();
   }
 
-  handleTouchStart() {
+  onTouchStart() {
     this.preTouchTime = Date.now();
   }
 
-  handleBlur() {
+  onBlur() {
     this.setVisible(false);
   }
 
-  handleClick(e) {
+  onClick(e) {
     // focus will trigger click
     if (this.focusTime) {
-      var preTime;
+      let preTime;
       if (this.preClickTime && this.preTouchTime) {
         preTime = Math.min(this.preClickTime, this.preTouchTime);
       } else if (this.preClickTime) {
@@ -145,90 +126,78 @@ class Tooltip extends React.Component {
     }
   }
 
-  handleOutsideClick(e) {
-    var target = e.target;
-    var root = React.findDOMNode(this);
-    var popupNode = this.getPopupDomNode();
+  onDocumentClick(e) {
+    const target = e.target;
+    const root = React.findDOMNode(this);
+    const popupNode = this.getPopupDomNode();
     if (!rcUtil.Dom.contains(root, target) && !rcUtil.Dom.contains(popupNode, target)) {
       this.setVisible(false);
     }
   }
 
-  componentDidMount() {
-    this.componentDidUpdate();
+  getPopupDomNode() {
+    // for test
+    return this.refs.popup ? this.refs.popup.getPopupDomNode() : this.popupInstance.getPopupDomNode();
   }
 
-  componentDidUpdate() {
+  getTipContainer() {
+    if (!this.tipContainer) {
+      this.tipContainer = document.createElement('div');
+      document.body.appendChild(this.tipContainer);
+    }
+    return this.tipContainer;
+  }
+
+  getPopupElement() {
     if (!this.popupRendered) {
-      return;
+      return null;
     }
-    if (this.props.renderPopupToBody) {
-      this.popupInstance = React.render(this.getPopupElement(), this.getTipContainer());
+    const props = this.props;
+    const state = this.state;
+    const ref = {};
+    if (!props.renderPopupToBody) {
+      ref.ref = 'popup';
     }
-    var props = this.props;
-    if (props.trigger.indexOf('click') !== -1) {
-      if (this.state.visible) {
-        if (!this.clickOutsideHandler) {
-          this.clickOutsideHandler = rcUtil.Dom.addEventListener(document, 'mousedown', this.handleOutsideClick);
-          this.touchOutsideHandler = rcUtil.Dom.addEventListener(document, 'touchstart', this.handleOutsideClick);
-        }
-        return;
-      }
-    }
-    if (this.clickOutsideHandler) {
-      this.clickOutsideHandler.remove();
-      this.touchOutsideHandler.remove();
-      this.clickOutsideHandler = null;
-      this.touchOutsideHandler = null;
-    }
-  }
-
-  componentWillUnmount() {
-    var tipContainer = this.tipContainer;
-    if (tipContainer) {
-      React.unmountComponentAtNode(tipContainer);
-      document.body.removeChild(tipContainer);
-      this.tipContainer = null;
-    }
-    if (this.delayTimer) {
-      clearTimeout(this.delayTimer);
-      this.delayTimer = null;
-    }
-    if (this.clickOutsideHandler) {
-      this.clickOutsideHandler.remove();
-      this.touchOutsideHandler.remove();
-      this.clickOutsideHandler = null;
-      this.touchOutsideHandler = null;
-    }
+    return (<Popup prefixCls={props.prefixCls}
+      {...ref}
+                   visible={state.visible}
+                   trigger={props.trigger}
+                   placement={props.placement}
+                   animation={props.animation}
+                   wrap={this}
+                   style={props.overlayStyle}
+                   transitionName={props.transitionName}>
+      {props.overlay}
+    </Popup>);
   }
 
   render() {
     if (this.state.visible) {
       this.popupRendered = true;
     }
-    var props = this.props;
-    var children = props.children;
-    var child = React.Children.only(children);
-    var childProps = child.props || {};
-    var newChildProps = {};
-    var trigger = props.trigger;
-    var mouseProps = {};
+    const props = this.props;
+    const children = props.children;
+    const child = React.Children.only(children);
+    const childProps = child.props || {};
+    const newChildProps = {};
+    const trigger = props.trigger;
+    const mouseProps = {};
     if (trigger.indexOf('click') !== -1) {
-      newChildProps.onClick = createChainedFunction(this.handleClick, childProps.onClick);
-      newChildProps.onMouseDown = createChainedFunction(this.handleMouseDown, childProps.onMouseDown);
-      newChildProps.onTouchStart = createChainedFunction(this.handleTouchStart, childProps.onTouchStart);
+      newChildProps.onClick = createChainedFunction(this.onClick, childProps.onClick);
+      newChildProps.onMouseDown = createChainedFunction(this.onMouseDown, childProps.onMouseDown);
+      newChildProps.onTouchStart = createChainedFunction(this.onTouchStart, childProps.onTouchStart);
     }
     if (trigger.indexOf('hover') !== -1) {
-      mouseProps.onMouseEnter = createChainedFunction(this.handleMouseEnter, childProps.onMouseEnter);
-      mouseProps.onMouseLeave = createChainedFunction(this.handleMouseLeave, childProps.onMouseLeave);
+      mouseProps.onMouseEnter = createChainedFunction(this.onMouseEnter, childProps.onMouseEnter);
+      mouseProps.onMouseLeave = createChainedFunction(this.onMouseLeave, childProps.onMouseLeave);
     }
     if (trigger.indexOf('focus') !== -1) {
-      newChildProps.onFocus = createChainedFunction(this.handleFocus, childProps.onFocus);
-      newChildProps.onBlur = createChainedFunction(this.handleBlur, childProps.onBlur);
+      newChildProps.onFocus = createChainedFunction(this.onFocus, childProps.onFocus);
+      newChildProps.onBlur = createChainedFunction(this.onBlur, childProps.onBlur);
     }
 
-    var popupElement = props.renderPopupToBody ? null : this.getPopupElement();
-    var className = `${props.prefixCls}-wrap`;
+    const popupElement = props.renderPopupToBody ? null : this.getPopupElement();
+    let className = `${props.prefixCls}-wrap`;
 
     if (this.state.visible) {
       className += ` ${props.prefixCls}-wrap-open`;
@@ -237,6 +206,30 @@ class Tooltip extends React.Component {
     return (<span className={className} {...mouseProps} style={props.wrapStyle}>
     {rcUtil.Children.mapSelf([React.cloneElement(child, newChildProps), popupElement])}
     </span>);
+  }
+
+  setVisible(visible) {
+    if (!('visible' in this.props)) {
+      this.setState({
+        visible: visible,
+      });
+    }
+    this.props.onVisibleChange(visible);
+  }
+
+  delaySetVisible(visible) {
+    const delay = this.props.delay * 1000;
+    if (delay) {
+      if (this.delayTimer) {
+        clearTimeout(this.delayTimer);
+      }
+      this.delayTimer = setTimeout(() => {
+        this.setVisible(visible);
+        this.delayTimer = null;
+      }, delay);
+    } else {
+      this.setVisible(visible);
+    }
   }
 }
 
@@ -248,19 +241,19 @@ Tooltip.propTypes = {
   overlay: React.PropTypes.node.isRequired,
   overlayStyle: React.PropTypes.object,
   wrapStyle: React.PropTypes.object,
-  delay: React.PropTypes.number
+  delay: React.PropTypes.number,
 };
 
 Tooltip.defaultProps = {
   prefixCls: 'rc-tooltip',
   renderPopupToBody: true,
-  onVisibleChange: function () {
+  onVisibleChange() {
   },
   delay: 0.1,
   overlayStyle: {},
   wrapStyle: {},
   placement: 'right',
-  trigger: ['hover']
+  trigger: ['hover'],
 };
 
 export default Tooltip;
