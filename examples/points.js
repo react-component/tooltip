@@ -50,7 +50,7 @@ webpackJsonp([2],{
 	        _react2['default'].createElement(
 	          _rcTooltip2['default'],
 	          { placement: placement,
-	            trigger: "click",
+	            trigger: 'click',
 	            overlay: _react2['default'].createElement(
 	              'span',
 	              null,

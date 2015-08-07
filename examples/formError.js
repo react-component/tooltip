@@ -55,8 +55,8 @@ webpackJsonp([0],[
 	          _rcTooltip2['default'],
 	          {
 	            visible: this.state.visible,
-	            animation: "zoom",
-	            trigger: "",
+	            animation: 'zoom',
+	            trigger: '',
 	            overlay: _react2['default'].createElement(
 	              'span',
 	              null,

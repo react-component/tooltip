@@ -164,16 +164,15 @@
 	    if ('visible' in props) {
 	      this.state.visible = !!props.visible;
 	    }
-	    ['handleClick', 'handleMouseEnter', 'handleMouseDown', 'handleTouchStart', 'handleMouseLeave', 'handleFocus', 'handleBlur', 'handleOutsideClick'].forEach(function (m) {
+	    ['onClick', 'onMouseEnter', 'onMouseDown', 'onTouchStart', 'onMouseLeave', 'onFocus', 'onBlur', 'onDocumentClick'].forEach(function (m) {
 	      _this[m] = _this[m].bind(_this);
 	    });
 	  }
 	
 	  _createClass(Tooltip, [{
-	    key: 'getPopupDomNode',
-	    value: function getPopupDomNode() {
-	      // for test
-	      return this.refs.popup ? this.refs.popup.getPopupDomNode() : this.popupInstance.getPopupDomNode();
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.componentDidUpdate();
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
@@ -183,6 +182,126 @@
 	          visible: !!nextProps.visible
 	        });
 	      }
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      if (!this.popupRendered) {
+	        return;
+	      }
+	      if (this.props.renderPopupToBody) {
+	        this.popupInstance = _react2['default'].render(this.getPopupElement(), this.getTipContainer());
+	      }
+	      var props = this.props;
+	      if (props.trigger.indexOf('click') !== -1) {
+	        if (this.state.visible) {
+	          if (!this.clickOutsideHandler) {
+	            this.clickOutsideHandler = _rcUtil2['default'].Dom.addEventListener(document, 'mousedown', this.onDocumentClick);
+	            this.touchOutsideHandler = _rcUtil2['default'].Dom.addEventListener(document, 'touchstart', this.onDocumentClick);
+	          }
+	          return;
+	        }
+	      }
+	      if (this.clickOutsideHandler) {
+	        this.clickOutsideHandler.remove();
+	        this.touchOutsideHandler.remove();
+	        this.clickOutsideHandler = null;
+	        this.touchOutsideHandler = null;
+	      }
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      var tipContainer = this.tipContainer;
+	      if (tipContainer) {
+	        _react2['default'].unmountComponentAtNode(tipContainer);
+	        document.body.removeChild(tipContainer);
+	        this.tipContainer = null;
+	      }
+	      if (this.delayTimer) {
+	        clearTimeout(this.delayTimer);
+	        this.delayTimer = null;
+	      }
+	      if (this.clickOutsideHandler) {
+	        this.clickOutsideHandler.remove();
+	        this.touchOutsideHandler.remove();
+	        this.clickOutsideHandler = null;
+	        this.touchOutsideHandler = null;
+	      }
+	    }
+	  }, {
+	    key: 'onMouseEnter',
+	    value: function onMouseEnter() {
+	      this.delaySetVisible(true);
+	    }
+	  }, {
+	    key: 'onMouseLeave',
+	    value: function onMouseLeave() {
+	      this.delaySetVisible(false);
+	    }
+	  }, {
+	    key: 'onFocus',
+	    value: function onFocus() {
+	      this.focusTime = Date.now();
+	      this.setVisible(true);
+	    }
+	  }, {
+	    key: 'onMouseDown',
+	    value: function onMouseDown() {
+	      this.preClickTime = Date.now();
+	    }
+	  }, {
+	    key: 'onTouchStart',
+	    value: function onTouchStart() {
+	      this.preTouchTime = Date.now();
+	    }
+	  }, {
+	    key: 'onBlur',
+	    value: function onBlur() {
+	      this.setVisible(false);
+	    }
+	  }, {
+	    key: 'onClick',
+	    value: function onClick(e) {
+	      // focus will trigger click
+	      if (this.focusTime) {
+	        var preTime = undefined;
+	        if (this.preClickTime && this.preTouchTime) {
+	          preTime = Math.min(this.preClickTime, this.preTouchTime);
+	        } else if (this.preClickTime) {
+	          preTime = this.preClickTime;
+	        } else if (this.preTouchTime) {
+	          preTime = this.preTouchTime;
+	        }
+	        if (Math.abs(preTime - this.focusTime) < 20) {
+	          return;
+	        }
+	        this.focusTime = 0;
+	      }
+	      this.preClickTime = 0;
+	      this.preTouchTime = 0;
+	      e.preventDefault();
+	      if (this.state.visible) {
+	        this.setVisible(false);
+	      } else {
+	        this.setVisible(true);
+	      }
+	    }
+	  }, {
+	    key: 'onDocumentClick',
+	    value: function onDocumentClick(e) {
+	      var target = e.target;
+	      var root = _react2['default'].findDOMNode(this);
+	      var popupNode = this.getPopupDomNode();
+	      if (!_rcUtil2['default'].Dom.contains(root, target) && !_rcUtil2['default'].Dom.contains(popupNode, target)) {
+	        this.setVisible(false);
+	      }
+	    }
+	  }, {
+	    key: 'getPopupDomNode',
+	    value: function getPopupDomNode() {
+	      // for test
+	      return this.refs.popup ? this.refs.popup.getPopupDomNode() : this.popupInstance.getPopupDomNode();
 	    }
 	  }, {
 	    key: 'getTipContainer',
@@ -220,19 +339,54 @@
 	      );
 	    }
 	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (this.state.visible) {
+	        this.popupRendered = true;
+	      }
+	      var props = this.props;
+	      var children = props.children;
+	      var child = _react2['default'].Children.only(children);
+	      var childProps = child.props || {};
+	      var newChildProps = {};
+	      var trigger = props.trigger;
+	      var mouseProps = {};
+	      if (trigger.indexOf('click') !== -1) {
+	        newChildProps.onClick = (0, _rcUtil.createChainedFunction)(this.onClick, childProps.onClick);
+	        newChildProps.onMouseDown = (0, _rcUtil.createChainedFunction)(this.onMouseDown, childProps.onMouseDown);
+	        newChildProps.onTouchStart = (0, _rcUtil.createChainedFunction)(this.onTouchStart, childProps.onTouchStart);
+	      }
+	      if (trigger.indexOf('hover') !== -1) {
+	        mouseProps.onMouseEnter = (0, _rcUtil.createChainedFunction)(this.onMouseEnter, childProps.onMouseEnter);
+	        mouseProps.onMouseLeave = (0, _rcUtil.createChainedFunction)(this.onMouseLeave, childProps.onMouseLeave);
+	      }
+	      if (trigger.indexOf('focus') !== -1) {
+	        newChildProps.onFocus = (0, _rcUtil.createChainedFunction)(this.onFocus, childProps.onFocus);
+	        newChildProps.onBlur = (0, _rcUtil.createChainedFunction)(this.onBlur, childProps.onBlur);
+	      }
+	
+	      var popupElement = props.renderPopupToBody ? null : this.getPopupElement();
+	      var className = props.prefixCls + '-wrap';
+	
+	      if (this.state.visible) {
+	        className += ' ' + props.prefixCls + '-wrap-open';
+	      }
+	
+	      return _react2['default'].createElement(
+	        'span',
+	        _extends({ className: className }, mouseProps, { style: props.wrapStyle }),
+	        _rcUtil2['default'].Children.mapSelf([_react2['default'].cloneElement(child, newChildProps), popupElement])
+	      );
+	    }
+	  }, {
 	    key: 'setVisible',
 	    value: function setVisible(visible) {
-	      if (this.state.visible !== visible) {
-	        var currentVisible = this.state.visible;
-	        this.props.onVisibleChange(visible);
-	        // avoid redundant render
-	        // user do not modify visible
-	        if (currentVisible === this.state.visible) {
-	          this.setState({
-	            visible: visible
-	          });
-	        }
+	      if (!('visible' in this.props)) {
+	        this.setState({
+	          visible: visible
+	        });
 	      }
+	      this.props.onVisibleChange(visible);
 	    }
 	  }, {
 	    key: 'delaySetVisible',
@@ -251,165 +405,6 @@
 	      } else {
 	        this.setVisible(visible);
 	      }
-	    }
-	  }, {
-	    key: 'handleMouseEnter',
-	    value: function handleMouseEnter() {
-	      this.delaySetVisible(true);
-	    }
-	  }, {
-	    key: 'handleMouseLeave',
-	    value: function handleMouseLeave() {
-	      this.delaySetVisible(false);
-	    }
-	  }, {
-	    key: 'handleFocus',
-	    value: function handleFocus() {
-	      this.focusTime = Date.now();
-	      this.setVisible(true);
-	    }
-	  }, {
-	    key: 'handleMouseDown',
-	    value: function handleMouseDown() {
-	      this.preClickTime = Date.now();
-	    }
-	  }, {
-	    key: 'handleTouchStart',
-	    value: function handleTouchStart() {
-	      this.preTouchTime = Date.now();
-	    }
-	  }, {
-	    key: 'handleBlur',
-	    value: function handleBlur() {
-	      this.setVisible(false);
-	    }
-	  }, {
-	    key: 'handleClick',
-	    value: function handleClick(e) {
-	      // focus will trigger click
-	      if (this.focusTime) {
-	        var preTime;
-	        if (this.preClickTime && this.preTouchTime) {
-	          preTime = Math.min(this.preClickTime, this.preTouchTime);
-	        } else if (this.preClickTime) {
-	          preTime = this.preClickTime;
-	        } else if (this.preTouchTime) {
-	          preTime = this.preTouchTime;
-	        }
-	        if (Math.abs(preTime - this.focusTime) < 20) {
-	          return;
-	        }
-	        this.focusTime = 0;
-	      }
-	      this.preClickTime = 0;
-	      this.preTouchTime = 0;
-	      e.preventDefault();
-	      if (this.state.visible) {
-	        this.setVisible(false);
-	      } else {
-	        this.setVisible(true);
-	      }
-	    }
-	  }, {
-	    key: 'handleOutsideClick',
-	    value: function handleOutsideClick(e) {
-	      var target = e.target;
-	      var root = _react2['default'].findDOMNode(this);
-	      var popupNode = this.getPopupDomNode();
-	      if (!_rcUtil2['default'].Dom.contains(root, target) && !_rcUtil2['default'].Dom.contains(popupNode, target)) {
-	        this.setVisible(false);
-	      }
-	    }
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.componentDidUpdate();
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      if (!this.popupRendered) {
-	        return;
-	      }
-	      if (this.props.renderPopupToBody) {
-	        this.popupInstance = _react2['default'].render(this.getPopupElement(), this.getTipContainer());
-	      }
-	      var props = this.props;
-	      if (props.trigger.indexOf('click') !== -1) {
-	        if (this.state.visible) {
-	          if (!this.clickOutsideHandler) {
-	            this.clickOutsideHandler = _rcUtil2['default'].Dom.addEventListener(document, 'mousedown', this.handleOutsideClick);
-	            this.touchOutsideHandler = _rcUtil2['default'].Dom.addEventListener(document, 'touchstart', this.handleOutsideClick);
-	          }
-	          return;
-	        }
-	      }
-	      if (this.clickOutsideHandler) {
-	        this.clickOutsideHandler.remove();
-	        this.touchOutsideHandler.remove();
-	        this.clickOutsideHandler = null;
-	        this.touchOutsideHandler = null;
-	      }
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      var tipContainer = this.tipContainer;
-	      if (tipContainer) {
-	        _react2['default'].unmountComponentAtNode(tipContainer);
-	        document.body.removeChild(tipContainer);
-	        this.tipContainer = null;
-	      }
-	      if (this.delayTimer) {
-	        clearTimeout(this.delayTimer);
-	        this.delayTimer = null;
-	      }
-	      if (this.clickOutsideHandler) {
-	        this.clickOutsideHandler.remove();
-	        this.touchOutsideHandler.remove();
-	        this.clickOutsideHandler = null;
-	        this.touchOutsideHandler = null;
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      if (this.state.visible) {
-	        this.popupRendered = true;
-	      }
-	      var props = this.props;
-	      var children = props.children;
-	      var child = _react2['default'].Children.only(children);
-	      var childProps = child.props || {};
-	      var newChildProps = {};
-	      var trigger = props.trigger;
-	      var mouseProps = {};
-	      if (trigger.indexOf('click') !== -1) {
-	        newChildProps.onClick = (0, _rcUtil.createChainedFunction)(this.handleClick, childProps.onClick);
-	        newChildProps.onMouseDown = (0, _rcUtil.createChainedFunction)(this.handleMouseDown, childProps.onMouseDown);
-	        newChildProps.onTouchStart = (0, _rcUtil.createChainedFunction)(this.handleTouchStart, childProps.onTouchStart);
-	      }
-	      if (trigger.indexOf('hover') !== -1) {
-	        mouseProps.onMouseEnter = (0, _rcUtil.createChainedFunction)(this.handleMouseEnter, childProps.onMouseEnter);
-	        mouseProps.onMouseLeave = (0, _rcUtil.createChainedFunction)(this.handleMouseLeave, childProps.onMouseLeave);
-	      }
-	      if (trigger.indexOf('focus') !== -1) {
-	        newChildProps.onFocus = (0, _rcUtil.createChainedFunction)(this.handleFocus, childProps.onFocus);
-	        newChildProps.onBlur = (0, _rcUtil.createChainedFunction)(this.handleBlur, childProps.onBlur);
-	      }
-	
-	      var popupElement = props.renderPopupToBody ? null : this.getPopupElement();
-	      var className = props.prefixCls + '-wrap';
-	
-	      if (this.state.visible) {
-	        className += ' ' + props.prefixCls + '-wrap-open';
-	      }
-	
-	      return _react2['default'].createElement(
-	        'span',
-	        _extends({ className: className }, mouseProps, { style: props.wrapStyle }),
-	        _rcUtil2['default'].Children.mapSelf([_react2['default'].cloneElement(child, newChildProps), popupElement])
-	      );
 	    }
 	  }]);
 	
@@ -1327,9 +1322,27 @@
 	var Popup = _react2['default'].createClass({
 	  displayName: 'Popup',
 	
+	  propTypes: {
+	    visible: _react2['default'].PropTypes.bool,
+	    wrap: _react2['default'].PropTypes.object,
+	    style: _react2['default'].PropTypes.object
+	  },
+	
 	  // optimize for speed
 	  shouldComponentUpdate: function shouldComponentUpdate(nextProps) {
 	    return this.props.visible || nextProps.visible;
+	  },
+	
+	  onAlign: function onAlign(popupDomNode, align) {
+	    var props = this.props;
+	    var placement = props.placement;
+	    if (placement && placement.points) {
+	      var originalClassName = (0, _utils.getToolTipClassByPlacement)(props.prefixCls, placement);
+	      var nextClassName = (0, _utils.getToolTipClassByPlacement)(props.prefixCls, align);
+	      if (nextClassName !== originalClassName) {
+	        popupDomNode.className = popupDomNode.className.replace(originalClassName, nextClassName);
+	      }
+	    }
 	  },
 	
 	  getPopupDomNode: function getPopupDomNode() {
@@ -1349,18 +1362,6 @@
 	    return transitionName;
 	  },
 	
-	  handleAlign: function handleAlign(popupDomNode, align) {
-	    var props = this.props;
-	    var placement = props.placement;
-	    if (placement && placement.points) {
-	      var originalClassName = (0, _utils.getToolTipClassByPlacement)(props.prefixCls, placement);
-	      var nextClassName = (0, _utils.getToolTipClassByPlacement)(props.prefixCls, align);
-	      if (nextClassName !== originalClassName) {
-	        popupDomNode.className = popupDomNode.className.replace(originalClassName, nextClassName);
-	      }
-	    }
-	  },
-	
 	  render: function render() {
 	    var props = this.props;
 	    var className = (0, _utils.getToolTipClassByPlacement)(props.prefixCls, props.placement);
@@ -1375,7 +1376,7 @@
 	    var innerClassname = props.prefixCls + '-inner';
 	
 	    var placement = props.placement;
-	    var align;
+	    var align = undefined;
 	    if (placement && placement.points) {
 	      align = placement;
 	    } else {
@@ -1384,19 +1385,19 @@
 	
 	    return _react2['default'].createElement(
 	      _rcAnimate2['default'],
-	      { component: "",
+	      { component: '',
 	        exclusive: true,
 	        animateMount: true,
 	        transitionName: this.getTransitionName(),
-	        showProp: "data-visible" },
+	        showProp: 'data-visible' },
 	      _react2['default'].createElement(
 	        _rcAlign2['default'],
 	        { target: this.getTarget,
-	          key: "popup",
+	          key: 'popup',
 	          'data-visible': props.visible,
 	          disabled: !props.visible,
 	          align: align,
-	          onAlign: this.handleAlign },
+	          onAlign: this.onAlign },
 	        _react2['default'].createElement(
 	          'div',
 	          { className: className,
@@ -1430,15 +1431,14 @@
 	function getToolTipClassByPlacement(prefixCls, placement) {
 	  if (typeof placement === 'string') {
 	    return prefixCls + ' ' + prefixCls + '-placement-' + placement;
-	  } else {
-	    var offset = placement.offset || [0, 0];
-	    var offsetClass = '';
-	    if (offset && offset.length) {
-	      offsetClass = prefixCls + '-placement-offset-x-' + offset[0] + ' ' + prefixCls + '-placement-offset-y-' + offset[1];
-	    }
-	    var points = placement.points;
-	    return prefixCls + ' ' + offsetClass + ' ' + prefixCls + '-placement-points-' + points[0] + '-' + points[1];
 	  }
+	  var offset = placement.offset || [0, 0];
+	  var offsetClass = '';
+	  if (offset && offset.length) {
+	    offsetClass = prefixCls + '-placement-offset-x-' + offset[0] + ' ' + prefixCls + '-placement-offset-y-' + offset[1];
+	  }
+	  var points = placement.points;
+	  return prefixCls + ' ' + offsetClass + ' ' + prefixCls + '-placement-points-' + points[0] + '-' + points[1];
 	}
 
 /***/ },
@@ -2525,12 +2525,13 @@
 	    var props = this.props;
 	    var showProp = props.showProp;
 	    var exclusive = props.exclusive;
+	    var currentlyAnimatingKeys = this.currentlyAnimatingKeys;
 	    // last props children if exclusive
 	    // exclusive needs immediate response
-	    var currentChildren = exclusive ? (0, _ChildrenUtils.toArrayChildren)(getChildrenFromProps(props)) : this.state.children;
+	    var currentChildren = this.state.children;
 	    var newChildren = _ChildrenUtils2['default'].mergeChildren(currentChildren, nextChildren);
 	
-	    if (showProp) {
+	    if (showProp && !exclusive) {
 	      newChildren = newChildren.map(function (c) {
 	        if (!c.props[showProp] && (0, _ChildrenUtils.isShownInChildren)(currentChildren, c, showProp)) {
 	          c = _react2['default'].cloneElement(c, _defineProperty({}, showProp, true));
@@ -2539,20 +2540,17 @@
 	      });
 	    }
 	
-	    // exclusive needs immediate response
-	    if (exclusive) {
-	      // make middle state children invalid
-	      // restore to last props children
-	      newChildren.forEach(function (c) {
-	        _this.stop(c.key);
-	      });
-	    }
-	
 	    this.setState({
 	      children: newChildren
 	    });
 	
-	    var currentlyAnimatingKeys = this.currentlyAnimatingKeys;
+	    // exclusive needs immediate response
+	    if (exclusive) {
+	      Object.keys(currentlyAnimatingKeys).forEach(function (key) {
+	        _this.stop(key);
+	      });
+	      currentChildren = (0, _ChildrenUtils.toArrayChildren)(getChildrenFromProps(props));
+	    }
 	
 	    nextChildren.forEach(function (c) {
 	      var key = c.key;
@@ -2594,8 +2592,11 @@
 	  },
 	
 	  performEnter: function performEnter(key) {
-	    this.currentlyAnimatingKeys[key] = true;
-	    this.refs[key].componentWillEnter(this._handleDoneEntering.bind(this, key));
+	    // may already remove by exclusive
+	    if (this.refs[key]) {
+	      this.currentlyAnimatingKeys[key] = true;
+	      this.refs[key].componentWillEnter(this._handleDoneEntering.bind(this, key));
+	    }
 	  },
 	
 	  _handleDoneEntering: function _handleDoneEntering(key) {
@@ -2615,8 +2616,11 @@
 	  },
 	
 	  performLeave: function performLeave(key) {
-	    this.currentlyAnimatingKeys[key] = true;
-	    this.refs[key].componentWillLeave(this._handleDoneLeaving.bind(this, key));
+	    // may already remove by exclusive
+	    if (this.refs[key]) {
+	      this.currentlyAnimatingKeys[key] = true;
+	      this.refs[key].componentWillLeave(this._handleDoneLeaving.bind(this, key));
+	    }
 	  },
 	
 	  isValidChildByKey: function isValidChildByKey(currentChildren, key) {
@@ -2842,6 +2846,11 @@
 	
 	var _cssAnimation2 = _interopRequireDefault(_cssAnimation);
 	
+	var transitionMap = {
+	  enter: 'transitionEnter',
+	  leave: 'transitionLeave'
+	};
+	
 	var AnimateChild = _react2['default'].createClass({
 	  displayName: 'AnimateChild',
 	
@@ -2856,7 +2865,7 @@
 	      _this.stopper = null;
 	      finishCallback();
 	    };
-	    if ((_cssAnimation.isCssAnimationSupported || !props.animation[animationType]) && transitionName && props.transitionEnter) {
+	    if ((_cssAnimation.isCssAnimationSupported || !props.animation[animationType]) && transitionName && props[transitionMap[animationType]]) {
 	      this.stopper = (0, _cssAnimation2['default'])(node, transitionName + '-' + animationType, end);
 	    } else {
 	      this.stopper = props.animation[animationType](node, end);
@@ -2899,6 +2908,7 @@
 	
 	exports['default'] = AnimateChild;
 	module.exports = exports['default'];
+
 
 /***/ },
 /* 28 */
@@ -3140,8 +3150,8 @@
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
-		module.hot.accept("!!/Users/yiminghe/code/react-components/tooltip/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/yiminghe/code/react-components/tooltip/assets/bootstrap.css", function() {
-			var newContent = require("!!/Users/yiminghe/code/react-components/tooltip/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/yiminghe/code/react-components/tooltip/assets/bootstrap.css");
+		module.hot.accept("!!/Users/yiminghe/code/react-components/tooltip/node_modules/rc-tools/node_modules/css-loader/index.js?sourceMap!/Users/yiminghe/code/react-components/tooltip/node_modules/rc-tools/node_modules/less-loader/index.js?sourceMap!/Users/yiminghe/code/react-components/tooltip/assets/bootstrap.less", function() {
+			var newContent = require("!!/Users/yiminghe/code/react-components/tooltip/node_modules/rc-tools/node_modules/css-loader/index.js?sourceMap!/Users/yiminghe/code/react-components/tooltip/node_modules/rc-tools/node_modules/less-loader/index.js?sourceMap!/Users/yiminghe/code/react-components/tooltip/assets/bootstrap.less");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -3154,7 +3164,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(33)();
-	exports.push([module.id, ".rc-tooltip {\n  position: absolute;\n  left: -9999px;\n  top: -9999px;\n  z-index: 1070;\n  display: block;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-size: 12px;\n  font-weight: normal;\n  line-height: 1.4;\n}\n.rc-tooltip-hidden {\n  display: none;\n}\n.rc-tooltip-placement-left {\n  margin-left: -3px;\n  padding: 0 5px;\n}\n.rc-tooltip-placement-left > .rc-tooltip-arrow {\n  top: 50%;\n  right: 0;\n  margin-top: -5px;\n  border-width: 5px 0 5px 5px;\n  border-left-color: #000000;\n}\n.rc-tooltip-placement-top {\n  margin-top: -3px;\n  padding: 5px 0;\n}\n.rc-tooltip-placement-top > .rc-tooltip-arrow {\n  bottom: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 5px 5px 0;\n  border-top-color: #000000;\n}\n.rc-tooltip-placement-bottom {\n  margin-top: 3px;\n  padding: 5px 0;\n}\n.rc-tooltip-placement-bottom > .rc-tooltip-arrow {\n  top: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 0 5px 5px;\n  border-bottom-color: #000000;\n}\n.rc-tooltip-placement-right {\n  margin-left: 3px;\n  padding: 0 5px;\n}\n.rc-tooltip-placement-right > .rc-tooltip-arrow {\n  top: 50%;\n  left: 0;\n  margin-top: -5px;\n  border-width: 5px 5px 5px 0;\n  border-right-color: #000000;\n}\n.rc-tooltip-arrow {\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-color: transparent;\n  border-style: solid;\n}\n.rc-tooltip-inner {\n  padding: 3px 8px;\n  color: #ffffff;\n  text-align: center;\n  text-decoration: none;\n  background-color: #000000;\n  border-radius: 4px;\n}\n.rc-tooltip.rc-tooltip-zoom-enter,\n.rc-tooltip.rc-tooltip-zoom-leave {\n  display: block;\n}\n.rc-tooltip-zoom-enter {\n  opacity: 0;\n  -webkit-animation-duration: 0.3s;\n          animation-duration: 0.3s;\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-animation-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);\n          animation-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);\n  -webkit-animation-play-state: paused;\n          animation-play-state: paused;\n}\n.rc-tooltip-zoom-leave {\n  -webkit-animation-duration: 0.3s;\n          animation-duration: 0.3s;\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-animation-timing-function: cubic-bezier(0.6, -0.3, 0.74, 0.05);\n          animation-timing-function: cubic-bezier(0.6, -0.3, 0.74, 0.05);\n  -webkit-animation-play-state: paused;\n          animation-play-state: paused;\n}\n.rc-tooltip-zoom-enter.rc-tooltip-zoom-enter-active {\n  -webkit-animation-name: rcToolTipZoomIn;\n          animation-name: rcToolTipZoomIn;\n  -webkit-animation-play-state: running;\n          animation-play-state: running;\n}\n.rc-tooltip-zoom-leave.rc-tooltip-zoom-leave-active {\n  -webkit-animation-name: rcToolTipZoomOut;\n          animation-name: rcToolTipZoomOut;\n  -webkit-animation-play-state: running;\n          animation-play-state: running;\n}\n@-webkit-keyframes rcToolTipZoomIn {\n  0% {\n    opacity: 0;\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    -webkit-transform: scale(0, 0);\n            transform: scale(0, 0);\n  }\n  100% {\n    opacity: 1;\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    -webkit-transform: scale(1, 1);\n            transform: scale(1, 1);\n  }\n}\n@keyframes rcToolTipZoomIn {\n  0% {\n    opacity: 0;\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    -webkit-transform: scale(0, 0);\n            transform: scale(0, 0);\n  }\n  100% {\n    opacity: 1;\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    -webkit-transform: scale(1, 1);\n            transform: scale(1, 1);\n  }\n}\n@-webkit-keyframes rcToolTipZoomOut {\n  0% {\n    opacity: 1;\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    -webkit-transform: scale(1, 1);\n            transform: scale(1, 1);\n  }\n  100% {\n    opacity: 0;\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    -webkit-transform: scale(0, 0);\n            transform: scale(0, 0);\n  }\n}\n@keyframes rcToolTipZoomOut {\n  0% {\n    opacity: 1;\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    -webkit-transform: scale(1, 1);\n            transform: scale(1, 1);\n  }\n  100% {\n    opacity: 0;\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    -webkit-transform: scale(0, 0);\n            transform: scale(0, 0);\n  }\n}\n", ""]);
+	exports.push([module.id, ".rc-tooltip {\n  position: absolute;\n  left: -9999px;\n  top: -9999px;\n  z-index: 1070;\n  display: block;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-size: 12px;\n  font-weight: normal;\n  line-height: 1.4;\n}\n.rc-tooltip-hidden {\n  display: none;\n}\n.rc-tooltip-placement-left {\n  margin-left: -3px;\n  padding: 0 5px;\n}\n.rc-tooltip-placement-left > .rc-tooltip-arrow {\n  top: 50%;\n  right: 0;\n  margin-top: -5px;\n  border-width: 5px 0 5px 5px;\n  border-left-color: #000000;\n}\n.rc-tooltip-placement-top {\n  margin-top: -3px;\n  padding: 5px 0;\n}\n.rc-tooltip-placement-top > .rc-tooltip-arrow {\n  bottom: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 5px 5px 0;\n  border-top-color: #000000;\n}\n.rc-tooltip-placement-bottom {\n  margin-top: 3px;\n  padding: 5px 0;\n}\n.rc-tooltip-placement-bottom > .rc-tooltip-arrow {\n  top: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 0 5px 5px;\n  border-bottom-color: #000000;\n}\n.rc-tooltip-placement-right {\n  margin-left: 3px;\n  padding: 0 5px;\n}\n.rc-tooltip-placement-right > .rc-tooltip-arrow {\n  top: 50%;\n  left: 0;\n  margin-top: -5px;\n  border-width: 5px 5px 5px 0;\n  border-right-color: #000000;\n}\n.rc-tooltip-arrow {\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-color: transparent;\n  border-style: solid;\n}\n.rc-tooltip-inner {\n  padding: 3px 8px;\n  color: #ffffff;\n  text-align: center;\n  text-decoration: none;\n  background-color: #000000;\n  border-radius: 4px;\n}\n.rc-tooltip.rc-tooltip-zoom-enter,\n.rc-tooltip.rc-tooltip-zoom-leave {\n  display: block;\n}\n.rc-tooltip-zoom-enter {\n  opacity: 0;\n  animation-duration: 0.3s;\n  animation-fill-mode: both;\n  animation-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);\n  animation-play-state: paused;\n}\n.rc-tooltip-zoom-leave {\n  animation-duration: 0.3s;\n  animation-fill-mode: both;\n  animation-timing-function: cubic-bezier(0.6, -0.3, 0.74, 0.05);\n  animation-play-state: paused;\n}\n.rc-tooltip-zoom-enter.rc-tooltip-zoom-enter-active {\n  animation-name: rcToolTipZoomIn;\n  animation-play-state: running;\n}\n.rc-tooltip-zoom-leave.rc-tooltip-zoom-leave-active {\n  animation-name: rcToolTipZoomOut;\n  animation-play-state: running;\n}\n@keyframes rcToolTipZoomIn {\n  0% {\n    opacity: 0;\n    transform-origin: 50% 50%;\n    transform: scale(0, 0);\n  }\n  100% {\n    opacity: 1;\n    transform-origin: 50% 50%;\n    transform: scale(1, 1);\n  }\n}\n@keyframes rcToolTipZoomOut {\n  0% {\n    opacity: 1;\n    transform-origin: 50% 50%;\n    transform: scale(1, 1);\n  }\n  100% {\n    opacity: 0;\n    transform-origin: 50% 50%;\n    transform: scale(0, 0);\n  }\n}\n", "", {"version":3,"sources":["bootstrap.less"],"names":[],"mappings":"AAEA,CAAC;EACC,kBAAA;EACA,aAAA;EACA,YAAA;EACA,aAAA;EACA,cAAA;EACA,aAAa,8CAAb;EACA,eAAA;EACA,mBAAA;EACA,gBAAA;;AAEA,CAXD,UAWE;EACC,aAAA;;AAIA,CAhBH,UAeE,UACE;EACC,iBAAA;EACA,cAAA;;AAEA,CApBL,UAeE,UACE,KAIG;EACA,QAAA;EACA,QAAA;EACA,gBAAA;EACA,2BAAA;EACA,0BAAA;;AAIJ,CA7BH,UAeE,UAcE;EACC,gBAAA;EACA,cAAA;;AAEA,CAjCL,UAeE,UAcE,IAIG,IAAG,UAAmB;EACtB,SAAA;EACA,SAAA;EACA,iBAAA;EACA,uBAAA;EACA,yBAAA;;AAIJ,CA1CH,UAeE,UA2BE;EACC,eAAA;EACA,cAAA;;AAEA,CA9CL,UAeE,UA2BE,OAIG,IAAG,UAAmB;EACtB,MAAA;EACA,SAAA;EACA,iBAAA;EACA,uBAAA;EACA,4BAAA;;AAKJ,CAxDH,UAeE,UAyCE;EACC,gBAAA;EACA,cAAA;;AAEA,CA5DL,UAeE,UAyCE,MAIG,IAAG,UAAmB;EACtB,QAAA;EACA,OAAA;EACA,gBAAA;EACA,2BAAA;EACA,2BAAA;;AAKN,CAtED,UAsEE;EACC,kBAAA;EACA,QAAA;EACA,SAAA;EACA,yBAAA;EACA,mBAAA;;AAGF,CA9ED,UA8EE;EACC,gBAAA;EACA,cAAA;EACA,kBAAA;EACA,qBAAA;EACA,yBAAA;EACA,kBAAA;;AAQF,CA5FD,UA4FE,CA5FF,UA4FG;AAAa,CA5FhB,UA4FiB,CA5FjB,UA4FkB;EACf,cAAA;;AAGF,CAhGD,UAgGE;EACC,UAAA;EATA,wBAAA;EACA,yBAAA;EAUA,2BAA2B,oCAA3B;EACA,4BAAA;;AAGF,CAvGD,UAuGE;EAfC,wBAAA;EACA,yBAAA;EAgBA,2BAA2B,mCAA3B;EACA,4BAAA;;AAGF,CA7GD,UA6GE,WAAW,CA7Gb,UA6Gc;EACX,+BAAA;EACA,6BAAA;;AAGF,CAlHD,UAkHE,WAAW,CAlHb,UAkHc;EACX,gCAAA;EACA,6BAAA;;AAGF;EACE;IACE,UAAA;IACA,yBAAA;IACA,WAAW,WAAX;;EAEF;IACE,UAAA;IACA,yBAAA;IACA,WAAW,WAAX;;;AAGJ;EACE;IACE,UAAA;IACA,yBAAA;IACA,WAAW,WAAX;;EAEF;IACE,UAAA;IACA,yBAAA;IACA,WAAW,WAAX","sourcesContent":["@tooltipPrefixCls: rc-tooltip;\n\n.@{tooltipPrefixCls} {\n  position: absolute;\n  left: -9999px;\n  top: -9999px;\n  z-index: 1070;\n  display: block;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-size: 12px;\n  font-weight: normal;\n  line-height: 1.4;\n\n  &-hidden {\n    display: none;\n  }\n\n  &-placement {\n    &-left {\n      margin-left: -3px;\n      padding: 0 5px;\n\n      & > .rc-tooltip-arrow {\n        top: 50%;\n        right: 0;\n        margin-top: -5px;\n        border-width: 5px 0 5px 5px;\n        border-left-color: #000000;\n      }\n    }\n\n    &-top {\n      margin-top: -3px;\n      padding: 5px 0;\n\n      & > .@{tooltipPrefixCls}-arrow {\n        bottom: 0;\n        left: 50%;\n        margin-left: -5px;\n        border-width: 5px 5px 0;\n        border-top-color: #000000;\n      }\n    }\n\n    &-bottom {\n      margin-top: 3px;\n      padding: 5px 0;\n\n      & > .@{tooltipPrefixCls}-arrow {\n        top: 0;\n        left: 50%;\n        margin-left: -5px;\n        border-width: 0 5px 5px;\n        border-bottom-color: #000000;\n      }\n\n    }\n\n    &-right {\n      margin-left: 3px;\n      padding: 0 5px;\n\n      & > .@{tooltipPrefixCls}-arrow {\n        top: 50%;\n        left: 0;\n        margin-top: -5px;\n        border-width: 5px 5px 5px 0;\n        border-right-color: #000000;\n      }\n    }\n  }\n\n  &-arrow {\n    position: absolute;\n    width: 0;\n    height: 0;\n    border-color: transparent;\n    border-style: solid;\n  }\n\n  &-inner {\n    padding: 3px 8px;\n    color: #ffffff;\n    text-align: center;\n    text-decoration: none;\n    background-color: #000000;\n    border-radius: 4px;\n  }\n\n  .effect() {\n    animation-duration: 0.3s;\n    animation-fill-mode: both;\n  }\n\n  &&-zoom-enter, &&-zoom-leave {\n    display: block;\n  }\n\n  &-zoom-enter {\n    opacity: 0;\n    .effect();\n    animation-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);\n    animation-play-state: paused;\n  }\n\n  &-zoom-leave {\n    .effect();\n    animation-timing-function: cubic-bezier(0.6, -0.3, 0.74, 0.05);\n    animation-play-state: paused;\n  }\n\n  &-zoom-enter&-zoom-enter-active {\n    animation-name: rcToolTipZoomIn;\n    animation-play-state: running;\n  }\n\n  &-zoom-leave&-zoom-leave-active {\n    animation-name: rcToolTipZoomOut;\n    animation-play-state: running;\n  }\n\n  @keyframes rcToolTipZoomIn {\n    0% {\n      opacity: 0;\n      transform-origin: 50% 50%;\n      transform: scale(0, 0);\n    }\n    100% {\n      opacity: 1;\n      transform-origin: 50% 50%;\n      transform: scale(1, 1);\n    }\n  }\n  @keyframes rcToolTipZoomOut {\n    0% {\n      opacity: 1;\n      transform-origin: 50% 50%;\n      transform: scale(1, 1);\n    }\n    100% {\n      opacity: 0;\n      transform-origin: 50% 50%;\n      transform: scale(0, 0);\n    }\n  }\n}\n"]}]);
 
 /***/ },
 /* 33 */
