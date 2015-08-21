@@ -15,6 +15,8 @@ const Popup = React.createClass({
     visible: React.PropTypes.bool,
     wrap: React.PropTypes.object,
     style: React.PropTypes.object,
+    onMouseEnter: React.PropTypes.func,
+    onMouseLeave: React.PropTypes.func,
   },
 
   // optimize for speed
@@ -84,6 +86,8 @@ const Popup = React.createClass({
              align={align}
              onAlign={this.onAlign}>
         <div className={className}
+             onMouseEnter={props.onMouseEnter}
+             onMouseLeave={props.onMouseLeave}
              style={style}>
           <div className={arrowClassName}></div>
           <div className={innerClassname}>

@@ -169,11 +169,17 @@ const Tooltip = React.createClass({
     }
     const props = this.props;
     const state = this.state;
+    const mouseProps = {};
+    if (props.trigger.indexOf('hover') !== -1) {
+      mouseProps.onMouseEnter = this.onMouseEnter;
+      mouseProps.onMouseLeave = this.onMouseLeave;
+    }
     return (<Popup prefixCls={props.prefixCls}
                    visible={state.visible}
                    trigger={props.trigger}
                    placement={props.placement}
                    animation={props.animation}
+      {...mouseProps}
                    wrap={this}
                    style={props.overlayStyle}
                    transitionName={props.transitionName}>
@@ -218,12 +224,14 @@ const Tooltip = React.createClass({
   },
 
   setVisible(visible) {
-    if (!('visible' in this.props)) {
-      this.setState({
-        visible: visible,
-      });
+    if (this.state.visible !== visible) {
+      if (!('visible' in this.props)) {
+        this.setState({
+          visible: visible,
+        });
+      }
+      this.props.onVisibleChange(visible);
     }
-    this.props.onVisibleChange(visible);
   },
 
   delaySetVisible(visible) {
