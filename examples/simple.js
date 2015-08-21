@@ -144,7 +144,6 @@ webpackJsonp([3],{
 	          _rcTooltip2['default'],
 	          { placement: this.state.placement,
 	            delay: 0.1,
-	            renderPopupToBody: this.props.renderPopupToBody,
 	            trigger: Object.keys(this.state.trigger),
 	            onVisibleChange: this.onVisibleChange,
 	            overlay: _react2['default'].createElement(
@@ -167,18 +166,7 @@ webpackJsonp([3],{
 	_react2['default'].render(_react2['default'].createElement(
 	  'div',
 	  null,
-	  _react2['default'].createElement(
-	    'h2',
-	    null,
-	    'renderPopupToBody=true'
-	  ),
-	  _react2['default'].createElement(Test, null),
-	  _react2['default'].createElement(
-	    'h2',
-	    null,
-	    'renderPopupToBody=false'
-	  ),
-	  _react2['default'].createElement(Test, { renderPopupToBody: false })
+	  _react2['default'].createElement(Test, null)
 	), document.getElementById("__react-content"));
 
 /***/ },

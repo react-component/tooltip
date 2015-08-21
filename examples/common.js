@@ -127,15 +127,7 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(2);
 	
@@ -143,61 +135,67 @@
 	
 	var _rcUtil = __webpack_require__(6);
 	
-	var _rcUtil2 = _interopRequireDefault(_rcUtil);
-	
 	var _Popup = __webpack_require__(18);
 	
 	var _Popup2 = _interopRequireDefault(_Popup);
 	
-	var Tooltip = (function (_React$Component) {
-	  _inherits(Tooltip, _React$Component);
+	var Tooltip = _react2['default'].createClass({
+	  displayName: 'Tooltip',
 	
-	  function Tooltip(props) {
-	    var _this = this;
+	  propTypes: {
+	    trigger: _react2['default'].PropTypes.any,
+	    placement: _react2['default'].PropTypes.any,
+	    onVisibleChange: _react2['default'].PropTypes.func,
+	    overlay: _react2['default'].PropTypes.node.isRequired,
+	    overlayStyle: _react2['default'].PropTypes.object,
+	    wrapStyle: _react2['default'].PropTypes.object,
+	    delay: _react2['default'].PropTypes.number
+	  },
 	
-	    _classCallCheck(this, Tooltip);
-	
-	    _get(Object.getPrototypeOf(Tooltip.prototype), 'constructor', this).call(this, props);
-	    this.state = {
-	      visible: !!props.defaultVisible
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      prefixCls: 'rc-tooltip',
+	      onVisibleChange: function onVisibleChange() {},
+	      delay: 0.1,
+	      overlayStyle: {},
+	      wrapStyle: {},
+	      placement: 'right',
+	      trigger: ['hover']
 	    };
-	    if ('visible' in props) {
-	      this.state.visible = !!props.visible;
-	    }
-	    ['onClick', 'onMouseEnter', 'onMouseDown', 'onTouchStart', 'onMouseLeave', 'onFocus', 'onBlur', 'onDocumentClick'].forEach(function (m) {
-	      _this[m] = _this[m].bind(_this);
-	    });
-	  }
+	  },
 	
-	  _createClass(Tooltip, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.componentDidUpdate();
+	  getInitialState: function getInitialState() {
+	    var props = this.props;
+	    var visible = undefined;
+	    if ('visible' in props) {
+	      visible = props.visible;
+	    } else {
+	      visible = props.defaultVisible;
 	    }
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      if ('visible' in nextProps) {
-	        this.setState({
-	          visible: !!nextProps.visible
-	        });
-	      }
+	    return { visible: visible };
+	  },
+	
+	  componentDidMount: function componentDidMount() {
+	    this.componentDidUpdate();
+	  },
+	
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    if ('visible' in nextProps) {
+	      this.setState({
+	        visible: !!nextProps.visible
+	      });
 	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      if (!this.popupRendered) {
-	        return;
-	      }
-	      if (this.props.renderPopupToBody) {
-	        this.popupInstance = _react2['default'].render(this.getPopupElement(), this.getTipContainer());
-	      }
+	  },
+	
+	  componentDidUpdate: function componentDidUpdate() {
+	    if (this.popupRendered) {
+	      this.popupInstance = _react2['default'].render(this.getPopupElement(), this.getTipContainer());
 	      var props = this.props;
 	      if (props.trigger.indexOf('click') !== -1) {
 	        if (this.state.visible) {
 	          if (!this.clickOutsideHandler) {
-	            this.clickOutsideHandler = _rcUtil2['default'].Dom.addEventListener(document, 'mousedown', this.onDocumentClick);
-	            this.touchOutsideHandler = _rcUtil2['default'].Dom.addEventListener(document, 'touchstart', this.onDocumentClick);
+	            this.clickOutsideHandler = _rcUtil.Dom.addEventListener(document, 'mousedown', this.onDocumentClick);
+	            this.touchOutsideHandler = _rcUtil.Dom.addEventListener(document, 'touchstart', this.onDocumentClick);
 	          }
 	          return;
 	        }
@@ -209,229 +207,184 @@
 	        this.touchOutsideHandler = null;
 	      }
 	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      var tipContainer = this.tipContainer;
-	      if (tipContainer) {
-	        _react2['default'].unmountComponentAtNode(tipContainer);
-	        document.body.removeChild(tipContainer);
-	        this.tipContainer = null;
-	      }
-	      if (this.delayTimer) {
-	        clearTimeout(this.delayTimer);
-	        this.delayTimer = null;
-	      }
-	      if (this.clickOutsideHandler) {
-	        this.clickOutsideHandler.remove();
-	        this.touchOutsideHandler.remove();
-	        this.clickOutsideHandler = null;
-	        this.touchOutsideHandler = null;
-	      }
+	  },
+	
+	  componentWillUnmount: function componentWillUnmount() {
+	    var tipContainer = this.tipContainer;
+	    if (tipContainer) {
+	      _react2['default'].unmountComponentAtNode(tipContainer);
+	      document.body.removeChild(tipContainer);
+	      this.tipContainer = null;
 	    }
-	  }, {
-	    key: 'onMouseEnter',
-	    value: function onMouseEnter() {
-	      this.delaySetVisible(true);
+	    if (this.delayTimer) {
+	      clearTimeout(this.delayTimer);
+	      this.delayTimer = null;
 	    }
-	  }, {
-	    key: 'onMouseLeave',
-	    value: function onMouseLeave() {
-	      this.delaySetVisible(false);
+	    if (this.clickOutsideHandler) {
+	      this.clickOutsideHandler.remove();
+	      this.touchOutsideHandler.remove();
+	      this.clickOutsideHandler = null;
+	      this.touchOutsideHandler = null;
 	    }
-	  }, {
-	    key: 'onFocus',
-	    value: function onFocus() {
-	      this.focusTime = Date.now();
+	  },
+	
+	  onMouseEnter: function onMouseEnter() {
+	    this.delaySetVisible(true);
+	  },
+	
+	  onMouseLeave: function onMouseLeave() {
+	    this.delaySetVisible(false);
+	  },
+	
+	  onFocus: function onFocus() {
+	    this.focusTime = Date.now();
+	    this.setVisible(true);
+	  },
+	
+	  onMouseDown: function onMouseDown() {
+	    this.preClickTime = Date.now();
+	  },
+	
+	  onTouchStart: function onTouchStart() {
+	    this.preTouchTime = Date.now();
+	  },
+	
+	  onBlur: function onBlur() {
+	    this.setVisible(false);
+	  },
+	
+	  onClick: function onClick(e) {
+	    // focus will trigger click
+	    if (this.focusTime) {
+	      var preTime = undefined;
+	      if (this.preClickTime && this.preTouchTime) {
+	        preTime = Math.min(this.preClickTime, this.preTouchTime);
+	      } else if (this.preClickTime) {
+	        preTime = this.preClickTime;
+	      } else if (this.preTouchTime) {
+	        preTime = this.preTouchTime;
+	      }
+	      if (Math.abs(preTime - this.focusTime) < 20) {
+	        return;
+	      }
+	      this.focusTime = 0;
+	    }
+	    this.preClickTime = 0;
+	    this.preTouchTime = 0;
+	    e.preventDefault();
+	    if (this.state.visible) {
+	      this.setVisible(false);
+	    } else {
 	      this.setVisible(true);
 	    }
-	  }, {
-	    key: 'onMouseDown',
-	    value: function onMouseDown() {
-	      this.preClickTime = Date.now();
-	    }
-	  }, {
-	    key: 'onTouchStart',
-	    value: function onTouchStart() {
-	      this.preTouchTime = Date.now();
-	    }
-	  }, {
-	    key: 'onBlur',
-	    value: function onBlur() {
+	  },
+	
+	  onDocumentClick: function onDocumentClick(e) {
+	    var target = e.target;
+	    var root = _react2['default'].findDOMNode(this);
+	    var popupNode = this.getPopupDomNode();
+	    if (!_rcUtil.Dom.contains(root, target) && !_rcUtil.Dom.contains(popupNode, target)) {
 	      this.setVisible(false);
 	    }
-	  }, {
-	    key: 'onClick',
-	    value: function onClick(e) {
-	      // focus will trigger click
-	      if (this.focusTime) {
-	        var preTime = undefined;
-	        if (this.preClickTime && this.preTouchTime) {
-	          preTime = Math.min(this.preClickTime, this.preTouchTime);
-	        } else if (this.preClickTime) {
-	          preTime = this.preClickTime;
-	        } else if (this.preTouchTime) {
-	          preTime = this.preTouchTime;
-	        }
-	        if (Math.abs(preTime - this.focusTime) < 20) {
-	          return;
-	        }
-	        this.focusTime = 0;
-	      }
-	      this.preClickTime = 0;
-	      this.preTouchTime = 0;
-	      e.preventDefault();
-	      if (this.state.visible) {
-	        this.setVisible(false);
-	      } else {
-	        this.setVisible(true);
-	      }
-	    }
-	  }, {
-	    key: 'onDocumentClick',
-	    value: function onDocumentClick(e) {
-	      var target = e.target;
-	      var root = _react2['default'].findDOMNode(this);
-	      var popupNode = this.getPopupDomNode();
-	      if (!_rcUtil2['default'].Dom.contains(root, target) && !_rcUtil2['default'].Dom.contains(popupNode, target)) {
-	        this.setVisible(false);
-	      }
-	    }
-	  }, {
-	    key: 'getPopupDomNode',
-	    value: function getPopupDomNode() {
-	      // for test
-	      return this.refs.popup ? this.refs.popup.getPopupDomNode() : this.popupInstance.getPopupDomNode();
-	    }
-	  }, {
-	    key: 'getTipContainer',
-	    value: function getTipContainer() {
-	      if (!this.tipContainer) {
-	        this.tipContainer = document.createElement('div');
-	        document.body.appendChild(this.tipContainer);
-	      }
-	      return this.tipContainer;
-	    }
-	  }, {
-	    key: 'getPopupElement',
-	    value: function getPopupElement() {
-	      if (!this.popupRendered) {
-	        return null;
-	      }
-	      var props = this.props;
-	      var state = this.state;
-	      var ref = {};
-	      if (!props.renderPopupToBody) {
-	        ref.ref = 'popup';
-	      }
-	      return _react2['default'].createElement(
-	        _Popup2['default'],
-	        _extends({ prefixCls: props.prefixCls
-	        }, ref, {
-	          visible: state.visible,
-	          trigger: props.trigger,
-	          placement: props.placement,
-	          animation: props.animation,
-	          wrap: this,
-	          style: props.overlayStyle,
-	          transitionName: props.transitionName }),
-	        props.overlay
-	      );
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      if (this.state.visible) {
-	        this.popupRendered = true;
-	      }
-	      var props = this.props;
-	      var children = props.children;
-	      var child = _react2['default'].Children.only(children);
-	      var childProps = child.props || {};
-	      var newChildProps = {};
-	      var trigger = props.trigger;
-	      var mouseProps = {};
-	      if (trigger.indexOf('click') !== -1) {
-	        newChildProps.onClick = (0, _rcUtil.createChainedFunction)(this.onClick, childProps.onClick);
-	        newChildProps.onMouseDown = (0, _rcUtil.createChainedFunction)(this.onMouseDown, childProps.onMouseDown);
-	        newChildProps.onTouchStart = (0, _rcUtil.createChainedFunction)(this.onTouchStart, childProps.onTouchStart);
-	      }
-	      if (trigger.indexOf('hover') !== -1) {
-	        mouseProps.onMouseEnter = (0, _rcUtil.createChainedFunction)(this.onMouseEnter, childProps.onMouseEnter);
-	        mouseProps.onMouseLeave = (0, _rcUtil.createChainedFunction)(this.onMouseLeave, childProps.onMouseLeave);
-	      }
-	      if (trigger.indexOf('focus') !== -1) {
-	        newChildProps.onFocus = (0, _rcUtil.createChainedFunction)(this.onFocus, childProps.onFocus);
-	        newChildProps.onBlur = (0, _rcUtil.createChainedFunction)(this.onBlur, childProps.onBlur);
-	      }
+	  },
 	
-	      var popupElement = props.renderPopupToBody ? null : this.getPopupElement();
-	      var className = props.prefixCls + '-wrap';
+	  getPopupDomNode: function getPopupDomNode() {
+	    // for test
+	    return this.popupInstance.getPopupDomNode();
+	  },
 	
-	      if (this.state.visible) {
-	        className += ' ' + props.prefixCls + '-wrap-open';
-	      }
-	
-	      return _react2['default'].createElement(
-	        'span',
-	        _extends({ className: className }, mouseProps, { style: props.wrapStyle }),
-	        _rcUtil2['default'].Children.mapSelf([_react2['default'].cloneElement(child, newChildProps), popupElement])
-	      );
+	  getTipContainer: function getTipContainer() {
+	    if (!this.tipContainer) {
+	      this.tipContainer = document.createElement('div');
+	      document.body.appendChild(this.tipContainer);
 	    }
-	  }, {
-	    key: 'setVisible',
-	    value: function setVisible(visible) {
-	      if (!('visible' in this.props)) {
-	        this.setState({
-	          visible: visible
-	        });
-	      }
-	      this.props.onVisibleChange(visible);
+	    return this.tipContainer;
+	  },
+	
+	  getPopupElement: function getPopupElement() {
+	    if (!this.popupRendered) {
+	      return null;
 	    }
-	  }, {
-	    key: 'delaySetVisible',
-	    value: function delaySetVisible(visible) {
-	      var _this2 = this;
+	    var props = this.props;
+	    var state = this.state;
+	    return _react2['default'].createElement(
+	      _Popup2['default'],
+	      { prefixCls: props.prefixCls,
+	        visible: state.visible,
+	        trigger: props.trigger,
+	        placement: props.placement,
+	        animation: props.animation,
+	        wrap: this,
+	        style: props.overlayStyle,
+	        transitionName: props.transitionName },
+	      props.overlay
+	    );
+	  },
 	
-	      var delay = this.props.delay * 1000;
-	      if (delay) {
-	        if (this.delayTimer) {
-	          clearTimeout(this.delayTimer);
-	        }
-	        this.delayTimer = setTimeout(function () {
-	          _this2.setVisible(visible);
-	          _this2.delayTimer = null;
-	        }, delay);
-	      } else {
-	        this.setVisible(visible);
-	      }
+	  render: function render() {
+	    if (this.state.visible) {
+	      this.popupRendered = true;
 	    }
-	  }]);
+	    var props = this.props;
+	    var children = props.children;
+	    var child = _react2['default'].Children.only(children);
+	    var childProps = child.props || {};
+	    var newChildProps = {};
+	    var trigger = props.trigger;
+	    var mouseProps = {};
+	    if (trigger.indexOf('click') !== -1) {
+	      newChildProps.onClick = (0, _rcUtil.createChainedFunction)(this.onClick, childProps.onClick);
+	      newChildProps.onMouseDown = (0, _rcUtil.createChainedFunction)(this.onMouseDown, childProps.onMouseDown);
+	      newChildProps.onTouchStart = (0, _rcUtil.createChainedFunction)(this.onTouchStart, childProps.onTouchStart);
+	    }
+	    if (trigger.indexOf('hover') !== -1) {
+	      mouseProps.onMouseEnter = (0, _rcUtil.createChainedFunction)(this.onMouseEnter, childProps.onMouseEnter);
+	      mouseProps.onMouseLeave = (0, _rcUtil.createChainedFunction)(this.onMouseLeave, childProps.onMouseLeave);
+	    }
+	    if (trigger.indexOf('focus') !== -1) {
+	      newChildProps.onFocus = (0, _rcUtil.createChainedFunction)(this.onFocus, childProps.onFocus);
+	      newChildProps.onBlur = (0, _rcUtil.createChainedFunction)(this.onBlur, childProps.onBlur);
+	    }
 	
-	  return Tooltip;
-	})(_react2['default'].Component);
+	    var className = props.prefixCls + '-wrap';
 	
-	Tooltip.propTypes = {
-	  trigger: _react2['default'].PropTypes.any,
-	  placement: _react2['default'].PropTypes.any,
-	  onVisibleChange: _react2['default'].PropTypes.func,
-	  renderPopupToBody: _react2['default'].PropTypes.bool,
-	  overlay: _react2['default'].PropTypes.node.isRequired,
-	  overlayStyle: _react2['default'].PropTypes.object,
-	  wrapStyle: _react2['default'].PropTypes.object,
-	  delay: _react2['default'].PropTypes.number
-	};
+	    if (this.state.visible) {
+	      className += ' ' + props.prefixCls + '-wrap-open';
+	    }
 	
-	Tooltip.defaultProps = {
-	  prefixCls: 'rc-tooltip',
-	  renderPopupToBody: true,
-	  onVisibleChange: function onVisibleChange() {},
-	  delay: 0.1,
-	  overlayStyle: {},
-	  wrapStyle: {},
-	  placement: 'right',
-	  trigger: ['hover']
-	};
+	    return _react2['default'].createElement(
+	      'span',
+	      _extends({ className: className }, mouseProps, { style: props.wrapStyle }),
+	      _react2['default'].cloneElement(child, newChildProps)
+	    );
+	  },
+	
+	  setVisible: function setVisible(visible) {
+	    if (!('visible' in this.props)) {
+	      this.setState({
+	        visible: visible
+	      });
+	    }
+	    this.props.onVisibleChange(visible);
+	  },
+	
+	  delaySetVisible: function delaySetVisible(visible) {
+	    var _this = this;
+	
+	    var delay = this.props.delay * 1000;
+	    if (delay) {
+	      if (this.delayTimer) {
+	        clearTimeout(this.delayTimer);
+	      }
+	      this.delayTimer = setTimeout(function () {
+	        _this.setVisible(visible);
+	        _this.delayTimer = null;
+	      }, delay);
+	    } else {
+	      this.setVisible(visible);
+	    }
+	  }
+	});
 	
 	exports['default'] = Tooltip;
 	module.exports = exports['default'];
@@ -1479,7 +1432,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(2);
 	
@@ -1522,24 +1475,15 @@
 	  _createClass(Align, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var _this = this;
-	
 	      var props = this.props;
-	      // parent ref not attached ....
+	      // if parent ref not attached .... use document.getElementById
 	      if (!props.disabled) {
-	        this.hackRefTimer = setTimeout(function () {
-	          var source = _react2['default'].findDOMNode(_this);
-	          props.onAlign(source, (0, _domAlign2['default'])(source, props.target(), props.align));
-	        }, 0);
+	        var source = _react2['default'].findDOMNode(this);
+	        props.onAlign(source, (0, _domAlign2['default'])(source, props.target(), props.align));
 	        if (props.monitorWindowResize) {
 	          this.startMonitorWindowResize();
 	        }
 	      }
-	    }
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps() {
-	      this.clearHackRefTimer();
 	    }
 	  }, {
 	    key: 'startMonitorWindowResize',
@@ -1557,14 +1501,6 @@
 	      }
 	    }
 	  }, {
-	    key: 'clearHackRefTimer',
-	    value: function clearHackRefTimer() {
-	      if (this.hackRefTimer) {
-	        clearTimeout(this.hackRefTimer);
-	        this.hackRefTimer = null;
-	      }
-	    }
-	  }, {
 	    key: 'handleWindowResize',
 	    value: function handleWindowResize() {
 	      var props = this.props;
@@ -1577,38 +1513,33 @@
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
 	      this.stopMonitorWindowResize();
-	      this.clearHackRefTimer();
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate(prevProps) {
-	      var _this2 = this;
-	
 	      var reAlign = false;
 	      var props = this.props;
 	      var currentTarget;
 	
-	      this.hackRefTimer = setTimeout(function () {
-	        if (!props.disabled) {
-	          if (prevProps.disabled || prevProps.align !== props.align) {
+	      if (!props.disabled) {
+	        if (prevProps.disabled || prevProps.align !== props.align) {
+	          reAlign = true;
+	          currentTarget = props.target();
+	        } else {
+	          var lastTarget = prevProps.target();
+	          currentTarget = props.target();
+	          if (isWindow(lastTarget) && isWindow(currentTarget)) {
+	            reAlign = false;
+	          } else if (lastTarget !== currentTarget) {
 	            reAlign = true;
-	            currentTarget = props.target();
-	          } else {
-	            var lastTarget = prevProps.target();
-	            currentTarget = props.target();
-	            if (isWindow(lastTarget) && isWindow(currentTarget)) {
-	              reAlign = false;
-	            } else if (lastTarget !== currentTarget) {
-	              reAlign = true;
-	            }
 	          }
 	        }
+	      }
 	
-	        if (reAlign) {
-	          var source = _react2['default'].findDOMNode(_this2);
-	          props.onAlign(source, (0, _domAlign2['default'])(source, currentTarget, props.align));
-	        }
-	      }, 0);
+	      if (reAlign) {
+	        var source = _react2['default'].findDOMNode(this);
+	        props.onAlign(source, (0, _domAlign2['default'])(source, currentTarget, props.align));
+	      }
 	
 	      if (props.monitorWindowResize && !props.disabled) {
 	        this.startMonitorWindowResize();

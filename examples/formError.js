@@ -57,6 +57,7 @@ webpackJsonp([0],[
 	            visible: this.state.visible,
 	            animation: 'zoom',
 	            trigger: '',
+	            overlayStyle: { zIndex: 1000 },
 	            overlay: _react2['default'].createElement(
 	              'span',
 	              null,
