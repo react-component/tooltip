@@ -30,6 +30,7 @@ var Test = React.createClass({
           visible={this.state.visible}
           animation="zoom"
           trigger=""
+          overlayStyle={{zIndex:1000}}
           overlay={<span>必填哦</span>}>
           <input onChange={this.handleChange}/>
         </Tooltip>

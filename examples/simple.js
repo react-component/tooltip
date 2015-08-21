@@ -86,7 +86,6 @@ var Test = React.createClass({
       <div style={{margin: 100}}>
         <Tooltip placement={this.state.placement}
           delay={0.1}
-          renderPopupToBody={this.props.renderPopupToBody}
           trigger={Object.keys(this.state.trigger)}
           onVisibleChange={this.onVisibleChange}
           overlay={<span>i am a tooltip</span>}
@@ -99,8 +98,5 @@ var Test = React.createClass({
 });
 
 React.render(<div>
-  <h2>renderPopupToBody=true</h2>
-  <Test/>
-  <h2>renderPopupToBody=false</h2>
-  <Test renderPopupToBody={false}/>
+  <Test />
 </div>, document.getElementById("__react-content"));

@@ -87,12 +87,6 @@ online example: http://react-component.github.io/tooltip/examples/
            <td>additional style  of wrap node</td>
          </tr>
         <tr>
-          <td>renderPopupToBody</td>
-          <td>boolean</td>
-          <td>true</td>
-          <td>whether render popup to body</td>
-        </tr>
-        <tr>
           <td>prefixCls</td>
           <td>String</td>
           <td>rc-tooltip</td>
