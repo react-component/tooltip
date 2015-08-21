@@ -7,6 +7,7 @@ const Tooltip = React.createClass({
     trigger: React.PropTypes.any,
     placement: React.PropTypes.any,
     onVisibleChange: React.PropTypes.func,
+    afterVisibleChange: React.PropTypes.func,
     overlay: React.PropTypes.node.isRequired,
     overlayStyle: React.PropTypes.object,
     wrapStyle: React.PropTypes.object,
@@ -17,6 +18,8 @@ const Tooltip = React.createClass({
     return {
       prefixCls: 'rc-tooltip',
       onVisibleChange() {
+      },
+      afterVisibleChange() {
       },
       delay: 0.1,
       overlayStyle: {},
