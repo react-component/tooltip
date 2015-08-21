@@ -146,6 +146,7 @@
 	    trigger: _react2['default'].PropTypes.any,
 	    placement: _react2['default'].PropTypes.any,
 	    onVisibleChange: _react2['default'].PropTypes.func,
+	    afterVisibleChange: _react2['default'].PropTypes.func,
 	    overlay: _react2['default'].PropTypes.node.isRequired,
 	    overlayStyle: _react2['default'].PropTypes.object,
 	    wrapStyle: _react2['default'].PropTypes.object,
@@ -156,6 +157,7 @@
 	    return {
 	      prefixCls: 'rc-tooltip',
 	      onVisibleChange: function onVisibleChange() {},
+	      afterVisibleChange: function afterVisibleChange() {},
 	      delay: 0.1,
 	      overlayStyle: {},
 	      wrapStyle: {},
@@ -176,7 +178,7 @@
 	  },
 	
 	  componentDidMount: function componentDidMount() {
-	    this.componentDidUpdate();
+	    this.componentDidUpdate(this.props, this.state);
 	  },
 	
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
@@ -187,25 +189,40 @@
 	    }
 	  },
 	
-	  componentDidUpdate: function componentDidUpdate() {
+	  componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
+	    var _this = this;
+	
+	    var props = this.props;
+	    var state = this.state;
 	    if (this.popupRendered) {
-	      this.popupInstance = _react2['default'].render(this.getPopupElement(), this.getTipContainer());
-	      var props = this.props;
-	      if (props.trigger.indexOf('click') !== -1) {
-	        if (this.state.visible) {
-	          if (!this.clickOutsideHandler) {
-	            this.clickOutsideHandler = _rcUtil.Dom.addEventListener(document, 'mousedown', this.onDocumentClick);
-	            this.touchOutsideHandler = _rcUtil.Dom.addEventListener(document, 'touchstart', this.onDocumentClick);
+	      var _ret = (function () {
+	        var self = _this;
+	        _react2['default'].render(_this.getPopupElement(), _this.getTipContainer(), function renderPopup() {
+	          self.popupInstance = this;
+	          if (prevState.visible !== state.visible) {
+	            props.afterVisibleChange(state.visible);
 	          }
-	          return;
+	        });
+	        if (props.trigger.indexOf('click') !== -1) {
+	          if (state.visible) {
+	            if (!_this.clickOutsideHandler) {
+	              _this.clickOutsideHandler = _rcUtil.Dom.addEventListener(document, 'mousedown', _this.onDocumentClick);
+	              _this.touchOutsideHandler = _rcUtil.Dom.addEventListener(document, 'touchstart', _this.onDocumentClick);
+	            }
+	            return {
+	              v: undefined
+	            };
+	          }
 	        }
-	      }
-	      if (this.clickOutsideHandler) {
-	        this.clickOutsideHandler.remove();
-	        this.touchOutsideHandler.remove();
-	        this.clickOutsideHandler = null;
-	        this.touchOutsideHandler = null;
-	      }
+	        if (_this.clickOutsideHandler) {
+	          _this.clickOutsideHandler.remove();
+	          _this.touchOutsideHandler.remove();
+	          _this.clickOutsideHandler = null;
+	          _this.touchOutsideHandler = null;
+	        }
+	      })();
+	
+	      if (typeof _ret === 'object') return _ret.v;
 	    }
 	  },
 	
@@ -307,16 +324,22 @@
 	    }
 	    var props = this.props;
 	    var state = this.state;
+	    var mouseProps = {};
+	    if (props.trigger.indexOf('hover') !== -1) {
+	      mouseProps.onMouseEnter = this.onMouseEnter;
+	      mouseProps.onMouseLeave = this.onMouseLeave;
+	    }
 	    return _react2['default'].createElement(
 	      _Popup2['default'],
-	      { prefixCls: props.prefixCls,
+	      _extends({ prefixCls: props.prefixCls,
 	        visible: state.visible,
 	        trigger: props.trigger,
 	        placement: props.placement,
-	        animation: props.animation,
+	        animation: props.animation
+	      }, mouseProps, {
 	        wrap: this,
 	        style: props.overlayStyle,
-	        transitionName: props.transitionName },
+	        transitionName: props.transitionName }),
 	      props.overlay
 	    );
 	  },
@@ -360,16 +383,18 @@
 	  },
 	
 	  setVisible: function setVisible(visible) {
-	    if (!('visible' in this.props)) {
-	      this.setState({
-	        visible: visible
-	      });
+	    if (this.state.visible !== visible) {
+	      if (!('visible' in this.props)) {
+	        this.setState({
+	          visible: visible
+	        });
+	      }
+	      this.props.onVisibleChange(visible);
 	    }
-	    this.props.onVisibleChange(visible);
 	  },
 	
 	  delaySetVisible: function delaySetVisible(visible) {
-	    var _this = this;
+	    var _this2 = this;
 	
 	    var delay = this.props.delay * 1000;
 	    if (delay) {
@@ -377,8 +402,8 @@
 	        clearTimeout(this.delayTimer);
 	      }
 	      this.delayTimer = setTimeout(function () {
-	        _this.setVisible(visible);
-	        _this.delayTimer = null;
+	        _this2.setVisible(visible);
+	        _this2.delayTimer = null;
 	      }, delay);
 	    } else {
 	      this.setVisible(visible);
@@ -1278,7 +1303,9 @@
 	  propTypes: {
 	    visible: _react2['default'].PropTypes.bool,
 	    wrap: _react2['default'].PropTypes.object,
-	    style: _react2['default'].PropTypes.object
+	    style: _react2['default'].PropTypes.object,
+	    onMouseEnter: _react2['default'].PropTypes.func,
+	    onMouseLeave: _react2['default'].PropTypes.func
 	  },
 	
 	  // optimize for speed
@@ -1354,6 +1381,8 @@
 	        _react2['default'].createElement(
 	          'div',
 	          { className: className,
+	            onMouseEnter: props.onMouseEnter,
+	            onMouseLeave: props.onMouseLeave,
 	            style: style },
 	          _react2['default'].createElement('div', { className: arrowClassName }),
 	          _react2['default'].createElement(
