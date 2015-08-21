@@ -38,7 +38,7 @@ const Tooltip = React.createClass({
   },
 
   componentDidMount() {
-    this.componentDidUpdate();
+    this.componentDidUpdate(this.props, this.state);
   },
 
   componentWillReceiveProps(nextProps) {
@@ -49,12 +49,19 @@ const Tooltip = React.createClass({
     }
   },
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
+    const props = this.props;
+    const state = this.state;
     if (this.popupRendered) {
-      this.popupInstance = React.render(this.getPopupElement(), this.getTipContainer());
-      const props = this.props;
+      const self = this;
+      React.render(this.getPopupElement(), this.getTipContainer(), function renderPopup() {
+        self.popupInstance = this;
+        if (prevState.visible !== state.visible) {
+          props.afterVisibleChange(state.visible);
+        }
+      });
       if (props.trigger.indexOf('click') !== -1) {
-        if (this.state.visible) {
+        if (state.visible) {
           if (!this.clickOutsideHandler) {
             this.clickOutsideHandler = Dom.addEventListener(document, 'mousedown', this.onDocumentClick);
             this.touchOutsideHandler = Dom.addEventListener(document, 'touchstart', this.onDocumentClick);
