@@ -96,7 +96,7 @@
     display: block;
   }
 
-  &-zoom-enter {
+  &-zoom-enter,&-zoom-appear {
     opacity: 0;
     .effect();
     animation-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
@@ -109,7 +109,7 @@
     animation-play-state: paused;
   }
 
-  &-zoom-enter&-zoom-enter-active {
+  &-zoom-enter&-zoom-enter-active, &-zoom-appear&-zoom-appear-active {
     animation-name: rcToolTipZoomIn;
     animation-play-state: running;
   }

@@ -76,7 +76,7 @@ const Popup = React.createClass({
 
     return (<Animate component=""
                      exclusive={true}
-                     animateMount={true}
+                     transitionAppear={true}
                      transitionName={this.getTransitionName()}
                      showProp="data-visible">
       <Align target={this.getTarget}
