@@ -207,15 +207,14 @@ const Tooltip = React.createClass({
     const childProps = child.props || {};
     const newChildProps = {};
     const trigger = props.trigger;
-    const mouseProps = {};
     if (trigger.indexOf('click') !== -1) {
       newChildProps.onClick = createChainedFunction(this.onClick, childProps.onClick);
       newChildProps.onMouseDown = createChainedFunction(this.onMouseDown, childProps.onMouseDown);
       newChildProps.onTouchStart = createChainedFunction(this.onTouchStart, childProps.onTouchStart);
     }
     if (trigger.indexOf('hover') !== -1) {
-      mouseProps.onMouseEnter = createChainedFunction(this.onMouseEnter, childProps.onMouseEnter);
-      mouseProps.onMouseLeave = createChainedFunction(this.onMouseLeave, childProps.onMouseLeave);
+      newChildProps.onMouseEnter = createChainedFunction(this.onMouseEnter, childProps.onMouseEnter);
+      newChildProps.onMouseLeave = createChainedFunction(this.onMouseLeave, childProps.onMouseLeave);
     }
     if (trigger.indexOf('focus') !== -1) {
       newChildProps.onFocus = createChainedFunction(this.onFocus, childProps.onFocus);
@@ -228,7 +227,7 @@ const Tooltip = React.createClass({
       className += ` ${props.prefixCls}-wrap-open`;
     }
 
-    return (<span className={className} {...mouseProps} style={props.wrapStyle}>
+    return (<span className={className} style={props.wrapStyle}>
     {React.cloneElement(child, newChildProps)}
     </span>);
   },
