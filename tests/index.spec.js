@@ -55,7 +55,7 @@ describe('rc-tooltip', function () {
                                           overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var target = scryRenderedDOMComponentsWithClass(tooltip, 'rc-tooltip-wrap')[0];
+      var target = scryRenderedDOMComponentsWithClass(tooltip, 'target')[0];
       // can not simulate mouseenter
       target.props.onMouseEnter();
       async.series([timeout(200), (next)=> {

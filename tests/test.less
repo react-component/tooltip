@@ -7,7 +7,7 @@
   height: 100px;
 }
 
-.fade-enter {
+.fade-enter,.fade-appear {
   display: block;
   opacity: 0;
   animation-duration: 0.5s;
@@ -24,7 +24,7 @@
   animation-play-state: paused;
 }
 
-.fade-enter.fade-enter-active {
+.fade-enter.fade-enter-active,.fade-appear.fade-appear-active {
   animation-name: rcDialogFadeIn;
   animation-play-state: running;
 }
