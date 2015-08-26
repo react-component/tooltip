@@ -10,6 +10,7 @@ const Tooltip = React.createClass({
     afterVisibleChange: React.PropTypes.func,
     overlay: React.PropTypes.node.isRequired,
     overlayStyle: React.PropTypes.object,
+    overlayClassName: React.PropTypes.string,
     wrapStyle: React.PropTypes.object,
     delay: React.PropTypes.number,
   },
@@ -186,6 +187,7 @@ const Tooltip = React.createClass({
     }
     return (<Popup prefixCls={props.prefixCls}
                    visible={state.visible}
+                   className={props.overlayClassName}
                    trigger={props.trigger}
                    placement={props.placement}
                    animation={props.animation}

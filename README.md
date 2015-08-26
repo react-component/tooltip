@@ -69,6 +69,12 @@ online example: http://react-component.github.io/tooltip/examples/
     </thead>
     <tbody>
         <tr>
+          <td>overlayClassName</td>
+          <td>string</td>
+          <td></td>
+          <td>additional className added to popup overlay</td>
+        </tr>
+        <tr>
           <td>delay</td>
           <td>number</td>
           <td>0.1</td>
