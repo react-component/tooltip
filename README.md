@@ -75,10 +75,16 @@ online example: http://react-component.github.io/tooltip/examples/
           <td>additional className added to popup overlay</td>
         </tr>
         <tr>
-          <td>delay</td>
+          <td>mouseEnterDelay</td>
+          <td>number</td>
+          <td>0</td>
+          <td>delay time to show when mouse enter.unit: s.</td>
+        </tr>
+        <tr>
+          <td>mouseLeaveDelay</td>
           <td>number</td>
           <td>0.1</td>
-          <td>delay time to show or hide, only valid for hover trigger.unit: s.</td>
+          <td>delay time to hide when mouse leave.unit: s.</td>
         </tr>
         <tr>
           <td>overlayStyle</td>

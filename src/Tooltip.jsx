@@ -12,7 +12,8 @@ const Tooltip = React.createClass({
     overlayStyle: React.PropTypes.object,
     overlayClassName: React.PropTypes.string,
     wrapStyle: React.PropTypes.object,
-    delay: React.PropTypes.number,
+    mouseEnterDelay: React.PropTypes.number,
+    mouseLeaveDelay: React.PropTypes.number,
   },
 
   getDefaultProps() {
@@ -22,7 +23,8 @@ const Tooltip = React.createClass({
       },
       afterVisibleChange() {
       },
-      delay: 0.1,
+      mouseEnterDelay: 0,
+      mouseLeaveDelay: 0.1,
       overlayStyle: {},
       wrapStyle: {},
       placement: 'right',
@@ -102,11 +104,11 @@ const Tooltip = React.createClass({
   },
 
   onMouseEnter() {
-    this.delaySetVisible(true);
+    this.delaySetVisible(true, this.props.mouseEnterDelay);
   },
 
   onMouseLeave() {
-    this.delaySetVisible(false);
+    this.delaySetVisible(false, this.props.mouseLeaveDelay);
   },
 
   onFocus() {
@@ -245,12 +247,13 @@ const Tooltip = React.createClass({
     }
   },
 
-  delaySetVisible(visible) {
-    const delay = this.props.delay * 1000;
+  delaySetVisible(visible, delayS) {
+    const delay = delayS * 1000;
+    if (this.delayTimer) {
+      clearTimeout(this.delayTimer);
+      this.delayTimer = null;
+    }
     if (delay) {
-      if (this.delayTimer) {
-        clearTimeout(this.delayTimer);
-      }
       this.delayTimer = setTimeout(() => {
         this.setVisible(visible);
         this.delayTimer = null;

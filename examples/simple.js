@@ -60,13 +60,14 @@ var Test = React.createClass({
             <option>bottom</option>
           </select>
         </label>
-      &nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
-          <input value='rc-tooltip-zoom' type='checkbox' onChange={this.onTransitionChange}  checked={this.state.transitionName === 'rc-tooltip-zoom'}/>
+          <input value='rc-tooltip-zoom' type='checkbox' onChange={this.onTransitionChange}
+                 checked={this.state.transitionName === 'rc-tooltip-zoom'}/>
           transitionName
         </label>
 
-      &nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;
 
         trigger:
 
@@ -85,11 +86,12 @@ var Test = React.createClass({
       </div>
       <div style={{margin: 100}}>
         <Tooltip placement={this.state.placement}
-          delay={0.1}
-          trigger={Object.keys(this.state.trigger)}
-          onVisibleChange={this.onVisibleChange}
-          overlay={<span>i am a tooltip</span>}
-          transitionName={this.state.transitionName}>
+                 mouseEnterDelay={0}
+                 mouseLeaveDelay={0.1}
+                 trigger={Object.keys(this.state.trigger)}
+                 onVisibleChange={this.onVisibleChange}
+                 overlay={<span>i am a tooltip</span>}
+                 transitionName={this.state.transitionName}>
           <a href='#' style={{margin: 20}} onClick={this.preventDefault}>trigger</a>
         </Tooltip>
       </div>

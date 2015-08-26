@@ -1,6 +1,15 @@
 # History
 ----
 
+### 2.7.0
+
+- add overlayClassName prop #16
+- split delay into mouseEnterDelay and mouseLeaveDelay #15
+
+### 2.6.0
+
+remove renderOverlayToBody prop. defaults to true
+
 ### 2.5.0 / 2015-07-28
 
 use rc-animate & rc-align
