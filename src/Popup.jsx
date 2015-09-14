@@ -81,6 +81,7 @@ const Popup = React.createClass({
                      showProp="data-visible">
       <Align target={this.getTarget}
              key="popup"
+             monitorWindowResize={true}
              data-visible={props.visible}
              disabled={!props.visible}
              align={align}
