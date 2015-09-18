@@ -140,6 +140,12 @@ online example: http://react-component.github.io/tooltip/examples/
           <td></td>
           <td>popup content</td>
         </tr>
+        <tr>
+          <td>getTooltipContainer</td>
+          <td>function</td>
+          <td></td>
+          <td>function returning html node which will act as tooltip contaier</td>
+        </tr>
     </tbody>
 </table>
 

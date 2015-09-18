@@ -14,6 +14,7 @@ const Tooltip = React.createClass({
     wrapStyle: React.PropTypes.object,
     mouseEnterDelay: React.PropTypes.number,
     mouseLeaveDelay: React.PropTypes.number,
+    getTooltipContainer: React.PropTypes.func,
   },
 
   getDefaultProps() {
@@ -88,7 +89,12 @@ const Tooltip = React.createClass({
     const tipContainer = this.tipContainer;
     if (tipContainer) {
       React.unmountComponentAtNode(tipContainer);
-      document.body.removeChild(tipContainer);
+      if (this.props.getTooltipContainer) {
+        const mountNode = this.props.getTooltipContainer();
+        mountNode.removeChild(tipContainer);
+      } else {
+        document.body.removeChild(tipContainer);
+      }
       this.tipContainer = null;
     }
     if (this.delayTimer) {
@@ -171,7 +177,12 @@ const Tooltip = React.createClass({
   getTipContainer() {
     if (!this.tipContainer) {
       this.tipContainer = document.createElement('div');
-      document.body.appendChild(this.tipContainer);
+      if (this.props.getTooltipContainer) {
+        const mountNode = this.props.getTooltipContainer();
+        mountNode.appendChild(this.tipContainer);
+      } else {
+        document.body.appendChild(this.tipContainer);
+      }
     }
     return this.tipContainer;
   },
