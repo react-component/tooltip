@@ -1,6 +1,10 @@
 # History
 ----
 
+### 2.8.0
+
+- add getTooltipContainer prop
+
 ### 2.7.0
 
 - add overlayClassName prop #16
