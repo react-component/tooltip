@@ -60,16 +60,14 @@ const Tooltip = React.createClass({
     const props = this.props;
     const state = this.state;
     if (this.popupRendered) {
-      // const self = this;
+
       //Render a ReactElement into the DOM in the supplied container and return a reference to the component.
-      this.popupInstance = React.render(this.getPopupElement(), this.getTipContainer(), function renderPopup() {
-        // self.popupInstance = this;
-        // FIXME maybe react can't make sure the `this` always is rendered component.
-        //
-        if (prevState.visible !== state.visible) {
-          props.afterVisibleChange(state.visible);
-        }
-      });
+      this.popupInstance = React.render(this.getPopupElement(), this.getTipContainer());
+
+      // Remove callback, why need to put below code into callback.
+      if (prevState.visible !== state.visible) {
+        props.afterVisibleChange(state.visible);
+      }
       if (props.trigger.indexOf('click') !== -1) {
         if (state.visible) {
           if (!this.clickOutsideHandler) {
