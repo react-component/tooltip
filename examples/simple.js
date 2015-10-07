@@ -58,6 +58,10 @@ var Test = React.createClass({
             <option>right</option>
             <option>top</option>
             <option>bottom</option>
+            <option>topLeft</option>
+            <option>topRight</option>
+            <option>bottomRight</option>
+            <option>bottomLeft</option>
           </select>
         </label>
         &nbsp;&nbsp;&nbsp;&nbsp;

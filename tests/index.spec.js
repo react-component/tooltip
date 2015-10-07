@@ -125,6 +125,46 @@ describe('rc-tooltip', function () {
       }, 20);
     });
 
+    it('bottomRight works', (done)=> {
+      var tooltip = React.render(<Tooltip trigger={['click']} placement="bottomRight" overlay={<strong>tooltip</strong>}>
+        <div className="target">click</div>
+      </Tooltip>, div);
+      var domNode = React.findDOMNode(tooltip).firstChild;
+      Simulate.click(domNode);
+      setTimeout(()=> {
+        var popupDomNode = tooltip.getPopupDomNode();
+        expect(popupDomNode).to.be.ok();
+        var targetOffset = $(domNode).offset();
+        var popupOffset = $(popupDomNode).offset();
+        var arrowOffset = $(popupDomNode).find('.rc-tooltip-arrow').offset();
+        console.log(popupOffset, targetOffset);
+        expect(popupOffset.top).to.be(targetOffset.top + $(domNode).outerHeight());
+        expect(arrowOffset.left).to.be(180);
+        Simulate.click(domNode);
+        done();
+      }, 20);
+    });
+
+    it('bottomLeft works', (done)=> {
+      var tooltip = React.render(<Tooltip trigger={['click']} placement="bottomLeft" overlay={<strong>tooltip</strong>}>
+        <div className="target">click</div>
+      </Tooltip>, div);
+      var domNode = React.findDOMNode(tooltip).firstChild;
+      Simulate.click(domNode);
+      setTimeout(()=> {
+        var popupDomNode = tooltip.getPopupDomNode();
+        expect(popupDomNode).to.be.ok();
+        var targetOffset = $(domNode).offset();
+        var popupOffset = $(popupDomNode).offset();
+        var arrowOffset = $(popupDomNode).find('.rc-tooltip-arrow').offset();
+        console.log(popupOffset, targetOffset);
+        expect(popupOffset.top).to.be(targetOffset.top + $(domNode).outerHeight());
+        expect(arrowOffset.left).to.be(110);
+        Simulate.click(domNode);
+        done();
+      }, 20);
+    });
+
     it('top works', (done)=> {
       var tooltip = React.render(<Tooltip trigger={['click']} placement="top" overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
@@ -138,6 +178,48 @@ describe('rc-tooltip', function () {
         var popupOffset = $(popupDomNode).offset();
         console.log(popupOffset, targetOffset);
         expect(popupOffset.top).to.be(targetOffset.top - $(popupDomNode).outerHeight());
+        Simulate.click(domNode);
+        done();
+      }, 20);
+    });
+
+    it('topLeft works', (done)=> {
+      var tooltip = React.render(<Tooltip trigger={['click']} placement="topLeft" overlay={<strong>tooltip</strong>}>
+        <div className="target">click</div>
+      </Tooltip>, div);
+      var domNode = React.findDOMNode(tooltip).firstChild;
+      Simulate.click(domNode);
+      setTimeout(()=> {
+        var popupDomNode = tooltip.getPopupDomNode();
+        expect(popupDomNode).to.be.ok();
+        var targetOffset = $(domNode).offset();
+        var popupOffset = $(popupDomNode).offset();
+        var arrowOffset = $(popupDomNode).find('.rc-tooltip-arrow').offset();
+        console.log(popupOffset, targetOffset);
+        expect(popupOffset.top).to.be(targetOffset.top - $(popupDomNode).outerHeight());
+        expect(popupOffset.left).to.be(targetOffset.left);
+        expect(arrowOffset.left).to.be(110);
+        Simulate.click(domNode);
+        done();
+      }, 20);
+    });
+
+    it('topRight works', (done)=> {
+      var tooltip = React.render(<Tooltip trigger={['click']} placement="topRight" overlay={<strong>tooltip</strong>}>
+        <div className="target">click</div>
+      </Tooltip>, div);
+      var domNode = React.findDOMNode(tooltip).firstChild;
+      Simulate.click(domNode);
+      setTimeout(()=> {
+        var popupDomNode = tooltip.getPopupDomNode();
+        expect(popupDomNode).to.be.ok();
+        var targetOffset = $(domNode).offset();
+        var popupOffset = $(popupDomNode).offset();
+        var arrowOffset = $(popupDomNode).find('.rc-tooltip-arrow').offset();
+        console.log(popupOffset, targetOffset);
+        expect(popupOffset.top).to.be(targetOffset.top - $(popupDomNode).outerHeight());
+        expect(popupOffset.left).to.be(targetOffset.left);
+        expect(arrowOffset.left).to.be(180);
         Simulate.click(domNode);
         done();
       }, 20);
