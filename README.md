@@ -75,6 +75,12 @@ online example: http://react-component.github.io/tooltip/examples/
           <td>additional className added to popup overlay</td>
         </tr>
         <tr>
+          <td>trigger</td>
+          <td>string[]</td>
+          <td>['hover']</td>
+          <td>which actions cause tooltip shown. enum of 'hover','click','focus'</td>
+        </tr>
+        <tr>
           <td>mouseEnterDelay</td>
           <td>number</td>
           <td>0</td>
