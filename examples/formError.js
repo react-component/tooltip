@@ -17,11 +17,11 @@ webpackJsonp([0],[
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcTooltip = __webpack_require__(3);
+	var _rcTooltip = __webpack_require__(158);
 	
 	var _rcTooltip2 = _interopRequireDefault(_rcTooltip);
 	
-	__webpack_require__(31);
+	__webpack_require__(187);
 	
 	var Test = _react2['default'].createClass({
 	  displayName: 'Test',
@@ -61,7 +61,7 @@ webpackJsonp([0],[
 	            overlay: _react2['default'].createElement(
 	              'span',
 	              null,
-	              '必填哦'
+	              'required!'
 	            ) },
 	          _react2['default'].createElement('input', { onChange: this.handleChange })
 	        )

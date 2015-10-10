@@ -3,12 +3,12 @@ webpackJsonp([3],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(37);
+	module.exports = __webpack_require__(190);
 
 
 /***/ },
 
-/***/ 37:
+/***/ 190:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19,13 +19,13 @@ webpackJsonp([3],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcTooltip = __webpack_require__(3);
+	var _rcTooltip = __webpack_require__(158);
 	
 	var _rcTooltip2 = _interopRequireDefault(_rcTooltip);
 	
-	__webpack_require__(31);
+	__webpack_require__(187);
 	
-	var _objectAssign = __webpack_require__(38);
+	var _objectAssign = __webpack_require__(191);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
@@ -107,6 +107,26 @@ webpackJsonp([3],{
 	              'option',
 	              null,
 	              'bottom'
+	            ),
+	            _react2['default'].createElement(
+	              'option',
+	              null,
+	              'topLeft'
+	            ),
+	            _react2['default'].createElement(
+	              'option',
+	              null,
+	              'topRight'
+	            ),
+	            _react2['default'].createElement(
+	              'option',
+	              null,
+	              'bottomRight'
+	            ),
+	            _react2['default'].createElement(
+	              'option',
+	              null,
+	              'bottomLeft'
 	            )
 	          )
 	        ),
@@ -114,7 +134,8 @@ webpackJsonp([3],{
 	        _react2['default'].createElement(
 	          'label',
 	          null,
-	          _react2['default'].createElement('input', { value: 'rc-tooltip-zoom', type: 'checkbox', onChange: this.onTransitionChange, checked: this.state.transitionName === 'rc-tooltip-zoom' }),
+	          _react2['default'].createElement('input', { value: 'rc-tooltip-zoom', type: 'checkbox', onChange: this.onTransitionChange,
+	            checked: this.state.transitionName === 'rc-tooltip-zoom' }),
 	          'transitionName'
 	        ),
 	        '     trigger:',
@@ -143,7 +164,8 @@ webpackJsonp([3],{
 	        _react2['default'].createElement(
 	          _rcTooltip2['default'],
 	          { placement: this.state.placement,
-	            delay: 0.1,
+	            mouseEnterDelay: 0,
+	            mouseLeaveDelay: 0.1,
 	            trigger: Object.keys(this.state.trigger),
 	            onVisibleChange: this.onVisibleChange,
 	            overlay: _react2['default'].createElement(
@@ -171,7 +193,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 38:
+/***/ 191:
 /***/ function(module, exports) {
 
 	'use strict';
