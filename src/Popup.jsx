@@ -11,7 +11,7 @@ const placementAlignMap = {
   topLeft: { points: ['bl', 'tl'] },
   topRight: { points: ['br', 'tr'] },
   bottomRight: { points: ['tr', 'br'] },
-  bottomLeft: { points: ['tl', 'bl'] }
+  bottomLeft: { points: ['tl', 'bl'] },
 };
 
 const Popup = React.createClass({

@@ -1,6 +1,10 @@
 # History
 ----
 
+### 2.9.0
+
+- support 'topLeft', 'topRight', 'bottomLeft', 'bottomRight' for placement
+
 ### 2.8.0
 
 - add getTooltipContainer prop
