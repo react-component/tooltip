@@ -19741,7 +19741,7 @@
 	      var _ret = (function () {
 	        var self = _this;
 	        _react2['default'].render(_this.getPopupElement(), _this.getTipContainer(), function renderPopup() {
-	          self.popupInstance = this;
+	          self.popupDomNode = _react2['default'].findDOMNode(this);
 	          if (prevState.visible !== state.visible) {
 	            props.afterVisibleChange(state.visible);
 	          }
@@ -19855,7 +19855,7 @@
 	
 	  getPopupDomNode: function getPopupDomNode() {
 	    // for test
-	    return this.popupInstance.getPopupDomNode();
+	    return this.popupDomNode;
 	  },
 	
 	  getTipContainer: function getTipContainer() {
@@ -20844,17 +20844,6 @@
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
-	var placementAlignMap = {
-	  left: { points: ['cr', 'cl'] },
-	  right: { points: ['cl', 'cr'] },
-	  top: { points: ['bc', 'tc'] },
-	  bottom: { points: ['tc', 'bc'] },
-	  topLeft: { points: ['bl', 'tl'] },
-	  topRight: { points: ['br', 'tr'] },
-	  bottomRight: { points: ['tr', 'br'] },
-	  bottomLeft: { points: ['tl', 'bl'] }
-	};
-	
 	var Popup = _react2['default'].createClass({
 	  displayName: 'Popup',
 	
@@ -20874,9 +20863,16 @@
 	  onAlign: function onAlign(popupDomNode, align) {
 	    var props = this.props;
 	    var placement = props.placement;
-	    if (placement && placement.points) {
-	      var originalClassName = (0, _utils.getToolTipClassByPlacement)(props.prefixCls, placement);
-	      var nextClassName = (0, _utils.getToolTipClassByPlacement)(props.prefixCls, align);
+	    var prefixCls = props.prefixCls;
+	
+	    if (placement) {
+	      var originalClassName = (0, _utils.getToolTipClassByPlacement)(prefixCls, placement);
+	      var nextClassName = undefined;
+	      if (placement.points) {
+	        nextClassName = (0, _utils.getToolTipClassByPlacement)(prefixCls, align);
+	      } else if (typeof placement === 'string') {
+	        nextClassName = (0, _utils.getToolTipClassByPlacement)(prefixCls, (0, _utils.fromPointsToPlacement)(align));
+	      }
 	      if (nextClassName !== originalClassName) {
 	        popupDomNode.className = popupDomNode.className.replace(originalClassName, nextClassName);
 	      }
@@ -20902,23 +20898,25 @@
 	
 	  render: function render() {
 	    var props = this.props;
-	    var className = (0, _utils.getToolTipClassByPlacement)(props.prefixCls, props.placement);
+	    var prefixCls = props.prefixCls;
+	
+	    var className = (0, _utils.getToolTipClassByPlacement)(prefixCls, props.placement);
 	    if (props.className) {
 	      className += ' ' + props.className;
 	    }
 	    var style = this.props.style;
 	    if (!props.visible) {
-	      className += ' ' + props.prefixCls + '-hidden';
+	      className += ' ' + prefixCls + '-hidden';
 	    }
-	    var arrowClassName = props.prefixCls + '-arrow';
-	    var innerClassname = props.prefixCls + '-inner';
+	    var arrowClassName = prefixCls + '-arrow';
+	    var innerClassname = prefixCls + '-inner';
 	
 	    var placement = props.placement;
 	    var align = undefined;
 	    if (placement && placement.points) {
 	      align = placement;
 	    } else {
-	      align = placementAlignMap[placement];
+	      align = _utils.placementAlignMap[placement];
 	    }
 	
 	    return _react2['default'].createElement(
@@ -20967,12 +20965,11 @@
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
+	exports.getToolTipClassByAlign = getToolTipClassByAlign;
 	exports.getToolTipClassByPlacement = getToolTipClassByPlacement;
+	exports.fromPointsToPlacement = fromPointsToPlacement;
 	
-	function getToolTipClassByPlacement(prefixCls, placement) {
-	  if (typeof placement === 'string') {
-	    return prefixCls + ' ' + prefixCls + '-placement-' + placement;
-	  }
+	function getToolTipClassByAlign(prefixCls, placement) {
 	  var offset = placement.offset || [0, 0];
 	  var offsetClass = '';
 	  if (offset && offset.length) {
@@ -20980,6 +20977,70 @@
 	  }
 	  var points = placement.points;
 	  return prefixCls + ' ' + offsetClass + ' ' + prefixCls + '-placement-points-' + points[0] + '-' + points[1];
+	}
+	
+	function getToolTipClassByPlacement(prefixCls, placement) {
+	  if (typeof placement === 'string') {
+	    return prefixCls + ' ' + prefixCls + '-placement-' + placement;
+	  }
+	  return getToolTipClassByAlign(prefixCls, placement);
+	}
+	
+	var autoAdjustOverflow = {
+	  adjustX: 1,
+	  adjustY: 1
+	};
+	
+	var placementAlignMap = {
+	  left: {
+	    points: ['cr', 'cl'],
+	    overflow: autoAdjustOverflow
+	  },
+	  right: {
+	    points: ['cl', 'cr'],
+	    overflow: autoAdjustOverflow
+	  },
+	  top: {
+	    points: ['bc', 'tc'],
+	    overflow: autoAdjustOverflow
+	  },
+	  bottom: {
+	    points: ['tc', 'bc'],
+	    overflow: autoAdjustOverflow
+	  },
+	  topLeft: {
+	    points: ['bl', 'tl'],
+	    overflow: autoAdjustOverflow
+	  },
+	  topRight: {
+	    points: ['br', 'tr'],
+	    overflow: autoAdjustOverflow
+	  },
+	  bottomRight: {
+	    points: ['tr', 'br'],
+	    overflow: autoAdjustOverflow
+	  },
+	  bottomLeft: {
+	    points: ['tl', 'bl'],
+	    overflow: autoAdjustOverflow
+	  }
+	};
+	
+	exports.placementAlignMap = placementAlignMap;
+	function isPointsEq(a1, a2) {
+	  return a1[0] === a2[0] && a1[1] === a2[1];
+	}
+	
+	function fromPointsToPlacement(align) {
+	  var points = align.points;
+	  for (var p in placementAlignMap) {
+	    if (placementAlignMap.hasOwnProperty(p)) {
+	      if (isPointsEq(placementAlignMap[p].points, points)) {
+	        return p;
+	      }
+	    }
+	  }
+	  throw new Error('can not find placement for', points);
 	}
 
 /***/ },
