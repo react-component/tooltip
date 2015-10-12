@@ -73,7 +73,9 @@ describe('rc-tooltip', function () {
 
   describe('placement', ()=> {
     it('left works', (done)=> {
-      var tooltip = React.render(<Tooltip trigger={['click']} placement="left" overlay={<strong>tooltip</strong>}>
+      var tooltip = React.render(<Tooltip trigger={['click']} placement="left"
+                                          overlayStyle={{width:50}}
+                                          overlay={<div>tooltip</div>}>
         <div className="target">click</div>
       </Tooltip>, div);
       var domNode = React.findDOMNode(tooltip).firstChild;
@@ -83,7 +85,27 @@ describe('rc-tooltip', function () {
         expect(popupDomNode).to.be.ok();
         var targetOffset = $(domNode).offset();
         var popupOffset = $(popupDomNode).offset();
-        expect(popupOffset.left + $(popupDomNode).outerWidth()).to.be(targetOffset.left);
+        expect(popupOffset.left + $(popupDomNode).outerWidth()).to.be(targetOffset.left-3);
+        Simulate.click(domNode);
+        done();
+      }, 20);
+    });
+
+    it('auto adjust left works', (done)=> {
+      var tooltip = React.render(<Tooltip trigger={['click']} placement="left"
+                                          overlayStyle={{width:400}}
+                                          overlay={<div>tooltip</div>}>
+        <div className="target">click</div>
+      </Tooltip>, div);
+      var domNode = React.findDOMNode(tooltip).firstChild;
+      Simulate.click(domNode);
+      setTimeout(()=> {
+        var popupDomNode = tooltip.getPopupDomNode();
+        expect(popupDomNode).to.be.ok();
+        var targetOffset = $(domNode).offset();
+        var popupOffset = $(popupDomNode).offset();
+        // offset is 3
+        expect(popupOffset.left).to.be(targetOffset.left + $(domNode).outerWidth() + 3);
         Simulate.click(domNode);
         done();
       }, 20);
@@ -101,7 +123,7 @@ describe('rc-tooltip', function () {
         var targetOffset = $(domNode).offset();
         var popupOffset = $(popupDomNode).offset();
         console.log(popupOffset, targetOffset);
-        expect(popupOffset.left).to.be(targetOffset.left + $(domNode).outerWidth());
+        expect(popupOffset.left).to.be(targetOffset.left + $(domNode).outerWidth()+3);
         Simulate.click(domNode);
         done();
       }, 20);
@@ -119,14 +141,15 @@ describe('rc-tooltip', function () {
         var targetOffset = $(domNode).offset();
         var popupOffset = $(popupDomNode).offset();
         console.log(popupOffset, targetOffset);
-        expect(popupOffset.top).to.be(targetOffset.top + $(domNode).outerHeight());
+        expect(popupOffset.top).to.be(targetOffset.top + $(domNode).outerHeight()+3);
         Simulate.click(domNode);
         done();
       }, 20);
     });
 
     it('bottomRight works', (done)=> {
-      var tooltip = React.render(<Tooltip trigger={['click']} placement="bottomRight" overlay={<strong>tooltip</strong>}>
+      var tooltip = React.render(<Tooltip trigger={['click']} placement="bottomRight"
+                                          overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
       var domNode = React.findDOMNode(tooltip).firstChild;
@@ -138,7 +161,7 @@ describe('rc-tooltip', function () {
         var popupOffset = $(popupDomNode).offset();
         var arrowOffset = $(popupDomNode).find('.rc-tooltip-arrow').offset();
         console.log(popupOffset, targetOffset);
-        expect(popupOffset.top).to.be(targetOffset.top + $(domNode).outerHeight());
+        expect(popupOffset.top).to.be(targetOffset.top + $(domNode).outerHeight()+3);
         expect(arrowOffset.left).to.be(180);
         Simulate.click(domNode);
         done();
@@ -158,7 +181,7 @@ describe('rc-tooltip', function () {
         var popupOffset = $(popupDomNode).offset();
         var arrowOffset = $(popupDomNode).find('.rc-tooltip-arrow').offset();
         console.log(popupOffset, targetOffset);
-        expect(popupOffset.top).to.be(targetOffset.top + $(domNode).outerHeight());
+        expect(popupOffset.top).to.be(targetOffset.top + $(domNode).outerHeight()+3);
         expect(arrowOffset.left).to.be(110);
         Simulate.click(domNode);
         done();
@@ -177,7 +200,7 @@ describe('rc-tooltip', function () {
         var targetOffset = $(domNode).offset();
         var popupOffset = $(popupDomNode).offset();
         console.log(popupOffset, targetOffset);
-        expect(popupOffset.top).to.be(targetOffset.top - $(popupDomNode).outerHeight());
+        expect(popupOffset.top).to.be(targetOffset.top - $(popupDomNode).outerHeight()-3);
         Simulate.click(domNode);
         done();
       }, 20);
@@ -196,7 +219,7 @@ describe('rc-tooltip', function () {
         var popupOffset = $(popupDomNode).offset();
         var arrowOffset = $(popupDomNode).find('.rc-tooltip-arrow').offset();
         console.log(popupOffset, targetOffset);
-        expect(popupOffset.top).to.be(targetOffset.top - $(popupDomNode).outerHeight());
+        expect(popupOffset.top).to.be(targetOffset.top - $(popupDomNode).outerHeight()-3);
         expect(popupOffset.left).to.be(targetOffset.left);
         expect(arrowOffset.left).to.be(110);
         Simulate.click(domNode);
@@ -217,7 +240,7 @@ describe('rc-tooltip', function () {
         var popupOffset = $(popupDomNode).offset();
         var arrowOffset = $(popupDomNode).find('.rc-tooltip-arrow').offset();
         console.log(popupOffset, targetOffset);
-        expect(popupOffset.top).to.be(targetOffset.top - $(popupDomNode).outerHeight());
+        expect(popupOffset.top).to.be(targetOffset.top - $(popupDomNode).outerHeight()-3);
         expect(popupOffset.left).to.be(targetOffset.left);
         expect(arrowOffset.left).to.be(180);
         Simulate.click(domNode);

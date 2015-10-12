@@ -24,34 +24,42 @@ export const placementAlignMap = {
   left: {
     points: ['cr', 'cl'],
     overflow: autoAdjustOverflow,
+    offset: [-3, 0],
   },
   right: {
     points: ['cl', 'cr'],
     overflow: autoAdjustOverflow,
+    offset: [3, 0],
   },
   top: {
     points: ['bc', 'tc'],
     overflow: autoAdjustOverflow,
+    offset: [0, -3],
   },
   bottom: {
     points: ['tc', 'bc'],
     overflow: autoAdjustOverflow,
+    offset: [0, 3],
   },
   topLeft: {
     points: ['bl', 'tl'],
     overflow: autoAdjustOverflow,
+    offset: [0, -3],
   },
   topRight: {
     points: ['br', 'tr'],
     overflow: autoAdjustOverflow,
+    offset: [0, -3],
   },
   bottomRight: {
     points: ['tr', 'br'],
     overflow: autoAdjustOverflow,
+    offset: [0, 3],
   },
   bottomLeft: {
     points: ['tl', 'bl'],
     overflow: autoAdjustOverflow,
+    offset: [0, 3],
   },
 };
 

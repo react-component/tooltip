@@ -12,6 +12,10 @@ const Popup = React.createClass({
     onMouseLeave: React.PropTypes.func,
   },
 
+  componentDidMount() {
+    this.rootNode = this.getPopupDomNode();
+  },
+
   // optimize for speed
   shouldComponentUpdate(nextProps) {
     return this.props.visible || nextProps.visible;
@@ -53,19 +57,24 @@ const Popup = React.createClass({
 
   render() {
     const props = this.props;
-    const {prefixCls} = props;
-    let className = getToolTipClassByPlacement(prefixCls, props.placement);
-    if (props.className) {
-      className += ' ' + props.className;
-    }
-    const style = this.props.style;
-    if (!props.visible) {
-      className += ` ${prefixCls}-hidden`;
+    const {prefixCls, placement, style} = props;
+    let className;
+
+    if (props.visible || !this.rootNode) {
+      className = getToolTipClassByPlacement(prefixCls, props.placement);
+      if (props.className) {
+        className += ' ' + props.className;
+      }
+    } else {
+      // fix auto adjust
+      className = this.rootNode.className;
+      const hiddenClass = `${prefixCls}-hidden`;
+      if (className.indexOf(hiddenClass) === -1) {
+        className += ` ${hiddenClass}`;
+      }
     }
     const arrowClassName = `${prefixCls}-arrow`;
     const innerClassname = `${prefixCls}-inner`;
-
-    const placement = props.placement;
     let align;
     if (placement && placement.points) {
       align = placement;
