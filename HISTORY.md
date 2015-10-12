@@ -1,6 +1,10 @@
 # History
 ----
 
+### 2.10.0
+
+- auto adjust align if current tooltip is not visible
+
 ### 2.9.0
 
 - support 'topLeft', 'topRight', 'bottomLeft', 'bottomRight' for placement

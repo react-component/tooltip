@@ -1,18 +1,7 @@
 import React from 'react';
-import {getToolTipClassByPlacement} from './utils';
+import {getToolTipClassByPlacement, fromPointsToPlacement, placementAlignMap} from './utils';
 import Align from 'rc-align';
 import Animate from 'rc-animate';
-
-const placementAlignMap = {
-  left: {points: ['cr', 'cl']},
-  right: {points: ['cl', 'cr']},
-  top: {points: ['bc', 'tc']},
-  bottom: {points: ['tc', 'bc']},
-  topLeft: { points: ['bl', 'tl'] },
-  topRight: { points: ['br', 'tr'] },
-  bottomRight: { points: ['tr', 'br'] },
-  bottomLeft: { points: ['tl', 'bl'] },
-};
 
 const Popup = React.createClass({
   propTypes: {
@@ -30,10 +19,15 @@ const Popup = React.createClass({
 
   onAlign(popupDomNode, align) {
     const props = this.props;
-    const placement = props.placement;
-    if (placement && placement.points) {
-      const originalClassName = getToolTipClassByPlacement(props.prefixCls, placement);
-      const nextClassName = getToolTipClassByPlacement(props.prefixCls, align);
+    const {placement, prefixCls} = props;
+    if (placement) {
+      const originalClassName = getToolTipClassByPlacement(prefixCls, placement);
+      let nextClassName;
+      if (placement.points) {
+        nextClassName = getToolTipClassByPlacement(prefixCls, align);
+      } else if (typeof placement === 'string') {
+        nextClassName = getToolTipClassByPlacement(prefixCls, fromPointsToPlacement(align));
+      }
       if (nextClassName !== originalClassName) {
         popupDomNode.className = popupDomNode.className.replace(originalClassName, nextClassName);
       }
@@ -59,16 +53,17 @@ const Popup = React.createClass({
 
   render() {
     const props = this.props;
-    let className = getToolTipClassByPlacement(props.prefixCls, props.placement);
+    const {prefixCls} = props;
+    let className = getToolTipClassByPlacement(prefixCls, props.placement);
     if (props.className) {
       className += ' ' + props.className;
     }
     const style = this.props.style;
     if (!props.visible) {
-      className += ` ${props.prefixCls}-hidden`;
+      className += ` ${prefixCls}-hidden`;
     }
-    const arrowClassName = `${props.prefixCls}-arrow`;
-    const innerClassname = `${props.prefixCls}-inner`;
+    const arrowClassName = `${prefixCls}-arrow`;
+    const innerClassname = `${prefixCls}-inner`;
 
     const placement = props.placement;
     let align;

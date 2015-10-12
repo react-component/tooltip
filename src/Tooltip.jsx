@@ -62,7 +62,7 @@ const Tooltip = React.createClass({
     if (this.popupRendered) {
       const self = this;
       React.render(this.getPopupElement(), this.getTipContainer(), function renderPopup() {
-        self.popupInstance = this;
+        self.popupDomNode = React.findDOMNode(this);
         if (prevState.visible !== state.visible) {
           props.afterVisibleChange(state.visible);
         }
@@ -171,7 +171,7 @@ const Tooltip = React.createClass({
 
   getPopupDomNode() {
     // for test
-    return this.popupInstance.getPopupDomNode();
+    return this.popupDomNode;
   },
 
   getTipContainer() {
