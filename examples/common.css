@@ -13,7 +13,6 @@
   display: none;
 }
 .rc-tooltip-placement-left {
-  margin-left: -3px;
   padding: 0 5px;
 }
 .rc-tooltip-placement-left > .rc-tooltip-arrow {
@@ -24,7 +23,6 @@
   border-left-color: #000000;
 }
 .rc-tooltip-placement-top {
-  margin-top: -3px;
   padding: 5px 0;
 }
 .rc-tooltip-placement-top > .rc-tooltip-arrow {
@@ -35,7 +33,6 @@
   border-top-color: #000000;
 }
 .rc-tooltip-placement-topRight {
-  margin-top: -3px;
   padding: 5px 0;
 }
 .rc-tooltip-placement-topRight > .rc-tooltip-arrow {
@@ -46,7 +43,6 @@
   border-top-color: #000000;
 }
 .rc-tooltip-placement-topLeft {
-  margin-top: -3px;
   padding: 5px 0;
 }
 .rc-tooltip-placement-topLeft > .rc-tooltip-arrow {
@@ -57,7 +53,6 @@
   border-top-color: #000000;
 }
 .rc-tooltip-placement-bottom {
-  margin-top: 3px;
   padding: 5px 0;
 }
 .rc-tooltip-placement-bottom > .rc-tooltip-arrow {
@@ -68,7 +63,6 @@
   border-bottom-color: #000000;
 }
 .rc-tooltip-placement-bottomRight {
-  margin-top: 3px;
   padding: 5px 0;
 }
 .rc-tooltip-placement-bottomRight > .rc-tooltip-arrow {
@@ -79,7 +73,6 @@
   border-bottom-color: #000000;
 }
 .rc-tooltip-placement-bottomLeft {
-  margin-top: 3px;
   padding: 5px 0;
 }
 .rc-tooltip-placement-bottomLeft > .rc-tooltip-arrow {
@@ -90,7 +83,6 @@
   border-bottom-color: #000000;
 }
 .rc-tooltip-placement-right {
-  margin-left: 3px;
   padding: 0 5px;
 }
 .rc-tooltip-placement-right > .rc-tooltip-arrow {

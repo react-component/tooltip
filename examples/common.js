@@ -20855,6 +20855,10 @@
 	    onMouseLeave: _react2['default'].PropTypes.func
 	  },
 	
+	  componentDidMount: function componentDidMount() {
+	    this.rootNode = this.getPopupDomNode();
+	  },
+	
 	  // optimize for speed
 	  shouldComponentUpdate: function shouldComponentUpdate(nextProps) {
 	    return this.props.visible || nextProps.visible;
@@ -20899,19 +20903,26 @@
 	  render: function render() {
 	    var props = this.props;
 	    var prefixCls = props.prefixCls;
+	    var placement = props.placement;
+	    var style = props.style;
 	
-	    var className = (0, _utils.getToolTipClassByPlacement)(prefixCls, props.placement);
-	    if (props.className) {
-	      className += ' ' + props.className;
-	    }
-	    var style = this.props.style;
-	    if (!props.visible) {
-	      className += ' ' + prefixCls + '-hidden';
+	    var className = undefined;
+	
+	    if (props.visible || !this.rootNode) {
+	      className = (0, _utils.getToolTipClassByPlacement)(prefixCls, props.placement);
+	      if (props.className) {
+	        className += ' ' + props.className;
+	      }
+	    } else {
+	      // fix auto adjust
+	      className = this.rootNode.className;
+	      var hiddenClass = prefixCls + '-hidden';
+	      if (className.indexOf(hiddenClass) === -1) {
+	        className += ' ' + hiddenClass;
+	      }
 	    }
 	    var arrowClassName = prefixCls + '-arrow';
 	    var innerClassname = prefixCls + '-inner';
-	
-	    var placement = props.placement;
 	    var align = undefined;
 	    if (placement && placement.points) {
 	      align = placement;
@@ -20994,35 +21005,43 @@
 	var placementAlignMap = {
 	  left: {
 	    points: ['cr', 'cl'],
-	    overflow: autoAdjustOverflow
+	    overflow: autoAdjustOverflow,
+	    offset: [-3, 0]
 	  },
 	  right: {
 	    points: ['cl', 'cr'],
-	    overflow: autoAdjustOverflow
+	    overflow: autoAdjustOverflow,
+	    offset: [3, 0]
 	  },
 	  top: {
 	    points: ['bc', 'tc'],
-	    overflow: autoAdjustOverflow
+	    overflow: autoAdjustOverflow,
+	    offset: [0, -3]
 	  },
 	  bottom: {
 	    points: ['tc', 'bc'],
-	    overflow: autoAdjustOverflow
+	    overflow: autoAdjustOverflow,
+	    offset: [0, 3]
 	  },
 	  topLeft: {
 	    points: ['bl', 'tl'],
-	    overflow: autoAdjustOverflow
+	    overflow: autoAdjustOverflow,
+	    offset: [0, -3]
 	  },
 	  topRight: {
 	    points: ['br', 'tr'],
-	    overflow: autoAdjustOverflow
+	    overflow: autoAdjustOverflow,
+	    offset: [0, -3]
 	  },
 	  bottomRight: {
 	    points: ['tr', 'br'],
-	    overflow: autoAdjustOverflow
+	    overflow: autoAdjustOverflow,
+	    offset: [0, 3]
 	  },
 	  bottomLeft: {
 	    points: ['tl', 'bl'],
-	    overflow: autoAdjustOverflow
+	    overflow: autoAdjustOverflow,
+	    offset: [0, 3]
 	  }
 	};
 	
