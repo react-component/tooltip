@@ -45,7 +45,8 @@ tooltip ui component for react
 ```js
 var Tooltip = require('rc-tooltip');
 var React = require('react');
-React.render(<Tooltip placement="left" trigger={['click']} overlay={<span>tooltip</span>}><a href='#'>hover</a></Tooltip>, container);
+var ReactDOM = require('react-dom')
+ReactDOM.render(<Tooltip placement="left" trigger={['click']} overlay={<span>tooltip</span>}><a href='#'>hover</a></Tooltip>, container);
 ```
 
 ## Example

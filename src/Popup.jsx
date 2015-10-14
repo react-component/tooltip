@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {getToolTipClassByPlacement, fromPointsToPlacement, placementAlignMap} from './utils';
 import Align from 'rc-align';
 import Animate from 'rc-animate';
@@ -39,11 +40,11 @@ const Popup = React.createClass({
   },
 
   getPopupDomNode() {
-    return React.findDOMNode(this);
+    return ReactDOM.findDOMNode(this);
   },
 
   getTarget() {
-    return React.findDOMNode(this.props.wrap).firstChild;
+    return ReactDOM.findDOMNode(this.props.wrap).firstChild;
   },
 
   getTransitionName() {

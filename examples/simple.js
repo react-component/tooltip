@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.less';
 import assign from 'object-assign';
@@ -103,6 +104,6 @@ var Test = React.createClass({
   }
 });
 
-React.render(<div>
+ReactDOM.render(<div>
   <Test />
 </div>, document.getElementById("__react-content"));

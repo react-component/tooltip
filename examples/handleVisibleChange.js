@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.less';
 
@@ -44,4 +45,4 @@ function preventDefault(e) {
   e.preventDefault();
 }
 
-React.render(<Test/>, document.getElementById("__react-content"));
+ReactDOM.render(<Test/>, document.getElementById("__react-content"));

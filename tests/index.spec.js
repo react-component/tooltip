@@ -1,8 +1,9 @@
 'use strict';
 
 var expect = require('expect.js');
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var ReactDOM = require('react-dom');
+var TestUtils = require('react-addons-test-utils');
 var Simulate = TestUtils.Simulate;
 var $ = require('jquery');
 window.$ = $;
@@ -25,16 +26,16 @@ describe('rc-tooltip', function () {
   document.body.insertBefore(div, document.body.firstChild);
 
   afterEach(()=> {
-    React.unmountComponentAtNode(div);
+    ReactDOM.unmountComponentAtNode(div);
   });
 
   describe('trigger', ()=> {
     it('click works', (done)=> {
-      var tooltip = React.render(<Tooltip trigger={['click']} placement="left"
+      var tooltip = ReactDOM.render(<Tooltip trigger={['click']} placement="left"
                                           overlay={<strong className='x-content'>tooltip2</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = React.findDOMNode(tooltip).firstChild;
+      var domNode = ReactDOM.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       async.series([timeout(20), (next)=> {
         var popupDomNode = tooltip.getPopupDomNode();
@@ -50,7 +51,7 @@ describe('rc-tooltip', function () {
     });
 
     it('hover works', (done)=> {
-      var tooltip = React.render(<Tooltip trigger={['hover']}
+      var tooltip = ReactDOM.render(<Tooltip trigger={['hover']}
                                           placement="left"
                                           overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
@@ -73,12 +74,12 @@ describe('rc-tooltip', function () {
 
   describe('placement', ()=> {
     it('left works', (done)=> {
-      var tooltip = React.render(<Tooltip trigger={['click']} placement="left"
+      var tooltip = ReactDOM.render(<Tooltip trigger={['click']} placement="left"
                                           overlayStyle={{width:50}}
                                           overlay={<div>tooltip</div>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = React.findDOMNode(tooltip).firstChild;
+      var domNode = ReactDOM.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       setTimeout(()=> {
         var popupDomNode = tooltip.getPopupDomNode();
@@ -92,12 +93,12 @@ describe('rc-tooltip', function () {
     });
 
     it('auto adjust left works', (done)=> {
-      var tooltip = React.render(<Tooltip trigger={['click']} placement="left"
+      var tooltip = ReactDOM.render(<Tooltip trigger={['click']} placement="left"
                                           overlayStyle={{width:400}}
                                           overlay={<div>tooltip</div>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = React.findDOMNode(tooltip).firstChild;
+      var domNode = ReactDOM.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       setTimeout(()=> {
         var popupDomNode = tooltip.getPopupDomNode();
@@ -113,10 +114,10 @@ describe('rc-tooltip', function () {
     });
 
     it('right works', (done)=> {
-      var tooltip = React.render(<Tooltip trigger={['click']} placement="right" overlay={<strong>tooltip</strong>}>
+      var tooltip = ReactDOM.render(<Tooltip trigger={['click']} placement="right" overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = React.findDOMNode(tooltip).firstChild;
+      var domNode = ReactDOM.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       setTimeout(()=> {
         var popupDomNode = tooltip.getPopupDomNode();
@@ -131,10 +132,10 @@ describe('rc-tooltip', function () {
     });
 
     it('bottom works', (done)=> {
-      var tooltip = React.render(<Tooltip trigger={['click']} placement="bottom" overlay={<strong>tooltip</strong>}>
+      var tooltip = ReactDOM.render(<Tooltip trigger={['click']} placement="bottom" overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = React.findDOMNode(tooltip).firstChild;
+      var domNode = ReactDOM.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       setTimeout(()=> {
         var popupDomNode = tooltip.getPopupDomNode();
@@ -149,11 +150,11 @@ describe('rc-tooltip', function () {
     });
 
     it('bottomRight works', (done)=> {
-      var tooltip = React.render(<Tooltip trigger={['click']} placement="bottomRight"
+      var tooltip = ReactDOM.render(<Tooltip trigger={['click']} placement="bottomRight"
                                           overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = React.findDOMNode(tooltip).firstChild;
+      var domNode = ReactDOM.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       setTimeout(()=> {
         var popupDomNode = tooltip.getPopupDomNode();
@@ -170,10 +171,10 @@ describe('rc-tooltip', function () {
     });
 
     it('bottomLeft works', (done)=> {
-      var tooltip = React.render(<Tooltip trigger={['click']} placement="bottomLeft" overlay={<strong>tooltip</strong>}>
+      var tooltip = ReactDOM.render(<Tooltip trigger={['click']} placement="bottomLeft" overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = React.findDOMNode(tooltip).firstChild;
+      var domNode = ReactDOM.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       setTimeout(()=> {
         var popupDomNode = tooltip.getPopupDomNode();
@@ -190,10 +191,10 @@ describe('rc-tooltip', function () {
     });
 
     it('top works', (done)=> {
-      var tooltip = React.render(<Tooltip trigger={['click']} placement="top" overlay={<strong>tooltip</strong>}>
+      var tooltip = ReactDOM.render(<Tooltip trigger={['click']} placement="top" overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = React.findDOMNode(tooltip).firstChild;
+      var domNode = ReactDOM.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       setTimeout(()=> {
         var popupDomNode = tooltip.getPopupDomNode();
@@ -208,10 +209,10 @@ describe('rc-tooltip', function () {
     });
 
     it('topLeft works', (done)=> {
-      var tooltip = React.render(<Tooltip trigger={['click']} placement="topLeft" overlay={<strong>tooltip</strong>}>
+      var tooltip = ReactDOM.render(<Tooltip trigger={['click']} placement="topLeft" overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = React.findDOMNode(tooltip).firstChild;
+      var domNode = ReactDOM.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       setTimeout(()=> {
         var popupDomNode = tooltip.getPopupDomNode();
@@ -229,10 +230,10 @@ describe('rc-tooltip', function () {
     });
 
     it('topRight works', (done)=> {
-      var tooltip = React.render(<Tooltip trigger={['click']} placement="topRight" overlay={<strong>tooltip</strong>}>
+      var tooltip = ReactDOM.render(<Tooltip trigger={['click']} placement="topRight" overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = React.findDOMNode(tooltip).firstChild;
+      var domNode = ReactDOM.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       setTimeout(()=> {
         var popupDomNode = tooltip.getPopupDomNode();
@@ -252,14 +253,14 @@ describe('rc-tooltip', function () {
 
   if (window.TransitionEvent) {
     it('transitionName works', (done)=> {
-      var tooltip = React.render(<Tooltip
+      var tooltip = ReactDOM.render(<Tooltip
         trigger={['click']}
         transitionName="fade"
         placement="top"
         overlay={<strong>tooltip</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = React.findDOMNode(tooltip).firstChild;
+      var domNode = ReactDOM.findDOMNode(tooltip).firstChild;
       Simulate.click(domNode);
       async.series([
           timeout(100),
