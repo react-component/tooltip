@@ -250,6 +250,47 @@ describe('rc-tooltip', function () {
     });
   });
 
+  describe('offset', ()=> {
+    it('offsetX works', (done)=> {
+      let offsetX = 10;
+      var tooltip = React.render(<Tooltip trigger={['click']} offsetX={offsetX} placement="bottomRight" overlay={<strong>tooltip</strong>}>
+        <div className="target">click</div>
+      </Tooltip>, div);
+      var domNode = React.findDOMNode(tooltip).firstChild;
+      Simulate.click(domNode);
+      setTimeout(()=> {
+        var popupDomNode = tooltip.getPopupDomNode();
+        expect(popupDomNode).to.be.ok();
+        var targetOffset = $(domNode).offset();
+        var popupOffset = $(popupDomNode).offset();
+        console.log(popupOffset, targetOffset);
+        expect(popupOffset.left).to.be(targetOffset.left + offsetX);
+        Simulate.click(domNode);
+        done();
+      }, 20);
+    });
+
+    it('offsetY works', (done)=> {
+      let offsetY = 50;
+      var tooltip = React.render(<Tooltip trigger={['click']} offsetY={offsetY} placement="topRight" overlay={<strong>tooltip</strong>}>
+        <div className="target">click</div>
+      </Tooltip>, div);
+      var domNode = React.findDOMNode(tooltip).firstChild;
+      Simulate.click(domNode);
+      setTimeout(()=> {
+        var popupDomNode = tooltip.getPopupDomNode();
+        expect(popupDomNode).to.be.ok();
+        var targetOffset = $(domNode).offset();
+        var popupOffset = $(popupDomNode).offset();
+        console.log(popupOffset, targetOffset);
+        expect(popupOffset.top).to.be(targetOffset.top - $(popupDomNode).outerHeight() + offsetY);
+        Simulate.click(domNode);
+        done();
+      }, 20);
+    });
+
+  });
+
   if (window.TransitionEvent) {
     it('transitionName works', (done)=> {
       var tooltip = React.render(<Tooltip
