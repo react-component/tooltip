@@ -1,21 +1,25 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import {createChainedFunction, Dom} from 'rc-util';
 import Popup from './Popup';
 
 const Tooltip = React.createClass({
   propTypes: {
-    trigger: React.PropTypes.any,
-    placement: React.PropTypes.any,
-    onVisibleChange: React.PropTypes.func,
-    afterVisibleChange: React.PropTypes.func,
-    overlay: React.PropTypes.node.isRequired,
-    overlayStyle: React.PropTypes.object,
-    overlayClassName: React.PropTypes.string,
-    wrapStyle: React.PropTypes.object,
-    mouseEnterDelay: React.PropTypes.number,
-    mouseLeaveDelay: React.PropTypes.number,
-    getTooltipContainer: React.PropTypes.func,
+    trigger: PropTypes.any,
+    placement: PropTypes.any,
+    onVisibleChange: PropTypes.func,
+    afterVisibleChange: PropTypes.func,
+    overlay: PropTypes.node.isRequired,
+    overlayStyle: PropTypes.object,
+    overlayClassName: PropTypes.string,
+    wrapStyle: PropTypes.object,
+    mouseEnterDelay: PropTypes.number,
+    mouseLeaveDelay: PropTypes.number,
+    getTooltipContainer: PropTypes.func,
+    align: PropTypes.shape({
+      offset: PropTypes.array,
+      targetOffset: PropTypes.array,
+    }),
   },
 
   getDefaultProps() {

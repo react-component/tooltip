@@ -20,51 +20,65 @@ const autoAdjustOverflow = {
   adjustY: 1,
 };
 
+const targetOffset = [0, 0];
+
 export const placementAlignMap = {
   left: {
     points: ['cr', 'cl'],
     overflow: autoAdjustOverflow,
     offset: [-3, 0],
+    targetOffset,
   },
   right: {
     points: ['cl', 'cr'],
     overflow: autoAdjustOverflow,
     offset: [3, 0],
+    targetOffset,
   },
   top: {
     points: ['bc', 'tc'],
     overflow: autoAdjustOverflow,
     offset: [0, -3],
+    targetOffset,
   },
   bottom: {
     points: ['tc', 'bc'],
     overflow: autoAdjustOverflow,
     offset: [0, 3],
+    targetOffset,
   },
   topLeft: {
     points: ['bl', 'tl'],
     overflow: autoAdjustOverflow,
     offset: [0, -3],
+    targetOffset,
   },
   topRight: {
     points: ['br', 'tr'],
     overflow: autoAdjustOverflow,
     offset: [0, -3],
+    targetOffset,
   },
   bottomRight: {
     points: ['tr', 'br'],
     overflow: autoAdjustOverflow,
     offset: [0, 3],
+    targetOffset,
   },
   bottomLeft: {
     points: ['tl', 'bl'],
     overflow: autoAdjustOverflow,
     offset: [0, 3],
+    targetOffset,
   },
 };
 
 function isPointsEq(a1, a2) {
   return a1[0] === a2[0] && a1[1] === a2[1];
+}
+
+export function fromPlacementStrToAlign(placementStr) {
+  return placementAlignMap[placementStr];
 }
 
 export function fromPointsToPlacement(align) {

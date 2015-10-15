@@ -12,7 +12,9 @@ var Test = React.createClass({
       placement: 'right',
       trigger: {
         hover: 1
-      }
+      },
+      offsetX: undefined,
+      offsetY: undefined
     };
   },
   onPlacementChange(e) {
@@ -39,6 +41,20 @@ var Test = React.createClass({
     });
   },
 
+  onOffsetXChange(e) {
+    var targetValue = e.target.value;
+    this.setState({
+      offsetX: targetValue ? targetValue : undefined,
+    });
+  },
+
+  onOffsetYChange(e) {
+    var targetValue = e.target.value;
+    this.setState({
+      offsetY: targetValue ? targetValue : undefined,
+    });
+  },
+
   preventDefault(e) {
     e.preventDefault();
   },
@@ -48,7 +64,6 @@ var Test = React.createClass({
   },
 
   render() {
-    console.log(this.state);
     var trigger = this.state.trigger;
     return <div >
       <div style={{margin: '10px 20px'}}>
@@ -88,6 +103,16 @@ var Test = React.createClass({
           <input value='click' checked={trigger.click} type='checkbox' onChange={this.onTriggerChange}/>
           click
         </label>
+        <br/>
+        <label>
+          offsetX:
+          <input type='text' onChange={this.onOffsetXChange} style={{width:50}}/>
+        </label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <label>
+          offsetY:
+          <input type='text' onChange={this.onOffsetYChange} style={{width:50}}/>
+        </label>
       </div>
       <div style={{margin: 100}}>
         <Tooltip placement={this.state.placement}
@@ -96,6 +121,9 @@ var Test = React.createClass({
                  trigger={Object.keys(this.state.trigger)}
                  onVisibleChange={this.onVisibleChange}
                  overlay={<span>i am a tooltip</span>}
+                 align={{
+                  offset:[this.state.offsetX, this.state.offsetY]
+                 }}
                  transitionName={this.state.transitionName}>
           <a href='#' style={{margin: 20}} onClick={this.preventDefault}>trigger</a>
         </Tooltip>

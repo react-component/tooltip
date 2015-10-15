@@ -1,17 +1,17 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import {getToolTipClassByPlacement, fromPointsToPlacement, placementAlignMap} from './utils';
+import {getToolTipClassByPlacement, fromPointsToPlacement, fromPlacementStrToAlign} from './utils';
 import Align from 'rc-align';
 import Animate from 'rc-animate';
 import assign from 'object-assign';
 
 const Popup = React.createClass({
   propTypes: {
-    visible: React.PropTypes.bool,
-    wrap: React.PropTypes.object,
-    style: React.PropTypes.object,
-    onMouseEnter: React.PropTypes.func,
-    onMouseLeave: React.PropTypes.func,
+    visible: PropTypes.bool,
+    wrap: PropTypes.object,
+    style: PropTypes.object,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func,
   },
 
   componentDidMount() {
@@ -81,9 +81,33 @@ const Popup = React.createClass({
     if (placement && placement.points) {
       align = placement;
     } else {
-      align = assign({}, placementAlignMap[placement], props.align);
+      align = fromPlacementStrToAlign(placement);
+      const {offset, targetOffset} = align;
+      let offsetProp = props.align.offset;
+      let targetOffsetProp = props.align.targetOffset;
+      if (offsetProp) {
+        offsetProp = offsetProp.concat();
+      }
+      if (targetOffsetProp) {
+        targetOffsetProp = targetOffsetProp.concat();
+      }
+      const updateAlign = {};
+      for (let i = 0; i < 2; i++) {
+        if (offsetProp) {
+          if (offsetProp[i] === undefined) {
+            offsetProp[i] = offset[i];
+          }
+          updateAlign.offset = offsetProp;
+        }
+        if (targetOffsetProp) {
+          if (targetOffsetProp[i] === undefined) {
+            targetOffsetProp[i] = targetOffset[i];
+          }
+          updateAlign.targetOffset = offsetProp;
+        }
+      }
+      align = assign({}, align, updateAlign);
     }
-
     return (<Animate component=""
                      exclusive={true}
                      transitionAppear={true}

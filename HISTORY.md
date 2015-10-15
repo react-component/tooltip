@@ -4,7 +4,7 @@
 ### 3.0.0
 
 - only support react 0.14
-- add prop align
+- add align prop to allow set offset and targetOffset when placement's type is String
 
 ### 2.10.0
 
