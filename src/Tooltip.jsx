@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {createChainedFunction, Dom} from 'rc-util';
 import Popup from './Popup';
 
@@ -61,8 +62,8 @@ const Tooltip = React.createClass({
     const state = this.state;
     if (this.popupRendered) {
       const self = this;
-      React.render(this.getPopupElement(), this.getTipContainer(), function renderPopup() {
-        self.popupDomNode = React.findDOMNode(this);
+      ReactDOM.unstable_renderSubtreeIntoContainer(this, this.getPopupElement(), this.getTipContainer(), function renderPopup() {
+        self.popupDomNode = ReactDOM.findDOMNode(this);
         if (prevState.visible !== state.visible) {
           props.afterVisibleChange(state.visible);
         }
@@ -88,7 +89,7 @@ const Tooltip = React.createClass({
   componentWillUnmount() {
     const tipContainer = this.tipContainer;
     if (tipContainer) {
-      React.unmountComponentAtNode(tipContainer);
+      ReactDOM.unmountComponentAtNode(tipContainer);
       if (this.props.getTooltipContainer) {
         const mountNode = this.props.getTooltipContainer();
         mountNode.removeChild(tipContainer);
@@ -162,7 +163,7 @@ const Tooltip = React.createClass({
 
   onDocumentClick(e) {
     const target = e.target;
-    const root = React.findDOMNode(this);
+    const root = ReactDOM.findDOMNode(this);
     const popupNode = this.getPopupDomNode();
     if (!Dom.contains(root, target) && !Dom.contains(popupNode, target)) {
       this.setVisible(false);
