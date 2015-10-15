@@ -251,6 +251,8 @@ describe('rc-tooltip', function () {
     });
   });
 
+
+
   if (window.TransitionEvent) {
     it('transitionName works', (done)=> {
       var tooltip = ReactDOM.render(<Tooltip

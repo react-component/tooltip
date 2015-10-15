@@ -1,6 +1,11 @@
 # History
 ----
 
+### 3.0.0
+
+- only support react 0.14
+- add prop align
+
 ### 2.10.0
 
 - auto adjust align if current tooltip is not visible

@@ -142,6 +142,12 @@ online example: http://react-component.github.io/tooltip/examples/
           <td>one of ['left','right','top','bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight'] or alignConfig of [dom-align](https://github.com/yiminghe/dom-align) </td>
         </tr>
         <tr>
+          <td>align</td>
+          <td>Object: alignConfig of [dom-align](https://github.com/yiminghe/dom-align)</td>
+          <td></td>
+          <td>only valid when placement's type is String. value will be merged into placement's align config. note: can only accept offset and targetOffset</td>
+        </tr>
+        <tr>
           <td>overlay</td>
           <td>React.Element</td>
           <td></td>

@@ -29,6 +29,7 @@ const Tooltip = React.createClass({
       mouseLeaveDelay: 0.1,
       overlayStyle: {},
       wrapStyle: {},
+      align: {},
       placement: 'right',
       trigger: ['hover'],
     };
@@ -203,6 +204,7 @@ const Tooltip = React.createClass({
                    visible={state.visible}
                    className={props.overlayClassName}
                    trigger={props.trigger}
+                   align={props.align}
                    placement={props.placement}
                    animation={props.animation}
       {...mouseProps}

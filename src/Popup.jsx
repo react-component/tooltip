@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {getToolTipClassByPlacement, fromPointsToPlacement, placementAlignMap} from './utils';
 import Align from 'rc-align';
 import Animate from 'rc-animate';
+import assign from 'object-assign';
 
 const Popup = React.createClass({
   propTypes: {
@@ -80,7 +81,7 @@ const Popup = React.createClass({
     if (placement && placement.points) {
       align = placement;
     } else {
-      align = placementAlignMap[placement];
+      align = assign({}, placementAlignMap[placement], props.align);
     }
 
     return (<Animate component=""
