@@ -3,12 +3,12 @@ webpackJsonp([3],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(190);
+	module.exports = __webpack_require__(198);
 
 
 /***/ },
 
-/***/ 190:
+/***/ 198:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19,13 +19,17 @@ webpackJsonp([3],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcTooltip = __webpack_require__(158);
+	var _reactDom = __webpack_require__(158);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _rcTooltip = __webpack_require__(159);
 	
 	var _rcTooltip2 = _interopRequireDefault(_rcTooltip);
 	
-	__webpack_require__(187);
+	__webpack_require__(195);
 	
-	var _objectAssign = __webpack_require__(191);
+	var _objectAssign = __webpack_require__(194);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
@@ -37,7 +41,9 @@ webpackJsonp([3],{
 	      placement: 'right',
 	      trigger: {
 	        hover: 1
-	      }
+	      },
+	      offsetX: undefined,
+	      offsetY: undefined
 	    };
 	  },
 	  onPlacementChange: function onPlacementChange(e) {
@@ -64,6 +70,20 @@ webpackJsonp([3],{
 	    });
 	  },
 	
+	  onOffsetXChange: function onOffsetXChange(e) {
+	    var targetValue = e.target.value;
+	    this.setState({
+	      offsetX: targetValue ? targetValue : undefined
+	    });
+	  },
+	
+	  onOffsetYChange: function onOffsetYChange(e) {
+	    var targetValue = e.target.value;
+	    this.setState({
+	      offsetY: targetValue ? targetValue : undefined
+	    });
+	  },
+	
 	  preventDefault: function preventDefault(e) {
 	    e.preventDefault();
 	  },
@@ -73,7 +93,6 @@ webpackJsonp([3],{
 	  },
 	
 	  render: function render() {
-	    console.log(this.state);
 	    var trigger = this.state.trigger;
 	    return _react2['default'].createElement(
 	      'div',
@@ -156,6 +175,20 @@ webpackJsonp([3],{
 	          null,
 	          _react2['default'].createElement('input', { value: 'click', checked: trigger.click, type: 'checkbox', onChange: this.onTriggerChange }),
 	          'click'
+	        ),
+	        _react2['default'].createElement('br', null),
+	        _react2['default'].createElement(
+	          'label',
+	          null,
+	          'offsetX:',
+	          _react2['default'].createElement('input', { type: 'text', onChange: this.onOffsetXChange, style: { width: 50 } })
+	        ),
+	        '    ',
+	        _react2['default'].createElement(
+	          'label',
+	          null,
+	          'offsetY:',
+	          _react2['default'].createElement('input', { type: 'text', onChange: this.onOffsetYChange, style: { width: 50 } })
 	        )
 	      ),
 	      _react2['default'].createElement(
@@ -173,6 +206,9 @@ webpackJsonp([3],{
 	              null,
 	              'i am a tooltip'
 	            ),
+	            align: {
+	              offset: [this.state.offsetX, this.state.offsetY]
+	            },
 	            transitionName: this.state.transitionName },
 	          _react2['default'].createElement(
 	            'a',
@@ -185,44 +221,11 @@ webpackJsonp([3],{
 	  }
 	});
 	
-	_react2['default'].render(_react2['default'].createElement(
+	_reactDom2['default'].render(_react2['default'].createElement(
 	  'div',
 	  null,
 	  _react2['default'].createElement(Test, null)
 	), document.getElementById("__react-content"));
-
-/***/ },
-
-/***/ 191:
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	function ToObject(val) {
-		if (val == null) {
-			throw new TypeError('Object.assign cannot be called with null or undefined');
-		}
-	
-		return Object(val);
-	}
-	
-	module.exports = Object.assign || function (target, source) {
-		var from;
-		var keys;
-		var to = ToObject(target);
-	
-		for (var s = 1; s < arguments.length; s++) {
-			from = arguments[s];
-			keys = Object.keys(Object(from));
-	
-			for (var i = 0; i < keys.length; i++) {
-				to[keys[i]] = from[keys[i]];
-			}
-		}
-	
-		return to;
-	};
-
 
 /***/ }
 

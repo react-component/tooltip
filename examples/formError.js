@@ -17,11 +17,15 @@ webpackJsonp([0],[
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcTooltip = __webpack_require__(158);
+	var _reactDom = __webpack_require__(158);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _rcTooltip = __webpack_require__(159);
 	
 	var _rcTooltip2 = _interopRequireDefault(_rcTooltip);
 	
-	__webpack_require__(187);
+	__webpack_require__(195);
 	
 	var Test = _react2['default'].createClass({
 	  displayName: 'Test',
@@ -75,7 +79,7 @@ webpackJsonp([0],[
 	  }
 	});
 	
-	_react2['default'].render(_react2['default'].createElement(Test, null), document.getElementById("__react-content"));
+	_reactDom2['default'].render(_react2['default'].createElement(Test, null), document.getElementById("__react-content"));
 
 /***/ }
 ]);
