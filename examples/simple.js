@@ -12,7 +12,9 @@ var Test = React.createClass({
       placement: 'right',
       trigger: {
         hover: 1
-      }
+      },
+      offsetX: null,
+      offsetY: null
     };
   },
   onPlacementChange(e) {
@@ -37,6 +39,18 @@ var Test = React.createClass({
     this.setState({
       trigger: trigger
     });
+  },
+
+  onOffsetXChange(e) {
+    this.setState({
+      offsetX: e.target.value
+    })
+  },
+
+  onOffsetYChange(e) {
+    this.setState({
+      offsetY: e.target.value
+    })
   },
 
   preventDefault(e) {
@@ -88,6 +102,15 @@ var Test = React.createClass({
           <input value='click' checked={trigger.click} type='checkbox' onChange={this.onTriggerChange}/>
           click
         </label>
+        <br/>
+        <label>
+          offsetX:
+          <input type='text' onChange={this.onOffsetXChange}/>
+        </label>
+        <label>
+          offsetY:
+          <input type='text' onChange={this.onOffsetYChange}/>
+        </label>
       </div>
       <div style={{margin: 100}}>
         <Tooltip placement={this.state.placement}
@@ -96,6 +119,8 @@ var Test = React.createClass({
                  trigger={Object.keys(this.state.trigger)}
                  onVisibleChange={this.onVisibleChange}
                  overlay={<span>i am a tooltip</span>}
+                 offsetX={this.state.offsetX}
+                 offsetY={this.state.offsetY}
                  transitionName={this.state.transitionName}>
           <a href='#' style={{margin: 20}} onClick={this.preventDefault}>trigger</a>
         </Tooltip>

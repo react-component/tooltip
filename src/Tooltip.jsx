@@ -16,6 +16,8 @@ const Tooltip = React.createClass({
     mouseEnterDelay: React.PropTypes.number,
     mouseLeaveDelay: React.PropTypes.number,
     getTooltipContainer: React.PropTypes.func,
+    offsetX: React.PropTypes.number,
+    offsetY: React.PropTypes.number
   },
 
   getDefaultProps() {
@@ -205,6 +207,8 @@ const Tooltip = React.createClass({
                    trigger={props.trigger}
                    placement={props.placement}
                    animation={props.animation}
+                   offsetX={props.offsetX}
+                   offsetY={props.offsetY}
       {...mouseProps}
                    wrap={this}
                    style={props.overlayStyle}

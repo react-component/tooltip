@@ -58,7 +58,7 @@ const Popup = React.createClass({
 
   render() {
     const props = this.props;
-    const {prefixCls, placement, style} = props;
+    const {prefixCls, placement, style, offsetX, offsetY} = props;
     let className;
 
     if (props.visible || !this.rootNode) {
@@ -81,6 +81,12 @@ const Popup = React.createClass({
       align = placement;
     } else {
       align = placementAlignMap[placement];
+    }
+    if (offsetX) {
+      align.offset[0] = offsetX;
+    }
+    if (offsetY) {
+      align.offset[1] = offsetY;
     }
 
     return (<Animate component=""

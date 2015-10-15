@@ -153,6 +153,18 @@ online example: http://react-component.github.io/tooltip/examples/
           <td></td>
           <td>function returning html node which will act as tooltip contaier</td>
         </tr>
+        <tr>
+          <td>offsetX</td>
+          <td>number</td>
+          <td></td>
+          <td>Offset in the X direction by a number of pixels</td>
+        </tr>
+        <tr>
+          <td>offsetY</td>
+          <td>number</td>
+          <td></td>
+          <td>Offset in the Y direction by a number of pixels</td>
+        </tr>
     </tbody>
 </table>
 
