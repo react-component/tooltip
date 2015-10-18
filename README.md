@@ -11,8 +11,6 @@ tooltip ui component for react 0.14+
 [![npm download][download-image]][download-url]
 [![Sauce Test Status](https://saucelabs.com/buildstatus/rc-tooltip)](https://saucelabs.com/u/rc-tooltip)
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/rc-tooltip.svg)](https://saucelabs.com/u/rc-tooltip)
-
 [npm-image]: http://img.shields.io/npm/v/rc-tooltip.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/rc-tooltip
 [travis-image]: https://img.shields.io/travis/react-component/tooltip.svg?style=flat-square
