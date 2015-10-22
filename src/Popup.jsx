@@ -92,16 +92,16 @@ const Popup = React.createClass({
         targetOffsetProp = targetOffsetProp.concat();
       }
       const updateAlign = {};
-      for (let i = 0; i < 2; i++) {
+      for (let index = 0; index < 2; index++) {
         if (offsetProp) {
-          if (offsetProp[i] === undefined) {
-            offsetProp[i] = offset[i];
+          if (offsetProp[index] === undefined) {
+            offsetProp[index] = offset[index];
           }
           updateAlign.offset = offsetProp;
         }
         if (targetOffsetProp) {
-          if (targetOffsetProp[i] === undefined) {
-            targetOffsetProp[i] = targetOffset[i];
+          if (targetOffsetProp[index] === undefined) {
+            targetOffsetProp[index] = targetOffset[index];
           }
           updateAlign.targetOffset = offsetProp;
         }
@@ -109,13 +109,13 @@ const Popup = React.createClass({
       align = assign({}, align, updateAlign);
     }
     return (<Animate component=""
-                     exclusive={true}
-                     transitionAppear={true}
+                     exclusive
+                     transitionAppear
                      transitionName={this.getTransitionName()}
                      showProp="data-visible">
       <Align target={this.getTarget}
              key="popup"
-             monitorWindowResize={true}
+             monitorWindowResize
              data-visible={props.visible}
              disabled={!props.visible}
              align={align}

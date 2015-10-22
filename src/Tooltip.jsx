@@ -140,7 +140,7 @@ const Tooltip = React.createClass({
     this.setVisible(false);
   },
 
-  onClick(e) {
+  onClick(event) {
     // focus will trigger click
     if (this.focusTime) {
       let preTime;
@@ -158,7 +158,7 @@ const Tooltip = React.createClass({
     }
     this.preClickTime = 0;
     this.preTouchTime = 0;
-    e.preventDefault();
+    event.preventDefault();
     if (this.state.visible) {
       this.setVisible(false);
     } else {
@@ -166,8 +166,8 @@ const Tooltip = React.createClass({
     }
   },
 
-  onDocumentClick(e) {
-    const target = e.target;
+  onDocumentClick(event) {
+    const target = event.target;
     const root = ReactDOM.findDOMNode(this);
     const popupNode = this.getPopupDomNode();
     if (!Dom.contains(root, target) && !Dom.contains(popupNode, target)) {
@@ -219,6 +219,33 @@ const Tooltip = React.createClass({
     </Popup>);
   },
 
+  setVisible(visible) {
+    if (this.state.visible !== visible) {
+      if (!('visible' in this.props)) {
+        this.setState({
+          visible: visible,
+        });
+      }
+      this.props.onVisibleChange(visible);
+    }
+  },
+
+  delaySetVisible(visible, delayS) {
+    const delay = delayS * 1000;
+    if (this.delayTimer) {
+      clearTimeout(this.delayTimer);
+      this.delayTimer = null;
+    }
+    if (delay) {
+      this.delayTimer = setTimeout(() => {
+        this.setVisible(visible);
+        this.delayTimer = null;
+      }, delay);
+    } else {
+      this.setVisible(visible);
+    }
+  },
+
   render() {
     if (this.state.visible) {
       this.popupRendered = true;
@@ -252,33 +279,6 @@ const Tooltip = React.createClass({
     return (<span className={className} style={props.wrapStyle}>
     {React.cloneElement(child, newChildProps)}
     </span>);
-  },
-
-  setVisible(visible) {
-    if (this.state.visible !== visible) {
-      if (!('visible' in this.props)) {
-        this.setState({
-          visible: visible,
-        });
-      }
-      this.props.onVisibleChange(visible);
-    }
-  },
-
-  delaySetVisible(visible, delayS) {
-    const delay = delayS * 1000;
-    if (this.delayTimer) {
-      clearTimeout(this.delayTimer);
-      this.delayTimer = null;
-    }
-    if (delay) {
-      this.delayTimer = setTimeout(() => {
-        this.setVisible(visible);
-        this.delayTimer = null;
-      }, delay);
-    } else {
-      this.setVisible(visible);
-    }
   },
 });
 
