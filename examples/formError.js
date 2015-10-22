@@ -25,7 +25,7 @@ webpackJsonp([0],[
 	
 	var _rcTooltip2 = _interopRequireDefault(_rcTooltip);
 	
-	__webpack_require__(195);
+	__webpack_require__(196);
 	
 	var Test = _react2['default'].createClass({
 	  displayName: 'Test',

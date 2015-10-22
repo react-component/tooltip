@@ -20856,11 +20856,11 @@
 	
 	var _rcAlign2 = _interopRequireDefault(_rcAlign);
 	
-	var _rcAnimate = __webpack_require__(186);
+	var _rcAnimate = __webpack_require__(187);
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
-	var _objectAssign = __webpack_require__(194);
+	var _objectAssign = __webpack_require__(195);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
@@ -21128,9 +21128,9 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// export this package's api
 	'use strict';
 	
-	// export this package's api
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
@@ -21154,19 +21154,15 @@
 	  value: true
 	});
 	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(158);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
 	var _domAlign = __webpack_require__(178);
 	
@@ -21174,17 +21170,13 @@
 	
 	var _rcUtil = __webpack_require__(162);
 	
-	var _rcUtil2 = _interopRequireDefault(_rcUtil);
+	var _isWindow = __webpack_require__(186);
 	
-	function isWindow(obj) {
-	  /*eslint-disable eqeqeq */
-	  return obj != null && obj == obj.window;
-	  /*eslint-enable eqeqeq */
-	}
+	var _isWindow2 = _interopRequireDefault(_isWindow);
 	
 	function buffer(fn, ms) {
-	  var timer;
-	  return function () {
+	  var timer = undefined;
+	  return function bufferFn() {
 	    if (timer) {
 	      clearTimeout(timer);
 	    }
@@ -21192,119 +21184,104 @@
 	  };
 	}
 	
-	var Align = (function (_React$Component) {
-	  _inherits(Align, _React$Component);
+	var Align = _react2['default'].createClass({
+	  displayName: 'Align',
 	
-	  function Align(props) {
-	    _classCallCheck(this, Align);
+	  propTypes: {
+	    align: _react.PropTypes.object.isRequired,
+	    target: _react.PropTypes.func,
+	    onAlign: _react.PropTypes.func,
+	    monitorBufferTime: _react.PropTypes.number,
+	    monitorWindowResize: _react.PropTypes.bool,
+	    disabled: _react.PropTypes.bool,
+	    children: _react.PropTypes.any
+	  },
 	
-	    _get(Object.getPrototypeOf(Align.prototype), 'constructor', this).apply(this, arguments);
-	    this.handleWindowResize = this.handleWindowResize.bind(this);
-	  }
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      target: function target() {
+	        return window;
+	      },
+	      onAlign: function onAlign() {},
+	      monitorBufferTime: 50,
+	      monitorWindowResize: false,
+	      disabled: false
+	    };
+	  },
 	
-	  _createClass(Align, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var props = this.props;
-	      // if parent ref not attached .... use document.getElementById
-	      if (!props.disabled) {
-	        var source = _react2['default'].findDOMNode(this);
-	        props.onAlign(source, (0, _domAlign2['default'])(source, props.target(), props.align));
-	        if (props.monitorWindowResize) {
-	          this.startMonitorWindowResize();
+	  componentDidMount: function componentDidMount() {
+	    var props = this.props;
+	    // if parent ref not attached .... use document.getElementById
+	    if (!props.disabled) {
+	      var source = _reactDom2['default'].findDOMNode(this);
+	      props.onAlign(source, (0, _domAlign2['default'])(source, props.target(), props.align));
+	      if (props.monitorWindowResize) {
+	        this.startMonitorWindowResize();
+	      }
+	    }
+	  },
+	
+	  componentDidUpdate: function componentDidUpdate(prevProps) {
+	    var reAlign = false;
+	    var props = this.props;
+	    var currentTarget = undefined;
+	
+	    if (!props.disabled) {
+	      if (prevProps.disabled || prevProps.align !== props.align) {
+	        reAlign = true;
+	        currentTarget = props.target();
+	      } else {
+	        var lastTarget = prevProps.target();
+	        currentTarget = props.target();
+	        if ((0, _isWindow2['default'])(lastTarget) && (0, _isWindow2['default'])(currentTarget)) {
+	          reAlign = false;
+	        } else if (lastTarget !== currentTarget) {
+	          reAlign = true;
 	        }
 	      }
 	    }
-	  }, {
-	    key: 'startMonitorWindowResize',
-	    value: function startMonitorWindowResize() {
-	      if (!this.resizeHandler) {
-	        this.resizeHandler = _rcUtil2['default'].Dom.addEventListener(window, 'resize', buffer(this.handleWindowResize, this.props.monitorBufferTime));
-	      }
+	
+	    if (reAlign) {
+	      var source = _reactDom2['default'].findDOMNode(this);
+	      props.onAlign(source, (0, _domAlign2['default'])(source, currentTarget, props.align));
 	    }
-	  }, {
-	    key: 'stopMonitorWindowResize',
-	    value: function stopMonitorWindowResize() {
-	      if (this.resizeHandler) {
-	        this.resizeHandler.remove();
-	        this.resizeHandler = null;
-	      }
-	    }
-	  }, {
-	    key: 'handleWindowResize',
-	    value: function handleWindowResize() {
-	      var props = this.props;
-	      if (!props.disabled) {
-	        var source = _react2['default'].findDOMNode(this);
-	        props.onAlign(source, (0, _domAlign2['default'])(source, props.target(), props.align));
-	      }
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
+	
+	    if (props.monitorWindowResize && !props.disabled) {
+	      this.startMonitorWindowResize();
+	    } else {
 	      this.stopMonitorWindowResize();
 	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate(prevProps) {
-	      var reAlign = false;
-	      var props = this.props;
-	      var currentTarget;
-	
-	      if (!props.disabled) {
-	        if (prevProps.disabled || prevProps.align !== props.align) {
-	          reAlign = true;
-	          currentTarget = props.target();
-	        } else {
-	          var lastTarget = prevProps.target();
-	          currentTarget = props.target();
-	          if (isWindow(lastTarget) && isWindow(currentTarget)) {
-	            reAlign = false;
-	          } else if (lastTarget !== currentTarget) {
-	            reAlign = true;
-	          }
-	        }
-	      }
-	
-	      if (reAlign) {
-	        var source = _react2['default'].findDOMNode(this);
-	        props.onAlign(source, (0, _domAlign2['default'])(source, currentTarget, props.align));
-	      }
-	
-	      if (props.monitorWindowResize && !props.disabled) {
-	        this.startMonitorWindowResize();
-	      } else {
-	        this.stopMonitorWindowResize();
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2['default'].Children.only(this.props.children);
-	    }
-	  }]);
-	
-	  return Align;
-	})(_react2['default'].Component);
-	
-	Align.defaultProps = {
-	  target: function target() {
-	    return window;
 	  },
-	  onAlign: function onAlign() {},
-	  monitorBufferTime: 50,
-	  monitorWindowResize: false,
-	  disabled: false
-	};
 	
-	Align.PropTypes = {
-	  align: _react2['default'].PropTypes.object.isRequired,
-	  target: _react2['default'].PropTypes.func,
-	  onAlign: _react2['default'].PropTypes.func,
-	  monitorBufferTime: _react2['default'].PropTypes.number,
-	  monitorWindowResize: _react2['default'].PropTypes.bool,
-	  disabled: _react2['default'].PropTypes.bool
-	};
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.stopMonitorWindowResize();
+	  },
+	
+	  onWindowResize: function onWindowResize() {
+	    var props = this.props;
+	    if (!props.disabled) {
+	      var source = _reactDom2['default'].findDOMNode(this);
+	      props.onAlign(source, (0, _domAlign2['default'])(source, props.target(), props.align));
+	    }
+	  },
+	
+	  startMonitorWindowResize: function startMonitorWindowResize() {
+	    if (!this.resizeHandler) {
+	      this.resizeHandler = _rcUtil.Dom.addEventListener(window, 'resize', buffer(this.onWindowResize, this.props.monitorBufferTime));
+	    }
+	  },
+	
+	  stopMonitorWindowResize: function stopMonitorWindowResize() {
+	    if (this.resizeHandler) {
+	      this.resizeHandler.remove();
+	      this.resizeHandler = null;
+	    }
+	  },
+	
+	  render: function render() {
+	    return _react2['default'].Children.only(this.props.children);
+	  }
+	});
 	
 	exports['default'] = Align;
 	module.exports = exports['default'];
@@ -22303,15 +22280,34 @@
 
 /***/ },
 /* 186 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports["default"] = isWindow;
+	
+	function isWindow(obj) {
+	  /* eslint no-eq-null: 0 */
+	  /* eslint eqeqeq: 0 */
+	  return obj != null && obj == obj.window;
+	}
+	
+	module.exports = exports["default"];
+
+/***/ },
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// export this package's api
 	'use strict';
 	
-	module.exports = __webpack_require__(187);
+	module.exports = __webpack_require__(188);
 
 /***/ },
-/* 187 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22328,15 +22324,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ChildrenUtils = __webpack_require__(188);
+	var _ChildrenUtils = __webpack_require__(189);
 	
 	var _ChildrenUtils2 = _interopRequireDefault(_ChildrenUtils);
 	
-	var _AnimateChild = __webpack_require__(189);
+	var _AnimateChild = __webpack_require__(190);
 	
 	var _AnimateChild2 = _interopRequireDefault(_AnimateChild);
 	
-	var _util = __webpack_require__(193);
+	var _util = __webpack_require__(194);
 	
 	var _util2 = _interopRequireDefault(_util);
 	
@@ -22387,12 +22383,6 @@
 	    };
 	  },
 	
-	  componentDidMount: function componentDidMount() {
-	    this.state.children.map(function (c) {
-	      return c.key;
-	    }).forEach(this.performAppear);
-	  },
-	
 	  getInitialState: function getInitialState() {
 	    this.currentlyAnimatingKeys = {};
 	    this.keysToEnter = [];
@@ -22402,8 +22392,23 @@
 	    };
 	  },
 	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	  componentDidMount: function componentDidMount() {
 	    var _this = this;
+	
+	    var showProp = this.props.showProp;
+	    var children = this.state.children;
+	    if (showProp) {
+	      children = children.filter(function (child) {
+	        return !!child.props[showProp];
+	      });
+	    }
+	    children.forEach(function (child) {
+	      _this.performAppear(child.key);
+	    });
+	  },
+	
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    var _this2 = this;
 	
 	    var nextChildren = (0, _ChildrenUtils.toArrayChildren)(getChildrenFromProps(nextProps));
 	    var props = this.props;
@@ -22413,65 +22418,82 @@
 	    // last props children if exclusive
 	    // exclusive needs immediate response
 	    var currentChildren = this.state.children;
-	    var newChildren = _ChildrenUtils2['default'].mergeChildren(currentChildren, nextChildren);
-	
-	    if (showProp && !exclusive) {
-	      newChildren = newChildren.map(function (c) {
-	        var ret = c;
-	        if (!c.props[showProp] && (0, _ChildrenUtils.isShownInChildren)(currentChildren, c, showProp)) {
-	          ret = _react2['default'].cloneElement(c, _defineProperty({}, showProp, true));
+	    // in case destroy in showProp mode
+	    var newChildren = [];
+	    if (showProp) {
+	      currentChildren.forEach(function (currentChild) {
+	        var nextChild = (0, _ChildrenUtils.findChildInChildrenByKey)(nextChildren, currentChild.key);
+	        var newChild = undefined;
+	        if ((!nextChild || !nextChild.props[showProp]) && currentChild.props[showProp]) {
+	          newChild = _react2['default'].cloneElement(nextChild || currentChild, _defineProperty({}, showProp, true));
+	        } else {
+	          newChild = nextChild;
 	        }
-	        return ret;
+	        if (newChild) {
+	          newChildren.push(newChild);
+	        }
 	      });
+	      nextChildren.forEach(function (nextChild) {
+	        if (!(0, _ChildrenUtils.findChildInChildrenByKey)(currentChildren, nextChild.key)) {
+	          newChildren.push(nextChild);
+	        }
+	      });
+	    } else {
+	      newChildren = _ChildrenUtils2['default'].mergeChildren(currentChildren, nextChildren);
 	    }
-	
-	    this.setState({
-	      children: newChildren
-	    });
 	
 	    // exclusive needs immediate response
 	    if (exclusive) {
 	      Object.keys(currentlyAnimatingKeys).forEach(function (key) {
-	        _this.stop(key);
+	        _this2.stop(key);
 	      });
 	      currentChildren = (0, _ChildrenUtils.toArrayChildren)(getChildrenFromProps(props));
 	    }
 	
-	    nextChildren.forEach(function (c) {
-	      var key = c.key;
+	    // need render to avoid update
+	    this.setState({
+	      children: newChildren
+	    });
+	
+	    nextChildren.forEach(function (child) {
+	      var key = child.key;
 	      if (currentlyAnimatingKeys[key]) {
 	        return;
 	      }
-	      var hasPrev = (0, _ChildrenUtils.inChildren)(currentChildren, c);
+	      var hasPrev = (0, _ChildrenUtils.findChildInChildrenByKey)(currentChildren, key);
 	      if (showProp) {
+	        var showInNext = child.props[showProp];
 	        if (hasPrev) {
-	          var showInNow = (0, _ChildrenUtils.isShownInChildren)(currentChildren, c, showProp);
-	          var showInNext = c.props[showProp];
+	          var showInNow = (0, _ChildrenUtils.findShownChildInChildrenByKey)(currentChildren, key, showProp);
 	          if (!showInNow && showInNext) {
-	            _this.keysToEnter.push(key);
+	            _this2.keysToEnter.push(key);
 	          }
+	        } else if (showInNext) {
+	          _this2.keysToEnter.push(key);
 	        }
 	      } else if (!hasPrev) {
-	        _this.keysToEnter.push(key);
+	        _this2.keysToEnter.push(key);
 	      }
 	    });
 	
-	    currentChildren.forEach(function (c) {
-	      var key = c.key;
+	    currentChildren.forEach(function (child) {
+	      var key = child.key;
 	      if (currentlyAnimatingKeys[key]) {
 	        return;
 	      }
-	      var hasNext = (0, _ChildrenUtils.inChildren)(nextChildren, c);
+	      var hasNext = (0, _ChildrenUtils.findChildInChildrenByKey)(nextChildren, key);
 	      if (showProp) {
+	        var showInNow = child.props[showProp];
 	        if (hasNext) {
-	          var showInNext = (0, _ChildrenUtils.isShownInChildren)(nextChildren, c, showProp);
-	          var showInNow = c.props[showProp];
+	          var showInNext = (0, _ChildrenUtils.findShownChildInChildrenByKey)(nextChildren, key, showProp);
 	          if (!showInNext && showInNow) {
-	            _this.keysToLeave.push(key);
+	            _this2.keysToLeave.push(key);
 	          }
+	        } else if (showInNow) {
+	          _this2.keysToLeave.push(key);
 	        }
 	      } else if (!hasNext) {
-	        _this.keysToLeave.push(key);
+	        _this2.keysToLeave.push(key);
 	      }
 	    });
 	  },
@@ -22483,36 +22505,6 @@
 	    var keysToLeave = this.keysToLeave;
 	    this.keysToLeave = [];
 	    keysToLeave.forEach(this.performLeave);
-	  },
-	
-	  render: function render() {
-	    var props = this.props;
-	    var children = this.state.children.map(function (child) {
-	      if (!child.key) {
-	        throw new Error('must set key for <rc-animate> children');
-	      }
-	      return _react2['default'].createElement(
-	        _AnimateChild2['default'],
-	        {
-	          key: child.key,
-	          ref: child.key,
-	          animation: props.animation,
-	          transitionName: props.transitionName,
-	          transitionEnter: props.transitionEnter,
-	          transitionAppear: props.transitionAppear,
-	          transitionLeave: props.transitionLeave },
-	        child
-	      );
-	    });
-	    var Component = props.component;
-	    if (Component) {
-	      return _react2['default'].createElement(
-	        Component,
-	        this.props,
-	        children
-	      );
-	    }
-	    return children[0] || null;
 	  },
 	
 	  performEnter: function performEnter(key) {
@@ -22539,20 +22531,15 @@
 	      this.performLeave(key);
 	    } else {
 	      if (type === 'appear') {
-	        if (_util2['default'].isAppearSupported(props)) {
+	        if (_util2['default'].allowAppearCallback(props)) {
 	          props.onAppear(key);
+	          props.onEnd(key, true);
 	        }
-	        props.onEnd(key, true);
 	      } else {
-	        if (_util2['default'].isEnterSupported(props)) {
+	        if (_util2['default'].allowEnterCallback(props)) {
 	          props.onEnter(key);
+	          props.onEnd(key, true);
 	        }
-	        props.onEnd(key, true);
-	      }
-	      if (this.isMounted() && !(0, _ChildrenUtils.isSameChildren)(this.state.children, currentChildren)) {
-	        this.setState({
-	          children: currentChildren
-	        });
 	      }
 	    }
 	  },
@@ -22573,11 +22560,11 @@
 	    if (this.isValidChildByKey(currentChildren, key)) {
 	      this.performEnter(key);
 	    } else {
-	      if (_util2['default'].isLeaveSupported(props)) {
+	      if (_util2['default'].allowLeaveCallback(props)) {
 	        props.onLeave(key);
 	        props.onEnd(key, false);
 	      }
-	      if (this.isMounted() && !(0, _ChildrenUtils.isSameChildren)(this.state.children, currentChildren)) {
+	      if (this.isMounted() && !(0, _ChildrenUtils.isSameChildren)(this.state.children, currentChildren, props.showProp)) {
 	        this.setState({
 	          children: currentChildren
 	        });
@@ -22588,9 +22575,9 @@
 	  isValidChildByKey: function isValidChildByKey(currentChildren, key) {
 	    var showProp = this.props.showProp;
 	    if (showProp) {
-	      return (0, _ChildrenUtils.isShownInChildrenByKey)(currentChildren, key, showProp);
+	      return (0, _ChildrenUtils.findShownChildInChildrenByKey)(currentChildren, key, showProp);
 	    }
-	    return (0, _ChildrenUtils.inChildrenByKey)(currentChildren, key);
+	    return (0, _ChildrenUtils.findChildInChildrenByKey)(currentChildren, key);
 	  },
 	
 	  stop: function stop(key) {
@@ -22599,129 +22586,44 @@
 	    if (component) {
 	      component.stop();
 	    }
+	  },
+	
+	  render: function render() {
+	    var props = this.props;
+	    var stateChildren = this.state.children;
+	    var children = null;
+	    if (stateChildren) {
+	      children = stateChildren.map(function (child) {
+	        if (!child.key) {
+	          throw new Error('must set key for <rc-animate> children');
+	        }
+	        return _react2['default'].createElement(
+	          _AnimateChild2['default'],
+	          {
+	            key: child.key,
+	            ref: child.key,
+	            animation: props.animation,
+	            transitionName: props.transitionName,
+	            transitionEnter: props.transitionEnter,
+	            transitionAppear: props.transitionAppear,
+	            transitionLeave: props.transitionLeave },
+	          child
+	        );
+	      });
+	    }
+	    var Component = props.component;
+	    if (Component) {
+	      return _react2['default'].createElement(
+	        Component,
+	        this.props,
+	        children
+	      );
+	    }
+	    return children[0] || null;
 	  }
 	});
 	
 	exports['default'] = Animate;
-	module.exports = exports['default'];
-
-/***/ },
-/* 188 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function inChildren(children, child) {
-	  var found = 0;
-	  children.forEach(function (c) {
-	    if (found) {
-	      return;
-	    }
-	    found = c.key === child.key;
-	  });
-	  return found;
-	}
-	
-	exports['default'] = {
-	  inChildren: inChildren,
-	
-	  toArrayChildren: function toArrayChildren(children) {
-	    var ret = [];
-	    _react2['default'].Children.forEach(children, function (c) {
-	      ret.push(c);
-	    });
-	    return ret;
-	  },
-	
-	  isShownInChildren: function isShownInChildren(children, child, showProp) {
-	    var found = 0;
-	    children.forEach(function (c) {
-	      if (found) {
-	        return;
-	      }
-	      found = c.key === child.key && c.props[showProp];
-	    });
-	    return found;
-	  },
-	
-	  inChildrenByKey: function inChildrenByKey(children, key) {
-	    var found = 0;
-	    if (children) {
-	      children.forEach(function (c) {
-	        if (found) {
-	          return;
-	        }
-	        found = c.key === key;
-	      });
-	    }
-	    return found;
-	  },
-	
-	  isShownInChildrenByKey: function isShownInChildrenByKey(children, key, showProp) {
-	    var found = 0;
-	    if (children) {
-	      children.forEach(function (c) {
-	        if (found) {
-	          return;
-	        }
-	        found = c.key === key && c.props[showProp];
-	      });
-	    }
-	    return found;
-	  },
-	
-	  isSameChildren: function isSameChildren(c1, c2) {
-	    var same = c1.length === c2.length;
-	    if (same) {
-	      c1.forEach(function (c, i) {
-	        if (c !== c2[i]) {
-	          same = false;
-	        }
-	      });
-	    }
-	    return same;
-	  },
-	
-	  mergeChildren: function mergeChildren(prev, next) {
-	    var ret = [];
-	
-	    // For each key of `next`, the list of keys to insert before that key in
-	    // the combined list
-	    var nextChildrenPending = {};
-	    var pendingChildren = [];
-	    prev.forEach(function (c) {
-	      if (inChildren(next, c)) {
-	        if (pendingChildren.length) {
-	          nextChildrenPending[c.key] = pendingChildren;
-	          pendingChildren = [];
-	        }
-	      } else {
-	        pendingChildren.push(c);
-	      }
-	    });
-	
-	    next.forEach(function (c) {
-	      if (nextChildrenPending.hasOwnProperty(c.key)) {
-	        ret = ret.concat(nextChildrenPending[c.key]);
-	      }
-	      ret.push(c);
-	    });
-	
-	    ret = ret.concat(pendingChildren);
-	
-	    return ret;
-	  }
-	};
 	module.exports = exports['default'];
 
 /***/ },
@@ -22740,11 +22642,132 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _cssAnimation = __webpack_require__(190);
+	var utils = {
+	  toArrayChildren: function toArrayChildren(children) {
+	    var ret = [];
+	    _react2['default'].Children.forEach(children, function (child) {
+	      ret.push(child);
+	    });
+	    return ret;
+	  },
+	
+	  findChildInChildrenByKey: function findChildInChildrenByKey(children, key) {
+	    var ret = null;
+	    if (children) {
+	      children.forEach(function (child) {
+	        if (ret) {
+	          return;
+	        }
+	        if (child.key === key) {
+	          ret = child;
+	        }
+	      });
+	    }
+	    return ret;
+	  },
+	
+	  findShownChildInChildrenByKey: function findShownChildInChildrenByKey(children, key, showProp) {
+	    var ret = null;
+	    if (children) {
+	      children.forEach(function (child) {
+	        if (child.key === key && child.props[showProp]) {
+	          if (ret) {
+	            throw new Error('two child with same key for <rc-animate> children');
+	          }
+	          ret = child;
+	        }
+	      });
+	    }
+	    return ret;
+	  },
+	
+	  findHiddenChildInChildrenByKey: function findHiddenChildInChildrenByKey(children, key, showProp) {
+	    var found = 0;
+	    if (children) {
+	      children.forEach(function (child) {
+	        if (found) {
+	          return;
+	        }
+	        found = child.key === key && !child.props[showProp];
+	      });
+	    }
+	    return found;
+	  },
+	
+	  isSameChildren: function isSameChildren(c1, c2, showProp) {
+	    var same = c1.length === c2.length;
+	    if (same) {
+	      c1.forEach(function (child, index) {
+	        var child2 = c2[index];
+	        if (child.key !== child2.key) {
+	          same = false;
+	        } else if (showProp && child.props[showProp] !== child2.props[showProp]) {
+	          same = false;
+	        }
+	      });
+	    }
+	    return same;
+	  },
+	
+	  mergeChildren: function mergeChildren(prev, next) {
+	    var ret = [];
+	
+	    // For each key of `next`, the list of keys to insert before that key in
+	    // the combined list
+	    var nextChildrenPending = {};
+	    var pendingChildren = [];
+	    prev.forEach(function (child) {
+	      if (utils.findChildInChildrenByKey(next, child.key)) {
+	        if (pendingChildren.length) {
+	          nextChildrenPending[child.key] = pendingChildren;
+	          pendingChildren = [];
+	        }
+	      } else {
+	        pendingChildren.push(child);
+	      }
+	    });
+	
+	    next.forEach(function (child) {
+	      if (nextChildrenPending.hasOwnProperty(child.key)) {
+	        ret = ret.concat(nextChildrenPending[child.key]);
+	      }
+	      ret.push(child);
+	    });
+	
+	    ret = ret.concat(pendingChildren);
+	
+	    return ret;
+	  }
+	};
+	
+	exports['default'] = utils;
+	module.exports = exports['default'];
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(158);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _cssAnimation = __webpack_require__(191);
 	
 	var _cssAnimation2 = _interopRequireDefault(_cssAnimation);
 	
-	var _util = __webpack_require__(193);
+	var _util = __webpack_require__(194);
 	
 	var _util2 = _interopRequireDefault(_util);
 	
@@ -22759,31 +22782,6 @@
 	
 	  propTypes: {
 	    children: _react2['default'].PropTypes.any
-	  },
-	
-	  transition: function transition(animationType, finishCallback) {
-	    var _this = this;
-	
-	    var node = _react2['default'].findDOMNode(this);
-	    var props = this.props;
-	    var transitionName = props.transitionName;
-	    this.stop();
-	    var end = function end() {
-	      _this.stopper = null;
-	      finishCallback();
-	    };
-	    if ((_cssAnimation.isCssAnimationSupported || !props.animation[animationType]) && transitionName && props[transitionMap[animationType]]) {
-	      this.stopper = (0, _cssAnimation2['default'])(node, transitionName + '-' + animationType, end);
-	    } else {
-	      this.stopper = props.animation[animationType](node, end);
-	    }
-	  },
-	
-	  stop: function stop() {
-	    if (this.stopper) {
-	      this.stopper.stop();
-	      this.stopper = null;
-	    }
 	  },
 	
 	  componentWillUnmount: function componentWillUnmount() {
@@ -22814,6 +22812,31 @@
 	    }
 	  },
 	
+	  transition: function transition(animationType, finishCallback) {
+	    var _this = this;
+	
+	    var node = _reactDom2['default'].findDOMNode(this);
+	    var props = this.props;
+	    var transitionName = props.transitionName;
+	    this.stop();
+	    var end = function end() {
+	      _this.stopper = null;
+	      finishCallback();
+	    };
+	    if ((_cssAnimation.isCssAnimationSupported || !props.animation[animationType]) && transitionName && props[transitionMap[animationType]]) {
+	      this.stopper = (0, _cssAnimation2['default'])(node, transitionName + '-' + animationType, end);
+	    } else {
+	      this.stopper = props.animation[animationType](node, end);
+	    }
+	  },
+	
+	  stop: function stop() {
+	    if (this.stopper) {
+	      this.stopper.stop();
+	      this.stopper = null;
+	    }
+	  },
+	
 	  render: function render() {
 	    return this.props.children;
 	  }
@@ -22823,13 +22846,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 190 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Event = __webpack_require__(191);
-	var Css = __webpack_require__(192);
+	var Event = __webpack_require__(192);
+	var Css = __webpack_require__(193);
 	var isCssAnimationSupported = Event.endEvents.length !== 0;
 	
 	function getDuration(node, name) {
@@ -22981,7 +23004,7 @@
 	module.exports = cssAnimation;
 
 /***/ },
-/* 191 */
+/* 192 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23069,7 +23092,7 @@
 	module.exports = TransitionEvents;
 
 /***/ },
-/* 192 */
+/* 193 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23100,7 +23123,7 @@
 	};
 
 /***/ },
-/* 193 */
+/* 194 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -23117,13 +23140,23 @@
 	  },
 	  isLeaveSupported: function isLeaveSupported(props) {
 	    return props.transitionName && props.transitionLeave || props.animation.leave;
+	  },
+	
+	  allowAppearCallback: function allowAppearCallback(props) {
+	    return props.transitionAppear || props.animation.appear;
+	  },
+	  allowEnterCallback: function allowEnterCallback(props) {
+	    return props.transitionEnter || props.animation.enter;
+	  },
+	  allowLeaveCallback: function allowLeaveCallback(props) {
+	    return props.transitionLeave || props.animation.leave;
 	  }
 	};
 	exports["default"] = util;
 	module.exports = exports["default"];
 
 /***/ },
-/* 194 */
+/* 195 */
 /***/ function(module, exports) {
 
 	/* eslint-disable no-unused-vars */
@@ -23168,7 +23201,7 @@
 
 
 /***/ },
-/* 195 */
+/* 196 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
