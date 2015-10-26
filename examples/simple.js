@@ -6,20 +6,29 @@ import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.less';
 import assign from 'object-assign';
 
+// do not use rc-tooltip/lib/placements
+import placements from 'rc-tooltip/src/placements';
+
 var Test = React.createClass({
   getInitialState() {
+    const placement='right';
+    const offset = placements[placement].offset;
     return {
-      placement: 'right',
+      placement: placement,
       trigger: {
         hover: 1
       },
-      offsetX: undefined,
-      offsetY: undefined
+      offsetX: offset[0],
+      offsetY: offset[1],
     };
   },
   onPlacementChange(e) {
+    const placement = e.target.value;
+    const offset = placements[placement].offset;
     this.setState({
-      placement: e.target.value
+      placement: e.target.value,
+      offsetX: offset[0],
+      offsetY: offset[1],
     });
   },
 
@@ -64,20 +73,16 @@ var Test = React.createClass({
   },
 
   render() {
-    var trigger = this.state.trigger;
+    var state = this.state;
+    var trigger = state.trigger;
     return <div >
       <div style={{margin: '10px 20px'}}>
         <label>
           placement:
           <select value={this.state.placement} onChange={this.onPlacementChange}>
-            <option>left</option>
-            <option>right</option>
-            <option>top</option>
-            <option>bottom</option>
-            <option>topLeft</option>
-            <option>topRight</option>
-            <option>bottomRight</option>
-            <option>bottomLeft</option>
+            {Object.keys(placements).map(function (p) {
+              return <option key={p} value={p}>{p}</option>
+            })}
           </select>
         </label>
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -106,12 +111,12 @@ var Test = React.createClass({
         <br/>
         <label>
           offsetX:
-          <input type='text' onChange={this.onOffsetXChange} style={{width:50}}/>
+          <input type='text' value={state.offsetX} onChange={this.onOffsetXChange} style={{width:50}}/>
         </label>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
           offsetY:
-          <input type='text' onChange={this.onOffsetYChange} style={{width:50}}/>
+          <input type='text' value={state.offsetY} onChange={this.onOffsetYChange} style={{width:50}}/>
         </label>
       </div>
       <div style={{margin: 100}}>
@@ -120,12 +125,12 @@ var Test = React.createClass({
                  mouseLeaveDelay={0.1}
                  trigger={Object.keys(this.state.trigger)}
                  onVisibleChange={this.onVisibleChange}
-                 overlay={<span>i am a tooltip</span>}
+                 overlay={<div style={{height:50,width:50}}>i am a tooltip</div>}
                  align={{
                   offset:[this.state.offsetX, this.state.offsetY]
                  }}
                  transitionName={this.state.transitionName}>
-          <a href='#' style={{margin: 20}} onClick={this.preventDefault}>trigger</a>
+          <div style={{height:100,width:100,border:'1px solid red'}}>trigger</div>
         </Tooltip>
       </div>
     </div>;

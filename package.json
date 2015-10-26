@@ -1,6 +1,6 @@
 {
   "name": "rc-tooltip",
-  "version": "3.0.3",
+  "version": "3.1.0",
   "description": "tooltip ui component for react",
   "keywords": [
     "react",
@@ -56,9 +56,6 @@
     "lint"
   ],
   "dependencies": {
-    "object-assign": "4.x",
-    "rc-align": "2.x",
-    "rc-animate": "2.x",
-    "rc-util": "2.x"
+    "rc-trigger": "1.x"
   }
 }
