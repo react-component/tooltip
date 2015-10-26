@@ -32,18 +32,16 @@ const Popup = React.createClass({
 
   onAlign(popupDomNode, align) {
     const props = this.props;
-    const {placement, prefixCls} = props;
-    if (placement) {
-      const originalClassName = popupDomNode.className;
-      let nextClassName = props.className + ' ';
-      if (placement.points) {
-        nextClassName += getToolTipClassByPlacement(prefixCls, align);
-      } else if (typeof placement === 'string') {
-        nextClassName += getToolTipClassByPlacement(prefixCls, fromPointsToPlacement(align));
-      }
-      if (nextClassName !== originalClassName) {
-        popupDomNode.className = nextClassName;
-      }
+    let placement;
+    const placementProp = this.currentPlacement || props.placement;
+    if (placementProp.points) {
+      placement = align;
+    } else if (typeof placementProp === 'string') {
+      placement = fromPointsToPlacement(align);
+    }
+    if (placement !== placementProp) {
+      this.currentPlacement = placement;
+      popupDomNode.className = this.getClassName(placement);
     }
   },
 
@@ -64,20 +62,24 @@ const Popup = React.createClass({
     return transitionName;
   },
 
+  getClassName(placement) {
+    const props = this.props;
+    const {prefixCls} = props;
+    let className = props.className + ' ';
+    className += getToolTipClassByPlacement(prefixCls, placement || props.placement);
+    const hiddenClass = `${prefixCls}-hidden`;
+    if (!props.visible) {
+      className += ` ${hiddenClass}`;
+    }
+    return className;
+  },
+
   render() {
     const props = this.props;
     const {prefixCls, placement, style} = props;
-    let className = props.className + ' ';
-
-    if (props.visible || !this.rootNode) {
-      className += getToolTipClassByPlacement(prefixCls, props.placement);
-    } else {
-      // fix auto adjust
-      className = this.rootNode.className;
-      const hiddenClass = `${prefixCls}-hidden`;
-      if (className.indexOf(hiddenClass) === -1) {
-        className += ` ${hiddenClass}`;
-      }
+    const className = this.getClassName(this.currentPlacement);
+    if (!props.visible) {
+      this.currentPlacement = null;
     }
     const arrowClassName = `${prefixCls}-arrow`;
     const innerClassname = `${prefixCls}-inner`;
