@@ -11,7 +11,14 @@ const Popup = React.createClass({
     wrap: PropTypes.object,
     style: PropTypes.object,
     onMouseEnter: PropTypes.func,
+    className: PropTypes.string,
     onMouseLeave: PropTypes.func,
+  },
+
+  getDefaultProps() {
+    return {
+      className: '',
+    };
   },
 
   componentDidMount() {
@@ -27,15 +34,15 @@ const Popup = React.createClass({
     const props = this.props;
     const {placement, prefixCls} = props;
     if (placement) {
-      const originalClassName = getToolTipClassByPlacement(prefixCls, placement);
-      let nextClassName;
+      const originalClassName = popupDomNode.className;
+      let nextClassName = props.className + ' ';
       if (placement.points) {
-        nextClassName = getToolTipClassByPlacement(prefixCls, align);
+        nextClassName += getToolTipClassByPlacement(prefixCls, align);
       } else if (typeof placement === 'string') {
-        nextClassName = getToolTipClassByPlacement(prefixCls, fromPointsToPlacement(align));
+        nextClassName += getToolTipClassByPlacement(prefixCls, fromPointsToPlacement(align));
       }
       if (nextClassName !== originalClassName) {
-        popupDomNode.className = popupDomNode.className.replace(originalClassName, nextClassName);
+        popupDomNode.className = nextClassName;
       }
     }
   },
@@ -60,13 +67,10 @@ const Popup = React.createClass({
   render() {
     const props = this.props;
     const {prefixCls, placement, style} = props;
-    let className;
+    let className = props.className + ' ';
 
     if (props.visible || !this.rootNode) {
-      className = getToolTipClassByPlacement(prefixCls, props.placement);
-      if (props.className) {
-        className += ' ' + props.className;
-      }
+      className += getToolTipClassByPlacement(prefixCls, props.placement);
     } else {
       // fix auto adjust
       className = this.rootNode.className;
