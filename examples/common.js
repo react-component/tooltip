@@ -19829,7 +19829,7 @@
 	    this.setVisible(false);
 	  },
 	
-	  onClick: function onClick(e) {
+	  onClick: function onClick(event) {
 	    // focus will trigger click
 	    if (this.focusTime) {
 	      var preTime = undefined;
@@ -19847,7 +19847,7 @@
 	    }
 	    this.preClickTime = 0;
 	    this.preTouchTime = 0;
-	    e.preventDefault();
+	    event.preventDefault();
 	    if (this.state.visible) {
 	      this.setVisible(false);
 	    } else {
@@ -19855,8 +19855,8 @@
 	    }
 	  },
 	
-	  onDocumentClick: function onDocumentClick(e) {
-	    var target = e.target;
+	  onDocumentClick: function onDocumentClick(event) {
+	    var target = event.target;
 	    var root = _reactDom2['default'].findDOMNode(this);
 	    var popupNode = this.getPopupDomNode();
 	    if (!_rcUtil.Dom.contains(root, target) && !_rcUtil.Dom.contains(popupNode, target)) {
@@ -19910,6 +19910,35 @@
 	    );
 	  },
 	
+	  setVisible: function setVisible(visible) {
+	    if (this.state.visible !== visible) {
+	      if (!('visible' in this.props)) {
+	        this.setState({
+	          visible: visible
+	        });
+	      }
+	      this.props.onVisibleChange(visible);
+	    }
+	  },
+	
+	  delaySetVisible: function delaySetVisible(visible, delayS) {
+	    var _this2 = this;
+	
+	    var delay = delayS * 1000;
+	    if (this.delayTimer) {
+	      clearTimeout(this.delayTimer);
+	      this.delayTimer = null;
+	    }
+	    if (delay) {
+	      this.delayTimer = setTimeout(function () {
+	        _this2.setVisible(visible);
+	        _this2.delayTimer = null;
+	      }, delay);
+	    } else {
+	      this.setVisible(visible);
+	    }
+	  },
+	
 	  render: function render() {
 	    if (this.state.visible) {
 	      this.popupRendered = true;
@@ -19945,35 +19974,6 @@
 	      { className: className, style: props.wrapStyle },
 	      _react2['default'].cloneElement(child, newChildProps)
 	    );
-	  },
-	
-	  setVisible: function setVisible(visible) {
-	    if (this.state.visible !== visible) {
-	      if (!('visible' in this.props)) {
-	        this.setState({
-	          visible: visible
-	        });
-	      }
-	      this.props.onVisibleChange(visible);
-	    }
-	  },
-	
-	  delaySetVisible: function delaySetVisible(visible, delayS) {
-	    var _this2 = this;
-	
-	    var delay = delayS * 1000;
-	    if (this.delayTimer) {
-	      clearTimeout(this.delayTimer);
-	      this.delayTimer = null;
-	    }
-	    if (delay) {
-	      this.delayTimer = setTimeout(function () {
-	        _this2.setVisible(visible);
-	        _this2.delayTimer = null;
-	      }, delay);
-	    } else {
-	      this.setVisible(visible);
-	    }
 	  }
 	});
 	
@@ -20872,7 +20872,14 @@
 	    wrap: _react.PropTypes.object,
 	    style: _react.PropTypes.object,
 	    onMouseEnter: _react.PropTypes.func,
+	    className: _react.PropTypes.string,
 	    onMouseLeave: _react.PropTypes.func
+	  },
+	
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      className: ''
+	    };
 	  },
 	
 	  componentDidMount: function componentDidMount() {
@@ -20886,20 +20893,16 @@
 	
 	  onAlign: function onAlign(popupDomNode, align) {
 	    var props = this.props;
-	    var placement = props.placement;
-	    var prefixCls = props.prefixCls;
-	
-	    if (placement) {
-	      var originalClassName = (0, _utils.getToolTipClassByPlacement)(prefixCls, placement);
-	      var nextClassName = undefined;
-	      if (placement.points) {
-	        nextClassName = (0, _utils.getToolTipClassByPlacement)(prefixCls, align);
-	      } else if (typeof placement === 'string') {
-	        nextClassName = (0, _utils.getToolTipClassByPlacement)(prefixCls, (0, _utils.fromPointsToPlacement)(align));
-	      }
-	      if (nextClassName !== originalClassName) {
-	        popupDomNode.className = popupDomNode.className.replace(originalClassName, nextClassName);
-	      }
+	    var placement = undefined;
+	    var placementProp = this.currentPlacement || props.placement;
+	    if (placementProp.points) {
+	      placement = align;
+	    } else if (typeof placementProp === 'string') {
+	      placement = (0, _utils.fromPointsToPlacement)(align);
+	    }
+	    if (placement !== placementProp) {
+	      this.currentPlacement = placement;
+	      popupDomNode.className = this.getClassName(placement);
 	    }
 	  },
 	
@@ -20920,26 +20923,28 @@
 	    return transitionName;
 	  },
 	
+	  getClassName: function getClassName(placement) {
+	    var props = this.props;
+	    var prefixCls = props.prefixCls;
+	
+	    var className = props.className + ' ';
+	    className += (0, _utils.getToolTipClassByPlacement)(prefixCls, placement || props.placement);
+	    var hiddenClass = prefixCls + '-hidden';
+	    if (!props.visible) {
+	      className += ' ' + hiddenClass;
+	    }
+	    return className;
+	  },
+	
 	  render: function render() {
 	    var props = this.props;
 	    var prefixCls = props.prefixCls;
 	    var placement = props.placement;
 	    var style = props.style;
 	
-	    var className = undefined;
-	
-	    if (props.visible || !this.rootNode) {
-	      className = (0, _utils.getToolTipClassByPlacement)(prefixCls, props.placement);
-	      if (props.className) {
-	        className += ' ' + props.className;
-	      }
-	    } else {
-	      // fix auto adjust
-	      className = this.rootNode.className;
-	      var hiddenClass = prefixCls + '-hidden';
-	      if (className.indexOf(hiddenClass) === -1) {
-	        className += ' ' + hiddenClass;
-	      }
+	    var className = this.getClassName(this.currentPlacement);
+	    if (!props.visible) {
+	      this.currentPlacement = null;
 	    }
 	    var arrowClassName = prefixCls + '-arrow';
 	    var innerClassname = prefixCls + '-inner';
@@ -20961,16 +20966,16 @@
 	        targetOffsetProp = targetOffsetProp.concat();
 	      }
 	      var updateAlign = {};
-	      for (var i = 0; i < 2; i++) {
+	      for (var index = 0; index < 2; index++) {
 	        if (offsetProp) {
-	          if (offsetProp[i] === undefined) {
-	            offsetProp[i] = offset[i];
+	          if (offsetProp[index] === undefined) {
+	            offsetProp[index] = offset[index];
 	          }
 	          updateAlign.offset = offsetProp;
 	        }
 	        if (targetOffsetProp) {
-	          if (targetOffsetProp[i] === undefined) {
-	            targetOffsetProp[i] = targetOffset[i];
+	          if (targetOffsetProp[index] === undefined) {
+	            targetOffsetProp[index] = targetOffset[index];
 	          }
 	          updateAlign.targetOffset = offsetProp;
 	        }
@@ -21114,10 +21119,10 @@
 	
 	function fromPointsToPlacement(align) {
 	  var points = align.points;
-	  for (var p in placementAlignMap) {
-	    if (placementAlignMap.hasOwnProperty(p)) {
-	      if (isPointsEq(placementAlignMap[p].points, points)) {
-	        return p;
+	  for (var placement in placementAlignMap) {
+	    if (placementAlignMap.hasOwnProperty(placement)) {
+	      if (isPointsEq(placementAlignMap[placement].points, points)) {
+	        return placement;
 	      }
 	    }
 	  }
