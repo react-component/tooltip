@@ -43,7 +43,7 @@ const Tooltip = React.createClass({
       <div className={`${prefixCls}-arrow`} key="arrow"></div>,
       <div className={`${prefixCls}-inner`} key="content">
         {overlay}
-      </div>
+      </div>,
     ]);
   },
 
