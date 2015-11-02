@@ -3,12 +3,12 @@ webpackJsonp([3],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(199);
+	module.exports = __webpack_require__(203);
 
 
 /***/ },
 
-/***/ 199:
+/***/ 203:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19,36 +19,48 @@ webpackJsonp([3],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(158);
+	var _reactDom = __webpack_require__(159);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _rcTooltip = __webpack_require__(159);
+	var _rcTooltip = __webpack_require__(160);
 	
 	var _rcTooltip2 = _interopRequireDefault(_rcTooltip);
 	
-	__webpack_require__(196);
+	__webpack_require__(200);
 	
-	var _objectAssign = __webpack_require__(195);
+	var _objectAssign = __webpack_require__(199);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+	
+	// do not use rc-tooltip/lib/placements
+	
+	var _rcTooltipSrcPlacements = __webpack_require__(163);
+	
+	var _rcTooltipSrcPlacements2 = _interopRequireDefault(_rcTooltipSrcPlacements);
 	
 	var Test = _react2['default'].createClass({
 	  displayName: 'Test',
 	
 	  getInitialState: function getInitialState() {
+	    var placement = 'right';
+	    var offset = _rcTooltipSrcPlacements2['default'][placement].offset;
 	    return {
-	      placement: 'right',
+	      placement: placement,
 	      trigger: {
 	        hover: 1
 	      },
-	      offsetX: undefined,
-	      offsetY: undefined
+	      offsetX: offset[0],
+	      offsetY: offset[1]
 	    };
 	  },
 	  onPlacementChange: function onPlacementChange(e) {
+	    var placement = e.target.value;
+	    var offset = _rcTooltipSrcPlacements2['default'][placement].offset;
 	    this.setState({
-	      placement: e.target.value
+	      placement: e.target.value,
+	      offsetX: offset[0],
+	      offsetY: offset[1]
 	    });
 	  },
 	
@@ -93,7 +105,8 @@ webpackJsonp([3],{
 	  },
 	
 	  render: function render() {
-	    var trigger = this.state.trigger;
+	    var state = this.state;
+	    var trigger = state.trigger;
 	    return _react2['default'].createElement(
 	      'div',
 	      null,
@@ -107,46 +120,13 @@ webpackJsonp([3],{
 	          _react2['default'].createElement(
 	            'select',
 	            { value: this.state.placement, onChange: this.onPlacementChange },
-	            _react2['default'].createElement(
-	              'option',
-	              null,
-	              'left'
-	            ),
-	            _react2['default'].createElement(
-	              'option',
-	              null,
-	              'right'
-	            ),
-	            _react2['default'].createElement(
-	              'option',
-	              null,
-	              'top'
-	            ),
-	            _react2['default'].createElement(
-	              'option',
-	              null,
-	              'bottom'
-	            ),
-	            _react2['default'].createElement(
-	              'option',
-	              null,
-	              'topLeft'
-	            ),
-	            _react2['default'].createElement(
-	              'option',
-	              null,
-	              'topRight'
-	            ),
-	            _react2['default'].createElement(
-	              'option',
-	              null,
-	              'bottomRight'
-	            ),
-	            _react2['default'].createElement(
-	              'option',
-	              null,
-	              'bottomLeft'
-	            )
+	            Object.keys(_rcTooltipSrcPlacements2['default']).map(function (p) {
+	              return _react2['default'].createElement(
+	                'option',
+	                { key: p, value: p },
+	                p
+	              );
+	            })
 	          )
 	        ),
 	        '    ',
@@ -181,14 +161,14 @@ webpackJsonp([3],{
 	          'label',
 	          null,
 	          'offsetX:',
-	          _react2['default'].createElement('input', { type: 'text', onChange: this.onOffsetXChange, style: { width: 50 } })
+	          _react2['default'].createElement('input', { type: 'text', value: state.offsetX, onChange: this.onOffsetXChange, style: { width: 50 } })
 	        ),
 	        '    ',
 	        _react2['default'].createElement(
 	          'label',
 	          null,
 	          'offsetY:',
-	          _react2['default'].createElement('input', { type: 'text', onChange: this.onOffsetYChange, style: { width: 50 } })
+	          _react2['default'].createElement('input', { type: 'text', value: state.offsetY, onChange: this.onOffsetYChange, style: { width: 50 } })
 	        )
 	      ),
 	      _react2['default'].createElement(
@@ -202,8 +182,8 @@ webpackJsonp([3],{
 	            trigger: Object.keys(this.state.trigger),
 	            onVisibleChange: this.onVisibleChange,
 	            overlay: _react2['default'].createElement(
-	              'span',
-	              null,
+	              'div',
+	              { style: { height: 50, width: 50 } },
 	              'i am a tooltip'
 	            ),
 	            align: {
@@ -211,8 +191,8 @@ webpackJsonp([3],{
 	            },
 	            transitionName: this.state.transitionName },
 	          _react2['default'].createElement(
-	            'a',
-	            { href: '#', style: { margin: 20 }, onClick: this.preventDefault },
+	            'div',
+	            { style: { height: 100, width: 100, border: '1px solid red' } },
 	            'trigger'
 	          )
 	        )

@@ -239,7 +239,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-tooltip@3.0.4</h1>
+    <h1>rc-tooltip@3.1.0</h1>
 
     <p>tooltip ui component for react</p>
   </div>
@@ -255,20 +255,29 @@ import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
 import assign from 'object-assign';
 
+// do not use rc-tooltip/lib/placements
+import placements from 'rc-tooltip/lib/placements';
+
 var Test = React.createClass({
   getInitialState() {
+    const placement='right';
+    const offset = placements[placement].offset;
     return {
-      placement: 'right',
+      placement: placement,
       trigger: {
         hover: 1
       },
-      offsetX: undefined,
-      offsetY: undefined
+      offsetX: offset[0],
+      offsetY: offset[1],
     };
   },
   onPlacementChange(e) {
+    const placement = e.target.value;
+    const offset = placements[placement].offset;
     this.setState({
-      placement: e.target.value
+      placement: e.target.value,
+      offsetX: offset[0],
+      offsetY: offset[1],
     });
   },
 
@@ -313,20 +322,16 @@ var Test = React.createClass({
   },
 
   render() {
-    var trigger = this.state.trigger;
+    var state = this.state;
+    var trigger = state.trigger;
     return <span class="hljs-tag">&lt;<span class="hljs-title">div</span> &gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">margin</span>: '10<span class="hljs-variable">px</span> 20<span class="hljs-variable">px</span>'}}</span><span class="xml"><span class="hljs-tag">&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
           placement:
           <span class="hljs-tag">&lt;<span class="hljs-title">select</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">{this.state.placement}</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onPlacementChange}</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>left<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>top<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>topLeft<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>topRight<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>bottomRight<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>bottomLeft<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+            {Object.keys(placements).map(function (p) {
+              return <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">key</span>=<span class="hljs-value">{p}</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">{p}</span>&gt;</span>{p}<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+            })}
           <span class="hljs-tag">&lt;/<span class="hljs-title">select</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
         &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
@@ -355,12 +360,12 @@ var Test = React.createClass({
         <span class="hljs-tag">&lt;<span class="hljs-title">br</span>/&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
           offsetX:
-          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'text'</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onOffsetXChange}</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">width</span>:50}}</span><span class="xml"><span class="hljs-tag">/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'text'</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">{state.offsetX}</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onOffsetXChange}</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">width</span>:50}}</span><span class="xml"><span class="hljs-tag">/&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
         &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
         <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
           offsetY:
-          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'text'</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onOffsetYChange}</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">width</span>:50}}</span><span class="xml"><span class="hljs-tag">/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'text'</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">{state.offsetY}</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onOffsetYChange}</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">width</span>:50}}</span><span class="xml"><span class="hljs-tag">/&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">margin</span>: 100}}</span><span class="xml"><span class="hljs-tag">&gt;</span>
@@ -369,12 +374,12 @@ var Test = React.createClass({
                  <span class="hljs-attribute">mouseLeaveDelay</span>=<span class="hljs-value">{0.1}</span>
                  <span class="hljs-attribute">trigger</span>=<span class="hljs-value">{Object.keys(this.state.trigger)}</span>
                  <span class="hljs-attribute">onVisibleChange</span>=<span class="hljs-value">{this.onVisibleChange}</span>
-                 <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{&lt;span</span>&gt;</span>i am a tooltip<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>}
+                 <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">height</span>:50,<span class="hljs-variable">width</span>:50}}</span><span class="xml"><span class="hljs-tag">&gt;</span>i am a tooltip<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
                  align=</span><span class="hljs-expression">{{
                   <span class="hljs-variable">offset</span>:[<span class="hljs-variable">this.state.offsetX</span>, <span class="hljs-variable">this.state.offsetY</span>]
                  }}</span><span class="xml">
                  transitionName={this.state.transitionName}&gt;
-          <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">'#'</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">margin</span>: 20}}</span><span class="xml"><span class="hljs-tag"> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{this.preventDefault}</span>&gt;</span>trigger<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">height</span>:100,<span class="hljs-variable">width</span>:100,<span class="hljs-variable">border</span>:'1<span class="hljs-variable">px</span> <span class="hljs-variable">solid</span> <span class="hljs-variable">red</span>'}}</span><span class="xml"><span class="hljs-tag">&gt;</span>trigger<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>;
