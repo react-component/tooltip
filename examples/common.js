@@ -76,7 +76,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"formError","1":"handleVisibleChange","2":"points","3":"simple"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"formError","1":"handleVisibleChange","2":"placement","3":"simple"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -19695,6 +19695,8 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _react = __webpack_require__(2);
@@ -19777,9 +19779,13 @@
 	    var defaultVisible = _props2.defaultVisible;
 	    var getTooltipContainer = _props2.getTooltipContainer;
 	
+	    var extraProps = {};
+	    if ('visible' in this.props) {
+	      extraProps.popupVisible = this.props.visible;
+	    }
 	    return _react2['default'].createElement(
 	      _rcTrigger2['default'],
-	      { popupClassName: overlayClassName,
+	      _extends({ popupClassName: overlayClassName,
 	        ref: 'trigger',
 	        prefixCls: prefixCls,
 	        popup: this.getPopupElement(),
@@ -19794,7 +19800,8 @@
 	        defaultPopupVisible: defaultVisible,
 	        mouseLeaveDelay: mouseLeaveDelay,
 	        popupStyle: overlayStyle,
-	        mouseEnterDelay: mouseEnterDelay },
+	        mouseEnterDelay: mouseEnterDelay
+	      }, extraProps),
 	      children
 	    );
 	  }
