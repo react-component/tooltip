@@ -30,7 +30,7 @@ var Test = React.createClass({
         <Tooltip
           visible={this.state.visible}
           animation="zoom"
-          trigger=""
+          trigger={[]}
           overlayStyle={{zIndex:1000}}
           overlay={<span>required!</span>}>
           <input onChange={this.handleChange}/>

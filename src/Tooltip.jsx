@@ -59,6 +59,10 @@ const Tooltip = React.createClass({
       transitionName, animation,
       placement, align,
       defaultVisible, getTooltipContainer} = this.props;
+    const extraProps = {};
+    if ('visible' in this.props) {
+      extraProps.popupVisible = this.props.visible;
+    }
     return (<Trigger popupClassName={overlayClassName}
                      ref="trigger"
                      prefixCls={prefixCls}
@@ -74,7 +78,8 @@ const Tooltip = React.createClass({
                      defaultPopupVisible={defaultVisible}
                      mouseLeaveDelay={mouseLeaveDelay}
                      popupStyle={overlayStyle}
-                     mouseEnterDelay={mouseEnterDelay}>
+                     mouseEnterDelay={mouseEnterDelay}
+      {...extraProps}>
       {children}
     </Trigger>);
   },

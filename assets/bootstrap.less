@@ -1,238 +1,163 @@
-@tooltipPrefixCls: rc-tooltip;
+@tooltip-prefix-cls: rc-tooltip;
 
-.@{tooltipPrefixCls} {
+//
+// Tooltips
+// --------------------------------------------------
+@font-size-base         : 12px;
+@line-height-base       : 1.5;
+@border-radius-base     : 6px;
+@overlay-shadow              : 0 0 4px rgba(0, 0, 0, 0.17);
+//** Tooltip text color
+@tooltip-color: #fff;
+//** Tooltip background color
+@tooltip-bg: #373737;
+@tooltip-opacity: 0.9;
+
+//** Tooltip arrow width
+@tooltip-arrow-width: 5px;
+//** Tooltip distance with trigger
+@tooltip-distance: @tooltip-arrow-width + 4;
+//** Tooltip arrow color
+@tooltip-arrow-color: @tooltip-bg;
+
+// Base class
+.@{tooltip-prefix-cls} {
   position: absolute;
-  left: -9999px;
-  top: -9999px;
   z-index: 1070;
   display: block;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  font-weight: normal;
-  line-height: 1.4;
+  visibility: visible;
+  // remove left/top by yiminghe
+  // left: -9999px;
+  // top: -9999px;
+  font-size: @font-size-base;
+  line-height: @line-height-base;
+  opacity: @tooltip-opacity;
 
   &-hidden {
     display: none;
   }
 
-  &-placement {
-    &-left {
-      padding: 0 5px;
-
-      & > .rc-tooltip-arrow {
-        top: 50%;
-        right: 0;
-        margin-top: -5px;
-        border-width: 5px 0 5px 5px;
-        border-left-color: #000000;
-      }
-    }
-
-    &-top {
-      padding: 5px 0;
-
-      & > .@{tooltipPrefixCls}-arrow {
-        bottom: 0;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 5px 5px 0;
-        border-top-color: #000000;
-      }
-    }
-
-    &-topRight {
-      padding: 5px 0;
-
-      & > .@{tooltipPrefixCls}-arrow {
-        bottom: 0;
-        left: 85%;
-        margin-left: -5px;
-        border-width: 5px 5px 0;
-        border-top-color: #000000;
-      }
-    }
-
-    &-rightTop {
-      padding: 0 5px;
-
-      & > .@{tooltipPrefixCls}-arrow {
-        top: 15%;
-        left: 0;
-        margin-top: -5px;
-        border-width: 5px 5px 5px 0;
-        border-right-color: #000000;
-      }
-    }
-
-    &-rightBottom {
-      padding: 0 5px;
-
-      & > .@{tooltipPrefixCls}-arrow {
-        top: 85%;
-        left: 0;
-        margin-top: -5px;
-        border-width: 5px 5px 5px 0;
-        border-right-color: #000000;
-      }
-    }
-
-    &-topLeft {
-      padding: 5px 0;
-
-      & > .@{tooltipPrefixCls}-arrow {
-        bottom: 0;
-        left: 15%;
-        margin-left: -5px;
-        border-width: 5px 5px 0;
-        border-top-color: #000000;
-      }
-    }
-
-    &-leftTop {
-      padding: 0 5px;
-
-      & > .rc-tooltip-arrow {
-        top: 15%;
-        right: 0;
-        margin-top: -5px;
-        border-width: 5px 0 5px 5px;
-        border-left-color: #000000;
-      }
-    }
-
-    &-leftBottom {
-      padding: 0 5px;
-
-      & > .rc-tooltip-arrow {
-        top: 85%;
-        right: 0;
-        margin-top: -5px;
-        border-width: 5px 0 5px 5px;
-        border-left-color: #000000;
-      }
-    }
-
-    &-bottom {
-      padding: 5px 0;
-
-      & > .@{tooltipPrefixCls}-arrow {
-        top: 0;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 0 5px 5px;
-        border-bottom-color: #000000;
-      }
-
-    }
-
-    &-bottomRight {
-      padding: 5px 0;
-
-      & > .@{tooltipPrefixCls}-arrow {
-        top: 0;
-        left: 85%;
-        margin-left: -5px;
-        border-width: 0 5px 5px;
-        border-bottom-color: #000000;
-      }
-    }
-
-    &-bottomLeft {
-      padding: 5px 0;
-
-      & > .@{tooltipPrefixCls}-arrow {
-        top: 0;
-        left: 15%;
-        margin-left: -5px;
-        border-width: 0 5px 5px;
-        border-bottom-color: #000000;
-      }
-    }
-
-    &-right {
-      padding: 0 5px;
-
-      & > .@{tooltipPrefixCls}-arrow {
-        top: 50%;
-        left: 0;
-        margin-top: -5px;
-        border-width: 5px 5px 5px 0;
-        border-right-color: #000000;
-      }
-    }
+  &-placement-top, &-placement-topLeft, &-placement-topRight {
+    padding: @tooltip-arrow-width 0 @tooltip-distance 0;
   }
-
-  &-arrow {
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-style: solid;
+  &-placement-right, &-placement-rightTop, &-placement-rightBottom {
+    padding: 0 @tooltip-arrow-width 0 @tooltip-distance;
   }
-
-  &-inner {
-    padding: 3px 8px;
-    color: #ffffff;
-    text-align: center;
-    text-decoration: none;
-    background-color: #000000;
-    border-radius: 4px;
+  &-placement-bottom, &-placement-bottomLeft, &-placement-bottomRight {
+    padding: @tooltip-distance 0 @tooltip-arrow-width 0;
   }
-
-  .effect() {
-    animation-duration: 0.3s;
-    animation-fill-mode: both;
-  }
-
-  &&-zoom-enter, &&-zoom-leave {
-    display: block;
-  }
-
-  &-zoom-enter,&-zoom-appear {
-    opacity: 0;
-    .effect();
-    animation-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
-    animation-play-state: paused;
-  }
-
-  &-zoom-leave {
-    .effect();
-    animation-timing-function: cubic-bezier(0.6, -0.3, 0.74, 0.05);
-    animation-play-state: paused;
-  }
-
-  &-zoom-enter&-zoom-enter-active, &-zoom-appear&-zoom-appear-active {
-    animation-name: rcToolTipZoomIn;
-    animation-play-state: running;
-  }
-
-  &-zoom-leave&-zoom-leave-active {
-    animation-name: rcToolTipZoomOut;
-    animation-play-state: running;
-  }
-
-  @keyframes rcToolTipZoomIn {
-    0% {
-      opacity: 0;
-      transform-origin: 50% 50%;
-      transform: scale(0, 0);
-    }
-    100% {
-      opacity: 1;
-      transform-origin: 50% 50%;
-      transform: scale(1, 1);
-    }
-  }
-  @keyframes rcToolTipZoomOut {
-    0% {
-      opacity: 1;
-      transform-origin: 50% 50%;
-      transform: scale(1, 1);
-    }
-    100% {
-      opacity: 0;
-      transform-origin: 50% 50%;
-      transform: scale(0, 0);
-    }
+  &-placement-left, &-placement-leftTop, &-placement-leftBottom {
+    padding: 0 @tooltip-distance 0 @tooltip-arrow-width;
   }
 }
+
+// Wrapper for the tooltip content
+.@{tooltip-prefix-cls}-inner {
+  padding: 8px 10px;
+  color: @tooltip-color;
+  text-align: left;
+  text-decoration: none;
+  background-color: @tooltip-bg;
+  border-radius: @border-radius-base;
+  box-shadow: @overlay-shadow;
+  min-height: 34px;
+}
+
+// Arrows
+.@{tooltip-prefix-cls}-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+
+.@{tooltip-prefix-cls} {
+  &-placement-top &-arrow,
+  &-placement-topLeft &-arrow,
+  &-placement-topRight &-arrow {
+    bottom: @tooltip-distance - @tooltip-arrow-width;
+    margin-left: -@tooltip-arrow-width;
+    border-width: @tooltip-arrow-width @tooltip-arrow-width 0;
+    border-top-color: @tooltip-arrow-color;
+  }
+
+  &-placement-top &-arrow {
+    left: 50%;
+  }
+
+  &-placement-topLeft &-arrow {
+    left: 15%;
+  }
+
+  &-placement-topRight &-arrow {
+    right: 15%;
+  }
+
+  &-placement-right &-arrow,
+  &-placement-rightTop &-arrow,
+  &-placement-rightBottom &-arrow {
+    left: @tooltip-distance - @tooltip-arrow-width;
+    margin-top: -@tooltip-arrow-width;
+    border-width: @tooltip-arrow-width @tooltip-arrow-width @tooltip-arrow-width 0;
+    border-right-color: @tooltip-arrow-color;
+  }
+
+  &-placement-right &-arrow {
+    top: 50%;
+  }
+
+  &-placement-rightTop &-arrow {
+    top: 15%;
+    margin-top: 0;
+  }
+
+  &-placement-rightBottom &-arrow {
+    bottom: 15%;
+  }
+
+  &-placement-left &-arrow,
+  &-placement-leftTop &-arrow,
+  &-placement-leftBottom &-arrow {
+    right: @tooltip-distance - @tooltip-arrow-width;
+    margin-top: -@tooltip-arrow-width;
+    border-width: @tooltip-arrow-width 0 @tooltip-arrow-width @tooltip-arrow-width;
+    border-left-color: @tooltip-arrow-color;
+  }
+
+  &-placement-left &-arrow {
+    top: 50%;
+  }
+
+  &-placement-leftTop &-arrow {
+    top: 15%;
+    margin-top: 0;
+  }
+
+  &-placement-leftBottom &-arrow {
+    bottom: 15%;
+  }
+
+  &-placement-bottom &-arrow,
+  &-placement-bottomLeft &-arrow,
+  &-placement-bottomRight &-arrow {
+    top: @tooltip-distance - @tooltip-arrow-width;
+    margin-left: -@tooltip-arrow-width;
+    border-width: 0 @tooltip-arrow-width @tooltip-arrow-width;
+    border-bottom-color: @tooltip-arrow-color;
+  }
+
+  &-placement-bottom &-arrow {
+    left: 50%;
+  }
+
+  &-placement-bottomLeft &-arrow {
+    left: 15%;
+  }
+
+  &-placement-bottomRight &-arrow {
+    right: 15%;
+  }
+}
+
+@import "boostrap/anim.less";
