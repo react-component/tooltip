@@ -46,6 +46,7 @@ webpackJsonp([3],{
 	    var placement = 'right';
 	    var offset = _rcTooltipSrcPlacements2['default'][placement].offset;
 	    return {
+	      destroyTooltipOnHide: false,
 	      placement: placement,
 	      trigger: {
 	        hover: 1
@@ -104,6 +105,12 @@ webpackJsonp([3],{
 	    console.log('tooltip', visible);
 	  },
 	
+	  onDestroyCheck: function onDestroyCheck() {
+	    this.setState({
+	      destroyTooltipOnHide: !this.state.destroyTooltipOnHide
+	    });
+	  },
+	
 	  render: function render() {
 	    var state = this.state;
 	    var trigger = state.trigger;
@@ -136,6 +143,14 @@ webpackJsonp([3],{
 	          _react2['default'].createElement('input', { value: 'rc-tooltip-zoom', type: 'checkbox', onChange: this.onTransitionChange,
 	            checked: this.state.transitionName === 'rc-tooltip-zoom' }),
 	          'transitionName'
+	        ),
+	        '    ',
+	        _react2['default'].createElement(
+	          'label',
+	          null,
+	          _react2['default'].createElement('input', { type: 'checkbox', onChange: this.onDestroyCheck,
+	            checked: this.state.destroyTooltipOnHide }),
+	          'destroyTooltipOnHide'
 	        ),
 	        '     trigger:',
 	        _react2['default'].createElement(
@@ -179,6 +194,7 @@ webpackJsonp([3],{
 	          { placement: this.state.placement,
 	            mouseEnterDelay: 0,
 	            mouseLeaveDelay: 0.1,
+	            destroyTooltipOnHide: this.state.destroyTooltipOnHide,
 	            trigger: Object.keys(this.state.trigger),
 	            onVisibleChange: this.onVisibleChange,
 	            overlay: _react2['default'].createElement(

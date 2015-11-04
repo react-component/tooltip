@@ -239,7 +239,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-tooltip@3.1.1</h1>
+    <h1>rc-tooltip@3.2.0</h1>
 
     <p>tooltip ui component for react</p>
   </div>
@@ -263,6 +263,7 @@ var Test = React.createClass({
     const placement='right';
     const offset = placements[placement].offset;
     return {
+      destroyTooltipOnHide:false,
       placement: placement,
       trigger: {
         hover: 1
@@ -321,6 +322,12 @@ var Test = React.createClass({
     console.log('tooltip', visible);
   },
 
+  onDestroyCheck() {
+    this.setState({
+      destroyTooltipOnHide: !this.state.destroyTooltipOnHide
+    });
+  },
+
   render() {
     var state = this.state;
     var trigger = state.trigger;
@@ -339,6 +346,14 @@ var Test = React.createClass({
           <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">'rc-tooltip-zoom'</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'checkbox'</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onTransitionChange}</span>
                  <span class="hljs-attribute">checked</span>=<span class="hljs-value">{this.state.transitionName</span> =<span class="hljs-value">==</span> '<span class="hljs-attribute">rc-tooltip-zoom</span>'}/&gt;</span>
           transitionName
+        <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+
+        &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+
+        <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">input</span>  <span class="hljs-attribute">type</span>=<span class="hljs-value">'checkbox'</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onDestroyCheck}</span>
+                 <span class="hljs-attribute">checked</span>=<span class="hljs-value">{this.state.destroyTooltipOnHide}</span>/&gt;</span>
+          destroyTooltipOnHide
         <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
 
         &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
@@ -372,6 +387,7 @@ var Test = React.createClass({
         <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span> <span class="hljs-attribute">placement</span>=<span class="hljs-value">{this.state.placement}</span>
                  <span class="hljs-attribute">mouseEnterDelay</span>=<span class="hljs-value">{0}</span>
                  <span class="hljs-attribute">mouseLeaveDelay</span>=<span class="hljs-value">{0.1}</span>
+                 <span class="hljs-attribute">destroyTooltipOnHide</span>=<span class="hljs-value">{this.state.destroyTooltipOnHide}</span>
                  <span class="hljs-attribute">trigger</span>=<span class="hljs-value">{Object.keys(this.state.trigger)}</span>
                  <span class="hljs-attribute">onVisibleChange</span>=<span class="hljs-value">{this.onVisibleChange}</span>
                  <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">height</span>:50,<span class="hljs-variable">width</span>:50}}</span><span class="xml"><span class="hljs-tag">&gt;</span>i am a tooltip<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}

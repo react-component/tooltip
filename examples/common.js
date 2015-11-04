@@ -19729,6 +19729,7 @@
 	    mouseEnterDelay: _react.PropTypes.number,
 	    mouseLeaveDelay: _react.PropTypes.number,
 	    getTooltipContainer: _react.PropTypes.func,
+	    destroyTooltipOnHide: _react.PropTypes.bool,
 	    align: _react.PropTypes.shape({
 	      offset: _react.PropTypes.array,
 	      targetOffset: _react.PropTypes.array
@@ -19739,6 +19740,7 @@
 	    return {
 	      prefixCls: 'rc-tooltip',
 	      mouseEnterDelay: 0,
+	      destroyTooltipOnHide: false,
 	      mouseLeaveDelay: 0.1,
 	      align: {},
 	      placement: 'right',
@@ -19776,6 +19778,7 @@
 	    var animation = _props2.animation;
 	    var placement = _props2.placement;
 	    var align = _props2.align;
+	    var destroyTooltipOnHide = _props2.destroyTooltipOnHide;
 	    var defaultVisible = _props2.defaultVisible;
 	    var getTooltipContainer = _props2.getTooltipContainer;
 	
@@ -19798,6 +19801,7 @@
 	        popupTransitionName: transitionName,
 	        popupAnimation: animation,
 	        defaultPopupVisible: defaultVisible,
+	        destroyPopupOnHide: destroyTooltipOnHide,
 	        mouseLeaveDelay: mouseLeaveDelay,
 	        popupStyle: overlayStyle,
 	        mouseEnterDelay: mouseEnterDelay
