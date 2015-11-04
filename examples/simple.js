@@ -14,6 +14,7 @@ var Test = React.createClass({
     const placement='right';
     const offset = placements[placement].offset;
     return {
+      destroyTooltipOnHide:false,
       placement: placement,
       trigger: {
         hover: 1
@@ -72,6 +73,12 @@ var Test = React.createClass({
     console.log('tooltip', visible);
   },
 
+  onDestroyCheck() {
+    this.setState({
+      destroyTooltipOnHide: !this.state.destroyTooltipOnHide
+    });
+  },
+
   render() {
     var state = this.state;
     var trigger = state.trigger;
@@ -90,6 +97,14 @@ var Test = React.createClass({
           <input value='rc-tooltip-zoom' type='checkbox' onChange={this.onTransitionChange}
                  checked={this.state.transitionName === 'rc-tooltip-zoom'}/>
           transitionName
+        </label>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
+        <label>
+          <input  type='checkbox' onChange={this.onDestroyCheck}
+                 checked={this.state.destroyTooltipOnHide}/>
+          destroyTooltipOnHide
         </label>
 
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -123,6 +138,7 @@ var Test = React.createClass({
         <Tooltip placement={this.state.placement}
                  mouseEnterDelay={0}
                  mouseLeaveDelay={0.1}
+                 destroyTooltipOnHide={this.state.destroyTooltipOnHide}
                  trigger={Object.keys(this.state.trigger)}
                  onVisibleChange={this.onVisibleChange}
                  overlay={<div style={{height:50,width:50}}>i am a tooltip</div>}

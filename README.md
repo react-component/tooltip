@@ -156,6 +156,12 @@ online example: http://react-component.github.io/tooltip/examples/
           <td></td>
           <td>function returning html node which will act as tooltip contaier</td>
         </tr>
+        <tr>
+          <td>destroyTooltipOnHide</td>
+          <td>boolean</td>
+          <td>false</td>
+          <td>whether destroy tooltip when tooltip is hidden</td>
+        </tr>
     </tbody>
 </table>
 

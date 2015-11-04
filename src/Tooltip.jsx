@@ -20,6 +20,7 @@ const Tooltip = React.createClass({
     mouseEnterDelay: PropTypes.number,
     mouseLeaveDelay: PropTypes.number,
     getTooltipContainer: PropTypes.func,
+    destroyTooltipOnHide: PropTypes.bool,
     align: PropTypes.shape({
       offset: PropTypes.array,
       targetOffset: PropTypes.array,
@@ -30,6 +31,7 @@ const Tooltip = React.createClass({
     return {
       prefixCls: 'rc-tooltip',
       mouseEnterDelay: 0,
+      destroyTooltipOnHide: false,
       mouseLeaveDelay: 0.1,
       align: {},
       placement: 'right',
@@ -58,6 +60,7 @@ const Tooltip = React.createClass({
       children, onVisibleChange,
       transitionName, animation,
       placement, align,
+      destroyTooltipOnHide,
       defaultVisible, getTooltipContainer} = this.props;
     const extraProps = {};
     if ('visible' in this.props) {
@@ -76,6 +79,7 @@ const Tooltip = React.createClass({
                      popupTransitionName={transitionName}
                      popupAnimation={animation}
                      defaultPopupVisible={defaultVisible}
+                     destroyPopupOnHide={destroyTooltipOnHide}
                      mouseLeaveDelay={mouseLeaveDelay}
                      popupStyle={overlayStyle}
                      mouseEnterDelay={mouseEnterDelay}
