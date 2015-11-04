@@ -1,6 +1,10 @@
 # History
 ----
 
+### 3.2.0
+
+- support destroyTooltipOnHide prop
+
 ### 3.0.0
 
 - only support react 0.14
