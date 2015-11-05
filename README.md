@@ -48,7 +48,7 @@ ReactDOM.render(<Tooltip placement="left" trigger={['click']} overlay={<span>too
 
 ## Example
 
-http://localhost:8007/examples/index.md
+http://localhost:8007/examples
 
 online example: http://react-component.github.io/tooltip/examples/
 
