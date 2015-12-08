@@ -45,6 +45,7 @@
     "bootstrap": "~3.3.2",
     "expect.js": "~0.3.1",
     "jquery": "~1.11.2",
+    "object-assign": "~4.0.1",
     "precommit-hook-eslint": "3.x",
     "rc-server": "3.x",
     "rc-tools": "4.x",

@@ -1,26 +1,24 @@
-'use strict';
 
-var expect = require('expect.js');
-var React = require('react');
-var ReactDOM = require('react-dom');
-var TestUtils = require('react-addons-test-utils');
-var Simulate = TestUtils.Simulate;
-var $ = require('jquery');
+import '../assets/bootstrap.less';
+import expect from 'expect.js';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
+import $ from 'jquery';
+import Tooltip from '../index';
+import async from 'async';
 window.$ = $;
-require('../assets/bootstrap.less');
-var Tooltip = require('../index');
-var scryRenderedDOMComponentsWithClass = TestUtils.scryRenderedDOMComponentsWithClass;
-var async = require('async');
+const Simulate = TestUtils.Simulate;
 
 function timeout(ms) {
   return (done)=> {
     setTimeout(done, ms);
-  }
+  };
 }
 
-describe('rc-tooltip', function () {
+describe('rc-tooltip', function() {
   this.timeout(40000);
-  var div = document.createElement('div');
+  const div = document.createElement('div');
   div.style.margin = '100px';
   document.body.insertBefore(div, document.body.firstChild);
 
@@ -30,21 +28,21 @@ describe('rc-tooltip', function () {
 
   describe('trigger', ()=> {
     it('works', (done)=> {
-      var tooltip = ReactDOM.render(<Tooltip trigger={['click']}
+      const tooltip = ReactDOM.render(<Tooltip trigger={['click']}
                                              placement="left"
-                                             overlay={<strong className='x-content'>tooltip2</strong>}>
+                                             overlay={<strong className="x-content">tooltip2</strong>}>
         <div className="target">click</div>
       </Tooltip>, div);
-      var domNode = ReactDOM.findDOMNode(tooltip);
+      const domNode = ReactDOM.findDOMNode(tooltip);
       Simulate.click(domNode);
       async.series([timeout(20), (next)=> {
-        var popupDomNode = tooltip.getPopupDomNode();
+        const popupDomNode = tooltip.getPopupDomNode();
         expect($(popupDomNode).find('.x-content').html()).to.be('tooltip2');
         expect(popupDomNode).to.be.ok();
         Simulate.click(domNode);
         next();
       }, timeout(20), (next)=> {
-        var popupDomNode = tooltip.getPopupDomNode();
+        const popupDomNode = tooltip.getPopupDomNode();
         expect($(popupDomNode).css('display')).to.be('none');
         next();
       }], done);

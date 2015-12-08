@@ -1,31 +1,34 @@
-'use strict';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.less';
 
-var Test = React.createClass({
+function preventDefault(e) {
+  e.preventDefault();
+}
+
+const Test = React.createClass({
   getInitialState() {
     return {
-      visible: false
+      visible: false,
     };
   },
   handleVisibleChange(visible) {
     this.setState({
-      visible: visible
+      visible: visible,
     });
   },
-  handleDestroy(){
+  handleDestroy() {
     this.setState({
-      destroy:true
+      destroy: true,
     });
   },
   render() {
-    if(this.state.destroy){
+    if (this.state.destroy) {
       return null;
     }
-    return <div >
+    return (<div>
       <div style={{marginTop: 300, marginLeft: 100, marginBottom: 100}}>
         <Tooltip
           visible={this.state.visible}
@@ -33,16 +36,12 @@ var Test = React.createClass({
           onVisibleChange={this.handleVisibleChange}
           trigger="click"
           overlay={<span>i am a tooltip</span>}>
-          <a href='#' onClick={preventDefault}>trigger</a>
+          <a href="#" onClick={preventDefault}>trigger</a>
         </Tooltip>
       </div>
       <button onClick={this.handleDestroy}>destroy</button>
-    </div>;
-  }
+    </div>);
+  },
 });
 
-function preventDefault(e) {
-  e.preventDefault();
-}
-
-ReactDOM.render(<Test/>, document.getElementById("__react-content"));
+ReactDOM.render(<Test/>, document.getElementById('__react-content'));
