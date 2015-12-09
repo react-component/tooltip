@@ -1,5 +1,8 @@
 # History
 ----
+### 3.2.1
+
+- support arrowContent prop
 
 ### 3.2.0
 
