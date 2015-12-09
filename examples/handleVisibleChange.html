@@ -233,13 +233,13 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   <!--[if lt IE 9]>
   <script src="https://a.alipayobjects.com/??es5-shim/4.0.5/es5-shim.js,es5-shim/4.0.5/es5-sham.js,html5shiv/3.7.2/src/html5shiv.js"></script>
   <![endif]-->
-  <link rel="stylesheet" href="common.css" />
+  <link rel="stylesheet" href="handleVisibleChange.css" />
 </head>
 
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-tooltip@3.2.0</h1>
+    <h1>rc-tooltip@3.3.0</h1>
 
     <p>tooltip ui component for react</p>
   </div>
@@ -247,55 +247,54 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   <script src="common.js?nowrap"></script>
   <script src="handleVisibleChange.js?nowrap"></script>
   <div class="highlight">
-    <pre><code><span class="hljs-pi">'use strict'</span>;
-
+    <pre><code>
 <span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
 <span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
 <span class="hljs-keyword">import</span> Tooltip <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-tooltip'</span>;
 <span class="hljs-keyword">import</span> <span class="hljs-string">'rc-tooltip/assets/bootstrap.css'</span>;
 
-<span class="hljs-keyword">var</span> Test = React.createClass({
+<span class="hljs-keyword">function</span> preventDefault(e) {
+  e.preventDefault();
+}
+
+<span class="hljs-keyword">const</span> Test = React.createClass({
   getInitialState() {
     <span class="hljs-keyword">return</span> {
-      visible: <span class="hljs-literal">false</span>
+      <span class="hljs-attribute">visible</span>: <span class="hljs-literal">false</span>,
     };
   },
   handleVisibleChange(visible) {
     <span class="hljs-keyword">this</span>.setState({
-      visible: visible
+      <span class="hljs-attribute">visible</span>: visible,
     });
   },
-  handleDestroy(){
+  handleDestroy() {
     <span class="hljs-keyword">this</span>.setState({
-      destroy:<span class="hljs-literal">true</span>
+      <span class="hljs-attribute">destroy</span>: <span class="hljs-literal">true</span>,
     });
   },
   render() {
-    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.state.destroy){
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.state.destroy) {
       <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
     }
-    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> &gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{marginTop:</span> <span class="hljs-attribute">300</span>, <span class="hljs-attribute">marginLeft:</span> <span class="hljs-attribute">100</span>, <span class="hljs-attribute">marginBottom:</span> <span class="hljs-attribute">100</span>}}&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span>
-          <span class="hljs-attribute">visible</span>=<span class="hljs-value">{this.state.visible}</span>
-          <span class="hljs-attribute">animation</span>=<span class="hljs-value">"zoom"</span>
-          <span class="hljs-attribute">onVisibleChange</span>=<span class="hljs-value">{this.handleVisibleChange}</span>
-          <span class="hljs-attribute">trigger</span>=<span class="hljs-value">"click"</span>
-          <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{&lt;span</span>&gt;</span>i am a tooltip<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>}&gt;
-          <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">'#'</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{preventDefault}</span>&gt;</span>trigger<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{this.handleDestroy}</span>&gt;</span>destroy<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>;</span>
-  }
+    <span class="hljs-keyword">return</span> (&lt;div&gt;
+      &lt;div style={{<span class="hljs-attribute">marginTop</span>: <span class="hljs-number">300</span>, <span class="hljs-attribute">marginLeft</span>: <span class="hljs-number">100</span>, <span class="hljs-attribute">marginBottom</span>: <span class="hljs-number">100</span>}}&gt;
+        &lt;Tooltip
+          visible={<span class="hljs-keyword">this</span>.state.visible}
+          animation=<span class="hljs-string">"zoom"</span>
+          onVisibleChange={<span class="hljs-keyword">this</span>.handleVisibleChange}
+          trigger=<span class="hljs-string">"click"</span>
+          overlay={&lt;span&gt;i am a tooltip&lt;/span&gt;}&gt;
+          &lt;a href=<span class="hljs-string">"#"</span> onClick={preventDefault}&gt;trigger&lt;/a&gt;
+        &lt;/Tooltip&gt;
+      &lt;/div&gt;
+      &lt;button onClick={<span class="hljs-keyword">this</span>.handleDestroy}&gt;destroy&lt;/button&gt;
+    &lt;/div&gt;);
+  },
 });
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">preventDefault</span>(<span class="hljs-params">e</span>) </span>{
-  e.preventDefault();
-}
-
-ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Test</span>/&gt;</span>, document.getElementById("__react-content"));
-</span></code></pre>
+ReactDOM.render(&lt;Test/&gt;, <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'__react-content'</span>));
+</code></pre>
   </div>
 </div>
 <a href="http://github.com/react-component/tooltip"><img style="position: absolute; top: 0; right: 0; border: 0;"

@@ -1,21 +1,14 @@
-webpackJsonp([3],{
+webpackJsonp([0],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(204);
+	module.exports = __webpack_require__(1);
 
 
 /***/ },
 
-/***/ 202:
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-
-/***/ 204:
+/***/ 1:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34,7 +27,7 @@ webpackJsonp([3],{
 	
 	var _rcTooltip2 = _interopRequireDefault(_rcTooltip);
 	
-	__webpack_require__(202);
+	__webpack_require__(200);
 	
 	var text = _react2['default'].createElement(
 	  'span',
@@ -62,7 +55,7 @@ webpackJsonp([3],{
 	      null,
 	      _react2['default'].createElement(
 	        _rcTooltip2['default'],
-	        { placement: 'left', overlay: text },
+	        { placement: 'left', overlay: text, arrowContent: _react2['default'].createElement('div', { className: 'rc-tooltip-arrow-inner' }) },
 	        _react2['default'].createElement(
 	          'a',
 	          { href: '#', style: styles },
@@ -71,7 +64,7 @@ webpackJsonp([3],{
 	      ),
 	      _react2['default'].createElement(
 	        _rcTooltip2['default'],
-	        { placement: 'top', overlay: text },
+	        { placement: 'top', overlay: text, arrowContent: _react2['default'].createElement('div', { className: 'rc-tooltip-arrow-inner' }) },
 	        _react2['default'].createElement(
 	          'a',
 	          { href: '#', style: styles },
@@ -80,7 +73,7 @@ webpackJsonp([3],{
 	      ),
 	      _react2['default'].createElement(
 	        _rcTooltip2['default'],
-	        { placement: 'bottom', overlay: text },
+	        { placement: 'bottom', overlay: text, arrowContent: _react2['default'].createElement('div', { className: 'rc-tooltip-arrow-inner' }) },
 	        _react2['default'].createElement(
 	          'a',
 	          { href: '#', style: styles },
@@ -89,7 +82,7 @@ webpackJsonp([3],{
 	      ),
 	      _react2['default'].createElement(
 	        _rcTooltip2['default'],
-	        { placement: 'right', overlay: text },
+	        { placement: 'right', overlay: text, arrowContent: _react2['default'].createElement('div', { className: 'rc-tooltip-arrow-inner' }) },
 	        _react2['default'].createElement(
 	          'a',
 	          { href: '#', style: styles },
@@ -99,7 +92,7 @@ webpackJsonp([3],{
 	      _react2['default'].createElement('br', null),
 	      _react2['default'].createElement(
 	        _rcTooltip2['default'],
-	        { placement: 'leftTop', overlay: text },
+	        { placement: 'leftTop', overlay: text, arrowContent: _react2['default'].createElement('div', { className: 'rc-tooltip-arrow-inner' }) },
 	        _react2['default'].createElement(
 	          'a',
 	          { href: '#', style: styles },
@@ -108,7 +101,7 @@ webpackJsonp([3],{
 	      ),
 	      _react2['default'].createElement(
 	        _rcTooltip2['default'],
-	        { placement: 'leftBottom', overlay: text },
+	        { placement: 'leftBottom', overlay: text, arrowContent: _react2['default'].createElement('div', { className: 'rc-tooltip-arrow-inner' }) },
 	        _react2['default'].createElement(
 	          'a',
 	          { href: '#', style: styles },
@@ -117,7 +110,7 @@ webpackJsonp([3],{
 	      ),
 	      _react2['default'].createElement(
 	        _rcTooltip2['default'],
-	        { placement: 'rightTop', overlay: text },
+	        { placement: 'rightTop', overlay: text, arrowContent: _react2['default'].createElement('div', { className: 'rc-tooltip-arrow-inner' }) },
 	        _react2['default'].createElement(
 	          'a',
 	          { href: '#', style: styles },
@@ -126,7 +119,7 @@ webpackJsonp([3],{
 	      ),
 	      _react2['default'].createElement(
 	        _rcTooltip2['default'],
-	        { placement: 'rightBottom', overlay: text },
+	        { placement: 'rightBottom', overlay: text, arrowContent: _react2['default'].createElement('div', { className: 'rc-tooltip-arrow-inner' }) },
 	        _react2['default'].createElement(
 	          'a',
 	          { href: '#', style: styles },
@@ -136,7 +129,7 @@ webpackJsonp([3],{
 	      _react2['default'].createElement('br', null),
 	      _react2['default'].createElement(
 	        _rcTooltip2['default'],
-	        { placement: 'topLeft', overlay: text },
+	        { placement: 'topLeft', overlay: text, arrowContent: _react2['default'].createElement('div', { className: 'rc-tooltip-arrow-inner' }) },
 	        _react2['default'].createElement(
 	          'a',
 	          { href: '#', style: styles },
@@ -145,7 +138,7 @@ webpackJsonp([3],{
 	      ),
 	      _react2['default'].createElement(
 	        _rcTooltip2['default'],
-	        { placement: 'topRight', overlay: text },
+	        { placement: 'topRight', overlay: text, arrowContent: _react2['default'].createElement('div', { className: 'rc-tooltip-arrow-inner' }) },
 	        _react2['default'].createElement(
 	          'a',
 	          { href: '#', style: styles },
@@ -154,7 +147,7 @@ webpackJsonp([3],{
 	      ),
 	      _react2['default'].createElement(
 	        _rcTooltip2['default'],
-	        { placement: 'bottomLeft', overlay: text },
+	        { placement: 'bottomLeft', overlay: text, arrowContent: _react2['default'].createElement('div', { className: 'rc-tooltip-arrow-inner' }) },
 	        _react2['default'].createElement(
 	          'a',
 	          { href: '#', style: styles },
@@ -163,7 +156,7 @@ webpackJsonp([3],{
 	      ),
 	      _react2['default'].createElement(
 	        _rcTooltip2['default'],
-	        { placement: 'bottomRight', overlay: text },
+	        { placement: 'bottomRight', overlay: text, arrowContent: _react2['default'].createElement('div', { className: 'rc-tooltip-arrow-inner' }) },
 	        _react2['default'].createElement(
 	          'a',
 	          { href: '#', style: styles },
@@ -176,7 +169,14 @@ webpackJsonp([3],{
 	
 	_reactDom2['default'].render(_react2['default'].createElement(Test, null), document.getElementById('__react-content'));
 
+/***/ },
+
+/***/ 200:
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
 /***/ }
 
 });
-//# sourceMappingURL=placement.js.map
+//# sourceMappingURL=arrowContent.js.map

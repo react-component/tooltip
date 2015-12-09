@@ -1,14 +1,21 @@
-webpackJsonp([1],{
+webpackJsonp([2],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(201);
+	module.exports = __webpack_require__(203);
 
 
 /***/ },
 
-/***/ 201:
+/***/ 202:
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+
+/***/ 203:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27,7 +34,11 @@ webpackJsonp([1],{
 	
 	var _rcTooltip2 = _interopRequireDefault(_rcTooltip);
 	
-	__webpack_require__(200);
+	__webpack_require__(202);
+	
+	function preventDefault(e) {
+	  e.preventDefault();
+	}
 	
 	var Test = _react2['default'].createClass({
 	  displayName: 'Test',
@@ -85,11 +96,7 @@ webpackJsonp([1],{
 	  }
 	});
 	
-	function preventDefault(e) {
-	  e.preventDefault();
-	}
-	
-	_reactDom2['default'].render(_react2['default'].createElement(Test, null), document.getElementById("__react-content"));
+	_reactDom2['default'].render(_react2['default'].createElement(Test, null), document.getElementById('__react-content'));
 
 /***/ }
 

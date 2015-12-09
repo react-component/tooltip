@@ -1,14 +1,21 @@
-webpackJsonp([3],{
+webpackJsonp([4],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(203);
+	module.exports = __webpack_require__(205);
 
 
 /***/ },
 
-/***/ 203:
+/***/ 202:
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+
+/***/ 205:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27,7 +34,7 @@ webpackJsonp([3],{
 	
 	var _rcTooltip2 = _interopRequireDefault(_rcTooltip);
 	
-	__webpack_require__(200);
+	__webpack_require__(202);
 	
 	var _objectAssign = __webpack_require__(199);
 	
@@ -97,10 +104,6 @@ webpackJsonp([3],{
 	    });
 	  },
 	
-	  preventDefault: function preventDefault(e) {
-	    e.preventDefault();
-	  },
-	
 	  onVisibleChange: function onVisibleChange(visible) {
 	    console.log('tooltip', visible);
 	  },
@@ -109,6 +112,10 @@ webpackJsonp([3],{
 	    this.setState({
 	      destroyTooltipOnHide: !this.state.destroyTooltipOnHide
 	    });
+	  },
+	
+	  preventDefault: function preventDefault(e) {
+	    e.preventDefault();
 	  },
 	
 	  render: function render() {
@@ -221,7 +228,7 @@ webpackJsonp([3],{
 	  'div',
 	  null,
 	  _react2['default'].createElement(Test, null)
-	), document.getElementById("__react-content"));
+	), document.getElementById('__react-content'));
 
 /***/ }
 

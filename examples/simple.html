@@ -233,13 +233,13 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   <!--[if lt IE 9]>
   <script src="https://a.alipayobjects.com/??es5-shim/4.0.5/es5-shim.js,es5-shim/4.0.5/es5-sham.js,html5shiv/3.7.2/src/html5shiv.js"></script>
   <![endif]-->
-  <link rel="stylesheet" href="common.css" />
+  <link rel="stylesheet" href="simple.css" />
 </head>
 
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-tooltip@3.2.0</h1>
+    <h1>rc-tooltip@3.3.0</h1>
 
     <p>tooltip ui component for react</p>
   </div>
@@ -247,8 +247,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   <script src="common.js?nowrap"></script>
   <script src="simple.js?nowrap"></script>
   <div class="highlight">
-    <pre><code><span class="xml">'use strict';
-
+    <pre><code><span class="xml">
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Tooltip from 'rc-tooltip';
@@ -258,15 +257,15 @@ import assign from 'object-assign';
 // do not use rc-tooltip/lib/placements
 import placements from 'rc-tooltip/lib/placements';
 
-var Test = React.createClass({
+const Test = React.createClass({
   getInitialState() {
-    const placement='right';
+    const placement = 'right';
     const offset = placements[placement].offset;
     return {
-      destroyTooltipOnHide:false,
+      destroyTooltipOnHide: false,
       placement: placement,
       trigger: {
-        hover: 1
+        hover: 1,
       },
       offsetX: offset[0],
       offsetY: offset[1],
@@ -284,38 +283,34 @@ var Test = React.createClass({
 
   onTransitionChange(e) {
     this.setState({
-      transitionName: e.target.checked ? e.target.value : ''
+      transitionName: e.target.checked ? e.target.value : '',
     });
   },
 
   onTriggerChange(e) {
-    var trigger = assign({}, this.state.trigger);
+    const trigger = assign({}, this.state.trigger);
     if (e.target.checked) {
       trigger[e.target.value] = 1;
     } else {
       delete trigger[e.target.value];
     }
     this.setState({
-      trigger: trigger
+      trigger: trigger,
     });
   },
 
   onOffsetXChange(e) {
-    var targetValue = e.target.value;
+    const targetValue = e.target.value;
     this.setState({
       offsetX: targetValue ? targetValue : undefined,
     });
   },
 
   onOffsetYChange(e) {
-    var targetValue = e.target.value;
+    const targetValue = e.target.value;
     this.setState({
       offsetY: targetValue ? targetValue : undefined,
     });
-  },
-
-  preventDefault(e) {
-    e.preventDefault();
   },
 
   onVisibleChange(visible) {
@@ -324,26 +319,30 @@ var Test = React.createClass({
 
   onDestroyCheck() {
     this.setState({
-      destroyTooltipOnHide: !this.state.destroyTooltipOnHide
+      destroyTooltipOnHide: !this.state.destroyTooltipOnHide,
     });
   },
 
+  preventDefault(e) {
+    e.preventDefault();
+  },
+
   render() {
-    var state = this.state;
-    var trigger = state.trigger;
-    return <span class="hljs-tag">&lt;<span class="hljs-title">div</span> &gt;</span>
+    const state = this.state;
+    const trigger = state.trigger;
+    return (<span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">margin</span>: '10<span class="hljs-variable">px</span> 20<span class="hljs-variable">px</span>'}}</span><span class="xml"><span class="hljs-tag">&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
           placement:
           <span class="hljs-tag">&lt;<span class="hljs-title">select</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">{this.state.placement}</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onPlacementChange}</span>&gt;</span>
-            {Object.keys(placements).map(function (p) {
-              return <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">key</span>=<span class="hljs-value">{p}</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">{p}</span>&gt;</span>{p}<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+            {Object.keys(placements).map(function(p) {
+              return <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">key</span>=<span class="hljs-value">{p}</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">{p}</span>&gt;</span>{p}<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>;
             })}
           <span class="hljs-tag">&lt;/<span class="hljs-title">select</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
         &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
         <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">'rc-tooltip-zoom'</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'checkbox'</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onTransitionChange}</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"rc-tooltip-zoom"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"checkbox"</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onTransitionChange}</span>
                  <span class="hljs-attribute">checked</span>=<span class="hljs-value">{this.state.transitionName</span> =<span class="hljs-value">==</span> '<span class="hljs-attribute">rc-tooltip-zoom</span>'}/&gt;</span>
           transitionName
         <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
@@ -351,7 +350,7 @@ var Test = React.createClass({
         &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
 
         <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">input</span>  <span class="hljs-attribute">type</span>=<span class="hljs-value">'checkbox'</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onDestroyCheck}</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"checkbox"</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onDestroyCheck}</span>
                  <span class="hljs-attribute">checked</span>=<span class="hljs-value">{this.state.destroyTooltipOnHide}</span>/&gt;</span>
           destroyTooltipOnHide
         <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
@@ -361,26 +360,26 @@ var Test = React.createClass({
         trigger:
 
         <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">'hover'</span> <span class="hljs-attribute">checked</span>=<span class="hljs-value">{trigger.hover}</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'checkbox'</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onTriggerChange}</span>/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"hover"</span> <span class="hljs-attribute">checked</span>=<span class="hljs-value">{trigger.hover}</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"checkbox"</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onTriggerChange}</span>/&gt;</span>
           hover
         <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">'focus'</span> <span class="hljs-attribute">checked</span>=<span class="hljs-value">{trigger.focus}</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'checkbox'</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onTriggerChange}</span>/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"focus"</span> <span class="hljs-attribute">checked</span>=<span class="hljs-value">{trigger.focus}</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"checkbox"</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onTriggerChange}</span>/&gt;</span>
           focus
         <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">'click'</span> <span class="hljs-attribute">checked</span>=<span class="hljs-value">{trigger.click}</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'checkbox'</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onTriggerChange}</span>/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"click"</span> <span class="hljs-attribute">checked</span>=<span class="hljs-value">{trigger.click}</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"checkbox"</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onTriggerChange}</span>/&gt;</span>
           click
         <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">br</span>/&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
           offsetX:
-          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'text'</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">{state.offsetX}</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onOffsetXChange}</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">width</span>:50}}</span><span class="xml"><span class="hljs-tag">/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">{state.offsetX}</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onOffsetXChange}</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">width</span>: 50}}</span><span class="xml"><span class="hljs-tag">/&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
         &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
         <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
           offsetY:
-          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'text'</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">{state.offsetY}</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onOffsetYChange}</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">width</span>:50}}</span><span class="xml"><span class="hljs-tag">/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">{state.offsetY}</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onOffsetYChange}</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">width</span>: 50}}</span><span class="xml"><span class="hljs-tag">/&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">margin</span>: 100}}</span><span class="xml"><span class="hljs-tag">&gt;</span>
@@ -390,21 +389,21 @@ var Test = React.createClass({
                  <span class="hljs-attribute">destroyTooltipOnHide</span>=<span class="hljs-value">{this.state.destroyTooltipOnHide}</span>
                  <span class="hljs-attribute">trigger</span>=<span class="hljs-value">{Object.keys(this.state.trigger)}</span>
                  <span class="hljs-attribute">onVisibleChange</span>=<span class="hljs-value">{this.onVisibleChange}</span>
-                 <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">height</span>:50,<span class="hljs-variable">width</span>:50}}</span><span class="xml"><span class="hljs-tag">&gt;</span>i am a tooltip<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
+                 <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">height</span>: 50, <span class="hljs-variable">width</span>: 50}}</span><span class="xml"><span class="hljs-tag">&gt;</span>i am a tooltip<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
                  align=</span><span class="hljs-expression">{{
-                  <span class="hljs-variable">offset</span>:[<span class="hljs-variable">this.state.offsetX</span>, <span class="hljs-variable">this.state.offsetY</span>]
+                   <span class="hljs-variable">offset</span>: [<span class="hljs-variable">this.state.offsetX</span>, <span class="hljs-variable">this.state.offsetY</span>],
                  }}</span><span class="xml">
                  transitionName={this.state.transitionName}&gt;
-          <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">height</span>:100,<span class="hljs-variable">width</span>:100,<span class="hljs-variable">border</span>:'1<span class="hljs-variable">px</span> <span class="hljs-variable">solid</span> <span class="hljs-variable">red</span>'}}</span><span class="xml"><span class="hljs-tag">&gt;</span>trigger<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">height</span>: 100, <span class="hljs-variable">width</span>: 100, <span class="hljs-variable">border</span>: '1<span class="hljs-variable">px</span> <span class="hljs-variable">solid</span> <span class="hljs-variable">red</span>'}}</span><span class="xml"><span class="hljs-tag">&gt;</span>trigger<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>;
-  }
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>);
+  },
 });
 
 ReactDOM.render(<span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">Test</span> /&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>, document.getElementById("__react-content"));
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>, document.getElementById('__react-content'));
 </span></code></pre>
   </div>
 </div>

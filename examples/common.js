@@ -30,7 +30,7 @@
 /******/ 	// "0" means "already loaded"
 /******/ 	// Array means "loading", array contains callbacks
 /******/ 	var installedChunks = {
-/******/ 		4:0
+/******/ 		5:0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -76,7 +76,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"formError","1":"handleVisibleChange","2":"placement","3":"simple"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"arrowContent","1":"formError","2":"handleVisibleChange","3":"placement","4":"simple"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -19733,7 +19733,8 @@
 	    align: _react.PropTypes.shape({
 	      offset: _react.PropTypes.array,
 	      targetOffset: _react.PropTypes.array
-	    })
+	    }),
+	    arrowContent: _react.PropTypes.any
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -19744,16 +19745,22 @@
 	      mouseLeaveDelay: 0.1,
 	      align: {},
 	      placement: 'right',
-	      trigger: ['hover']
+	      trigger: ['hover'],
+	      arrowContent: null
 	    };
 	  },
 	
 	  getPopupElement: function getPopupElement() {
 	    var _props = this.props;
+	    var arrowContent = _props.arrowContent;
 	    var overlay = _props.overlay;
 	    var prefixCls = _props.prefixCls;
 	
-	    return [_react2['default'].createElement('div', { className: prefixCls + '-arrow', key: 'arrow' }), _react2['default'].createElement(
+	    return [_react2['default'].createElement(
+	      'div',
+	      { className: prefixCls + '-arrow', key: 'arrow' },
+	      arrowContent
+	    ), _react2['default'].createElement(
 	      'div',
 	      { className: prefixCls + '-inner', key: 'content' },
 	      overlay
@@ -23375,12 +23382,6 @@
 		return to;
 	};
 
-
-/***/ },
-/* 200 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
 
 /***/ }
 /******/ ]);
