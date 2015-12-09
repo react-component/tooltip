@@ -25,10 +25,7 @@ const Tooltip = React.createClass({
       offset: PropTypes.array,
       targetOffset: PropTypes.array,
     }),
-    arrowContent: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.element,
-    ]),
+    arrowContent: PropTypes.any,
   },
 
   getDefaultProps() {
@@ -40,7 +37,7 @@ const Tooltip = React.createClass({
       align: {},
       placement: 'right',
       trigger: ['hover'],
-      arrowContent: '',
+      arrowContent: null,
     };
   },
 

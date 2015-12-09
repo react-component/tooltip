@@ -146,8 +146,8 @@ online example: http://react-component.github.io/tooltip/examples/
         </tr>
         <tr>
           <td>arrowContent</td>
-          <td>String|React.Element</td>
-          <td>''</td>
+          <td>React.Node</td>
+          <td>null</td>
           <td>arrow content</td>
         </tr>
         <tr>
