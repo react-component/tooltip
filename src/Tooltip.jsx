@@ -25,6 +25,10 @@ const Tooltip = React.createClass({
       offset: PropTypes.array,
       targetOffset: PropTypes.array,
     }),
+    arrowContent: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element,
+    ]),
   },
 
   getDefaultProps() {
@@ -36,13 +40,16 @@ const Tooltip = React.createClass({
       align: {},
       placement: 'right',
       trigger: ['hover'],
+      arrowContent: '',
     };
   },
 
   getPopupElement() {
-    const {overlay, prefixCls} = this.props;
+    const {arrowContent, overlay, prefixCls} = this.props;
     return ([
-      <div className={`${prefixCls}-arrow`} key="arrow"></div>,
+      <div className={`${prefixCls}-arrow`} key="arrow">
+        {arrowContent}
+      </div>,
       <div className={`${prefixCls}-inner`} key="content">
         {overlay}
       </div>,

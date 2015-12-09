@@ -96,12 +96,6 @@ online example: http://react-component.github.io/tooltip/examples/
           <td></td>
           <td>additional style of overlay node</td>
         </tr>
-         <tr>
-           <td>wrapStyle</td>
-           <td>Object</td>
-           <td></td>
-           <td>additional style  of wrap node</td>
-         </tr>
         <tr>
           <td>prefixCls</td>
           <td>String</td>
@@ -149,6 +143,12 @@ online example: http://react-component.github.io/tooltip/examples/
           <td>React.Element</td>
           <td></td>
           <td>popup content</td>
+        </tr>
+        <tr>
+          <td>arrowContent</td>
+          <td>String|React.Element</td>
+          <td>''</td>
+          <td>arrow content</td>
         </tr>
         <tr>
           <td>getTooltipContainer</td>
