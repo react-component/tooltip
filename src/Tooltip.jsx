@@ -65,8 +65,8 @@ const Tooltip = React.createClass({
       transitionName, animation,
       placement, align,
       destroyTooltipOnHide,
-      defaultVisible, getTooltipContainer} = this.props;
-    const extraProps = {};
+      defaultVisible, getTooltipContainer, ...restProps} = this.props;
+    const extraProps = {...restProps};
     if ('visible' in this.props) {
       extraProps.popupVisible = this.props.visible;
     }
