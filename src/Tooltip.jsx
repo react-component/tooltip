@@ -13,7 +13,10 @@ const Tooltip = React.createClass({
     animation: PropTypes.any,
     onVisibleChange: PropTypes.func,
     afterVisibleChange: PropTypes.func,
-    overlay: PropTypes.node.isRequired,
+    overlay: PropTypes.oneOfType([
+      React.PropTypes.node,
+      React.PropTypes.func,
+    ]).isRequired,
     overlayStyle: PropTypes.object,
     overlayClassName: PropTypes.string,
     prefixCls: PropTypes.string,
@@ -40,14 +43,16 @@ const Tooltip = React.createClass({
 
   getPopupElement() {
     const { arrowContent, overlay, prefixCls } = this.props;
-    return ([
-      <div className={`${prefixCls}-arrow`} key="arrow">
-        {arrowContent}
-      </div>,
-      <div className={`${prefixCls}-inner`} key="content">
-        {overlay}
-      </div>,
-    ]);
+    return () => {
+      return ([
+        <div className={`${prefixCls}-arrow`} key="arrow">
+          {arrowContent}
+        </div>,
+        <div className={`${prefixCls}-inner`} key="content">
+          {typeof overlay === 'function' ? overlay() : overlay}
+        </div>,
+      ]);
+    };
   },
 
   getPopupDomNode() {

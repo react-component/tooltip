@@ -15,7 +15,7 @@ function timeout(ms) {
   };
 }
 
-describe('rc-tooltip', function () {
+describe('rc-tooltip', () => {
   this.timeout(40000);
   const div = document.createElement('div');
   div.style.margin = '100px';
@@ -44,6 +44,28 @@ describe('rc-tooltip', function () {
         Simulate.click(domNode);
         next();
       }, timeout(20), (next) => {
+        const popupDomNode = tooltip.getPopupDomNode();
+        expect($(popupDomNode).css('display')).to.be('none');
+        next();
+      }], done);
+    });
+  });
+  describe('trigger-functon', ()=> {
+    it('works with a function overlay', (done)=> {
+      const tooltip = ReactDOM.render(<Tooltip trigger={['click']}
+                                            placement="left"
+                                            overlay={() => (<strong className="x-content">tooltip</strong>)}>
+        <div className="target">click</div>
+      </Tooltip>, div);
+      const domNode = ReactDOM.findDOMNode(tooltip);
+      Simulate.click(domNode);
+      async.series([timeout(20), (next)=> {
+        const popupDomNode = tooltip.getPopupDomNode();
+        expect($(popupDomNode).find('.x-content').html()).to.be('tooltip');
+        expect(popupDomNode).to.be.ok();
+        Simulate.click(domNode);
+        next();
+      }, timeout(20), (next)=> {
         const popupDomNode = tooltip.getPopupDomNode();
         expect($(popupDomNode).css('display')).to.be('none');
         next();
