@@ -39,7 +39,7 @@ export const placements = {
   leftTop: {
     points: ['tr', 'tl'],
     overflow: autoAdjustOverflow,
-    offset: [-3, 0],
+    offset: [-4, 0],
     targetOffset,
   },
   topRight: {
