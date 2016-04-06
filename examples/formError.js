@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Tooltip from 'rc-tooltip';
@@ -25,13 +24,14 @@ const Test = React.createClass({
       return null;
     }
     return (<div>
-      <div style={{marginTop: 100, marginLeft: 100, marginBottom: 100}}>
+      <div style={{ marginTop: 100, marginLeft: 100, marginBottom: 100 }}>
         <Tooltip
           visible={this.state.visible}
           animation="zoom"
           trigger={[]}
-          overlayStyle={{zIndex: 1000}}
-          overlay={<span>required!</span>}>
+          overlayStyle={{ zIndex: 1000 }}
+          overlay={<span>required!</span>}
+        >
           <input onChange={this.handleChange}/>
         </Tooltip>
       </div>

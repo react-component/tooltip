@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Tooltip from 'rc-tooltip';
@@ -14,12 +13,12 @@ const Test = React.createClass({
       visible: false,
     };
   },
-  handleVisibleChange(visible) {
+  onVisibleChange(visible) {
     this.setState({
-      visible: visible,
+      visible,
     });
   },
-  handleDestroy() {
+  onDestroy() {
     this.setState({
       destroy: true,
     });
@@ -29,17 +28,18 @@ const Test = React.createClass({
       return null;
     }
     return (<div>
-      <div style={{marginTop: 300, marginLeft: 100, marginBottom: 100}}>
+      <div style={{ marginTop: 300, marginLeft: 100, marginBottom: 100 }}>
         <Tooltip
           visible={this.state.visible}
           animation="zoom"
-          onVisibleChange={this.handleVisibleChange}
+          onVisibleChange={this.onVisibleChange}
           trigger="click"
-          overlay={<span>i am a tooltip</span>}>
+          overlay={<span>i am a tooltip</span>}
+        >
           <a href="#" onClick={preventDefault}>trigger</a>
         </Tooltip>
       </div>
-      <button onClick={this.handleDestroy}>destroy</button>
+      <button onClick={this.onDestroy}>destroy</button>
     </div>);
   },
 });

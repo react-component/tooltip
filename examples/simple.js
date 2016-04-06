@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Tooltip from 'rc-tooltip';
@@ -14,7 +13,7 @@ const Test = React.createClass({
     const offset = placements[placement].offset;
     return {
       destroyTooltipOnHide: false,
-      placement: placement,
+      placement,
       trigger: {
         hover: 1,
       },
@@ -46,21 +45,21 @@ const Test = React.createClass({
       delete trigger[e.target.value];
     }
     this.setState({
-      trigger: trigger,
+      trigger,
     });
   },
 
   onOffsetXChange(e) {
     const targetValue = e.target.value;
     this.setState({
-      offsetX: targetValue ? targetValue : undefined,
+      offsetX: targetValue || undefined,
     });
   },
 
   onOffsetYChange(e) {
     const targetValue = e.target.value;
     this.setState({
-      offsetY: targetValue ? targetValue : undefined,
+      offsetY: targetValue || undefined,
     });
   },
 
@@ -78,31 +77,38 @@ const Test = React.createClass({
     e.preventDefault();
   },
 
-  render() {
+  lrender() {
     const state = this.state;
     const trigger = state.trigger;
     return (<div>
-      <div style={{margin: '10px 20px'}}>
+      <div style={{ margin: '10px 20px' }}>
         <label>
           placement:
           <select value={this.state.placement} onChange={this.onPlacementChange}>
-            {Object.keys(placements).map(function(p) {
+            {Object.keys(placements).map((p) => {
               return <option key={p} value={p}>{p}</option>;
             })}
           </select>
         </label>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
-          <input value="rc-tooltip-zoom" type="checkbox" onChange={this.onTransitionChange}
-                 checked={this.state.transitionName === 'rc-tooltip-zoom'}/>
+          <input
+            value="rc-tooltip-zoom"
+            type="checkbox"
+            onChange={this.onTransitionChange}
+            checked={this.state.transitionName === 'rc-tooltip-zoom'}
+          />
           transitionName
         </label>
 
         &nbsp;&nbsp;&nbsp;&nbsp;
 
         <label>
-          <input type="checkbox" onChange={this.onDestroyCheck}
-                 checked={this.state.destroyTooltipOnHide}/>
+          <input
+            type="checkbox"
+            onChange={this.onDestroyCheck}
+            checked={this.state.destroyTooltipOnHide}
+          />
           destroyTooltipOnHide
         </label>
 
@@ -111,41 +117,68 @@ const Test = React.createClass({
         trigger:
 
         <label>
-          <input value="hover" checked={trigger.hover} type="checkbox" onChange={this.onTriggerChange}/>
+          <input
+            value="hover"
+            checked={trigger.hover}
+            type="checkbox"
+            onChange={this.onTriggerChange}
+          />
           hover
         </label>
         <label>
-          <input value="focus" checked={trigger.focus} type="checkbox" onChange={this.onTriggerChange}/>
+          <input
+            value="focus"
+            checked={trigger.focus}
+            type="checkbox"
+            onChange={this.onTriggerChange}
+          />
           focus
         </label>
         <label>
-          <input value="click" checked={trigger.click} type="checkbox" onChange={this.onTriggerChange}/>
+          <input
+            value="click"
+            checked={trigger.click}
+            type="checkbox"
+            onChange={this.onTriggerChange}
+          />
           click
         </label>
         <br/>
         <label>
           offsetX:
-          <input type="text" value={state.offsetX} onChange={this.onOffsetXChange} style={{width: 50}}/>
+          <input
+            type="text"
+            value={state.offsetX}
+            onChange={this.onOffsetXChange}
+            style={{ width: 50 }}
+          />
         </label>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
           offsetY:
-          <input type="text" value={state.offsetY} onChange={this.onOffsetYChange} style={{width: 50}}/>
+          <input
+            type="text"
+            value={state.offsetY}
+            onChange={this.onOffsetYChange}
+            style={{ width: 50 }}
+          />
         </label>
       </div>
-      <div style={{margin: 100}}>
-        <Tooltip placement={this.state.placement}
-                 mouseEnterDelay={0}
-                 mouseLeaveDelay={0.1}
-                 destroyTooltipOnHide={this.state.destroyTooltipOnHide}
-                 trigger={Object.keys(this.state.trigger)}
-                 onVisibleChange={this.onVisibleChange}
-                 overlay={<div style={{height: 50, width: 50}}>i am a tooltip</div>}
-                 align={{
-                   offset: [this.state.offsetX, this.state.offsetY],
-                 }}
-                 transitionName={this.state.transitionName}>
-          <div style={{height: 100, width: 100, border: '1px solid red'}}>trigger</div>
+      <div style={{ margin: 100 }}>
+        <Tooltip
+          placement={this.state.placement}
+          mouseEnterDelay={0}
+          mouseLeaveDelay={0.1}
+          destroyTooltipOnHide={this.state.destroyTooltipOnHide}
+          trigger={Object.keys(this.state.trigger)}
+          onVisibleChange={this.onVisibleChange}
+          overlay={<div style={{ height: 50, width: 50 }}>i am a tooltip</div>}
+          align={{
+            offset: [this.state.offsetX, this.state.offsetY],
+          }}
+          transitionName={this.state.transitionName}
+        >
+          <div style={{ height: 100, width: 100, border: '1px solid red' }}>trigger</div>
         </Tooltip>
       </div>
     </div>);

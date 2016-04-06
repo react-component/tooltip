@@ -139,6 +139,12 @@ online example: http://react-component.github.io/tooltip/examples/
           <td>only valid when placement's type is String. value will be merged into placement's align config. note: can only accept offset and targetOffset</td>
         </tr>
         <tr>
+          <td>onPopupAlign</td>
+          <td>function(popupDomNode, align)</td>
+          <td></td>
+          <td>callback when popup node is aligned</td>
+        </tr>
+        <tr>
           <td>overlay</td>
           <td>React.Element</td>
           <td></td>
