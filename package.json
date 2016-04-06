@@ -1,7 +1,7 @@
 {
   "name": "rc-tooltip",
   "version": "3.3.2",
-  "description": "tooltip ui component for react",
+  "description": "React Tooltip",
   "keywords": [
     "react",
     "react-component",

@@ -1,7 +1,7 @@
 # rc-tooltip
 ---
 
-tooltip ui component for react 0.14+
+React Tooltip
 
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
@@ -9,7 +9,6 @@ tooltip ui component for react 0.14+
 [![gemnasium deps][gemnasium-image]][gemnasium-url]
 [![node version][node-image]][node-url]
 [![npm download][download-image]][download-url]
-[![Sauce Test Status](https://saucelabs.com/buildstatus/rc-tooltip)](https://saucelabs.com/u/rc-tooltip)
 
 [npm-image]: http://img.shields.io/npm/v/rc-tooltip.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/rc-tooltip
