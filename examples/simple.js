@@ -77,7 +77,7 @@ const Test = React.createClass({
     e.preventDefault();
   },
 
-  lrender() {
+  render() {
     const state = this.state;
     const trigger = state.trigger;
     return (<div>
