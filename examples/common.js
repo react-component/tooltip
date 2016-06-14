@@ -19761,10 +19761,7 @@
 	    mouseLeaveDelay: _react.PropTypes.number,
 	    getTooltipContainer: _react.PropTypes.func,
 	    destroyTooltipOnHide: _react.PropTypes.bool,
-	    align: _react.PropTypes.shape({
-	      offset: _react.PropTypes.array,
-	      targetOffset: _react.PropTypes.array
-	    }),
+	    align: _react.PropTypes.object,
 	    arrowContent: _react.PropTypes.any
 	  },
 	
