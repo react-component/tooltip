@@ -21,10 +21,7 @@ const Tooltip = React.createClass({
     mouseLeaveDelay: PropTypes.number,
     getTooltipContainer: PropTypes.func,
     destroyTooltipOnHide: PropTypes.bool,
-    align: PropTypes.shape({
-      offset: PropTypes.array,
-      targetOffset: PropTypes.array,
-    }),
+    align: PropTypes.object,
     arrowContent: PropTypes.any,
   },
 
