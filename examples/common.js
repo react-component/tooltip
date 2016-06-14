@@ -19748,7 +19748,7 @@
 	    children: _react.PropTypes.any,
 	    defaultVisible: _react.PropTypes.bool,
 	    visible: _react.PropTypes.bool,
-	    placement: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.object]),
+	    placement: _react.PropTypes.string,
 	    transitionName: _react.PropTypes.string,
 	    animation: _react.PropTypes.any,
 	    onVisibleChange: _react.PropTypes.func,
