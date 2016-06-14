@@ -3,17 +3,15 @@ webpackJsonp([1],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(212);
+	module.exports = __webpack_require__(213);
 
 
 /***/ },
 
-/***/ 212:
+/***/ 213:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _react = __webpack_require__(2);
 	
@@ -27,11 +25,12 @@ webpackJsonp([1],{
 	
 	var _rcTooltip2 = _interopRequireDefault(_rcTooltip);
 	
-	__webpack_require__(213);
+	__webpack_require__(214);
 	
-	var Test = _react2['default'].createClass({
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	var Test = _react2["default"].createClass({
 	  displayName: 'Test',
-	
 	  getInitialState: function getInitialState() {
 	    return {
 	      visible: false
@@ -51,28 +50,29 @@ webpackJsonp([1],{
 	    if (this.state.destroy) {
 	      return null;
 	    }
-	    return _react2['default'].createElement(
+	    return _react2["default"].createElement(
 	      'div',
 	      null,
-	      _react2['default'].createElement(
+	      _react2["default"].createElement(
 	        'div',
 	        { style: { marginTop: 100, marginLeft: 100, marginBottom: 100 } },
-	        _react2['default'].createElement(
-	          _rcTooltip2['default'],
+	        _react2["default"].createElement(
+	          _rcTooltip2["default"],
 	          {
 	            visible: this.state.visible,
 	            animation: 'zoom',
 	            trigger: [],
 	            overlayStyle: { zIndex: 1000 },
-	            overlay: _react2['default'].createElement(
+	            overlay: _react2["default"].createElement(
 	              'span',
 	              null,
 	              'required!'
-	            ) },
-	          _react2['default'].createElement('input', { onChange: this.handleChange })
+	            )
+	          },
+	          _react2["default"].createElement('input', { onChange: this.handleChange })
 	        )
 	      ),
-	      _react2['default'].createElement(
+	      _react2["default"].createElement(
 	        'button',
 	        { onClick: this.handleDestroy },
 	        'destroy'
@@ -81,11 +81,11 @@ webpackJsonp([1],{
 	  }
 	});
 	
-	_reactDom2['default'].render(_react2['default'].createElement(Test, null), document.getElementById('__react-content'));
+	_reactDom2["default"].render(_react2["default"].createElement(Test, null), document.getElementById('__react-content'));
 
 /***/ },
 
-/***/ 213:
+/***/ 214:
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

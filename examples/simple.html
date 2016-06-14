@@ -2,12 +2,12 @@
 <html>
 
 <head>
-  <title>simple.js - example - rc-tooltip@3.3.2</title>
+  <title>simple.js - example - rc-tooltip@3.3.3</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
+  <link href="https://a.alipayobjects.com/normalize.css/3.0.1/normalize.css" rel="stylesheet"/>
   <style>
     .highlight pre {
       padding: .8em 1em;
@@ -251,21 +251,20 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   <!--[if lt IE 9]>
   <script src="https://a.alipayobjects.com/??es5-shim/4.0.5/es5-shim.js,es5-shim/4.0.5/es5-sham.js,html5shiv/3.7.2/src/html5shiv.js"></script>
   <![endif]-->
+  
   <link rel="stylesheet" href="simple.css" />
 </head>
 
 <body>
-<div class="container">
-  <div class="header">
-    <h1>rc-tooltip@3.3.2</h1>
+  <div class="container">
+    <div class="header">
+      <h1>rc-tooltip@3.3.3</h1>
 
-    <p>tooltip ui component for react</p>
-  </div>
-  <div class="example" id="__react-content"></div>
-  <script src="common.js?nowrap"></script>
-  <script src="simple.js?nowrap"></script>
-  <div class="highlight"><pre><code language="undefined">
-import React from 'react';
+      <p>React Tooltip</p>
+    </div>
+    <div class="example" id="__react-content"></div>
+
+    <div class="highlight"><pre><code language="undefined">import React from 'react';
 import ReactDOM from 'react-dom';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
@@ -280,7 +279,7 @@ const Test = React.createClass({
     const offset = placements[placement].offset;
     return {
       destroyTooltipOnHide: false,
-      placement: placement,
+      placement,
       trigger: {
         hover: 1,
       },
@@ -312,21 +311,21 @@ const Test = React.createClass({
       delete trigger[e.target.value];
     }
     this.setState({
-      trigger: trigger,
+      trigger,
     });
   },
 
   onOffsetXChange(e) {
     const targetValue = e.target.value;
     this.setState({
-      offsetX: targetValue ? targetValue : undefined,
+      offsetX: targetValue || undefined,
     });
   },
 
   onOffsetYChange(e) {
     const targetValue = e.target.value;
     this.setState({
-      offsetY: targetValue ? targetValue : undefined,
+      offsetY: targetValue || undefined,
     });
   },
 
@@ -344,31 +343,38 @@ const Test = React.createClass({
     e.preventDefault();
   },
 
-  render() {
+  lrender() {
     const state = this.state;
     const trigger = state.trigger;
     return (&lt;div&gt;
-      &lt;div style={{margin: '10px 20px'}}&gt;
+      &lt;div style={{ margin: '10px 20px' }}&gt;
         &lt;label&gt;
           placement:
           &lt;select value={this.state.placement} onChange={this.onPlacementChange}&gt;
-            {Object.keys(placements).map(function(p) {
+            {Object.keys(placements).map((p) =&gt; {
               return &lt;option key={p} value={p}&gt;{p}&lt;/option&gt;;
             })}
           &lt;/select&gt;
         &lt;/label&gt;
         &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
         &lt;label&gt;
-          &lt;input value="rc-tooltip-zoom" type="checkbox" onChange={this.onTransitionChange}
-                 checked={this.state.transitionName === 'rc-tooltip-zoom'}/&gt;
+          &lt;input
+            value="rc-tooltip-zoom"
+            type="checkbox"
+            onChange={this.onTransitionChange}
+            checked={this.state.transitionName === 'rc-tooltip-zoom'}
+          /&gt;
           transitionName
         &lt;/label&gt;
 
         &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
 
         &lt;label&gt;
-          &lt;input type="checkbox" onChange={this.onDestroyCheck}
-                 checked={this.state.destroyTooltipOnHide}/&gt;
+          &lt;input
+            type="checkbox"
+            onChange={this.onDestroyCheck}
+            checked={this.state.destroyTooltipOnHide}
+          /&gt;
           destroyTooltipOnHide
         &lt;/label&gt;
 
@@ -377,41 +383,68 @@ const Test = React.createClass({
         trigger:
 
         &lt;label&gt;
-          &lt;input value="hover" checked={trigger.hover} type="checkbox" onChange={this.onTriggerChange}/&gt;
+          &lt;input
+            value="hover"
+            checked={trigger.hover}
+            type="checkbox"
+            onChange={this.onTriggerChange}
+          /&gt;
           hover
         &lt;/label&gt;
         &lt;label&gt;
-          &lt;input value="focus" checked={trigger.focus} type="checkbox" onChange={this.onTriggerChange}/&gt;
+          &lt;input
+            value="focus"
+            checked={trigger.focus}
+            type="checkbox"
+            onChange={this.onTriggerChange}
+          /&gt;
           focus
         &lt;/label&gt;
         &lt;label&gt;
-          &lt;input value="click" checked={trigger.click} type="checkbox" onChange={this.onTriggerChange}/&gt;
+          &lt;input
+            value="click"
+            checked={trigger.click}
+            type="checkbox"
+            onChange={this.onTriggerChange}
+          /&gt;
           click
         &lt;/label&gt;
         &lt;br/&gt;
         &lt;label&gt;
           offsetX:
-          &lt;input type="text" value={state.offsetX} onChange={this.onOffsetXChange} style={{width: 50}}/&gt;
+          &lt;input
+            type="text"
+            value={state.offsetX}
+            onChange={this.onOffsetXChange}
+            style={{ width: 50 }}
+          /&gt;
         &lt;/label&gt;
         &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
         &lt;label&gt;
           offsetY:
-          &lt;input type="text" value={state.offsetY} onChange={this.onOffsetYChange} style={{width: 50}}/&gt;
+          &lt;input
+            type="text"
+            value={state.offsetY}
+            onChange={this.onOffsetYChange}
+            style={{ width: 50 }}
+          /&gt;
         &lt;/label&gt;
       &lt;/div&gt;
-      &lt;div style={{margin: 100}}&gt;
-        &lt;Tooltip placement={this.state.placement}
-                 mouseEnterDelay={0}
-                 mouseLeaveDelay={0.1}
-                 destroyTooltipOnHide={this.state.destroyTooltipOnHide}
-                 trigger={Object.keys(this.state.trigger)}
-                 onVisibleChange={this.onVisibleChange}
-                 overlay={&lt;div style={{height: 50, width: 50}}&gt;i am a tooltip&lt;/div&gt;}
-                 align={{
-                   offset: [this.state.offsetX, this.state.offsetY],
-                 }}
-                 transitionName={this.state.transitionName}&gt;
-          &lt;div style={{height: 100, width: 100, border: '1px solid red'}}&gt;trigger&lt;/div&gt;
+      &lt;div style={{ margin: 100 }}&gt;
+        &lt;Tooltip
+          placement={this.state.placement}
+          mouseEnterDelay={0}
+          mouseLeaveDelay={0.1}
+          destroyTooltipOnHide={this.state.destroyTooltipOnHide}
+          trigger={Object.keys(this.state.trigger)}
+          onVisibleChange={this.onVisibleChange}
+          overlay={&lt;div style={{ height: 50, width: 50 }}&gt;i am a tooltip&lt;/div&gt;}
+          align={{
+            offset: [this.state.offsetX, this.state.offsetY],
+          }}
+          transitionName={this.state.transitionName}
+        &gt;
+          &lt;div style={{ height: 100, width: 100, border: '1px solid red' }}&gt;trigger&lt;/div&gt;
         &lt;/Tooltip&gt;
       &lt;/div&gt;
     &lt;/div&gt;);
@@ -422,13 +455,16 @@ ReactDOM.render(&lt;div&gt;
   &lt;Test /&gt;
 &lt;/div&gt;, document.getElementById('__react-content'));
 </code></pre></div>
-</div>
-<a href="http://github.com/react-component/tooltip">
-  <img style="position: absolute; top: 0; right: 0; border: 0;"
-       src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
-       alt="Fork me on GitHub"
-       data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
-</a>
+  </div>
+  <a href="http://github.com/react-component/tooltip">
+    <img style="position: absolute; top: 0; right: 0; border: 0;"
+         src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
+         alt="Fork me on GitHub"
+         data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+  </a>
+  
+  <script src="common.js?nowrap"></script>
+  <script src="simple.js?nowrap"></script>
 </body>
 
 </html>
