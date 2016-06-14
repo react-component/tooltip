@@ -8,7 +8,7 @@ const Tooltip = React.createClass({
     children: PropTypes.any,
     defaultVisible: PropTypes.bool,
     visible: PropTypes.bool,
-    placement: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    placement: PropTypes.string,
     transitionName: PropTypes.string,
     animation: PropTypes.any,
     onVisibleChange: PropTypes.func,
