@@ -145,7 +145,7 @@ online example: http://react-component.github.io/tooltip/examples/
         </tr>
         <tr>
           <td>overlay</td>
-          <td>React.Element</td>
+          <td>React.Element | () => React.Element</td>
           <td></td>
           <td>popup content</td>
         </tr>

@@ -1,5 +1,10 @@
 # History
 ----
+
+### 3.4.0
+
+- allow overlay prop as function type
+
 ### 3.3.0
 
 - support arrowContent prop
