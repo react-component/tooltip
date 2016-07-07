@@ -15,7 +15,7 @@ function timeout(ms) {
   };
 }
 
-describe('rc-tooltip', () => {
+describe('rc-tooltip', function run() {
   this.timeout(40000);
   const div = document.createElement('div');
   div.style.margin = '100px';
