@@ -19783,17 +19783,15 @@
 	    var overlay = _props.overlay;
 	    var prefixCls = _props.prefixCls;
 	
-	    return function () {
-	      return [_react2["default"].createElement(
-	        'div',
-	        { className: prefixCls + '-arrow', key: 'arrow' },
-	        arrowContent
-	      ), _react2["default"].createElement(
-	        'div',
-	        { className: prefixCls + '-inner', key: 'content' },
-	        typeof overlay === 'function' ? overlay() : overlay
-	      )];
-	    };
+	    return [_react2["default"].createElement(
+	      'div',
+	      { className: prefixCls + '-arrow', key: 'arrow' },
+	      arrowContent
+	    ), _react2["default"].createElement(
+	      'div',
+	      { className: prefixCls + '-inner', key: 'content' },
+	      typeof overlay === 'function' ? overlay() : overlay
+	    )];
 	  },
 	  getPopupDomNode: function getPopupDomNode() {
 	    return this.refs.trigger.popupDomNode;
@@ -19828,7 +19826,7 @@
 	        popupClassName: overlayClassName,
 	        ref: 'trigger',
 	        prefixCls: prefixCls,
-	        popup: this.getPopupElement(),
+	        popup: this.getPopupElement,
 	        action: trigger,
 	        builtinPlacements: _placements.placements,
 	        popupPlacement: placement,
