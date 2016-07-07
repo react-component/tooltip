@@ -54,7 +54,7 @@ const Tooltip = React.createClass({
   },
 
   getPopupDomNode() {
-    return this.refs.trigger.popupDomNode;
+    return this.refs.trigger.getPopupDomNode();
   },
 
   render() {
