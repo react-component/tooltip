@@ -19794,7 +19794,7 @@
 	    )];
 	  },
 	  getPopupDomNode: function getPopupDomNode() {
-	    return this.refs.trigger.popupDomNode;
+	    return this.refs.trigger.getPopupDomNode();
 	  },
 	  render: function render() {
 	    var _props2 = this.props;
