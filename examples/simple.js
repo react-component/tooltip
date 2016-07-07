@@ -34,7 +34,7 @@ webpackJsonp([4],{
 	
 	__webpack_require__(214);
 	
-	var _objectAssign = __webpack_require__(184);
+	var _objectAssign = __webpack_require__(172);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
@@ -107,7 +107,7 @@ webpackJsonp([4],{
 	  preventDefault: function preventDefault(e) {
 	    e.preventDefault();
 	  },
-	  lrender: function lrender() {
+	  render: function render() {
 	    var state = this.state;
 	    var trigger = state.trigger;
 	    return _react2["default"].createElement(
