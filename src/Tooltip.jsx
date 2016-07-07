@@ -43,16 +43,14 @@ const Tooltip = React.createClass({
 
   getPopupElement() {
     const { arrowContent, overlay, prefixCls } = this.props;
-    return () => {
-      return ([
-        <div className={`${prefixCls}-arrow`} key="arrow">
-          {arrowContent}
-        </div>,
-        <div className={`${prefixCls}-inner`} key="content">
-          {typeof overlay === 'function' ? overlay() : overlay}
-        </div>,
-      ]);
-    };
+    return ([
+      <div className={`${prefixCls}-arrow`} key="arrow">
+        {arrowContent}
+      </div>,
+      <div className={`${prefixCls}-inner`} key="content">
+        {typeof overlay === 'function' ? overlay() : overlay}
+      </div>,
+    ]);
   },
 
   getPopupDomNode() {
@@ -79,7 +77,7 @@ const Tooltip = React.createClass({
       popupClassName={overlayClassName}
       ref="trigger"
       prefixCls={prefixCls}
-      popup={this.getPopupElement()}
+      popup={this.getPopupElement}
       action={trigger}
       builtinPlacements={placements}
       popupPlacement={placement}
