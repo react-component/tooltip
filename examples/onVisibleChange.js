@@ -3,19 +3,19 @@ webpackJsonp([2],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(215);
+	module.exports = __webpack_require__(213);
 
 
 /***/ },
 
-/***/ 214:
+/***/ 212:
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
 
-/***/ 215:
+/***/ 213:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24,23 +24,23 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(159);
+	var _reactDom = __webpack_require__(34);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _rcTooltip = __webpack_require__(160);
+	var _rcTooltip = __webpack_require__(173);
 	
 	var _rcTooltip2 = _interopRequireDefault(_rcTooltip);
 	
-	__webpack_require__(214);
+	__webpack_require__(212);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function preventDefault(e) {
 	  e.preventDefault();
 	}
 	
-	var Test = _react2["default"].createClass({
+	var Test = _react2.default.createClass({
 	  displayName: 'Test',
 	  getInitialState: function getInitialState() {
 	    return {
@@ -61,33 +61,33 @@ webpackJsonp([2],{
 	    if (this.state.destroy) {
 	      return null;
 	    }
-	    return _react2["default"].createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2["default"].createElement(
+	      _react2.default.createElement(
 	        'div',
 	        { style: { marginTop: 300, marginLeft: 100, marginBottom: 100 } },
-	        _react2["default"].createElement(
-	          _rcTooltip2["default"],
+	        _react2.default.createElement(
+	          _rcTooltip2.default,
 	          {
 	            visible: this.state.visible,
 	            animation: 'zoom',
 	            onVisibleChange: this.onVisibleChange,
 	            trigger: 'click',
-	            overlay: _react2["default"].createElement(
+	            overlay: _react2.default.createElement(
 	              'span',
 	              null,
 	              'i am a tooltip'
 	            )
 	          },
-	          _react2["default"].createElement(
+	          _react2.default.createElement(
 	            'a',
 	            { href: '#', onClick: preventDefault },
 	            'trigger'
 	          )
 	        )
 	      ),
-	      _react2["default"].createElement(
+	      _react2.default.createElement(
 	        'button',
 	        { onClick: this.onDestroy },
 	        'destroy'
@@ -96,7 +96,7 @@ webpackJsonp([2],{
 	  }
 	});
 	
-	_reactDom2["default"].render(_react2["default"].createElement(Test, null), document.getElementById('__react-content'));
+	_reactDom2.default.render(_react2.default.createElement(Test, null), document.getElementById('__react-content'));
 
 /***/ }
 
