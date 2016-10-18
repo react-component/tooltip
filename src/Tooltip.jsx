@@ -48,13 +48,21 @@ const Tooltip = React.createClass({
         {arrowContent}
       </div>,
       <div className={`${prefixCls}-inner`} key="content">
-        {typeof overlay === 'function' ? overlay() : overlay}
+        {this.renderOverlay(overlay)}
       </div>,
     ]);
   },
 
   getPopupDomNode() {
     return this.refs.trigger.getPopupDomNode();
+  },
+
+  renderOverlay(overlay) {
+    const overlayElement = typeof overlay === 'function' ? overlay() : overlay;
+    if (overlayElement.type.displayName === 'Tooltip') {
+      return React.cloneElement(overlayElement, { getPopupContainer: this.getPopupDomNode });
+    }
+    return overlayElement;
   },
 
   render() {
