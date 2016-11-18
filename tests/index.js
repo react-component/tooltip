@@ -2,77 +2,87 @@ import '../assets/bootstrap.less';
 import expect from 'expect.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import { Simulate } from 'react-addons-test-utils';
 import $ from 'jquery';
 import Tooltip from '../index';
 import async from 'async';
 window.$ = $;
-const Simulate = TestUtils.Simulate;
 
-function timeout(ms) {
+const timeout = (ms) => {
   return (done) => {
     setTimeout(done, ms);
   };
-}
+};
 
-describe('rc-tooltip', function run() {
-  this.timeout(40000);
-  const div = document.createElement('div');
-  div.style.margin = '100px';
-  document.body.insertBefore(div, document.body.firstChild);
+const expectComponentPopupToBeOk = (component) => {
+  const popupDomNode = component.getPopupDomNode();
+  expect(popupDomNode).to.be.ok();
+};
+
+const expectPopupToHaveContent = (component, content) => {
+  const popupDomNode = component.getPopupDomNode();
+  expect($(popupDomNode).find('.x-content').html()).to.be(content);
+  expect(popupDomNode).to.be.ok();
+};
+
+const expectPopupToBeHidden = (component) => {
+  const popupDomNode = component.getPopupDomNode();
+  expect($(popupDomNode).css('display')).to.be('none');
+};
+
+const verifyContent = (component, content, done) => {
+  const componentDomNode = ReactDOM.findDOMNode(component);
+  async.series([timeout(20), (next) => {
+    expectPopupToHaveContent(component, content);
+    expectComponentPopupToBeOk(component);
+    Simulate.click(componentDomNode);
+    next();
+  }, timeout(20), (next) => {
+    expectPopupToBeHidden(component);
+    next();
+  }], done);
+};
+
+describe('rc-tooltip', () => {
+  let div;
+  before(() => {
+    timeout(40000);
+    div = document.createElement('div');
+    div.style.margin = '100px';
+    document.body.insertBefore(div, document.body.firstChild);
+  });
 
   afterEach(() => {
     ReactDOM.unmountComponentAtNode(div);
   });
 
-  describe('trigger', () => {
-    it('works', (done) => {
+  describe('shows and hides itself on click', () => {
+    it('using an element overlay', (done) => {
       const tooltip = ReactDOM.render(
         <Tooltip
           trigger={['click']}
           placement="left"
-          overlay={<strong className="x-content">tooltip2</strong>}
+          overlay={<strong className="x-content">Tooltip content</strong>}
         >
-          <div className="target">click</div>
+          <div className="target">Click this</div>
         </Tooltip>, div);
-      const domNode = ReactDOM.findDOMNode(tooltip);
-      Simulate.click(domNode);
-      async.series([timeout(20), (next) => {
-        const popupDomNode = tooltip.getPopupDomNode();
-        expect($(popupDomNode).find('.x-content').html()).to.be('tooltip2');
-        expect(popupDomNode).to.be.ok();
-        Simulate.click(domNode);
-        next();
-      }, timeout(20), (next) => {
-        const popupDomNode = tooltip.getPopupDomNode();
-        expect($(popupDomNode).css('display')).to.be('none');
-        next();
-      }], done);
+      const componentDomNode = ReactDOM.findDOMNode(tooltip);
+      Simulate.click(componentDomNode);
+      verifyContent(tooltip, 'Tooltip content', done);
     });
-  });
-  describe('trigger-functon', () => {
-    it('works with a function overlay', (done) => {
+
+    it('using a function overlay', (done) => {
       const tooltip = ReactDOM.render(
         <Tooltip
           trigger={['click']}
           placement="left"
-          overlay={() => (<strong className="x-content">tooltip</strong>)}
+          overlay={() => (<strong className="x-content">Tooltip content</strong>)}
         >
-          <div className="target">click</div>
+          <div className="target">Click this</div>
         </Tooltip>, div);
-      const domNode = ReactDOM.findDOMNode(tooltip);
-      Simulate.click(domNode);
-      async.series([timeout(20), (next) => {
-        const popupDomNode = tooltip.getPopupDomNode();
-        expect($(popupDomNode).find('.x-content').html()).to.be('tooltip');
-        expect(popupDomNode).to.be.ok();
-        Simulate.click(domNode);
-        next();
-      }, timeout(20), (next) => {
-        const popupDomNode = tooltip.getPopupDomNode();
-        expect($(popupDomNode).css('display')).to.be('none');
-        next();
-      }], done);
+      const componentDomNode = ReactDOM.findDOMNode(tooltip);
+      Simulate.click(componentDomNode);
+      verifyContent(tooltip, 'Tooltip content', done);
     });
   });
 });
