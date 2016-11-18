@@ -64,7 +64,7 @@ const Test = React.createClass({
   },
 
   onVisibleChange(visible) {
-    console.log('tooltip', visible);
+    console.log('tooltip', visible); // eslint-disable-line no-console
   },
 
   onDestroyCheck() {
