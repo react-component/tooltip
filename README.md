@@ -23,16 +23,18 @@ React Tooltip
 [download-image]: https://img.shields.io/npm/dm/rc-tooltip.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-tooltip
 
-## Screenshots
+## Screenshot
 
 <img src="http://gtms03.alicdn.com/tps/i3/TB1NQUSHpXXXXaUXFXXlQqyZXXX-1312-572.png" width="600"/>
 
-## Feature
+## Browser Support
 
-* support ie8,ie8+,chrome,firefox,safari
+|![IE](https://raw.github.com/alrra/browser-logos/master/internet-explorer/internet-explorer_48x48.png) | ![Chrome](https://raw.github.com/alrra/browser-logos/master/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/firefox/firefox_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/opera/opera_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/safari/safari_48x48.png)|
+| --- | --- | --- | --- | --- |
+| IE 8 + IE 8+ ✔ | Chrome 31.0+ ✔ | Firefox 31.0+ ✔ | Opera 30.0+ ✔ | Safari 7.0+ ✔ |
 
 
-## install
+## Install
 
 [![rc-tooltip](https://nodei.co/npm/rc-tooltip.png)](https://npmjs.org/package/rc-tooltip)
 
@@ -41,19 +43,20 @@ React Tooltip
 ```js
 var Tooltip = require('rc-tooltip');
 var React = require('react');
-var ReactDOM = require('react-dom')
+var ReactDOM = require('react-dom');
 ReactDOM.render(<Tooltip placement="left" trigger={['click']} overlay={<span>tooltip</span>}><a href='#'>hover</a></Tooltip>, container);
 ```
 
-## Example
+## Examples
 
-http://localhost:8007/examples
+`npm start` and then go to
+[http://localhost:8007/examples](http://localhost:8007/examples)
 
-online example: http://react-component.github.io/tooltip/examples/
+Online examples: [http://react-component.github.io/tooltip/examples/](http://react-component.github.io/tooltip/examples/)
 
 ## API
 
-### props
+### Props
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -173,19 +176,19 @@ online example: http://react-component.github.io/tooltip/examples/
 
 ## Development
 
-```
+```bash
 npm install
 npm start
 ```
 
 ## Test Case
 
-http://localhost:8007/tests/runner.html?coverage
+[http://localhost:8007/tests/runner.html?coverage](http://localhost:8007/tests/runner.html?coverage)
 
 ## Coverage
 
-http://localhost:8007/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:8007/tests/runner.html?coverage
+[http://localhost:8007/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:8007/tests/runner.html?coverage](http://localhost:8007/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:8007/tests/runner.html?coverage)
 
 ## License
 
-rc-tooltip is released under the MIT license.
+`rc-tooltip` is released under the MIT license.
