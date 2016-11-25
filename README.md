@@ -183,11 +183,16 @@ npm start
 
 ## Test Case
 
-[http://localhost:8007/tests/runner.html?coverage](http://localhost:8007/tests/runner.html?coverage)
+```bash
+npm test
+npm run chrome-test
+```
 
 ## Coverage
 
-[http://localhost:8007/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:8007/tests/runner.html?coverage](http://localhost:8007/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:8007/tests/runner.html?coverage)
+```bash
+npm run coverage
+```
 
 ## License
 
