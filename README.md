@@ -173,6 +173,10 @@ Online examples: [http://react-component.github.io/tooltip/examples/](http://rea
     </tbody>
 </table>
 
+## Note
+
+`Tooltip` requires child node accepts `onMouseEnter`, `onMouseLeave`, `onFocus`, `onClick` event.
+
 
 ## Development
 
