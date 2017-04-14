@@ -1,8 +1,10 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import createReactClass from 'create-react-class';
 import { placements } from './placements';
 import Trigger from 'rc-trigger';
 
-const Tooltip = React.createClass({
+const Tooltip = createReactClass({
   propTypes: {
     trigger: PropTypes.any,
     children: PropTypes.any,
@@ -14,8 +16,8 @@ const Tooltip = React.createClass({
     onVisibleChange: PropTypes.func,
     afterVisibleChange: PropTypes.func,
     overlay: PropTypes.oneOfType([
-      React.PropTypes.node,
-      React.PropTypes.func,
+      PropTypes.node,
+      PropTypes.func,
     ]).isRequired,
     overlayStyle: PropTypes.object,
     overlayClassName: PropTypes.string,
