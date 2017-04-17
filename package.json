@@ -57,6 +57,8 @@
     "lint"
   ],
   "dependencies": {
+    "create-react-class": "^15.5.2",
+    "prop-types": "^15.5.8",
     "rc-trigger": "1.x"
   }
 }
