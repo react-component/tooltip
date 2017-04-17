@@ -1,6 +1,10 @@
 # History
 ----
 
+### 3.4.3
+
+- Fix `createClass` and `PropTypes` warning.
+
 ### 3.4.0
 
 - allow overlay prop as function type
