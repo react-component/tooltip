@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>onVisibleChange.js - example - rc-tooltip@3.4.2</title>
+  <title>onVisibleChange.js - example - rc-tooltip@3.4.3</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -251,20 +251,25 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   <!--[if lt IE 9]>
   <script src="https://a.alipayobjects.com/??es5-shim/4.0.5/es5-shim.js,es5-shim/4.0.5/es5-sham.js,html5shiv/3.7.2/src/html5shiv.js"></script>
   <![endif]-->
-  
+  <script src="https://as.alipayobjects.com/g/component/??modernizr/2.8.3/modernizr.js,fastclick/1.0.6/fastclick.js"></script>
+  <script>
+  if(!window.Promise) {
+    document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"'+'>'+'<'+'/'+'script>');
+  }
+  </script>
   <link rel="stylesheet" href="onVisibleChange.css" />
 </head>
 
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-tooltip@3.4.2</h1>
+      <h1>rc-tooltip@3.4.3</h1>
 
       <p>React Tooltip</p>
     </div>
     <div class="example" id="__react-content"></div>
 
-    <div class="highlight"><pre><code language="js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+    <div class="highlight"><pre><code language="js"><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
 <span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
 <span class="hljs-keyword">import</span> Tooltip <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-tooltip'</span>;
 <span class="hljs-keyword">import</span> <span class="hljs-string">'rc-tooltip/assets/bootstrap.css'</span>;
@@ -273,22 +278,20 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   e.preventDefault();
 }
 
-<span class="hljs-keyword">const</span> Test = React.createClass({
-  getInitialState() {
-    <span class="hljs-keyword">return</span> {
-      visible: <span class="hljs-literal">false</span>,
-    };
-  },
-  onVisibleChange(visible) {
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+  state = {
+    visible: <span class="hljs-literal">false</span>,
+  };
+  onVisibleChange = (visible) =&gt; {
     <span class="hljs-keyword">this</span>.setState({
       visible,
     });
-  },
-  onDestroy() {
+  }
+  onDestroy = () =&gt; {
     <span class="hljs-keyword">this</span>.setState({
       destroy: <span class="hljs-literal">true</span>,
     });
-  },
+  }
   render() {
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.state.destroy) {
       <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
@@ -307,10 +310,10 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
       <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{this.onDestroy}</span>&gt;</span>destroy<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>)</span>;
-  },
-});
+  }
+}
 
-ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Test</span>/&gt;</span>, document.getElementById('__react-content'));
+ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Test</span> /&gt;</span>, document.getElementById('__react-content'));
 </span></code></pre></div>
   </div>
   <a href="http://github.com/react-component/tooltip">
@@ -319,7 +322,7 @@ ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-t
          alt="Fork me on GitHub"
          data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
   </a>
-  
+  <script>FastClick.attach(document.body);</script>
   <script src="common.js?nowrap"></script>
   <script src="onVisibleChange.js?nowrap"></script>
 </body>

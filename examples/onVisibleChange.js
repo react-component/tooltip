@@ -1,38 +1,50 @@
 webpackJsonp([2],{
 
 /***/ 0:
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(213);
+	module.exports = __webpack_require__(312);
 
 
-/***/ },
+/***/ }),
 
-/***/ 212:
-/***/ function(module, exports) {
+/***/ 311:
+/***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
-/***/ },
+/***/ }),
 
-/***/ 213:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 312:
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	var _classCallCheck2 = __webpack_require__(225);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(226);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(262);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
 	
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(34);
+	var _reactDom = __webpack_require__(37);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _rcTooltip = __webpack_require__(173);
+	var _rcTooltip = __webpack_require__(183);
 	
 	var _rcTooltip2 = _interopRequireDefault(_rcTooltip);
 	
-	__webpack_require__(212);
+	__webpack_require__(311);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -40,24 +52,32 @@ webpackJsonp([2],{
 	  e.preventDefault();
 	}
 	
-	var Test = _react2.default.createClass({
-	  displayName: 'Test',
-	  getInitialState: function getInitialState() {
-	    return {
+	var Test = function (_Component) {
+	  (0, _inherits3.default)(Test, _Component);
+	
+	  function Test() {
+	    var _temp, _this, _ret;
+	
+	    (0, _classCallCheck3.default)(this, Test);
+	
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
 	      visible: false
-	    };
-	  },
-	  onVisibleChange: function onVisibleChange(visible) {
-	    this.setState({
-	      visible: visible
-	    });
-	  },
-	  onDestroy: function onDestroy() {
-	    this.setState({
-	      destroy: true
-	    });
-	  },
-	  render: function render() {
+	    }, _this.onVisibleChange = function (visible) {
+	      _this.setState({
+	        visible: visible
+	      });
+	    }, _this.onDestroy = function () {
+	      _this.setState({
+	        destroy: true
+	      });
+	    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+	  }
+	
+	  Test.prototype.render = function render() {
 	    if (this.state.destroy) {
 	      return null;
 	    }
@@ -93,12 +113,14 @@ webpackJsonp([2],{
 	        'destroy'
 	      )
 	    );
-	  }
-	});
+	  };
+	
+	  return Test;
+	}(_react.Component);
 	
 	_reactDom2.default.render(_react2.default.createElement(Test, null), document.getElementById('__react-content'));
 
-/***/ }
+/***/ })
 
 });
 //# sourceMappingURL=onVisibleChange.js.map

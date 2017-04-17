@@ -1,113 +1,125 @@
 webpackJsonp([4],{
 
 /***/ 0:
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(215);
+	module.exports = __webpack_require__(314);
 
 
-/***/ },
+/***/ }),
 
-/***/ 212:
-/***/ function(module, exports) {
+/***/ 311:
+/***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
-/***/ },
+/***/ }),
 
-/***/ 215:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 314:
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	var _classCallCheck2 = __webpack_require__(225);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(226);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(262);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
 	
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(34);
+	var _reactDom = __webpack_require__(37);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _rcTooltip = __webpack_require__(173);
+	var _rcTooltip = __webpack_require__(183);
 	
 	var _rcTooltip2 = _interopRequireDefault(_rcTooltip);
 	
-	__webpack_require__(212);
+	__webpack_require__(311);
 	
-	var _objectAssign = __webpack_require__(184);
+	var _objectAssign = __webpack_require__(279);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
-	var _placements = __webpack_require__(176);
+	var _placements = __webpack_require__(308);
 	
 	var _placements2 = _interopRequireDefault(_placements);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Test = _react2.default.createClass({
-	  displayName: 'Test',
-	  getInitialState: function getInitialState() {
-	    var placement = 'right';
-	    var offset = _placements2.default[placement].offset;
-	    return {
+	var Test = function (_Component) {
+	  (0, _inherits3.default)(Test, _Component);
+	
+	  function Test() {
+	    var _temp, _this, _ret;
+	
+	    (0, _classCallCheck3.default)(this, Test);
+	
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
 	      destroyTooltipOnHide: false,
-	      placement: placement,
+	      placement: 'right',
 	      trigger: {
 	        hover: 1
 	      },
-	      offsetX: offset[0],
-	      offsetY: offset[1]
-	    };
-	  },
-	  onPlacementChange: function onPlacementChange(e) {
-	    var placement = e.target.value;
-	    var offset = _placements2.default[placement].offset;
-	    this.setState({
-	      placement: e.target.value,
-	      offsetX: offset[0],
-	      offsetY: offset[1]
-	    });
-	  },
-	  onTransitionChange: function onTransitionChange(e) {
-	    this.setState({
-	      transitionName: e.target.checked ? e.target.value : ''
-	    });
-	  },
-	  onTriggerChange: function onTriggerChange(e) {
-	    var trigger = (0, _objectAssign2.default)({}, this.state.trigger);
-	    if (e.target.checked) {
-	      trigger[e.target.value] = 1;
-	    } else {
-	      delete trigger[e.target.value];
-	    }
-	    this.setState({
-	      trigger: trigger
-	    });
-	  },
-	  onOffsetXChange: function onOffsetXChange(e) {
-	    var targetValue = e.target.value;
-	    this.setState({
-	      offsetX: targetValue || undefined
-	    });
-	  },
-	  onOffsetYChange: function onOffsetYChange(e) {
-	    var targetValue = e.target.value;
-	    this.setState({
-	      offsetY: targetValue || undefined
-	    });
-	  },
-	  onVisibleChange: function onVisibleChange(visible) {
-	    console.log('tooltip', visible);
-	  },
-	  onDestroyCheck: function onDestroyCheck() {
-	    this.setState({
-	      destroyTooltipOnHide: !this.state.destroyTooltipOnHide
-	    });
-	  },
-	  preventDefault: function preventDefault(e) {
-	    e.preventDefault();
-	  },
-	  render: function render() {
+	      offsetX: _placements2.default.right.offset[0],
+	      offsetY: _placements2.default.right.offset[1]
+	    }, _this.onPlacementChange = function (e) {
+	      var placement = e.target.value;
+	      var offset = _placements2.default[placement].offset;
+	      _this.setState({
+	        placement: e.target.value,
+	        offsetX: offset[0],
+	        offsetY: offset[1]
+	      });
+	    }, _this.onTransitionChange = function (e) {
+	      _this.setState({
+	        transitionName: e.target.checked ? e.target.value : ''
+	      });
+	    }, _this.onTriggerChange = function (e) {
+	      var trigger = (0, _objectAssign2.default)({}, _this.state.trigger);
+	      if (e.target.checked) {
+	        trigger[e.target.value] = 1;
+	      } else {
+	        delete trigger[e.target.value];
+	      }
+	      _this.setState({
+	        trigger: trigger
+	      });
+	    }, _this.onOffsetXChange = function (e) {
+	      var targetValue = e.target.value;
+	      _this.setState({
+	        offsetX: targetValue || undefined
+	      });
+	    }, _this.onOffsetYChange = function (e) {
+	      var targetValue = e.target.value;
+	      _this.setState({
+	        offsetY: targetValue || undefined
+	      });
+	    }, _this.onVisibleChange = function (visible) {
+	      console.log('tooltip', visible); // eslint-disable-line no-console
+	    }, _this.onDestroyCheck = function () {
+	      _this.setState({
+	        destroyTooltipOnHide: !_this.state.destroyTooltipOnHide
+	      });
+	    }, _this.preventDefault = function (e) {
+	      e.preventDefault();
+	    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+	  }
+	
+	  Test.prototype.render = function render() {
 	    var state = this.state;
 	    var trigger = state.trigger;
 	    return _react2.default.createElement(
@@ -132,7 +144,7 @@ webpackJsonp([4],{
 	            })
 	          )
 	        ),
-	        '    ',
+	        '\xA0\xA0\xA0\xA0',
 	        _react2.default.createElement(
 	          'label',
 	          null,
@@ -144,7 +156,7 @@ webpackJsonp([4],{
 	          }),
 	          'transitionName'
 	        ),
-	        '    ',
+	        '\xA0\xA0\xA0\xA0',
 	        _react2.default.createElement(
 	          'label',
 	          null,
@@ -155,7 +167,7 @@ webpackJsonp([4],{
 	          }),
 	          'destroyTooltipOnHide'
 	        ),
-	        '     trigger:',
+	        '\xA0\xA0\xA0\xA0 trigger:',
 	        _react2.default.createElement(
 	          'label',
 	          null,
@@ -201,7 +213,7 @@ webpackJsonp([4],{
 	            style: { width: 50 }
 	          })
 	        ),
-	        '    ',
+	        '\xA0\xA0\xA0\xA0',
 	        _react2.default.createElement(
 	          'label',
 	          null,
@@ -244,19 +256,17 @@ webpackJsonp([4],{
 	        )
 	      )
 	    );
-	  }
-	});
+	  };
+	
+	  return Test;
+	}(_react.Component);
 	
 	// do not use rc-tooltip/lib/placements
 	
 	
-	_reactDom2.default.render(_react2.default.createElement(
-	  'div',
-	  null,
-	  _react2.default.createElement(Test, null)
-	), document.getElementById('__react-content'));
+	_reactDom2.default.render(_react2.default.createElement(Test, null), document.getElementById('__react-content'));
 
-/***/ }
+/***/ })
 
 });
 //# sourceMappingURL=simple.js.map

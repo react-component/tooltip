@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>simple.js - example - rc-tooltip@3.4.2</title>
+  <title>simple.js - example - rc-tooltip@3.4.3</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -251,20 +251,25 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   <!--[if lt IE 9]>
   <script src="https://a.alipayobjects.com/??es5-shim/4.0.5/es5-shim.js,es5-shim/4.0.5/es5-sham.js,html5shiv/3.7.2/src/html5shiv.js"></script>
   <![endif]-->
-  
+  <script src="https://as.alipayobjects.com/g/component/??modernizr/2.8.3/modernizr.js,fastclick/1.0.6/fastclick.js"></script>
+  <script>
+  if(!window.Promise) {
+    document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"'+'>'+'<'+'/'+'script>');
+  }
+  </script>
   <link rel="stylesheet" href="simple.css" />
 </head>
 
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-tooltip@3.4.2</h1>
+      <h1>rc-tooltip@3.4.3</h1>
 
       <p>React Tooltip</p>
     </div>
     <div class="example" id="__react-content"></div>
 
-    <div class="highlight"><pre><code language="undefined">import React from 'react';
+    <div class="highlight"><pre><code language="undefined">import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
@@ -273,21 +278,17 @@ import assign from 'object-assign';
 // do not use rc-tooltip/lib/placements
 import placements from 'rc-tooltip/lib/placements';
 
-const Test = React.createClass({
-  getInitialState() {
-    const placement = 'right';
-    const offset = placements[placement].offset;
-    return {
-      destroyTooltipOnHide: false,
-      placement,
-      trigger: {
-        hover: 1,
-      },
-      offsetX: offset[0],
-      offsetY: offset[1],
-    };
-  },
-  onPlacementChange(e) {
+class Test extends Component {
+  state = {
+    destroyTooltipOnHide: false,
+    placement: 'right',
+    trigger: {
+      hover: 1,
+    },
+    offsetX: placements.right.offset[0],
+    offsetY: placements.right.offset[1],
+  };
+  onPlacementChange = (e) =&gt; {
     const placement = e.target.value;
     const offset = placements[placement].offset;
     this.setState({
@@ -295,15 +296,13 @@ const Test = React.createClass({
       offsetX: offset[0],
       offsetY: offset[1],
     });
-  },
-
-  onTransitionChange(e) {
+  }
+  onTransitionChange = (e) =&gt; {
     this.setState({
       transitionName: e.target.checked ? e.target.value : '',
     });
-  },
-
-  onTriggerChange(e) {
+  }
+  onTriggerChange = (e) =&gt; {
     const trigger = assign({}, this.state.trigger);
     if (e.target.checked) {
       trigger[e.target.value] = 1;
@@ -313,36 +312,30 @@ const Test = React.createClass({
     this.setState({
       trigger,
     });
-  },
-
-  onOffsetXChange(e) {
+  }
+  onOffsetXChange = (e) =&gt; {
     const targetValue = e.target.value;
     this.setState({
       offsetX: targetValue || undefined,
     });
-  },
-
-  onOffsetYChange(e) {
+  }
+  onOffsetYChange = (e) =&gt; {
     const targetValue = e.target.value;
     this.setState({
       offsetY: targetValue || undefined,
     });
-  },
-
-  onVisibleChange(visible) {
-    console.log('tooltip', visible);
-  },
-
-  onDestroyCheck() {
+  }
+  onVisibleChange = (visible) =&gt; {
+    console.log('tooltip', visible); // eslint-disable-line no-console
+  }
+  onDestroyCheck = () =&gt; {
     this.setState({
       destroyTooltipOnHide: !this.state.destroyTooltipOnHide,
     });
-  },
-
-  preventDefault(e) {
+  }
+  preventDefault = (e) =&gt; {
     e.preventDefault();
-  },
-
+  }
   render() {
     const state = this.state;
     const trigger = state.trigger;
@@ -448,12 +441,10 @@ const Test = React.createClass({
         &lt;/Tooltip&gt;
       &lt;/div&gt;
     &lt;/div&gt;);
-  },
-});
+  }
+}
 
-ReactDOM.render(&lt;div&gt;
-  &lt;Test /&gt;
-&lt;/div&gt;, document.getElementById('__react-content'));
+ReactDOM.render(&lt;Test /&gt;, document.getElementById('__react-content'));
 </code></pre></div>
   </div>
   <a href="http://github.com/react-component/tooltip">
@@ -462,7 +453,7 @@ ReactDOM.render(&lt;div&gt;
          alt="Fork me on GitHub"
          data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
   </a>
-  
+  <script>FastClick.attach(document.body);</script>
   <script src="common.js?nowrap"></script>
   <script src="simple.js?nowrap"></script>
 </body>
