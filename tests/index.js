@@ -2,7 +2,7 @@ import '../assets/bootstrap.less';
 import expect from 'expect.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Simulate } from 'react-addons-test-utils';
+import { Simulate } from 'react-dom/test-utils';
 import $ from 'jquery';
 import Tooltip from '../index';
 import async from 'async';

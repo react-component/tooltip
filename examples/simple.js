@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.less';
@@ -7,21 +7,17 @@ import assign from 'object-assign';
 // do not use rc-tooltip/lib/placements
 import placements from 'rc-tooltip/src/placements';
 
-const Test = React.createClass({
-  getInitialState() {
-    const placement = 'right';
-    const offset = placements[placement].offset;
-    return {
-      destroyTooltipOnHide: false,
-      placement,
-      trigger: {
-        hover: 1,
-      },
-      offsetX: offset[0],
-      offsetY: offset[1],
-    };
-  },
-  onPlacementChange(e) {
+class Test extends Component {
+  state = {
+    destroyTooltipOnHide: false,
+    placement: 'right',
+    trigger: {
+      hover: 1,
+    },
+    offsetX: placements.right.offset[0],
+    offsetY: placements.right.offset[1],
+  };
+  onPlacementChange = (e) => {
     const placement = e.target.value;
     const offset = placements[placement].offset;
     this.setState({
@@ -29,15 +25,13 @@ const Test = React.createClass({
       offsetX: offset[0],
       offsetY: offset[1],
     });
-  },
-
-  onTransitionChange(e) {
+  }
+  onTransitionChange = (e) => {
     this.setState({
       transitionName: e.target.checked ? e.target.value : '',
     });
-  },
-
-  onTriggerChange(e) {
+  }
+  onTriggerChange = (e) => {
     const trigger = assign({}, this.state.trigger);
     if (e.target.checked) {
       trigger[e.target.value] = 1;
@@ -47,36 +41,30 @@ const Test = React.createClass({
     this.setState({
       trigger,
     });
-  },
-
-  onOffsetXChange(e) {
+  }
+  onOffsetXChange = (e) => {
     const targetValue = e.target.value;
     this.setState({
       offsetX: targetValue || undefined,
     });
-  },
-
-  onOffsetYChange(e) {
+  }
+  onOffsetYChange = (e) => {
     const targetValue = e.target.value;
     this.setState({
       offsetY: targetValue || undefined,
     });
-  },
-
-  onVisibleChange(visible) {
+  }
+  onVisibleChange = (visible) => {
     console.log('tooltip', visible); // eslint-disable-line no-console
-  },
-
-  onDestroyCheck() {
+  }
+  onDestroyCheck = () => {
     this.setState({
       destroyTooltipOnHide: !this.state.destroyTooltipOnHide,
     });
-  },
-
-  preventDefault(e) {
+  }
+  preventDefault = (e) => {
     e.preventDefault();
-  },
-
+  }
   render() {
     const state = this.state;
     const trigger = state.trigger;
@@ -182,9 +170,7 @@ const Test = React.createClass({
         </Tooltip>
       </div>
     </div>);
-  },
-});
+  }
+}
 
-ReactDOM.render(<div>
-  <Test />
-</div>, document.getElementById('__react-content'));
+ReactDOM.render(<Test />, document.getElementById('__react-content'));

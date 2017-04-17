@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import createReactClass from 'create-react-class';
-import { placements } from './placements';
 import Trigger from 'rc-trigger';
+import { placements } from './placements';
 
-const Tooltip = createReactClass({
-  propTypes: {
+class Tooltip extends Component {
+  static propTypes = {
     trigger: PropTypes.any,
     children: PropTypes.any,
     defaultVisible: PropTypes.bool,
@@ -28,22 +27,20 @@ const Tooltip = createReactClass({
     destroyTooltipOnHide: PropTypes.bool,
     align: PropTypes.object,
     arrowContent: PropTypes.any,
-  },
+  };
 
-  getDefaultProps() {
-    return {
-      prefixCls: 'rc-tooltip',
-      mouseEnterDelay: 0,
-      destroyTooltipOnHide: false,
-      mouseLeaveDelay: 0.1,
-      align: {},
-      placement: 'right',
-      trigger: ['hover'],
-      arrowContent: null,
-    };
-  },
+  static defaultProps = {
+    prefixCls: 'rc-tooltip',
+    mouseEnterDelay: 0,
+    destroyTooltipOnHide: false,
+    mouseLeaveDelay: 0.1,
+    align: {},
+    placement: 'right',
+    trigger: ['hover'],
+    arrowContent: null,
+  };
 
-  getPopupElement() {
+  getPopupElement = () => {
     const { arrowContent, overlay, prefixCls } = this.props;
     return ([
       <div className={`${prefixCls}-arrow`} key="arrow">
@@ -53,11 +50,11 @@ const Tooltip = createReactClass({
         {typeof overlay === 'function' ? overlay() : overlay}
       </div>,
     ]);
-  },
+  }
 
   getPopupDomNode() {
     return this.refs.trigger.getPopupDomNode();
-  },
+  }
 
   render() {
     const {
@@ -97,7 +94,7 @@ const Tooltip = createReactClass({
     >
       {children}
     </Trigger>);
-  },
-});
+  }
+}
 
 export default Tooltip;
