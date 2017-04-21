@@ -56,6 +56,7 @@
     "lint"
   ],
   "dependencies": {
+    "babel-runtime": "^6.23.0",
     "prop-types": "^15.5.8",
     "rc-trigger": "1.x"
   }
