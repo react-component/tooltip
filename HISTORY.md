@@ -1,6 +1,10 @@
 # History
 ----
 
+### 3.4.4
+
+- Fix babel-runtime module not found
+
 ### 3.4.3
 
 - Fix `createClass` and `PropTypes` warning.
