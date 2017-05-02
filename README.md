@@ -162,7 +162,7 @@ Online examples: [http://react-component.github.io/tooltip/examples/](http://rea
           <td>getTooltipContainer</td>
           <td>function</td>
           <td></td>
-          <td>function returning html node which will act as tooltip container</td>
+          <td>Function returning html node which will act as tooltip container. By default the tooltip attaches to the body. If you want to change the container, simply return a new element.</td>
         </tr>
         <tr>
           <td>destroyTooltipOnHide</td>
