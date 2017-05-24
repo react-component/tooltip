@@ -46,7 +46,7 @@ webpackJsonp([4],{
 	
 	__webpack_require__(311);
 	
-	var _objectAssign = __webpack_require__(279);
+	var _objectAssign = __webpack_require__(281);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
