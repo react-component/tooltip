@@ -1,1 +1,3 @@
-module.exports = require('./src/');
+import Tooltip from './src';
+
+export default Tooltip;
