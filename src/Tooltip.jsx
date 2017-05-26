@@ -76,7 +76,7 @@ class Tooltip extends Component {
       popupClassName={overlayClassName}
       ref="trigger"
       prefixCls={prefixCls}
-      popup={this.getPopupElement}
+      popup={this.getPopupElement()}
       action={trigger}
       builtinPlacements={placements}
       popupPlacement={placement}
