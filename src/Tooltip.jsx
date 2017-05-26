@@ -66,9 +66,8 @@ class Tooltip extends Component {
       placement, align,
       destroyTooltipOnHide,
       defaultVisible, getTooltipContainer,
-      ...restProps,
+      ...extraProps,
     } = this.props;
-    const extraProps = { ...restProps };
     if ('visible' in this.props) {
       extraProps.popupVisible = this.props.visible;
     }
