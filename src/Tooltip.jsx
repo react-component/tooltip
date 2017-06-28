@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Trigger from 'rc-trigger';
-import { placements } from './placements';
+import { getPlacements } from './placements';
 
 class Tooltip extends Component {
   static propTypes = {
@@ -27,6 +27,13 @@ class Tooltip extends Component {
     destroyTooltipOnHide: PropTypes.bool,
     align: PropTypes.object,
     arrowContent: PropTypes.any,
+    autoAdjustOverflow: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.shape({
+        adjustX: PropTypes.oneOf([0, 1]),
+        adjustY: PropTypes.oneOf([0, 1]),
+      }),
+    ]),
   };
 
   static defaultProps = {
@@ -38,6 +45,7 @@ class Tooltip extends Component {
     placement: 'right',
     trigger: ['hover'],
     arrowContent: null,
+    autoAdjustOverflow: true,
   };
 
   getPopupElement = () => {
@@ -66,9 +74,11 @@ class Tooltip extends Component {
       placement, align,
       destroyTooltipOnHide,
       defaultVisible, getTooltipContainer,
+      autoAdjustOverflow,
       ...restProps,
     } = this.props;
     const extraProps = { ...restProps };
+    const builtinPlacements = getPlacements({ autoAdjustOverflow });
     if ('visible' in this.props) {
       extraProps.popupVisible = this.props.visible;
     }
@@ -78,7 +88,7 @@ class Tooltip extends Component {
       prefixCls={prefixCls}
       popup={this.getPopupElement}
       action={trigger}
-      builtinPlacements={placements}
+      builtinPlacements={builtinPlacements}
       popupPlacement={placement}
       popupAlign={align}
       getPopupContainer={getTooltipContainer}
