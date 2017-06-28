@@ -170,6 +170,12 @@ Online examples: [http://react-component.github.io/tooltip/examples/](http://rea
           <td>false</td>
           <td>whether destroy tooltip when tooltip is hidden</td>
         </tr>
+        <tr>
+          <td>autoAdjustOverflow</td>
+          <td>boolean</td>
+          <td>true</td>
+          <td>whether adjust source node placement automatically when source node is invisible</td>
+        </tr>
     </tbody>
 </table>
 
@@ -201,3 +207,4 @@ npm run coverage
 ## License
 
 `rc-tooltip` is released under the MIT license.
+
