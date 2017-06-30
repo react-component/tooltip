@@ -117,6 +117,12 @@ Online examples: [http://react-component.github.io/tooltip/examples/](http://rea
           <td>call when visible is changed</td>
         </tr>
         <tr>
+          <td>afterVisibleChange</td>
+          <td>Function</td>
+          <td></td>
+          <td>call after visible is changed</td>
+        </tr>
+        <tr>
           <td>visible</td>
           <td>boolean</td>
           <td></td>
