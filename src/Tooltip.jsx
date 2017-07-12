@@ -61,7 +61,7 @@ class Tooltip extends Component {
       overlayClassName, trigger,
       mouseEnterDelay, mouseLeaveDelay,
       overlayStyle, prefixCls,
-      children, onVisibleChange,
+      children, onVisibleChange, afterVisibleChange,
       transitionName, animation,
       placement, align,
       destroyTooltipOnHide,
@@ -83,6 +83,7 @@ class Tooltip extends Component {
       popupAlign={align}
       getPopupContainer={getTooltipContainer}
       onPopupVisibleChange={onVisibleChange}
+      afterPopupVisibleChange={afterVisibleChange}
       popupTransitionName={transitionName}
       popupAnimation={animation}
       defaultPopupVisible={defaultVisible}
