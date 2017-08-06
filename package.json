@@ -1,6 +1,6 @@
 {
   "name": "rc-tooltip",
-  "version": "3.4.7",
+  "version": "3.4.8",
   "description": "React Tooltip",
   "keywords": [
     "react",
@@ -9,6 +9,7 @@
     "tooltip"
   ],
   "files": [
+    "dist",
     "lib",
     "es",
     "assets/*.css"
@@ -28,9 +29,15 @@
   },
   "license": "MIT",
   "config": {
-    "port": 8007
+    "port": 8007,
+    "entry": {
+      "rc-tooltip": [
+        "./src/index.js"
+      ]
+    }
   },
   "scripts": {
+    "dist": "rc-tools run dist",
     "build": "rc-tools run build",
     "gh-pages": "rc-tools run gh-pages",
     "start": "rc-tools run server",
@@ -60,7 +67,7 @@
     "lint"
   ],
   "dependencies": {
-    "babel-runtime": "^6.23.0",
+    "babel-runtime": "6.x",
     "prop-types": "^15.5.8",
     "rc-trigger": "1.x"
   }

@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Simulate } from 'react-dom/test-utils';
 import $ from 'jquery';
-import Tooltip from '../index';
+import Tooltip from 'rc-tooltip';
 import async from 'async';
 window.$ = $;
 

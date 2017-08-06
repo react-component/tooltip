@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap_white.less';
+
 const text = <span>提示文字</span>;
 const styles = {
   display: 'inline-block',
