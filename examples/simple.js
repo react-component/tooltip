@@ -20,7 +20,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_tooltip__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_tooltip_assets_bootstrap_less__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_tooltip_assets_bootstrap_less___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_rc_tooltip_assets_bootstrap_less__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_object_assign__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_object_assign__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_object_assign__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_tooltip_src_placements__ = __webpack_require__(91);
 
@@ -257,7 +257,7 @@ __WEBPACK_IMPORTED_MODULE_5_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 
 /***/ }),
 
-/***/ 322:
+/***/ 321:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(149);
@@ -265,5 +265,5 @@ module.exports = __webpack_require__(149);
 
 /***/ })
 
-},[322]);
+},[321]);
 //# sourceMappingURL=simple.js.map
