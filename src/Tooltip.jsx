@@ -42,12 +42,12 @@ class Tooltip extends Component {
   };
 
   getPopupElement = () => {
-    const { arrowContent, overlay, prefixCls } = this.props;
+    const { arrowContent, overlay, prefixCls, ariaId } = this.props;
     return ([
       <div className={`${prefixCls}-arrow`} key="arrow">
         {arrowContent}
       </div>,
-      <div className={`${prefixCls}-inner`} key="content" id={this.props.ariaId}>
+      <div className={`${prefixCls}-inner`} key="content" id={ariaId}>
         {typeof overlay === 'function' ? overlay() : overlay}
       </div>,
     ]);
