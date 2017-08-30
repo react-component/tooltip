@@ -176,6 +176,12 @@ Online examples: [http://react-component.github.io/tooltip/examples/](http://rea
           <td>false</td>
           <td>whether destroy tooltip when tooltip is hidden</td>
         </tr>
+        <tr>
+          <td>ariaId</td>
+          <td>String</td>
+          <td></td>
+          <td>Id which gets attached to the tooltip content. Can be used with aria-describedby to achieve Screenreader-Support.</td>
+        </tr>
     </tbody>
 </table>
 

@@ -27,6 +27,7 @@ class Tooltip extends Component {
     destroyTooltipOnHide: PropTypes.bool,
     align: PropTypes.object,
     arrowContent: PropTypes.any,
+    ariaId: PropTypes.string
   };
 
   static defaultProps = {
@@ -46,7 +47,7 @@ class Tooltip extends Component {
       <div className={`${prefixCls}-arrow`} key="arrow">
         {arrowContent}
       </div>,
-      <div className={`${prefixCls}-inner`} key="content">
+      <div className={`${prefixCls}-inner`} key="content" id={this.props.ariaId}>
         {typeof overlay === 'function' ? overlay() : overlay}
       </div>,
     ]);
