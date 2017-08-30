@@ -27,7 +27,7 @@ class Tooltip extends Component {
     destroyTooltipOnHide: PropTypes.bool,
     align: PropTypes.object,
     arrowContent: PropTypes.any,
-    ariaId: PropTypes.string
+    ariaId: PropTypes.string,
   };
 
   static defaultProps = {
