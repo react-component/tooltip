@@ -191,7 +191,7 @@ Online examples: [http://react-component.github.io/tooltip/examples/](http://rea
 
 ## Accessibility
 
-For accesibility purpose you can use the `id` prop to link your tooltip with another element. For example attaching it with an input:
+For accessibility purpose you can use the `id` prop to link your tooltip with another element. For example attaching it to an input element:
 ```jsx
 <Tooltip
     ...
