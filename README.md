@@ -177,7 +177,7 @@ Online examples: [http://react-component.github.io/tooltip/examples/](http://rea
           <td>whether destroy tooltip when tooltip is hidden</td>
         </tr>
         <tr>
-          <td>ariaId</td>
+          <td>id</td>
           <td>String</td>
           <td></td>
           <td>Id which gets attached to the tooltip content. Can be used with aria-describedby to achieve Screenreader-Support.</td>
@@ -189,6 +189,20 @@ Online examples: [http://react-component.github.io/tooltip/examples/](http://rea
 
 `Tooltip` requires child node accepts `onMouseEnter`, `onMouseLeave`, `onFocus`, `onClick` event.
 
+## Accessibility
+
+For accesibility purpose you can use the `id` prop to link your tooltip with another element. For example attaching it with an input:
+```jsx
+<Tooltip
+    ...
+    id={this.props.name}
+    <input className={className}
+           type="text"
+           ...
+           aria-describedby={this.props.name}/>
+</Tooltip>
+```
+If you do it like this, a screenreader would read the content of your tooltip if you focus the input element.
 
 ## Development
 
