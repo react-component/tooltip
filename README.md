@@ -196,8 +196,7 @@ For accessibility purpose you can use the `id` prop to link your tooltip with an
 <Tooltip
     ...
     id={this.props.name}
-    <input className={className}
-           type="text"
+    <input type="text"
            ...
            aria-describedby={this.props.name}/>
 </Tooltip>
