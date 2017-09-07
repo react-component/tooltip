@@ -53,7 +53,11 @@ class Tooltip extends Component {
   }
 
   getPopupDomNode() {
-    return this.refs.trigger.getPopupDomNode();
+    return this.trigger.getPopupDomNode();
+  }
+
+  saveTrigger = (node) => {
+    this.trigger = node;
   }
 
   render() {
@@ -74,7 +78,7 @@ class Tooltip extends Component {
     }
     return (<Trigger
       popupClassName={overlayClassName}
-      ref="trigger"
+      ref={this.saveTrigger}
       prefixCls={prefixCls}
       popup={this.getPopupElement}
       action={trigger}
