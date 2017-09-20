@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>arrowContent.js - example - rc-tooltip@3.4.9</title>
+  <title>arrowContent.js - example - rmc-tooltip@1.0.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-tooltip@3.4.9</h1>
+      <h1>rmc-tooltip@1.0.0</h1>
 
       <p>React Tooltip</p>
     </div>
@@ -271,8 +271,8 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 
     <div class="highlight"><pre><code language="js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
 <span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
-<span class="hljs-keyword">import</span> Tooltip <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-tooltip'</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">'rc-tooltip/assets/bootstrap_white.css'</span>;
+<span class="hljs-keyword">import</span> Tooltip <span class="hljs-keyword">from</span> <span class="hljs-string">'../src/index'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'rmc-tooltip/assets/bootstrap_white.css'</span>;
 
 <span class="hljs-keyword">const</span> text = <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">span</span>&gt;</span>提示文字<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>;</span>
 <span class="hljs-keyword">const</span> styles = {
@@ -292,28 +292,28 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
     <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span>
       <span class="hljs-attribute">placement</span>=<span class="hljs-value">"left"</span>
       <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{text}</span>
-      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
+      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rmc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
     &gt;
       <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{styles}</span>&gt;</span>左边<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span>
       <span class="hljs-attribute">placement</span>=<span class="hljs-value">"top"</span>
       <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{text}</span>
-      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
+      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rmc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
     &gt;
       <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{styles}</span>&gt;</span>上边<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span>
       <span class="hljs-attribute">placement</span>=<span class="hljs-value">"bottom"</span>
       <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{text}</span>
-      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
+      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rmc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
     &gt;
       <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{styles}</span>&gt;</span>下边<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span>
       <span class="hljs-attribute">placement</span>=<span class="hljs-value">"right"</span>
       <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{text}</span>
-      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
+      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rmc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
     &gt;
       <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{styles}</span>&gt;</span>右边<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
@@ -321,28 +321,28 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
     <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span>
       <span class="hljs-attribute">placement</span>=<span class="hljs-value">"leftTop"</span>
       <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{text}</span>
-      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
+      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rmc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
     &gt;
       <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{styles}</span>&gt;</span>左上<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span>
       <span class="hljs-attribute">placement</span>=<span class="hljs-value">"leftBottom"</span>
       <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{text}</span>
-      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
+      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rmc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
     &gt;
       <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{styles}</span>&gt;</span>左下<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span>
       <span class="hljs-attribute">placement</span>=<span class="hljs-value">"rightTop"</span>
       <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{text}</span>
-      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
+      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rmc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
     &gt;
       <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{styles}</span>&gt;</span>右上<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span>
       <span class="hljs-attribute">placement</span>=<span class="hljs-value">"rightBottom"</span>
       <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{text}</span>
-      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
+      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rmc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
     &gt;
       <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{styles}</span>&gt;</span>右下<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
@@ -350,28 +350,28 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
     <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span>
       <span class="hljs-attribute">placement</span>=<span class="hljs-value">"topLeft"</span>
       <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{text}</span>
-      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
+      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rmc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
     &gt;
       <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{styles}</span>&gt;</span>上左<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span>
       <span class="hljs-attribute">placement</span>=<span class="hljs-value">"topRight"</span>
       <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{text}</span>
-      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
+      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rmc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
     &gt;
       <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{styles}</span>&gt;</span>上右<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span>
       <span class="hljs-attribute">placement</span>=<span class="hljs-value">"bottomLeft"</span>
       <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{text}</span>
-      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
+      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rmc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
     &gt;
       <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{styles}</span>&gt;</span>下左<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span>
       <span class="hljs-attribute">placement</span>=<span class="hljs-value">"bottomRight"</span>
       <span class="hljs-attribute">overlay</span>=<span class="hljs-value">{text}</span>
-      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
+      <span class="hljs-attribute">arrowContent</span>=<span class="hljs-value">{&lt;div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"rmc-tooltip-arrow-inner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>}
     &gt;
       <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{styles}</span>&gt;</span>下右<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span>
@@ -381,7 +381,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Test</span> /&gt;</span>, document.getElementById('__react-content'));
 </span></code></pre></div>
   </div>
-  <a href="http://github.com/react-component/tooltip">
+  <a href="http://github.com/react-component/tooltip/tree/m-tooltip">
     <img style="position: absolute; top: 0; right: 0; border: 0;"
          src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
          alt="Fork me on GitHub"

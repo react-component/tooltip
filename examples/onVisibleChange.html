@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>onVisibleChange.js - example - rc-tooltip@3.4.9</title>
+  <title>onVisibleChange.js - example - rmc-tooltip@1.0.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-tooltip@3.4.9</h1>
+      <h1>rmc-tooltip@1.0.0</h1>
 
       <p>React Tooltip</p>
     </div>
@@ -271,16 +271,17 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 
     <div class="highlight"><pre><code language="js"><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
 <span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
-<span class="hljs-keyword">import</span> Tooltip <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-tooltip'</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">'rc-tooltip/assets/bootstrap.css'</span>;
+<span class="hljs-keyword">import</span> Tooltip <span class="hljs-keyword">from</span> <span class="hljs-string">'../src/index'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'rmc-tooltip/assets/bootstrap.css'</span>;
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">preventDefault</span>(<span class="hljs-params">e</span>) </span>{
   e.preventDefault();
 }
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span>&lt;<span class="hljs-title">any</span>, <span class="hljs-title">any</span>&gt; </span>{
   state = {
     visible: <span class="hljs-literal">false</span>,
+    destroy: <span class="hljs-literal">false</span>,
   };
   onVisibleChange = (visible) =&gt; {
     <span class="hljs-keyword">this</span>.setState({
@@ -316,7 +317,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Test</span> /&gt;</span>, document.getElementById('__react-content'));
 </span></code></pre></div>
   </div>
-  <a href="http://github.com/react-component/tooltip">
+  <a href="http://github.com/react-component/tooltip/tree/m-tooltip">
     <img style="position: absolute; top: 0; right: 0; border: 0;"
          src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
          alt="Fork me on GitHub"
