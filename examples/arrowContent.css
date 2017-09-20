@@ -1,9 +1,9 @@
-.rmc-tooltip.rmc-tooltip-zoom-enter,
-.rmc-tooltip.rmc-tooltip-zoom-leave {
+.rc-tooltip.rc-tooltip-zoom-enter,
+.rc-tooltip.rc-tooltip-zoom-leave {
   display: block;
 }
-.rmc-tooltip-zoom-enter,
-.rmc-tooltip-zoom-appear {
+.rc-tooltip-zoom-enter,
+.rc-tooltip-zoom-appear {
   opacity: 0;
   -webkit-animation-duration: 0.3s;
           animation-duration: 0.3s;
@@ -14,7 +14,7 @@
   -webkit-animation-play-state: paused;
           animation-play-state: paused;
 }
-.rmc-tooltip-zoom-leave {
+.rc-tooltip-zoom-leave {
   -webkit-animation-duration: 0.3s;
           animation-duration: 0.3s;
   -webkit-animation-fill-mode: both;
@@ -24,14 +24,14 @@
   -webkit-animation-play-state: paused;
           animation-play-state: paused;
 }
-.rmc-tooltip-zoom-enter.rmc-tooltip-zoom-enter-active,
-.rmc-tooltip-zoom-appear.rmc-tooltip-zoom-appear-active {
+.rc-tooltip-zoom-enter.rc-tooltip-zoom-enter-active,
+.rc-tooltip-zoom-appear.rc-tooltip-zoom-appear-active {
   -webkit-animation-name: rcToolTipZoomIn;
           animation-name: rcToolTipZoomIn;
   -webkit-animation-play-state: running;
           animation-play-state: running;
 }
-.rmc-tooltip-zoom-leave.rmc-tooltip-zoom-leave-active {
+.rc-tooltip-zoom-leave.rc-tooltip-zoom-leave-active {
   -webkit-animation-name: rcToolTipZoomOut;
           animation-name: rcToolTipZoomOut;
   -webkit-animation-play-state: running;
@@ -101,7 +101,7 @@
             transform: scale(0, 0);
   }
 }
-.rmc-tooltip {
+.rc-tooltip {
   position: absolute;
   z-index: 1070;
   display: block;
@@ -112,10 +112,10 @@
   padding: 1px;
   opacity: 0.9;
 }
-.rmc-tooltip-hidden {
+.rc-tooltip-hidden {
   display: none;
 }
-.rmc-tooltip-inner {
+.rc-tooltip-inner {
   padding: 8px 10px;
   color: #333333;
   text-align: left;
@@ -125,114 +125,114 @@
   min-height: 34px;
   border: 1px solid #b1b1b1;
 }
-.rmc-tooltip-arrow,
-.rmc-tooltip-arrow-inner {
+.rc-tooltip-arrow,
+.rc-tooltip-arrow-inner {
   position: absolute;
   width: 0;
   height: 0;
   border-color: transparent;
   border-style: solid;
 }
-.rmc-tooltip-placement-top .rmc-tooltip-arrow,
-.rmc-tooltip-placement-topLeft .rmc-tooltip-arrow,
-.rmc-tooltip-placement-topRight .rmc-tooltip-arrow {
+.rc-tooltip-placement-top .rc-tooltip-arrow,
+.rc-tooltip-placement-topLeft .rc-tooltip-arrow,
+.rc-tooltip-placement-topRight .rc-tooltip-arrow {
   bottom: -5px;
   margin-left: -6px;
   border-width: 6px 6px 0;
   border-top-color: #b1b1b1;
 }
-.rmc-tooltip-placement-top .rmc-tooltip-arrow-inner,
-.rmc-tooltip-placement-topLeft .rmc-tooltip-arrow-inner,
-.rmc-tooltip-placement-topRight .rmc-tooltip-arrow-inner {
+.rc-tooltip-placement-top .rc-tooltip-arrow-inner,
+.rc-tooltip-placement-topLeft .rc-tooltip-arrow-inner,
+.rc-tooltip-placement-topRight .rc-tooltip-arrow-inner {
   bottom: 1px;
   margin-left: -6px;
   border-width: 6px 6px 0;
   border-top-color: #ffffff;
 }
-.rmc-tooltip-placement-top .rmc-tooltip-arrow {
+.rc-tooltip-placement-top .rc-tooltip-arrow {
   left: 50%;
 }
-.rmc-tooltip-placement-topLeft .rmc-tooltip-arrow {
+.rc-tooltip-placement-topLeft .rc-tooltip-arrow {
   left: 15%;
 }
-.rmc-tooltip-placement-topRight .rmc-tooltip-arrow {
+.rc-tooltip-placement-topRight .rc-tooltip-arrow {
   right: 15%;
 }
-.rmc-tooltip-placement-right .rmc-tooltip-arrow,
-.rmc-tooltip-placement-rightTop .rmc-tooltip-arrow,
-.rmc-tooltip-placement-rightBottom .rmc-tooltip-arrow {
+.rc-tooltip-placement-right .rc-tooltip-arrow,
+.rc-tooltip-placement-rightTop .rc-tooltip-arrow,
+.rc-tooltip-placement-rightBottom .rc-tooltip-arrow {
   left: -5px;
   margin-top: -6px;
   border-width: 6px 6px 6px 0;
   border-right-color: #b1b1b1;
 }
-.rmc-tooltip-placement-right .rmc-tooltip-arrow-inner,
-.rmc-tooltip-placement-rightTop .rmc-tooltip-arrow-inner,
-.rmc-tooltip-placement-rightBottom .rmc-tooltip-arrow-inner {
+.rc-tooltip-placement-right .rc-tooltip-arrow-inner,
+.rc-tooltip-placement-rightTop .rc-tooltip-arrow-inner,
+.rc-tooltip-placement-rightBottom .rc-tooltip-arrow-inner {
   left: 1px;
   margin-top: -6px;
   border-width: 6px 6px 6px 0;
   border-right-color: #ffffff;
 }
-.rmc-tooltip-placement-right .rmc-tooltip-arrow {
+.rc-tooltip-placement-right .rc-tooltip-arrow {
   top: 50%;
 }
-.rmc-tooltip-placement-rightTop .rmc-tooltip-arrow {
+.rc-tooltip-placement-rightTop .rc-tooltip-arrow {
   top: 15%;
   margin-top: 0;
 }
-.rmc-tooltip-placement-rightBottom .rmc-tooltip-arrow {
+.rc-tooltip-placement-rightBottom .rc-tooltip-arrow {
   bottom: 15%;
 }
-.rmc-tooltip-placement-left .rmc-tooltip-arrow,
-.rmc-tooltip-placement-leftTop .rmc-tooltip-arrow,
-.rmc-tooltip-placement-leftBottom .rmc-tooltip-arrow {
+.rc-tooltip-placement-left .rc-tooltip-arrow,
+.rc-tooltip-placement-leftTop .rc-tooltip-arrow,
+.rc-tooltip-placement-leftBottom .rc-tooltip-arrow {
   right: -5px;
   margin-top: -6px;
   border-width: 6px 0 6px 6px;
   border-left-color: #b1b1b1;
 }
-.rmc-tooltip-placement-left .rmc-tooltip-arrow-inner,
-.rmc-tooltip-placement-leftTop .rmc-tooltip-arrow-inner,
-.rmc-tooltip-placement-leftBottom .rmc-tooltip-arrow-inner {
+.rc-tooltip-placement-left .rc-tooltip-arrow-inner,
+.rc-tooltip-placement-leftTop .rc-tooltip-arrow-inner,
+.rc-tooltip-placement-leftBottom .rc-tooltip-arrow-inner {
   right: 1px;
   margin-top: -6px;
   border-width: 6px 0 6px 6px;
   border-left-color: #ffffff;
 }
-.rmc-tooltip-placement-left .rmc-tooltip-arrow {
+.rc-tooltip-placement-left .rc-tooltip-arrow {
   top: 50%;
 }
-.rmc-tooltip-placement-leftTop .rmc-tooltip-arrow {
+.rc-tooltip-placement-leftTop .rc-tooltip-arrow {
   top: 15%;
   margin-top: 0;
 }
-.rmc-tooltip-placement-leftBottom .rmc-tooltip-arrow {
+.rc-tooltip-placement-leftBottom .rc-tooltip-arrow {
   bottom: 15%;
 }
-.rmc-tooltip-placement-bottom .rmc-tooltip-arrow,
-.rmc-tooltip-placement-bottomLeft .rmc-tooltip-arrow,
-.rmc-tooltip-placement-bottomRight .rmc-tooltip-arrow {
+.rc-tooltip-placement-bottom .rc-tooltip-arrow,
+.rc-tooltip-placement-bottomLeft .rc-tooltip-arrow,
+.rc-tooltip-placement-bottomRight .rc-tooltip-arrow {
   top: -5px;
   margin-left: -6px;
   border-width: 0 6px 6px;
   border-bottom-color: #b1b1b1;
 }
-.rmc-tooltip-placement-bottom .rmc-tooltip-arrow-inner,
-.rmc-tooltip-placement-bottomLeft .rmc-tooltip-arrow-inner,
-.rmc-tooltip-placement-bottomRight .rmc-tooltip-arrow-inner {
+.rc-tooltip-placement-bottom .rc-tooltip-arrow-inner,
+.rc-tooltip-placement-bottomLeft .rc-tooltip-arrow-inner,
+.rc-tooltip-placement-bottomRight .rc-tooltip-arrow-inner {
   top: 1px;
   margin-left: -6px;
   border-width: 0 6px 6px;
   border-bottom-color: #ffffff;
 }
-.rmc-tooltip-placement-bottom .rmc-tooltip-arrow {
+.rc-tooltip-placement-bottom .rc-tooltip-arrow {
   left: 50%;
 }
-.rmc-tooltip-placement-bottomLeft .rmc-tooltip-arrow {
+.rc-tooltip-placement-bottomLeft .rc-tooltip-arrow {
   left: 15%;
 }
-.rmc-tooltip-placement-bottomRight .rmc-tooltip-arrow {
+.rc-tooltip-placement-bottomRight .rc-tooltip-arrow {
   right: 15%;
 }
 

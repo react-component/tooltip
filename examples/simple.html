@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>simple.js - example - rmc-tooltip@1.0.0</title>
+  <title>simple.js - example - rc-tooltip@3.4.9</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rmc-tooltip@1.0.0</h1>
+      <h1>rc-tooltip@3.4.9</h1>
 
       <p>React Tooltip</p>
     </div>
@@ -271,19 +271,22 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 
     <div class="highlight"><pre><code language="undefined">import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Tooltip from '../src/index';
-import 'rmc-tooltip/assets/bootstrap.css';
+import Tooltip from 'rc-tooltip';
+import 'rc-tooltip/assets/bootstrap.css';
+import assign from 'object-assign';
 
 // do not use rc-tooltip/lib/placements
-import placements from '../src/placements';
+import placements from 'rc-tooltip/lib/placements';
 
-class Test extends Component&lt;any, any&gt; {
+class Test extends Component {
   state = {
     destroyTooltipOnHide: false,
     placement: 'right',
+    trigger: {
+      hover: 1,
+    },
     offsetX: placements.right.offset[0],
     offsetY: placements.right.offset[1],
-    transitionName: '',
   };
   onPlacementChange = (e) =&gt; {
     const placement = e.target.value;
@@ -299,6 +302,17 @@ class Test extends Component&lt;any, any&gt; {
       transitionName: e.target.checked ? e.target.value : '',
     });
   }
+  onTriggerChange = (e) =&gt; {
+    const trigger = assign({}, this.state.trigger);
+    if (e.target.checked) {
+      trigger[e.target.value] = 1;
+    } else {
+      delete trigger[e.target.value];
+    }
+    this.setState({
+      trigger,
+    });
+  }
   onOffsetXChange = (e) =&gt; {
     const targetValue = e.target.value;
     this.setState({
@@ -312,8 +326,7 @@ class Test extends Component&lt;any, any&gt; {
     });
   }
   onVisibleChange = (visible) =&gt; {
-    /* tslint:disable:no-console */
-    console.log('tooltip', visible);
+    console.log('tooltip', visible); // eslint-disable-line no-console
   }
   onDestroyCheck = () =&gt; {
     this.setState({
@@ -325,6 +338,7 @@ class Test extends Component&lt;any, any&gt; {
   }
   render() {
     const state = this.state;
+    const trigger = state.trigger;
     return (&lt;div&gt;
       &lt;div style={{ margin: '10px 20px' }}&gt;
         &lt;label&gt;
@@ -338,10 +352,10 @@ class Test extends Component&lt;any, any&gt; {
         &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
         &lt;label&gt;
           &lt;input
-            value="rmc-tooltip-zoom"
+            value="rc-tooltip-zoom"
             type="checkbox"
             onChange={this.onTransitionChange}
-            checked={this.state.transitionName === 'rmc-tooltip-zoom'}
+            checked={this.state.transitionName === 'rc-tooltip-zoom'}
           /&gt;
           transitionName
         &lt;/label&gt;
@@ -358,6 +372,36 @@ class Test extends Component&lt;any, any&gt; {
         &lt;/label&gt;
 
         &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+
+        trigger:
+
+        &lt;label&gt;
+          &lt;input
+            value="hover"
+            checked={trigger.hover}
+            type="checkbox"
+            onChange={this.onTriggerChange}
+          /&gt;
+          hover
+        &lt;/label&gt;
+        &lt;label&gt;
+          &lt;input
+            value="focus"
+            checked={trigger.focus}
+            type="checkbox"
+            onChange={this.onTriggerChange}
+          /&gt;
+          focus
+        &lt;/label&gt;
+        &lt;label&gt;
+          &lt;input
+            value="click"
+            checked={trigger.click}
+            type="checkbox"
+            onChange={this.onTriggerChange}
+          /&gt;
+          click
+        &lt;/label&gt;
         &lt;br/&gt;
         &lt;label&gt;
           offsetX:
@@ -382,7 +426,10 @@ class Test extends Component&lt;any, any&gt; {
       &lt;div style={{ margin: 100 }}&gt;
         &lt;Tooltip
           placement={this.state.placement}
+          mouseEnterDelay={0}
+          mouseLeaveDelay={0.1}
           destroyTooltipOnHide={this.state.destroyTooltipOnHide}
+          trigger={Object.keys(this.state.trigger)}
           onVisibleChange={this.onVisibleChange}
           overlay={&lt;div style={{ height: 50, width: 50 }}&gt;i am a tooltip&lt;/div&gt;}
           align={{
@@ -400,7 +447,7 @@ class Test extends Component&lt;any, any&gt; {
 ReactDOM.render(&lt;Test /&gt;, document.getElementById('__react-content'));
 </code></pre></div>
   </div>
-  <a href="http://github.com/react-component/tooltip/tree/m-tooltip">
+  <a href="http://github.com/react-component/tooltip">
     <img style="position: absolute; top: 0; right: 0; border: 0;"
          src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
          alt="Fork me on GitHub"
