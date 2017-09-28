@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
-  <title>rc-tooltip@3.4.9 - React Tooltip</title>
+  <title>rc-tooltip@3.5.0 - React Tooltip</title>
   <style>
     @font-face {
       font-family: octicons-anchor;
@@ -737,7 +737,7 @@
 
 <body>
 <div class="header">
-  <h1>rc-tooltip@3.4.9</h1>
+  <h1>rc-tooltip@3.5.0</h1>
 </div>
 <div class="examples">
   <h3>EXAMPLES</h3>
@@ -919,10 +919,24 @@ ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-t
           <td>false</td>
           <td>whether destroy tooltip when tooltip is hidden</td>
         </tr>
+        <tr>
+          <td>id</td>
+          <td>String</td>
+          <td></td>
+          <td>Id which gets attached to the tooltip content. Can be used with aria-describedby to achieve Screenreader-Support.</td>
+        </tr>
     </tbody>
 </table>
 
 <h2>Note<a id="user-content-note" name="note" class="anchor" aria-hidden="true" href="#note"><span class="octicon octicon-link"></span></a></h2><p><code>Tooltip</code> requires child node accepts <code>onMouseEnter</code>, <code>onMouseLeave</code>, <code>onFocus</code>, <code>onClick</code> event.</p>
+<h2>Accessibility<a id="user-content-accessibility" name="accessibility" class="anchor" aria-hidden="true" href="#accessibility"><span class="octicon octicon-link"></span></a></h2><p>For accessibility purpose you can use the <code>id</code> prop to link your tooltip with another element. For example attaching it to an input element:</p>
+<div class="highlight"><pre><code language="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Tooltip</span>
+    <span class="hljs-attribute">...</span>
+    <span class="hljs-attribute">id</span>=<span class="hljs-value">{this.props.name}</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span>
+           <span class="hljs-attribute">...</span>
+           <span class="hljs-attribute">aria-describedby</span>=<span class="hljs-value">{this.props.name}</span>/&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">Tooltip</span>&gt;</span></code></pre></div><p>If you do it like this, a screenreader would read the content of your tooltip if you focus the input element.</p>
 <h2>Development<a id="user-content-development" name="development" class="anchor" aria-hidden="true" href="#development"><span class="octicon octicon-link"></span></a></h2><div class="highlight"><pre><code language="bash">npm install
 npm start</code></pre></div><h2>Test Case<a id="user-content-test-case" name="test-case" class="anchor" aria-hidden="true" href="#test-case"><span class="octicon octicon-link"></span></a></h2><div class="highlight"><pre><code language="bash">npm <span class="hljs-built_in">test</span>
 npm run chrome-test</code></pre></div><h2>Coverage<a id="user-content-coverage" name="coverage" class="anchor" aria-hidden="true" href="#coverage"><span class="octicon octicon-link"></span></a></h2><div class="highlight"><pre><code language="bash">npm run coverage</code></pre></div><h2>License<a id="user-content-license" name="license" class="anchor" aria-hidden="true" href="#license"><span class="octicon octicon-link"></span></a></h2><p><code>rc-tooltip</code> is released under the MIT license.</p>
