@@ -1,6 +1,10 @@
 # History
 ----
 
+### 3.5.0
+
+- Add id for ARIA.
+
 ### 3.4.4
 
 - Fix babel-runtime module not found
