@@ -27,6 +27,7 @@ class Tooltip extends Component {
     destroyTooltipOnHide: PropTypes.bool,
     align: PropTypes.object,
     arrowContent: PropTypes.any,
+    id: PropTypes.string,
   };
 
   static defaultProps = {
@@ -41,12 +42,12 @@ class Tooltip extends Component {
   };
 
   getPopupElement = () => {
-    const { arrowContent, overlay, prefixCls } = this.props;
+    const { arrowContent, overlay, prefixCls, id } = this.props;
     return ([
       <div className={`${prefixCls}-arrow`} key="arrow">
         {arrowContent}
       </div>,
-      <div className={`${prefixCls}-inner`} key="content">
+      <div className={`${prefixCls}-inner`} key="content" id={id}>
         {typeof overlay === 'function' ? overlay() : overlay}
       </div>,
     ]);
