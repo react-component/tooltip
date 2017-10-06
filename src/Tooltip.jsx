@@ -10,7 +10,10 @@ class Tooltip extends Component {
     defaultVisible: PropTypes.bool,
     visible: PropTypes.bool,
     placement: PropTypes.string,
-    transitionName: PropTypes.string,
+    transitionName: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
     animation: PropTypes.any,
     onVisibleChange: PropTypes.func,
     afterVisibleChange: PropTypes.func,
