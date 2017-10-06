@@ -111,9 +111,9 @@ Online examples: [http://react-component.github.io/tooltip/examples/](http://rea
         </tr>
         <tr>
           <td>transitionName</td>
-          <td>String</td>
+          <td>String|Object</td>
           <td></td>
-          <td>same as https://github.com/react-component/css-transition-group</td>
+          <td>same as https://github.com/react-component/animate</td>
         </tr>
         <tr>
           <td>onVisibleChange</td>
