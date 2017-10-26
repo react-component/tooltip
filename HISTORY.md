@@ -1,6 +1,10 @@
 # History
 ----
 
+### 3.6.0
+
+- Support React 16.
+
 ### 3.5.0
 
 - Add id for ARIA.
