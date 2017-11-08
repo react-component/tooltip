@@ -69,7 +69,7 @@
     "jest": "^21.2.1",
     "object-assign": "~4.0.1",
     "pre-commit": "1.x",
-    "rc-tools": "6.x",
+    "rc-tools": "^7.0.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   },
