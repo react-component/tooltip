@@ -77,7 +77,7 @@ class Tooltip extends Component {
       ...restProps,
     } = this.props;
     const extraProps = { ...restProps };
-    if ('visible' in this.props) {
+    if (typeof this.props.visible !== 'undefined') {
       extraProps.popupVisible = this.props.visible;
     }
     return (<Trigger
