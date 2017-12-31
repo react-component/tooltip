@@ -74,11 +74,12 @@ class Tooltip extends Component {
       placement, align,
       destroyTooltipOnHide,
       defaultVisible, getTooltipContainer,
+      visible,
       ...restProps,
     } = this.props;
     const extraProps = { ...restProps };
-    if (typeof this.props.visible !== 'undefined') {
-      extraProps.popupVisible = this.props.visible;
+    if (typeof visible !== 'undefined') {
+      extraProps.popupVisible = visible;
     }
     return (<Trigger
       popupClassName={overlayClassName}
