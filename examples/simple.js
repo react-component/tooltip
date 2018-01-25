@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.less';
-import assign from 'object-assign';
 
 // do not use rc-tooltip/lib/placements
 import placements from 'rc-tooltip/src/placements';
@@ -32,7 +31,7 @@ class Test extends Component {
     });
   }
   onTriggerChange = (e) => {
-    const trigger = assign({}, this.state.trigger);
+    const trigger = { ...this.state.trigger };
     if (e.target.checked) {
       trigger[e.target.value] = 1;
     } else {
