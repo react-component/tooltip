@@ -32,7 +32,7 @@ class Test extends Component {
           animation="zoom"
           onVisibleChange={this.onVisibleChange}
           trigger="click"
-          overlay={<span>i am a tooltip</span>}
+          overlay={<span>I am a tooltip</span>}
         >
           <a href="#" onClick={preventDefault}>trigger</a>
         </Tooltip>
