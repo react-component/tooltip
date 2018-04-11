@@ -44,6 +44,12 @@ class Tooltip extends Component {
     arrowContent: null,
   };
 
+  componentDidUpdate() {
+    if (this.props.visible) {
+      this.trigger.forcePopupAlign();
+    }
+  }
+
   getPopupElement = () => {
     const { arrowContent, overlay, prefixCls, id } = this.props;
     return ([
