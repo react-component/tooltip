@@ -1,41 +1,41 @@
 webpackJsonp([0],{
 
-/***/ 14:
+/***/ 13:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 171:
+/***/ 162:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(172);
+module.exports = __webpack_require__(163);
 
 
 /***/ }),
 
-/***/ 172:
+/***/ 163:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rc_tooltip__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_tooltip_assets_bootstrap_less__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_tooltip_assets_bootstrap_less___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rc_tooltip_assets_bootstrap_less__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_object_assign__ = __webpack_require__(173);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_object_assign__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_tooltip_src_placements__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_tooltip__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_tooltip_assets_bootstrap_less__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_tooltip_assets_bootstrap_less___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_rc_tooltip_assets_bootstrap_less__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_tooltip_src_placements__ = __webpack_require__(72);
 
 
 
@@ -49,18 +49,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var Test = function (_Component) {
-  __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default()(Test, _Component);
+  __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default()(Test, _Component);
 
   function Test() {
     var _temp, _this, _ret;
 
-    __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default()(this, Test);
+    __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default()(this, Test);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default()(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default()(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
       destroyTooltipOnHide: false,
       placement: 'right',
       trigger: {
@@ -81,7 +81,7 @@ var Test = function (_Component) {
         transitionName: e.target.checked ? e.target.value : ''
       });
     }, _this.onTriggerChange = function (e) {
-      var trigger = __WEBPACK_IMPORTED_MODULE_7_object_assign___default()({}, _this.state.trigger);
+      var trigger = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, _this.state.trigger);
       if (e.target.checked) {
         trigger[e.target.value] = 1;
       } else {
@@ -108,27 +108,27 @@ var Test = function (_Component) {
       });
     }, _this.preventDefault = function (e) {
       e.preventDefault();
-    }, _temp), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default()(_this, _ret);
+    }, _temp), __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default()(_this, _ret);
   }
 
   Test.prototype.render = function render() {
     var state = this.state;
     var trigger = state.trigger;
-    return __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+    return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
       'div',
       null,
-      __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+      __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
         'div',
         { style: { margin: '10px 20px' } },
-        __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
           'label',
           null,
           'placement:',
-          __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
             'select',
             { value: this.state.placement, onChange: this.onPlacementChange },
             Object.keys(__WEBPACK_IMPORTED_MODULE_8_rc_tooltip_src_placements__["a" /* default */]).map(function (p) {
-              return __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+              return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
                 'option',
                 { key: p, value: p },
                 p
@@ -137,10 +137,10 @@ var Test = function (_Component) {
           )
         ),
         '\xA0\xA0\xA0\xA0',
-        __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
           'label',
           null,
-          __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('input', {
+          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('input', {
             value: 'rc-tooltip-zoom',
             type: 'checkbox',
             onChange: this.onTransitionChange,
@@ -149,10 +149,10 @@ var Test = function (_Component) {
           'transitionName'
         ),
         '\xA0\xA0\xA0\xA0',
-        __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
           'label',
           null,
-          __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('input', {
+          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('input', {
             type: 'checkbox',
             onChange: this.onDestroyCheck,
             checked: this.state.destroyTooltipOnHide
@@ -160,10 +160,10 @@ var Test = function (_Component) {
           'destroyTooltipOnHide'
         ),
         '\xA0\xA0\xA0\xA0 trigger:',
-        __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
           'label',
           null,
-          __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('input', {
+          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('input', {
             value: 'hover',
             checked: trigger.hover,
             type: 'checkbox',
@@ -171,10 +171,10 @@ var Test = function (_Component) {
           }),
           'hover'
         ),
-        __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
           'label',
           null,
-          __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('input', {
+          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('input', {
             value: 'focus',
             checked: trigger.focus,
             type: 'checkbox',
@@ -182,10 +182,10 @@ var Test = function (_Component) {
           }),
           'focus'
         ),
-        __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
           'label',
           null,
-          __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('input', {
+          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('input', {
             value: 'click',
             checked: trigger.click,
             type: 'checkbox',
@@ -193,12 +193,12 @@ var Test = function (_Component) {
           }),
           'click'
         ),
-        __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('br', null),
-        __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('br', null),
+        __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
           'label',
           null,
           'offsetX:',
-          __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('input', {
+          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('input', {
             type: 'text',
             value: state.offsetX,
             onChange: this.onOffsetXChange,
@@ -206,11 +206,11 @@ var Test = function (_Component) {
           })
         ),
         '\xA0\xA0\xA0\xA0',
-        __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
           'label',
           null,
           'offsetY:',
-          __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('input', {
+          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('input', {
             type: 'text',
             value: state.offsetY,
             onChange: this.onOffsetYChange,
@@ -218,11 +218,11 @@ var Test = function (_Component) {
           })
         )
       ),
-      __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+      __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
         'div',
         { style: { margin: 100 } },
-        __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_5_rc_tooltip__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_6_rc_tooltip__["a" /* default */],
           {
             placement: this.state.placement,
             mouseEnterDelay: 0,
@@ -230,7 +230,7 @@ var Test = function (_Component) {
             destroyTooltipOnHide: this.state.destroyTooltipOnHide,
             trigger: Object.keys(this.state.trigger),
             onVisibleChange: this.onVisibleChange,
-            overlay: __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+            overlay: __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
               'div',
               { style: { height: 50, width: 50 } },
               'i am a tooltip'
@@ -240,7 +240,7 @@ var Test = function (_Component) {
             },
             transitionName: this.state.transitionName
           },
-          __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
             'div',
             { style: { height: 100, width: 100, border: '1px solid red' } },
             'trigger'
@@ -251,58 +251,11 @@ var Test = function (_Component) {
   };
 
   return Test;
-}(__WEBPACK_IMPORTED_MODULE_3_react__["Component"]);
+}(__WEBPACK_IMPORTED_MODULE_4_react__["Component"]);
 
-__WEBPACK_IMPORTED_MODULE_4_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(Test, null), document.getElementById('__react-content'));
-
-/***/ }),
-
-/***/ 173:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* eslint-disable no-unused-vars */
-
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-module.exports = Object.assign || function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (Object.getOwnPropertySymbols) {
-			symbols = Object.getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
+__WEBPACK_IMPORTED_MODULE_5_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(Test, null), document.getElementById('__react-content'));
 
 /***/ })
 
-},[171]);
+},[162]);
 //# sourceMappingURL=simple.js.map
