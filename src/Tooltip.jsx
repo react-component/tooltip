@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Trigger from 'rc-trigger';
 import { placements } from './placements';
+import Content from './Content';
 
 class Tooltip extends Component {
   static propTypes = {
@@ -44,21 +45,19 @@ class Tooltip extends Component {
     arrowContent: null,
   };
 
-  componentDidUpdate() {
-    if (this.props.visible) {
-      this.trigger.forcePopupAlign();
-    }
-  }
-
   getPopupElement = () => {
     const { arrowContent, overlay, prefixCls, id } = this.props;
     return ([
       <div className={`${prefixCls}-arrow`} key="arrow">
         {arrowContent}
       </div>,
-      <div className={`${prefixCls}-inner`} key="content" id={id}>
-        {typeof overlay === 'function' ? overlay() : overlay}
-      </div>,
+      <Content
+        key="content"
+        trigger={this.trigger}
+        prefixCls={prefixCls}
+        id={id}
+        overlay={overlay}
+      />,
     ]);
   }
 
