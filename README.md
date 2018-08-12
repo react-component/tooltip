@@ -49,7 +49,12 @@ var ReactDOM = require('react-dom');
 // Consider importing the stylesheet it comes with:
 // 'rc-tooltip/assets/bootstrap_white.css'
 
-ReactDOM.render(<Tooltip placement="left" trigger={['click']} overlay={<span>tooltip</span>}><a href='#'>hover</a></Tooltip>, container);
+ReactDOM.render(
+  <Tooltip placement="left" trigger={['click']} overlay={<span>tooltip</span>}>
+    <a href="#">hover</a>
+  </Tooltip>,
+  container
+);
 ```
 
 ## Examples
