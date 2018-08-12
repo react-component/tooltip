@@ -50,7 +50,7 @@ var ReactDOM = require('react-dom');
 // 'rc-tooltip/assets/bootstrap_white.css'
 
 ReactDOM.render(
-  <Tooltip placement="left" trigger={["click"]} overlay={<span>tooltip</span>}>
+  <Tooltip placement="left" trigger={['click']} overlay={<span>tooltip</span>}>
     <a href="#">hover</a>
   </Tooltip>,
   container
