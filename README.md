@@ -213,6 +213,8 @@ For accessibility purpose you can use the `id` prop to link your tooltip with an
 ```
 If you do it like this, a screenreader would read the content of your tooltip if you focus the input element.
 
+**NOTE:** `role="tooltip"` is also added to expose the purpose of the tooltip element to a screenreader.
+
 ## Development
 
 ```bash

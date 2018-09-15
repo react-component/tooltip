@@ -22,7 +22,7 @@ export default class Content extends React.Component {
   render() {
     const { overlay, prefixCls, id } = this.props;
     return (
-      <div className={`${prefixCls}-inner`} id={id}>
+      <div className={`${prefixCls}-inner`} id={id} role="tooltip">
         {typeof overlay === 'function' ? overlay() : overlay}
       </div>
     );
