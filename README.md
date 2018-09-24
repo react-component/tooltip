@@ -10,22 +10,22 @@ React Tooltip
 [![node version][node-image]][node-url]
 [![npm download][download-image]][download-url]
 
-[npm-image]: http://img.shields.io/npm/v/rc-tooltip.svg?style=flat-square
-[npm-url]: http://npmjs.org/package/rc-tooltip
+[npm-image]: https://img.shields.io/npm/v/rc-tooltip.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/rc-tooltip
 [travis-image]: https://img.shields.io/travis/react-component/tooltip.svg?style=flat-square
 [travis-url]: https://travis-ci.org/react-component/tooltip
 [coveralls-image]: https://img.shields.io/coveralls/react-component/tooltip.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/react-component/tooltip?branch=master
-[gemnasium-image]: http://img.shields.io/gemnasium/react-component/tooltip.svg?style=flat-square
+[gemnasium-image]: https://img.shields.io/gemnasium/react-component/tooltip.svg?style=flat-square
 [gemnasium-url]: https://gemnasium.com/react-component/tooltip
 [node-image]: https://img.shields.io/badge/node.js-%3E=_0.10-green.svg?style=flat-square
-[node-url]: http://nodejs.org/download/
+[node-url]: https://nodejs.org/download/
 [download-image]: https://img.shields.io/npm/dm/rc-tooltip.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-tooltip
 
 ## Screenshot
 
-<img src="http://gtms03.alicdn.com/tps/i3/TB1NQUSHpXXXXaUXFXXlQqyZXXX-1312-572.png" width="600"/>
+<img src="https://gtms03.alicdn.com/tps/i3/TB1NQUSHpXXXXaUXFXXlQqyZXXX-1312-572.png" width="600"/>
 
 ## Browsers support
 
@@ -60,9 +60,9 @@ ReactDOM.render(
 ## Examples
 
 `npm start` and then go to
-[http://localhost:8007/examples](http://localhost:8007/examples)
+<http://localhost:8007/examples>
 
-Online examples: [http://react-component.github.io/tooltip/examples/](http://react-component.github.io/tooltip/examples/)
+Online examples: <https://react-component.github.io/tooltip/examples/>
 
 ## API
 
