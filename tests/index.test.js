@@ -10,6 +10,38 @@ const verifyContent = (wrapper, content) => {
 };
 
 describe('rc-tooltip', () => {
+  describe('show when set prop visible', () => {
+    it('is boolean', () => {
+      const wrapper = mount(
+        <Tooltip
+          visible
+          overlay={<strong className="x-content">Tooltip content</strong>}
+        >
+          <div className="target">Click this</div>
+        </Tooltip>
+      );
+
+      expect(wrapper.find('.x-content').text()).toBe('Tooltip content');
+      expect(wrapper.instance().getPopupDomNode()).toBeTruthy();
+    });
+
+    it('is undefined', () => {
+      const wrapper = mount(
+        <Tooltip
+          visible={undefined}
+          trigger={['click']}
+          placement="left"
+          overlay={<strong className="x-content">Tooltip content</strong>}
+        >
+          <div className="target">Click this</div>
+        </Tooltip>
+      );
+      wrapper.find('.target').simulate('click');
+      verifyContent(wrapper, 'Tooltip content');
+    });
+  });
+
+
   describe('shows and hides itself on click', () => {
     it('using an element overlay', () => {
       const wrapper = mount(
