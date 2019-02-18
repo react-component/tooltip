@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
+import positions from 'positions';
 import Trigger from 'rc-trigger';
 import { placements } from './placements';
 import Content from './Content';
+
+const placementsMap = {
+  tc: 'top center',
+  bc: 'bottom center',
+  cl: 'center right',
+  cr: 'center left',
+  tl: 'top left',
+  tr: 'top right',
+  bl: 'bottom left',
+  br: 'bottom right',
+};
 
 class Tooltip extends Component {
   static propTypes = {
@@ -45,10 +58,18 @@ class Tooltip extends Component {
     arrowContent: null,
   };
 
+  saveArrow = (node) => {
+    this.arrow = node;
+  }
+
+  saveTrigger = (node) => {
+    this.trigger = node;
+  }
+
   getPopupElement = () => {
     const { arrowContent, overlay, prefixCls, id } = this.props;
     return ([
-      <div className={`${prefixCls}-arrow`} key="arrow">
+      <div ref={this.saveArrow} className={`${prefixCls}-arrow`} key="arrow">
         {arrowContent}
       </div>,
       <Content
@@ -65,8 +86,26 @@ class Tooltip extends Component {
     return this.trigger.getPopupDomNode();
   }
 
-  saveTrigger = (node) => {
-    this.trigger = node;
+  onPopupAlign = (popupNode, align) => {
+    const { onPopupAlign } = this.props;
+
+    if (align.overflow.adjustX !== false || align.overflow.adjustY !== false) {
+      const targetNode = findDOMNode(this);
+
+      const position = positions(this.arrow, placementsMap[align.points[0]], targetNode, placementsMap[align.points[1]]);
+
+      if (align.points[0] === 'tc' || align.points[0] === 'bc') {
+        arrowNode.style.top = '';
+        arrowNode.style.left = `${position.left}px`;
+      } else {
+        arrowNode.style.top = `${position.top}px`;
+        arrowNode.style.left = '';
+      }
+    }
+
+    if (onPopupAlign) {
+      onPopupAlign(popupNode, align);
+    }
   }
 
   render() {
@@ -106,6 +145,7 @@ class Tooltip extends Component {
         popupStyle={overlayStyle}
         mouseEnterDelay={mouseEnterDelay}
         {...extraProps}
+        onPopupAlign={this.onPopupAlign}
       >
         {children}
       </Trigger>
