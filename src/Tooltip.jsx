@@ -95,11 +95,11 @@ class Tooltip extends Component {
       const position = positions(this.arrow, placementsMap[align.points[0]], targetNode, placementsMap[align.points[1]]);
 
       if (align.points[0] === 'tc' || align.points[0] === 'bc') {
-        arrowNode.style.top = '';
-        arrowNode.style.left = `${position.left}px`;
+        this.arrow.style.top = '';
+        this.arrow.style.left = `${position.left}px`;
       } else {
-        arrowNode.style.top = `${position.top}px`;
-        arrowNode.style.left = '';
+        this.arrow.style.top = `${position.top}px`;
+        this.arrow.style.left = '';
       }
     }
 
