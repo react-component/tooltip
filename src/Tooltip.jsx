@@ -59,15 +59,6 @@ class Tooltip extends Component {
     arrowContent: null,
   };
 
-  saveArrow = (node) => {
-    this.arrow = node;
-  }
-
-  saveTrigger = (node) => {
-    this.trigger = node;
-  }
-
-
   getPopupDomNode = () => {
     return this.trigger.getPopupDomNode();
   }
@@ -78,7 +69,14 @@ class Tooltip extends Component {
     if (align.overflow.adjustX !== false || align.overflow.adjustY !== false) {
       const targetNode = findDOMNode(this);
 
-      const position = positions(this.arrow, placementsMap[align.points[0]], targetNode, placementsMap[align.points[1]]);
+      const arrowPlacementPosition = placementsMap[align.points[0]];
+      const targetPlacementPosition = placementsMap[align.points[1]];
+      const position = positions(
+        this.arrow,
+        arrowPlacementPosition,
+        targetNode,
+        targetPlacementPosition,
+      );
 
       if (align.points[0] === 'tc' || align.points[0] === 'bc') {
         this.arrow.style.top = '';
@@ -108,6 +106,14 @@ class Tooltip extends Component {
         overlay={overlay}
       />,
     ]);
+  }
+
+  saveArrow = (node) => {
+    this.arrow = node;
+  }
+
+  saveTrigger = (node) => {
+    this.trigger = node;
   }
 
   render() {
