@@ -30,6 +30,7 @@ class Tooltip extends Component {
     ]),
     animation: PropTypes.any,
     onVisibleChange: PropTypes.func,
+    onPopupAlign: PropTypes.func,
     afterVisibleChange: PropTypes.func,
     overlay: PropTypes.oneOfType([
       PropTypes.node,
@@ -66,23 +67,8 @@ class Tooltip extends Component {
     this.trigger = node;
   }
 
-  getPopupElement = () => {
-    const { arrowContent, overlay, prefixCls, id } = this.props;
-    return ([
-      <div ref={this.saveArrow} className={`${prefixCls}-arrow`} key="arrow">
-        {arrowContent}
-      </div>,
-      <Content
-        key="content"
-        trigger={this.trigger}
-        prefixCls={prefixCls}
-        id={id}
-        overlay={overlay}
-      />,
-    ]);
-  }
 
-  getPopupDomNode() {
+  getPopupDomNode = () => {
     return this.trigger.getPopupDomNode();
   }
 
@@ -106,6 +92,22 @@ class Tooltip extends Component {
     if (onPopupAlign) {
       onPopupAlign(popupNode, align);
     }
+  }
+
+  getPopupElement = () => {
+    const { arrowContent, overlay, prefixCls, id } = this.props;
+    return ([
+      <div ref={this.saveArrow} className={`${prefixCls}-arrow`} key="arrow">
+        {arrowContent}
+      </div>,
+      <Content
+        key="content"
+        trigger={this.trigger}
+        prefixCls={prefixCls}
+        id={id}
+        overlay={overlay}
+      />,
+    ]);
   }
 
   render() {
