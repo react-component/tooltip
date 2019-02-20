@@ -59,10 +59,6 @@ class Tooltip extends Component {
     arrowContent: null,
   };
 
-  getPopupDomNode = () => {
-    return this.trigger.getPopupDomNode();
-  }
-
   onPopupAlign = (popupNode, align) => {
     const { onPopupAlign } = this.props;
 
@@ -90,6 +86,10 @@ class Tooltip extends Component {
     if (onPopupAlign) {
       onPopupAlign(popupNode, align);
     }
+  }
+
+  getPopupDomNode = () => {
+    return this.trigger.getPopupDomNode();
   }
 
   getPopupElement = () => {
