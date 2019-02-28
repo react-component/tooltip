@@ -12,7 +12,7 @@ export default class Content extends React.Component {
     trigger: PropTypes.any,
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     const { trigger } = this.props;
     if (trigger) {
       trigger.forcePopupAlign();
