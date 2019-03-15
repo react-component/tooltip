@@ -9,8 +9,8 @@ import Content from './Content';
 const placementsMap = {
   tc: 'top center',
   bc: 'bottom center',
-  cl: 'center right',
-  cr: 'center left',
+  cl: 'center left',
+  cr: 'center right',
   tl: 'top left',
   tr: 'top right',
   bl: 'bottom left',
