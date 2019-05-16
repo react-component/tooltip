@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import positions from 'positions';
 import Trigger from 'rc-trigger';
 import { placements } from './placements';
+import { getArrowDirection, getArrowAlign } from './util';
 import Content from './Content';
 
-const placementsMap = {
+const pointNamesMap = {
   tc: 'top center',
   bc: 'bottom center',
   cl: 'center left',
@@ -15,6 +16,33 @@ const placementsMap = {
   tr: 'top right',
   bl: 'bottom left',
   br: 'bottom right',
+};
+
+const getArrowStyle = (position, align) => {
+  const arrowDirection = getArrowDirection(align);
+  const arrowAlign = getArrowAlign(align);
+
+  const style = {};
+  if (arrowDirection === 'up' || arrowDirection === 'down') {
+    style.left = `${position.left + align.offsetX}px`;
+  }
+  if (arrowDirection === 'left' || arrowDirection === 'right') {
+    style.top = `${position.top + align.offsetY}px`;
+  }
+  if (arrowAlign === 'left') {
+    style.marginLeft = 5;
+  }
+  if (arrowAlign === 'right') {
+    style.marginRight = 5;
+  }
+  if (arrowAlign === 'top') {
+    style.marginTop = 5;
+  }
+  if (arrowAlign === 'bottom') {
+    style.marginBottom = 5;
+  }
+
+  return style;
 };
 
 class Tooltip extends Component {
@@ -59,29 +87,12 @@ class Tooltip extends Component {
     arrowContent: null,
   };
 
+  state = { arrowStyle: null }
+
   onPopupAlign = (popupNode, align) => {
     const { onPopupAlign } = this.props;
 
-    if (align.overflow.adjustX !== false || align.overflow.adjustY !== false) {
-      const targetNode = findDOMNode(this);
-
-      const arrowPlacementPosition = placementsMap[align.points[0]];
-      const targetPlacementPosition = placementsMap[align.points[1]];
-      const position = positions(
-        this.arrow,
-        arrowPlacementPosition,
-        targetNode,
-        targetPlacementPosition,
-      );
-
-      if (align.points[0] === 'tc' || align.points[0] === 'bc') {
-        this.arrow.style.top = '';
-        this.arrow.style.left = `${position.left}px`;
-      } else {
-        this.arrow.style.top = `${position.top}px`;
-        this.arrow.style.left = '';
-      }
-    }
+    this.adjustArrow(align);
 
     if (onPopupAlign) {
       onPopupAlign(popupNode, align);
@@ -94,8 +105,10 @@ class Tooltip extends Component {
 
   getPopupElement = () => {
     const { arrowContent, overlay, prefixCls, id } = this.props;
+    const { arrowStyle } = this.state;
+
     return ([
-      <div ref={this.saveArrow} className={`${prefixCls}-arrow`} key="arrow">
+      <div ref={this.saveArrow} className={`${prefixCls}-arrow`} key="arrow" style={arrowStyle}>
         {arrowContent}
       </div>,
       <Content
@@ -106,6 +119,29 @@ class Tooltip extends Component {
         overlay={overlay}
       />,
     ]);
+  }
+
+  adjustArrow = (align) => {
+    const { arrowStyle: arrowStyleCurrent } = this.state;
+    const targetNode = findDOMNode(this);
+
+    const arrowPlacement = pointNamesMap[align.points[0]];
+    const targetPlacement = pointNamesMap[align.points[1]];
+    const position = positions(
+      this.arrow,
+      arrowPlacement,
+      targetNode,
+      targetPlacement,
+    );
+
+    const arrowStyle = getArrowStyle(position, align);
+    if (
+      !arrowStyleCurrent ||
+      arrowStyle.top !== arrowStyleCurrent.top ||
+      arrowStyle.left !== arrowStyleCurrent.left
+    ) {
+      this.setState({ arrowStyle });
+    }
   }
 
   saveArrow = (node) => {
