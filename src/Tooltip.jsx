@@ -24,10 +24,10 @@ const getArrowStyle = (position, align) => {
 
   const style = {};
   if (arrowDirection === 'up' || arrowDirection === 'down') {
-    style.left = `${position.left + align.offsetX}px`;
+    style.left = `${position.left + align.offset[0]}px`;
   }
   if (arrowDirection === 'left' || arrowDirection === 'right') {
-    style.top = `${position.top + align.offsetY}px`;
+    style.top = `${position.top + align.offset[1]}px`;
   }
   if (arrowAlign === 'left') {
     style.marginLeft = 5;
