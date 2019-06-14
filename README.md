@@ -109,6 +109,12 @@ Online examples: <https://react-component.github.io/tooltip/examples/>
           <td>additional style of overlay node</td>
         </tr>
         <tr>
+          <td>innerStyle</td>
+          <td>Object</td>
+          <td></td>
+          <td>additional style of inner node</td>
+        </tr>
+        <tr>
           <td>prefixCls</td>
           <td>String</td>
           <td>rc-tooltip</td>

@@ -10,6 +10,7 @@ export default class Content extends React.Component {
     ]).isRequired,
     id: PropTypes.string,
     trigger: PropTypes.any,
+    innerStyle: PropTypes.object,
   }
 
   componentDidUpdate() {
@@ -20,9 +21,9 @@ export default class Content extends React.Component {
   }
 
   render() {
-    const { overlay, prefixCls, id } = this.props;
+    const { overlay, prefixCls, id, innerStyle } = this.props;
     return (
-      <div className={`${prefixCls}-inner`} id={id} role="tooltip">
+      <div className={`${prefixCls}-inner`} id={id} role="tooltip" style={innerStyle || {}}>
         {typeof overlay === 'function' ? overlay() : overlay}
       </div>
     );
