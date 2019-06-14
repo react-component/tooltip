@@ -23,6 +23,7 @@ class Tooltip extends Component {
       PropTypes.func,
     ]).isRequired,
     overlayStyle: PropTypes.object,
+    innerStyle: PropTypes.object,
     overlayClassName: PropTypes.string,
     prefixCls: PropTypes.string,
     mouseEnterDelay: PropTypes.number,
@@ -46,7 +47,7 @@ class Tooltip extends Component {
   };
 
   getPopupElement = () => {
-    const { arrowContent, overlay, prefixCls, id } = this.props;
+    const { arrowContent, overlay, prefixCls, id, innerStyle } = this.props;
     return ([
       <div className={`${prefixCls}-arrow`} key="arrow">
         {arrowContent}
@@ -57,6 +58,7 @@ class Tooltip extends Component {
         prefixCls={prefixCls}
         id={id}
         overlay={overlay}
+        innerStyle={innerStyle}
       />,
     ]);
   }
