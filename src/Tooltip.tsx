@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import Trigger from 'rc-trigger';
 import { placements } from './placements';
 import Content from './Content';
+import { AlignType, AnimationType } from 'rc-trigger/lib/interface';
 
 export interface TooltipProps {
   trigger?: string[];
   defaultVisible?: boolean;
   visible?: boolean;
   placement?: string;
-  transitionName?: string | Object;
-  animation?: any;
+  transitionName?: string;
+  animation?: AnimationType;
   onVisibleChange?: () => void;
   afterVisibleChange?: () => void;
   overlay: (() => React.ReactElement) | React.ReactElement;
@@ -19,12 +20,12 @@ export interface TooltipProps {
   prefixCls?: string;
   mouseEnterDelay?: number;
   mouseLeaveDelay?: number;
-  getTooltipContainer?: Function;
+  getTooltipContainer?: (node: HTMLElement) => HTMLElement;
   destroyTooltipOnHide?: boolean;
-  align?: Object;
-  arrowContent?: any;
+  align?: AlignType;
+  arrowContent?: React.ReactElement;
   id?: string;
-  children?: React.ReactChildren;
+  children?: React.ReactElement;
   popupVisible?: boolean;
 }
 
