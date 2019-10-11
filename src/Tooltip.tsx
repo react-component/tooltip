@@ -1,9 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Trigger from 'rc-trigger';
+import { AlignType, AnimationType } from 'rc-trigger/lib/interface';
 import { placements } from './placements';
 import Content from './Content';
-import { AlignType, AnimationType } from 'rc-trigger/lib/interface';
 
 export interface TooltipProps {
   trigger?: string[];
@@ -32,19 +31,19 @@ export interface TooltipProps {
 const Tooltip = (props: TooltipProps) => {
   const {
     overlayClassName,
-    trigger,
-    mouseEnterDelay,
-    mouseLeaveDelay,
+    trigger = ['hover'],
+    mouseEnterDelay = 0,
+    mouseLeaveDelay = 0.1,
     overlayStyle,
-    prefixCls,
+    prefixCls = 'rc-tooltip',
     children,
     onVisibleChange,
     afterVisibleChange,
     transitionName,
     animation,
-    placement,
-    align,
-    destroyTooltipOnHide,
+    placement = 'right',
+    align = {},
+    destroyTooltipOnHide = false,
     defaultVisible,
     getTooltipContainer,
     ...restProps
@@ -56,7 +55,7 @@ const Tooltip = (props: TooltipProps) => {
   }
 
   const getPopupElement = () => {
-    const { arrowContent, overlay, id } = props;
+    const { arrowContent = null, overlay, id } = props;
     return [
       <div className={`${prefixCls}-arrow`} key="arrow">
         {arrowContent}
@@ -89,40 +88,6 @@ const Tooltip = (props: TooltipProps) => {
       {children}
     </Trigger>
   );
-};
-
-Tooltip.propTypes = {
-  trigger: PropTypes.any,
-  children: PropTypes.any,
-  defaultVisible: PropTypes.bool,
-  visible: PropTypes.bool,
-  placement: PropTypes.string,
-  transitionName: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  animation: PropTypes.any,
-  onVisibleChange: PropTypes.func,
-  afterVisibleChange: PropTypes.func,
-  overlay: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  overlayStyle: PropTypes.object,
-  overlayClassName: PropTypes.string,
-  prefixCls: PropTypes.string,
-  mouseEnterDelay: PropTypes.number,
-  mouseLeaveDelay: PropTypes.number,
-  getTooltipContainer: PropTypes.func,
-  destroyTooltipOnHide: PropTypes.bool,
-  align: PropTypes.object,
-  arrowContent: PropTypes.any,
-  id: PropTypes.string,
-};
-
-Tooltip.defaultProps = {
-  prefixCls: 'rc-tooltip',
-  mouseEnterDelay: 0,
-  destroyTooltipOnHide: false,
-  mouseLeaveDelay: 0.1,
-  align: {},
-  placement: 'right',
-  trigger: ['hover'],
-  arrowContent: null,
 };
 
 export default Tooltip;

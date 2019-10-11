@@ -65,9 +65,9 @@
     "enzyme-to-json": "^3.4.0",
     "father": "^2.22.0",
     "np": "^5.0.3",
+    "rc-trigger": "^4.0.0-alpha.4",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "rc-trigger": "^4.0.0-alpha.4",
     "typescript": "^3.5.2"
   }
 }
