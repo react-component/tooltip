@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export interface ContentProps {
   prefixCls?: string;
-  overlay: () => React.ReactElement | React.ReactElement;
+  overlay: (() => React.ReactElement) | React.ReactElement;
   id: string;
   trigger: any;
 }

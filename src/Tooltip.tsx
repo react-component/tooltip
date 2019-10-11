@@ -13,7 +13,7 @@ export interface TooltipProps {
   animation?: any;
   onVisibleChange?: () => void;
   afterVisibleChange?: () => void;
-  overlay: () => React.ReactElement | React.ReactElement;
+  overlay: (() => React.ReactElement) | React.ReactElement;
   overlayStyle?: React.CSSProperties;
   overlayClassName?: string;
   prefixCls?: string;
