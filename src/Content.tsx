@@ -5,15 +5,10 @@ export interface ContentProps {
   prefixCls?: string;
   overlay: (() => React.ReactElement) | React.ReactElement;
   id: string;
-  trigger: any;
 }
 
 const Content = (props: ContentProps) => {
-  const { overlay, prefixCls, id, trigger } = props;
-
-  if (trigger) {
-    trigger.forcePopupAlign();
-  }
+  const { overlay, prefixCls, id } = props;
 
   return (
     <div className={`${prefixCls}-inner`} id={id} role="tooltip">

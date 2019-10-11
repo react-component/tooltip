@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Trigger from 'rc-trigger';
 import { placements } from './placements';
@@ -49,8 +49,6 @@ const Tooltip = (props: TooltipProps) => {
     ...restProps
   } = props;
 
-  const triggerDomRef = useRef(null);
-
   const extraProps = { ...restProps };
   if ('visible' in props) {
     extraProps.popupVisible = props.visible;
@@ -62,20 +60,13 @@ const Tooltip = (props: TooltipProps) => {
       <div className={`${prefixCls}-arrow`} key="arrow">
         {arrowContent}
       </div>,
-      <Content
-        key="content"
-        trigger={triggerDomRef.current}
-        prefixCls={prefixCls}
-        id={id}
-        overlay={overlay}
-      />,
+      <Content key="content" prefixCls={prefixCls} id={id} overlay={overlay} />,
     ];
   };
 
   return (
     <Trigger
       popupClassName={overlayClassName}
-      ref={triggerDomRef}
       prefixCls={prefixCls}
       popup={getPopupElement}
       action={trigger}
