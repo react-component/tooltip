@@ -12,7 +12,8 @@
     "dist",
     "lib",
     "es",
-    "assets/*.css"
+    "assets/*.css",
+    "assets/*.less"
   ],
   "main": "lib/index",
   "module": "es/index",
@@ -28,55 +29,50 @@
     "url": "http://github.com/react-component/tooltip/issues"
   },
   "license": "MIT",
-  "config": {
-    "port": 8007,
-    "entry": {
-      "rc-tooltip": [
-        "./src/index.js"
-      ]
-    }
-  },
   "scripts": {
-    "dist": "rc-tools run dist",
-    "build": "rc-tools run build",
-    "gh-pages": "rc-tools run gh-pages",
-    "start": "rc-tools run server",
-    "compile": "rc-tools run compile --babel-runtime",
-    "pub": "rc-tools run pub --babel-runtime",
-    "lint": "rc-tools run lint",
-    "test": "jest",
-    "coverage": "jest --coverage"
-  },
-  "jest": {
-    "setupFiles": [
-      "./tests/setup.js"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "transform": {
-      "\\.jsx?$": "./node_modules/rc-tools/scripts/jestPreprocessor.js"
-    }
+    "start": "cross-env NODE_ENV=development father doc dev --storybook",
+    "build": "father doc build --storybook",
+    "compile": "father build",
+    "prepublishOnly": "npm run compile && np --no-cleanup --yolo --no-publish",
+    "lint": "eslint src/ examples/ --ext .tsx,.ts,.jsx,.js",
+    "test": "father test",
+    "coverage": "father test --coverage",
+    "now-build": "npm run build"
   },
   "devDependencies": {
-    "enzyme": "^3.1.1",
-    "enzyme-adapter-react-16": "^1.0.4",
-    "enzyme-to-json": "^3.2.1",
-    "jest": "^21.2.1",
+    "@types/jest": "^24.0.18",
+    "@types/react": "^16.8.19",
+    "@types/react-dom": "^16.8.4",
+    "@types/warning": "^3.0.0",
+    "cross-env": "^6.0.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.0.2",
+    "enzyme-to-json": "^3.4.0",
+    "father": "^2.13.2",
     "pre-commit": "1.x",
-    "rc-tools": "^7.0.2",
+    "rc-tools": "7.x",
+    "np": "^5.0.3",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   },
-  "pre-commit": [
-    "lint"
-  ],
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
   "dependencies": {
-    "babel-runtime": "6.x",
-    "prop-types": "^15.5.8",
-    "rc-trigger": "^2.2.2"
+    "@types/jest": "^24.0.18",
+    "@types/react": "^16.8.19",
+    "@types/react-dom": "^16.8.4",
+    "@types/warning": "^3.0.0",
+    "cross-env": "^6.0.0",
+    "css-animation": "^2.0.4",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.0.2",
+    "enzyme-to-json": "^3.4.0",
+    "father": "^2.22.0",
+    "np": "^5.0.3",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "typescript": "^3.5.2"
   }
 }
