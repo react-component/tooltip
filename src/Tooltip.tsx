@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useImperativeHandle, forwardRef } from 'react';
 import Trigger from 'rc-trigger';
 import { AlignType, AnimationType } from 'rc-trigger/lib/interface';
 import { placements } from './placements';
@@ -28,7 +28,7 @@ export interface TooltipProps {
   popupVisible?: boolean;
 }
 
-const Tooltip = (props: TooltipProps) => {
+const Tooltip = (props: TooltipProps, ref) => {
   const {
     overlayClassName,
     trigger = ['hover'],
@@ -48,6 +48,9 @@ const Tooltip = (props: TooltipProps) => {
     getTooltipContainer,
     ...restProps
   } = props;
+
+  const domRef = useRef(null);
+  useImperativeHandle(ref, () => domRef.current);
 
   const extraProps = { ...restProps };
   if ('visible' in props) {
@@ -72,6 +75,7 @@ const Tooltip = (props: TooltipProps) => {
       action={trigger}
       builtinPlacements={placements}
       popupPlacement={placement}
+      ref={domRef}
       popupAlign={align}
       getPopupContainer={getTooltipContainer}
       onPopupVisibleChange={onVisibleChange}
@@ -90,4 +94,4 @@ const Tooltip = (props: TooltipProps) => {
   );
 };
 
-export default Tooltip;
+export default forwardRef(Tooltip);
