@@ -48,5 +48,20 @@ describe('rc-tooltip', () => {
       wrapper.find('.target').simulate('click');
       verifyContent(wrapper, 'Tooltip content');
     });
+
+    it('access of ref', () => {
+      const domRef = React.createRef();
+      mount(
+        <Tooltip
+          trigger={['click']}
+          placement="left"
+          overlay={() => <strong className="x-content">Tooltip content</strong>}
+          ref={domRef}
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+      expect(domRef.current).toBeTruthy();
+    });
   });
 });
