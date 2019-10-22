@@ -4,9 +4,19 @@ import Tooltip from '../src';
 
 const verifyContent = (wrapper, content) => {
   expect(wrapper.find('.x-content').text()).toBe(content);
-  expect(wrapper.instance().getPopupDomNode()).toBeTruthy();
+  expect(
+    wrapper
+      .find('Trigger')
+      .instance()
+      .getPopupDomNode(),
+  ).toBeTruthy();
   wrapper.find('.target').simulate('click');
-  expect(wrapper.find('.rc-tooltip').hostNodes().hasClass('rc-tooltip-hidden')).toBe(true);
+  expect(
+    wrapper
+      .find('.rc-tooltip')
+      .hostNodes()
+      .hasClass('rc-tooltip-hidden'),
+  ).toBe(true);
 };
 
 describe('rc-tooltip', () => {
@@ -19,7 +29,7 @@ describe('rc-tooltip', () => {
           overlay={<strong className="x-content">Tooltip content</strong>}
         >
           <div className="target">Click this</div>
-        </Tooltip>
+        </Tooltip>,
       );
       wrapper.find('.target').simulate('click');
       verifyContent(wrapper, 'Tooltip content');
@@ -30,13 +40,28 @@ describe('rc-tooltip', () => {
         <Tooltip
           trigger={['click']}
           placement="left"
-          overlay={() => (<strong className="x-content">Tooltip content</strong>)}
+          overlay={() => <strong className="x-content">Tooltip content</strong>}
         >
           <div className="target">Click this</div>
-        </Tooltip>
+        </Tooltip>,
       );
       wrapper.find('.target').simulate('click');
       verifyContent(wrapper, 'Tooltip content');
+    });
+
+    it('access of ref', () => {
+      const domRef = React.createRef();
+      mount(
+        <Tooltip
+          trigger={['click']}
+          placement="left"
+          overlay={() => <strong className="x-content">Tooltip content</strong>}
+          ref={domRef}
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+      expect(domRef.current).toBeTruthy();
     });
   });
 });
