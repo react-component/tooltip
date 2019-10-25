@@ -1,19 +1,19 @@
 import React, { useRef, useImperativeHandle, forwardRef } from 'react';
-import Trigger from 'rc-trigger';
-import { AlignType, AnimationType } from 'rc-trigger/lib/interface';
+import Trigger, { TriggerProps } from 'rc-trigger';
+import { AlignType, AnimationType, ActionType } from 'rc-trigger/lib/interface';
 import { placements } from './placements';
 import Content from './Content';
 
-export interface TooltipProps {
-  trigger?: string[];
+export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'builtinPlacements'> {
+  trigger?: ActionType;
   defaultVisible?: boolean;
   visible?: boolean;
   placement?: string;
   transitionName?: string;
   animation?: AnimationType;
-  onVisibleChange?: () => void;
+  onVisibleChange?: (visible: boolean) => void;
   afterVisibleChange?: () => void;
-  overlay: (() => React.ReactElement) | React.ReactElement;
+  overlay: (() => React.ReactNode) | React.ReactNode;
   overlayStyle?: React.CSSProperties;
   overlayClassName?: string;
   prefixCls?: string;
@@ -49,14 +49,6 @@ const Tooltip = (props: TooltipProps, ref) => {
     ...restProps
   } = props;
 
-  const domRef = useRef(null);
-  useImperativeHandle(ref, () => domRef.current);
-
-  const extraProps = { ...restProps };
-  if ('visible' in props) {
-    extraProps.popupVisible = props.visible;
-  }
-
   const getPopupElement = () => {
     const { arrowContent = null, overlay, id } = props;
     return [
@@ -66,6 +58,14 @@ const Tooltip = (props: TooltipProps, ref) => {
       <Content key="content" prefixCls={prefixCls} id={id} overlay={overlay} />,
     ];
   };
+
+  const domRef = useRef(null);
+  useImperativeHandle(ref, () => domRef.current);
+
+  const extraProps = { ...restProps };
+  if ('visible' in props) {
+    extraProps.popupVisible = props.visible;
+  }
 
   return (
     <Trigger

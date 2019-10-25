@@ -2,7 +2,7 @@ import React from 'react';
 
 export interface ContentProps {
   prefixCls?: string;
-  overlay: (() => React.ReactElement) | React.ReactElement;
+  overlay: (() => React.ReactNode) | React.ReactNode;
   id: string;
 }
 
