@@ -1,19 +1,19 @@
 import React, { useRef, useImperativeHandle, forwardRef } from 'react';
-import Trigger from 'rc-trigger';
-import { AlignType, AnimationType } from 'rc-trigger/lib/interface';
+import Trigger, { TriggerProps } from 'rc-trigger';
+import { AlignType, AnimationType, ActionType } from 'rc-trigger/lib/interface';
 import { placements } from './placements';
 import Content from './Content';
 
-export interface TooltipProps {
-  trigger?: string[];
+export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'builtinPlacements'> {
+  trigger?: ActionType;
   defaultVisible?: boolean;
   visible?: boolean;
   placement?: string;
   transitionName?: string;
   animation?: AnimationType;
-  onVisibleChange?: () => void;
+  onVisibleChange?: (visible: boolean) => void;
   afterVisibleChange?: () => void;
-  overlay: (() => React.ReactElement) | React.ReactElement;
+  overlay: (() => React.ReactNode) | React.ReactNode;
   overlayStyle?: React.CSSProperties;
   overlayClassName?: string;
   prefixCls?: string;
