@@ -49,6 +49,14 @@ const Tooltip = (props: TooltipProps, ref) => {
     ...restProps
   } = props;
 
+  const domRef = useRef(null);
+  useImperativeHandle(ref, () => domRef.current);
+
+  const extraProps = { ...restProps };
+  if ('visible' in props) {
+    extraProps.popupVisible = props.visible;
+  }
+
   const getPopupElement = () => {
     const { arrowContent = null, overlay, id } = props;
     return [
@@ -58,14 +66,6 @@ const Tooltip = (props: TooltipProps, ref) => {
       <Content key="content" prefixCls={prefixCls} id={id} overlay={overlay} />,
     ];
   };
-
-  const domRef = useRef(null);
-  useImperativeHandle(ref, () => domRef.current);
-
-  const extraProps = { ...restProps };
-  if ('visible' in props) {
-    extraProps.popupVisible = props.visible;
-  }
 
   return (
     <Trigger
