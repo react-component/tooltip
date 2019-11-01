@@ -55,8 +55,8 @@
     "typescript": "^3.6.4"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-dom": "*"
+    "react": "^15.0.0 || ^16.0.0",
+    "react-dom": "^15.0.0 || ^16.0.0"
   },
   "maintainers": [
     "yiminghe@gmail.com"
