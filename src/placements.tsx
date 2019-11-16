@@ -1,3 +1,5 @@
+import { BuildInPlacements } from 'rc-trigger';
+
 const autoAdjustOverflow = {
   adjustX: 1,
   adjustY: 1,
@@ -5,7 +7,7 @@ const autoAdjustOverflow = {
 
 const targetOffset = [0, 0];
 
-export const placements = {
+export const placements: BuildInPlacements = {
   left: {
     points: ['cr', 'cl'],
     overflow: autoAdjustOverflow,
