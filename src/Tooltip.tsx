@@ -122,6 +122,7 @@ export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'built
 
   /**
    * Which actions cause tooltip shown. enum of 'hover','click','focus'
+   * @default 'hover'
    */
   trigger?: ActionType;
 
