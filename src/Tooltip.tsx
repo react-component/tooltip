@@ -5,7 +5,7 @@ import { placements } from './placements';
 import Content from './Content';
 
 export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'builtinPlacements'> {
-  trigger?: ActionType;
+  trigger?: ActionType | ActionType[];
   defaultVisible?: boolean;
   visible?: boolean;
   placement?: string;

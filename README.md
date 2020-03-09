@@ -86,7 +86,7 @@ Online examples: <https://react-component.github.io/tooltip/examples/>
         </tr>
         <tr>
           <td>trigger</td>
-          <td>string[]</td>
+          <td>string | string[]</td>
           <td>['hover']</td>
           <td>which actions cause tooltip shown. enum of 'hover','click','focus'</td>
         </tr>
