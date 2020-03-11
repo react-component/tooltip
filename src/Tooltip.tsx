@@ -24,7 +24,7 @@ export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'built
   align?: AlignType;
   arrowContent?: React.ReactNode;
   id?: string;
-  children?: React.ReactNode;
+  children?: React.ReactElement;
   popupVisible?: boolean;
 }
 
