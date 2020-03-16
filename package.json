@@ -28,7 +28,7 @@
   "module": "es/index",
   "scripts": {
     "build": "father doc build --storybook",
-    "compile": "father build",
+    "compile": "father build && lessc assets/bootstrap.less assets/bootstrap.css && lessc assets/bootstrap_white.less assets/bootstrap_white.css",
     "coverage": "father test --coverage",
     "lint": "eslint src/ examples/ --ext .tsx,.ts,.jsx,.js",
     "now-build": "npm run build",
@@ -49,6 +49,7 @@
     "enzyme-adapter-react-16": "^1.15.1",
     "enzyme-to-json": "^3.4.3",
     "father": "^2.23.1",
+    "less": "^3.11.1",
     "np": "^6.0.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
