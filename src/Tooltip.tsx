@@ -26,6 +26,7 @@ export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'built
   id?: string;
   children?: React.ReactElement;
   popupVisible?: boolean;
+  overlayInnerStyle?: React.CSSProperties;
 }
 
 const Tooltip = (props: TooltipProps, ref) => {
@@ -46,6 +47,7 @@ const Tooltip = (props: TooltipProps, ref) => {
     destroyTooltipOnHide = false,
     defaultVisible,
     getTooltipContainer,
+    overlayInnerStyle,
     ...restProps
   } = props;
 
@@ -63,7 +65,13 @@ const Tooltip = (props: TooltipProps, ref) => {
       <div className={`${prefixCls}-arrow`} key="arrow">
         {arrowContent}
       </div>,
-      <Content key="content" prefixCls={prefixCls} id={id} overlay={overlay} />,
+      <Content
+        key="content"
+        prefixCls={prefixCls}
+        id={id}
+        overlay={overlay}
+        overlayInnerStyle={overlayInnerStyle}
+      />,
     ];
   };
 
