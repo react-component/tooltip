@@ -12,6 +12,7 @@ class Test extends Component {
     },
     offsetX: placements.right.offset[0],
     offsetY: placements.right.offset[1],
+    overlayInnerStyle: undefined,
   };
 
   onPlacementChange = e => {
@@ -66,6 +67,12 @@ class Test extends Component {
     }));
   };
 
+  onOverlayInnerStyleChange = () => {
+    this.setState(prevState => ({
+      overlayInnerStyle: prevState.overlayInnerStyle ? undefined : { background: 'red' },
+    }));
+  };
+
   preventDefault = e => {
     e.preventDefault();
   };
@@ -78,10 +85,7 @@ class Test extends Component {
         <div style={{ margin: '10px 20px' }}>
           <label>
             placement:
-            <select
-              value={this.state.placement}
-              onChange={this.onPlacementChange}
-            >
+            <select value={this.state.placement} onChange={this.onPlacementChange}>
               {Object.keys(placements).map(p => (
                 <option key={p} value={p}>
                   {p}
@@ -156,6 +160,15 @@ class Test extends Component {
               style={{ width: 50 }}
             />
           </label>
+          <label>
+            <input
+              value="overlayInnerStyle"
+              checked={!!state.overlayInnerStyle}
+              type="checkbox"
+              onChange={this.onOverlayInnerStyleChange}
+            />
+            overlayInnerStyle(red background)
+          </label>
         </div>
         <div style={{ margin: 100 }}>
           <Tooltip
@@ -165,17 +178,14 @@ class Test extends Component {
             destroyTooltipOnHide={this.state.destroyTooltipOnHide}
             trigger={Object.keys(this.state.trigger)}
             onVisibleChange={this.onVisibleChange}
-            overlay={
-              <div style={{ height: 50, width: 50 }}>i am a tooltip</div>
-            }
+            overlay={<div style={{ height: 50, width: 50 }}>i am a tooltip</div>}
             align={{
               offset: [this.state.offsetX, this.state.offsetY],
             }}
             transitionName={this.state.transitionName}
+            overlayInnerStyle={state.overlayInnerStyle}
           >
-            <div style={{ height: 100, width: 100, border: '1px solid red' }}>
-              trigger
-            </div>
+            <div style={{ height: 100, width: 100, border: '1px solid red' }}>trigger</div>
           </Tooltip>
         </div>
       </div>
