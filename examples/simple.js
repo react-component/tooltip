@@ -6,6 +6,20 @@ import { placements } from '../src/placements';
 class Test extends Component {
   state = {
     destroyTooltipOnHide: false,
+    destroyTooltipOptions: [
+      {
+        name: "don't destroy",
+        value: 0,
+      },
+      {
+        name: 'destroy parent',
+        value: 1,
+      },
+      {
+        name: 'keep parent',
+        value: 2,
+      },
+    ],
     placement: 'right',
     trigger: {
       hover: 1,
@@ -60,10 +74,11 @@ class Test extends Component {
     console.log('tooltip', visible); // eslint-disable-line no-console
   };
 
-  onDestroyCheck = () => {
-    this.setState(prevState => ({
-      destroyTooltipOnHide: !prevState.destroyTooltipOnHide,
-    }));
+  onDestroyChange = e => {
+    const { value } = e.target;
+    this.setState({
+      destroyTooltipOnHide: [false, { keepParent: false }, { keepParent: true }][value],
+    });
   };
 
   preventDefault = e => {
@@ -78,10 +93,7 @@ class Test extends Component {
         <div style={{ margin: '10px 20px' }}>
           <label>
             placement:
-            <select
-              value={this.state.placement}
-              onChange={this.onPlacementChange}
-            >
+            <select value={this.state.placement} onChange={this.onPlacementChange}>
               {Object.keys(placements).map(p => (
                 <option key={p} value={p}>
                   {p}
@@ -101,12 +113,14 @@ class Test extends Component {
           </label>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <label>
-            <input
-              type="checkbox"
-              onChange={this.onDestroyCheck}
-              checked={this.state.destroyTooltipOnHide}
-            />
-            destroyTooltipOnHide
+            destroyTooltipOnHide:
+            <select onChange={this.onDestroyChange}>
+              {this.state.destroyTooltipOptions.map(({ name, value }) => (
+                <option key={value} value={value}>
+                  {name}
+                </option>
+              ))}
+            </select>
           </label>
           &nbsp;&nbsp;&nbsp;&nbsp; trigger:
           <label>
@@ -165,17 +179,13 @@ class Test extends Component {
             destroyTooltipOnHide={this.state.destroyTooltipOnHide}
             trigger={Object.keys(this.state.trigger)}
             onVisibleChange={this.onVisibleChange}
-            overlay={
-              <div style={{ height: 50, width: 50 }}>i am a tooltip</div>
-            }
+            overlay={<div style={{ height: 50, width: 50 }}>i am a tooltip</div>}
             align={{
               offset: [this.state.offsetX, this.state.offsetY],
             }}
             transitionName={this.state.transitionName}
           >
-            <div style={{ height: 100, width: 100, border: '1px solid red' }}>
-              trigger
-            </div>
+            <div style={{ height: 100, width: 100, border: '1px solid red' }}>trigger</div>
           </Tooltip>
         </div>
       </div>

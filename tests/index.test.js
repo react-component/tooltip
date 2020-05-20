@@ -64,4 +64,72 @@ describe('rc-tooltip', () => {
       expect(domRef.current).toBeTruthy();
     });
   });
+  describe('destroyTooltipOnHide', () => {
+    const destroyVerifyContent = (wrapper, content) => {
+      wrapper.find('.target').simulate('click');
+      expect(wrapper.find('.x-content').text()).toBe(content);
+      expect(
+        wrapper
+          .find('Trigger')
+          .instance()
+          .getPopupDomNode(),
+      ).toBeTruthy();
+      wrapper.find('.target').simulate('click');
+    };
+    it('default value', () => {
+      const wrapper = mount(
+        <Tooltip
+          trigger={['click']}
+          placement="left"
+          overlay={<strong className="x-content">Tooltip content</strong>}
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+      wrapper.find('.target').simulate('click');
+      verifyContent(wrapper, 'Tooltip content');
+    });
+    it('should only remove tooltip when value is true', () => {
+      const wrapper = mount(
+        <Tooltip
+          destroyTooltipOnHide
+          trigger={['click']}
+          placement="left"
+          overlay={<strong className="x-content">Tooltip content</strong>}
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+      destroyVerifyContent(wrapper, 'Tooltip content');
+      expect(wrapper.html()).toBe('<div class="target">Click this</div><div></div>');
+    });
+    it('should only remove tooltip when keepParent is true', () => {
+      const wrapper = mount(
+        <Tooltip
+          destroyTooltipOnHide={{ keepParent: true }}
+          trigger={['click']}
+          placement="left"
+          overlay={<strong className="x-content">Tooltip content</strong>}
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+      destroyVerifyContent(wrapper, 'Tooltip content');
+      expect(wrapper.html()).toBe('<div class="target">Click this</div><div></div>');
+    });
+    it('should remove tooltip and container when keepParent is false', () => {
+      const wrapper = mount(
+        <Tooltip
+          destroyTooltipOnHide={{ keepParent: false }}
+          trigger={['click']}
+          placement="left"
+          overlay={<strong className="x-content">Tooltip content</strong>}
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+      destroyVerifyContent(wrapper, 'Tooltip content');
+      expect(wrapper.html()).toBe('<div class="target">Click this</div>');
+    });
+  });
 });

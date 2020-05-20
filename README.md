@@ -182,9 +182,9 @@ Online examples: <https://react-component.github.io/tooltip/examples/>
         </tr>
         <tr>
           <td>destroyTooltipOnHide</td>
-          <td>boolean</td>
+          <td>boolean | { keepParent: boolean }</td>
           <td>false</td>
-          <td>whether destroy tooltip when tooltip is hidden</td>
+          <td>whether destroy tooltip when tooltip is hidden.In general, destroyTooltipOnHide will only remove itself instead of parent container of it.Parent container will be removed include tooltip when keepParent is true</td>
         </tr>
         <tr>
           <td>id</td>
