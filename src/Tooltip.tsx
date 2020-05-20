@@ -20,7 +20,11 @@ export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'built
   mouseEnterDelay?: number;
   mouseLeaveDelay?: number;
   getTooltipContainer?: (node: HTMLElement) => HTMLElement;
-  destroyTooltipOnHide?: boolean;
+  destroyTooltipOnHide?:
+    | boolean
+    | {
+        keepParent?: boolean;
+      };
   align?: AlignType;
   arrowContent?: React.ReactNode;
   id?: string;
@@ -67,6 +71,16 @@ const Tooltip = (props: TooltipProps, ref) => {
     ];
   };
 
+  let destroyTooltip = false;
+  let autoDestroy = false;
+  if (typeof destroyTooltipOnHide === 'boolean') {
+    destroyTooltip = destroyTooltipOnHide;
+  } else if (destroyTooltipOnHide && typeof destroyTooltipOnHide === 'object') {
+    const { keepParent } = destroyTooltipOnHide;
+    destroyTooltip = keepParent === true;
+    autoDestroy = keepParent === false;
+  }
+
   return (
     <Trigger
       popupClassName={overlayClassName}
@@ -83,7 +97,8 @@ const Tooltip = (props: TooltipProps, ref) => {
       popupTransitionName={transitionName}
       popupAnimation={animation}
       defaultPopupVisible={defaultVisible}
-      destroyPopupOnHide={destroyTooltipOnHide}
+      destroyPopupOnHide={destroyTooltip}
+      autoDestroy={autoDestroy}
       mouseLeaveDelay={mouseLeaveDelay}
       popupStyle={overlayStyle}
       mouseEnterDelay={mouseEnterDelay}
