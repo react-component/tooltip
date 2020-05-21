@@ -49,6 +49,22 @@ describe('rc-tooltip', () => {
       verifyContent(wrapper, 'Tooltip content');
     });
 
+    // https://github.com/ant-design/ant-design/pull/23155
+    it('using style inner style', () => {
+      const wrapper = mount(
+        <Tooltip
+          trigger={['click']}
+          placement="left"
+          overlay={() => <strong className="x-content">Tooltip content</strong>}
+          overlayInnerStyle={{ background: 'red' }}
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+      wrapper.find('.target').simulate('click');
+      expect(wrapper.find('.rc-tooltip-inner').props().style).toEqual({ background: 'red' });
+    });
+
     it('access of ref', () => {
       const domRef = React.createRef();
       mount(

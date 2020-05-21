@@ -26,6 +26,7 @@ class Test extends Component {
     },
     offsetX: placements.right.offset[0],
     offsetY: placements.right.offset[1],
+    overlayInnerStyle: undefined,
   };
 
   onPlacementChange = e => {
@@ -79,6 +80,12 @@ class Test extends Component {
     this.setState({
       destroyTooltipOnHide: [false, { keepParent: false }, { keepParent: true }][value],
     });
+  };
+
+  onOverlayInnerStyleChange = () => {
+    this.setState(prevState => ({
+      overlayInnerStyle: prevState.overlayInnerStyle ? undefined : { background: 'red' },
+    }));
   };
 
   preventDefault = e => {
@@ -170,6 +177,15 @@ class Test extends Component {
               style={{ width: 50 }}
             />
           </label>
+          <label>
+            <input
+              value="overlayInnerStyle"
+              checked={!!state.overlayInnerStyle}
+              type="checkbox"
+              onChange={this.onOverlayInnerStyleChange}
+            />
+            overlayInnerStyle(red background)
+          </label>
         </div>
         <div style={{ margin: 100 }}>
           <Tooltip
@@ -184,6 +200,7 @@ class Test extends Component {
               offset: [this.state.offsetX, this.state.offsetY],
             }}
             transitionName={this.state.transitionName}
+            overlayInnerStyle={state.overlayInnerStyle}
           >
             <div style={{ height: 100, width: 100, border: '1px solid red' }}>trigger</div>
           </Tooltip>
