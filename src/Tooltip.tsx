@@ -1,4 +1,5 @@
-import React, { useRef, useImperativeHandle, forwardRef } from 'react';
+import * as React from 'react';
+import { useRef, useImperativeHandle, forwardRef } from 'react';
 import Trigger, { TriggerProps } from 'rc-trigger';
 import { AlignType, AnimationType, ActionType } from 'rc-trigger/lib/interface';
 import { placements } from './placements';
