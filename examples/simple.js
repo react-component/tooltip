@@ -21,6 +21,7 @@ class Test extends Component {
       },
     ],
     placement: 'right',
+    transitionName: 'rc-tooltip-zoom',
     trigger: {
       hover: 1,
     },

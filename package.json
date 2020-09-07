@@ -37,7 +37,7 @@
     "test": "father test"
   },
   "dependencies": {
-    "rc-trigger": "^4.2.1"
+    "rc-trigger": "^5.0.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.0",
