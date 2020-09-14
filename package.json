@@ -37,6 +37,7 @@
     "test": "father test"
   },
   "dependencies": {
+    "@babel/runtime": "^7.11.2",
     "rc-trigger": "^4.2.1"
   },
   "devDependencies": {
