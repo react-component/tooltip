@@ -32,6 +32,7 @@ export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'built
   children?: React.ReactElement;
   popupVisible?: boolean;
   overlayInnerStyle?: React.CSSProperties;
+  keepAlign?: boolean;
 }
 
 const Tooltip = (props: TooltipProps, ref) => {
@@ -53,16 +54,42 @@ const Tooltip = (props: TooltipProps, ref) => {
     defaultVisible,
     getTooltipContainer,
     overlayInnerStyle,
+    keepAlign = false,
     ...restProps
   } = props;
 
   const domRef = useRef(null);
   useImperativeHandle(ref, () => domRef.current);
 
+  const rafRef = React.useRef<number | null>(null);
+
+  function cancelKeepAlign() {
+    window.cancelAnimationFrame(rafRef.current!);
+    rafRef.current = null;
+  }
+
+  function forceAlign() {
+    rafRef.current = window.requestAnimationFrame(() => {
+      (domRef.current as any).forcePopupAlign();
+      rafRef.current = null;
+      forceAlign();
+    });
+  }
+
   const extraProps = { ...restProps };
   if ('visible' in props) {
     extraProps.popupVisible = props.visible;
   }
+
+  React.useEffect(() => {
+    if (keepAlign && extraProps.popupVisible) {
+      forceAlign();
+    } else {
+      cancelKeepAlign();
+    }
+
+    return cancelKeepAlign;
+  }, [extraProps.popupVisible, keepAlign]);
 
   const getPopupElement = () => {
     const { arrowContent = null, overlay, id } = props;
