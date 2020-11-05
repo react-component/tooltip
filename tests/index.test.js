@@ -205,7 +205,7 @@ describe('rc-tooltip', () => {
         '<div class="rc-tooltip-content"><div class="rc-tooltip-arrow"></div><div class="rc-tooltip-inner" role="tooltip"><strong class="x-content">Tooltip content</strong></div></div>',
       );
     });
-    it('should show tooltip arrow when arrowVisible is true', () => {
+    it('should hide tooltip arrow when arrowVisible is false', () => {
       const wrapper = mount(
         <Tooltip
           destroyTooltipOnHide={{ keepParent: false }}
