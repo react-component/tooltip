@@ -169,5 +169,58 @@ describe('rc-tooltip', () => {
     );
 
     jest.useRealTimers();
+  })
+
+  describe('arrowVisible', () => {
+    it('should show tooltip arrow default', () => {
+      const wrapper = mount(
+        <Tooltip
+          destroyTooltipOnHide={{ keepParent: false }}
+          trigger={['click']}
+          placement="left"
+          overlay={<strong className="x-content">Tooltip content</strong>}
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+      wrapper.find('.target').simulate('click');
+      expect(wrapper.find('.rc-tooltip-content').html()).toBe(
+        '<div class="rc-tooltip-content"><div class="rc-tooltip-arrow"></div><div class="rc-tooltip-inner" role="tooltip"><strong class="x-content">Tooltip content</strong></div></div>',
+      );
+    });
+    it('should show tooltip arrow when arrowVisible is true', () => {
+      const wrapper = mount(
+        <Tooltip
+          destroyTooltipOnHide={{ keepParent: false }}
+          trigger={['click']}
+          placement="left"
+          overlay={<strong className="x-content">Tooltip content</strong>}
+          arrowVisible
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+      wrapper.find('.target').simulate('click');
+      expect(wrapper.find('.rc-tooltip-content').html()).toBe(
+        '<div class="rc-tooltip-content"><div class="rc-tooltip-arrow"></div><div class="rc-tooltip-inner" role="tooltip"><strong class="x-content">Tooltip content</strong></div></div>',
+      );
+    });
+    it('should show tooltip arrow when arrowVisible is true', () => {
+      const wrapper = mount(
+        <Tooltip
+          destroyTooltipOnHide={{ keepParent: false }}
+          trigger={['click']}
+          placement="left"
+          overlay={<strong className="x-content">Tooltip content</strong>}
+          arrowVisible={false}
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+      wrapper.find('.target').simulate('click');
+      expect(wrapper.find('.rc-tooltip-content').html()).toBe(
+        '<div class="rc-tooltip-content"><div class="rc-tooltip-inner" role="tooltip"><strong class="x-content">Tooltip content</strong></div></div>',
+      );
+    });
   });
 });
