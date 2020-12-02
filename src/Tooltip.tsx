@@ -13,7 +13,7 @@ export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'built
   transitionName?: string;
   animation?: AnimationType;
   onVisibleChange?: (visible: boolean) => void;
-  afterVisibleChange?: () => void;
+  afterVisibleChange?: (visible: boolean) => void;
   overlay: (() => React.ReactNode) | React.ReactNode;
   overlayStyle?: React.CSSProperties;
   overlayClassName?: string;
