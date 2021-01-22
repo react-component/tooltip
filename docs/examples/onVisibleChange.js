@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Tooltip from '../src';
-import '../assets/bootstrap.less';
+import Tooltip from 'rc-tooltip';
+import '../../assets/bootstrap.less';
 
 function preventDefault(e) {
   e.preventDefault();

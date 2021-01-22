@@ -202,7 +202,7 @@ Online examples: <https://react-component.github.io/tooltip/examples/>
 ## Accessibility
 
 For accessibility purpose you can use the `id` prop to link your tooltip with another element. For example attaching it to an input element:
-```jsx
+```js
 <Tooltip
     ...
     id={this.props.name}>
