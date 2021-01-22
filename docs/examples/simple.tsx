@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Tooltip from 'rc-tooltip';
 import '../../assets/bootstrap.less';
-import { placements } from '@/placements';
+import { placements } from '../../src/placements';
 
 class Test extends Component {
   state = {

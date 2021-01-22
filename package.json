@@ -32,7 +32,7 @@
     "docs:deploy": "gh-pages -d .doc",
     "compile": "father build && lessc assets/bootstrap.less assets/bootstrap.css && lessc assets/bootstrap_white.less assets/bootstrap_white.css",
     "coverage": "father test --coverage",
-    "lint": "eslint src/ examples/ --ext .tsx,.ts,.jsx,.js",
+    "lint": "eslint src/ --ext .tsx,.ts,.jsx,.js",
     "now-build": "npm run build",
     "prepublishOnly": "npm run compile && np --no-cleanup --yolo --no-publish",
     "test": "father test"
@@ -59,7 +59,7 @@
     "np": "^7.1.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "typescript": "^4.0.3"
+    "typescript": "^4.0.5"
   },
   "maintainers": [
     "yiminghe@gmail.com"

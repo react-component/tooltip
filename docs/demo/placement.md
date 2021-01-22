@@ -1,3 +1,3 @@
-## placement.md
+## placement
 
-<code src="../examples/placement.js">
+<code src="../examples/placement.tsx">

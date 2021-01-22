@@ -1,3 +1,3 @@
-## arrowContent.md
+## arrowContent
 
-<code src="../examples/arrowContent.js">
+<code src="../examples/arrowContent.tsx">

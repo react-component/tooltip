@@ -1,3 +1,3 @@
-## formError.md
+## formError
 
-<code src="../examples/formError.js">
+<code src="../examples/formError.tsx">

@@ -10,7 +10,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"],
-      "rc-tooltip": ["src/index.ts"]
+      "rc-tooltip": ["src/index.tsx"]
     }
   }
 }

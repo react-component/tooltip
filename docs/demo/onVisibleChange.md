@@ -1,3 +1,3 @@
-## onVisibleChange.md
+## onVisibleChange
 
-<code src="../examples/onVisibleChange.js">
+<code src="../examples/onVisibleChange.tsx">
