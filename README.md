@@ -1,19 +1,13 @@
 # rc-tooltip
----
 
 React Tooltip
 
-[![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
-[![Test coverage][coveralls-image]][coveralls-url]
-[![gemnasium deps][gemnasium-image]][gemnasium-url]
-[![node version][node-image]][node-url]
-[![npm download][download-image]][download-url]
+[![NPM version][npm-image]][npm-url] [![build status][github-actions-image]][github-actions-url]  [![Test coverage][coveralls-image]][coveralls-url] [![gemnasium deps][gemnasium-image]][gemnasium-url] [![node version][node-image]][node-url] [![npm download][download-image]][download-url]
 
 [npm-image]: https://img.shields.io/npm/v/rc-tooltip.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/rc-tooltip
-[travis-image]: https://img.shields.io/travis/react-component/tooltip.svg?style=flat-square
-[travis-url]: https://travis-ci.org/react-component/tooltip
+[github-actions-image]: https://github.com/react-component/tooltip/workflows/CI/badge.svg
+[github-actions-url]: https://github.com/react-component/tooltip/actions
 [coveralls-image]: https://img.shields.io/coveralls/react-component/tooltip.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/react-component/tooltip?branch=master
 [gemnasium-image]: https://img.shields.io/gemnasium/react-component/tooltip.svg?style=flat-square
