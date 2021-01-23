@@ -34,7 +34,7 @@ class Test extends Component {
             overlayStyle={{ zIndex: 1000 }}
             overlay={<span>required!</span>}
           >
-            <input onChange={this.handleChange} />
+            <input onChange={this.handleChange} onBlur={this.handleChange} />
           </Tooltip>
         </div>
         <button type="button" onClick={this.handleDestroy}>
