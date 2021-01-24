@@ -30,3 +30,9 @@ es
 coverage
 yarn.lock
 package-lock.json
+
+# umi
+.umi
+.umi-production
+.umi-test
+.env.local 

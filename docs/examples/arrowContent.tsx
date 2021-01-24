@@ -1,6 +1,6 @@
 import React from 'react';
-import Tooltip from '../src';
-import '../assets/bootstrap_white.less';
+import Tooltip from 'rc-tooltip';
+import '../../assets/bootstrap_white.less';
 
 const text = <span>Tooltip Text</span>;
 const styles = {

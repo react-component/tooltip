@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Tooltip from '../src';
+import Tooltip from 'rc-tooltip';
 
-import '../assets/bootstrap.less';
+import '../../assets/bootstrap.less';
 
 class Test extends Component {
   state = {
