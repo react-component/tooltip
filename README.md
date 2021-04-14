@@ -195,9 +195,9 @@ Online examples: <https://react-component.github.io/tooltip/examples/>
     </tbody>
 </table>
 
-## Note
+## Important Note
 
-`Tooltip` requires child node accepts `onMouseEnter`, `onMouseLeave`, `onFocus`, `onClick` event.
+`Tooltip` requires a child node that accepts an `onMouseEnter`, `onMouseLeave`, `onFocus`, `onClick` event. This means the child node must be a built-in component like `div` or `span`, or a custom component that passes its props to its built-in component child.
 
 ## Accessibility
 
