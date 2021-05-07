@@ -10,6 +10,9 @@ const verifyContent = (wrapper, content) => {
 };
 
 describe('rc-tooltip', () => {
+  window.requestAnimationFrame = window.setTimeout;
+  window.cancelAnimationFrame = window.clearTimeout;
+
   describe('shows and hides itself on click', () => {
     it('using an element overlay', () => {
       const wrapper = mount(
@@ -144,5 +147,27 @@ describe('rc-tooltip', () => {
     );
 
     expect(wrapper.find('Trigger').props().popupMotion).toEqual({ motionName: 'bamboo-is-light' });
+  });
+
+  it('zIndex', () => {
+    jest.useFakeTimers();
+
+    const wrapper = mount(
+      <Tooltip trigger={['click']} zIndex={903} overlay="Bamboo">
+        <div className="target">Light</div>
+      </Tooltip>,
+    );
+    wrapper.find('.target').simulate('click');
+
+    jest.runAllTimers();
+    wrapper.update();
+
+    expect(wrapper.find('div.rc-tooltip').prop('style')).toEqual(
+      expect.objectContaining({
+        zIndex: 903,
+      }),
+    );
+
+    jest.useRealTimers();
   });
 });
