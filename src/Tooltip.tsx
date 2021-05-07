@@ -37,6 +37,7 @@ export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'built
   children?: React.ReactElement;
   popupVisible?: boolean;
   overlayInnerStyle?: React.CSSProperties;
+  zIndex?: number;
 }
 
 const Tooltip = (props: TooltipProps, ref) => {
