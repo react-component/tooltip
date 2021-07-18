@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Tooltip from 'rc-tooltip';
-import 'rc-tooltip/assets/bootstrap_white.less';
+import '../../assets/bootstrap_white.less';
 
 const text = <span>Tooltip Text</span>;
 const styles = {
@@ -18,67 +17,82 @@ const rowStyle = {
   display: 'table-row',
 };
 
-
 const Test = () => (
-  <div style={{ display: 'table' }}>
+  <div style={{ display: 'table', padding: 120 }}>
     <div style={rowStyle}>
       <Tooltip
         placement="left"
         overlay={text}
         arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
       >
-        <a href="#" style={styles}>Left</a>
+        <a href="#" style={styles}>
+          Left
+        </a>
       </Tooltip>
       <Tooltip
         placement="top"
         overlay={text}
         arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
       >
-        <a href="#" style={styles}>Top</a>
+        <a href="#" style={styles}>
+          Top
+        </a>
       </Tooltip>
       <Tooltip
         placement="bottom"
         overlay={text}
         arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
       >
-        <a href="#" style={styles}>Bottom</a>
+        <a href="#" style={styles}>
+          Bottom
+        </a>
       </Tooltip>
       <Tooltip
         placement="right"
         overlay={text}
         arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
       >
-        <a href="#" style={styles}>Right</a>
+        <a href="#" style={styles}>
+          Right
+        </a>
       </Tooltip>
-    </ div>
+    </div>
     <div style={rowStyle}>
       <Tooltip
         placement="leftTop"
         overlay={text}
         arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
       >
-        <a href="#" style={styles}>Left Top</a>
+        <a href="#" style={styles}>
+          Left Top
+        </a>
       </Tooltip>
       <Tooltip
         placement="leftBottom"
         overlay={text}
         arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
       >
-        <a href="#" style={styles}>Left Bottom</a>
+        <a href="#" style={styles}>
+          Left Bottom
+        </a>
       </Tooltip>
       <Tooltip
         placement="rightTop"
         overlay={text}
         arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
       >
-        <a href="#" style={styles}>Right Top</a>
+        <a href="#" style={styles}>
+          Right Top
+        </a>
       </Tooltip>
       <Tooltip
         placement="rightBottom"
         overlay={text}
         arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
       >
-        <a href="#" style={styles}>Right Bottom</a>
+        <a href="#" style={styles}>
+          Right Bottom
+        </a>
       </Tooltip>
     </div>
     <div style={rowStyle}>
@@ -87,31 +101,39 @@ const Test = () => (
         overlay={text}
         arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
       >
-        <a href="#" style={styles}>Top Left</a>
+        <a href="#" style={styles}>
+          Top Left
+        </a>
       </Tooltip>
       <Tooltip
         placement="topRight"
         overlay={text}
         arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
       >
-        <a href="#" style={styles}>Top Right</a>
+        <a href="#" style={styles}>
+          Top Right
+        </a>
       </Tooltip>
       <Tooltip
         placement="bottomLeft"
         overlay={text}
         arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
       >
-        <a href="#" style={styles}>Bottom Left</a>
+        <a href="#" style={styles}>
+          Bottom Left
+        </a>
       </Tooltip>
       <Tooltip
         placement="bottomRight"
         overlay={text}
         arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
       >
-        <a href="#" style={styles}>Bottom Right</a>
+        <a href="#" style={styles}>
+          Bottom Right
+        </a>
       </Tooltip>
     </div>
   </div>
 );
 
-ReactDOM.render(<Test />, document.getElementById('__react-content'));
+export default Test;

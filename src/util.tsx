@@ -1,15 +1,17 @@
 import { placements } from './placements';
+import type { AlignType } from 'rc-trigger/lib/interface';
 
-function getPlacementFromAlign(align) {
-  for (const placement of Object.keys(placements)) {
+type ArrowDirection = 'down' | 'left' | 'up' | 'right';
+type ArrowAlign = 'left' | 'right' | 'top' | 'bottom';
+
+function getPlacementFromAlign(align: AlignType) {
+  return Object.keys(placements).find((placement) => {
     const [popupAlignPoint, targetAlignPoint] = placements[placement].points;
-    if (align.points[0] === popupAlignPoint && align.points[1] === targetAlignPoint) {
-      return placement;
-    }
-  }
+    return align.points[0] === popupAlignPoint && align.points[1] === targetAlignPoint;
+  });
 }
 
-export function getArrowDirection(align) {
+export function getArrowDirection(align: AlignType): ArrowDirection | null {
   const placement = getPlacementFromAlign(align);
 
   if (['top', 'topLeft', 'topRight'].includes(placement)) {
@@ -27,9 +29,11 @@ export function getArrowDirection(align) {
   if (['left', 'leftTop', 'leftBottom'].includes(placement)) {
     return 'right';
   }
+
+  return null;
 }
 
-export function getArrowAlign(align) {
+export function getArrowAlign(align: AlignType): ArrowAlign | null {
   const placement = getPlacementFromAlign(align);
 
   if (['topLeft', 'bottomLeft'].includes(placement)) {
@@ -47,4 +51,6 @@ export function getArrowAlign(align) {
   if (['leftBottom', 'rightBottom'].includes(placement)) {
     return 'bottom';
   }
+
+  return null;
 }
