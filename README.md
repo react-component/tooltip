@@ -1,19 +1,13 @@
 # rc-tooltip
----
 
 React Tooltip
 
-[![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
-[![Test coverage][coveralls-image]][coveralls-url]
-[![gemnasium deps][gemnasium-image]][gemnasium-url]
-[![node version][node-image]][node-url]
-[![npm download][download-image]][download-url]
+[![NPM version][npm-image]][npm-url] [![dumi](https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square)](https://github.com/umijs/dumi) [![build status][github-actions-image]][github-actions-url]  [![Test coverage][coveralls-image]][coveralls-url] [![gemnasium deps][gemnasium-image]][gemnasium-url] [![node version][node-image]][node-url] [![npm download][download-image]][download-url]
 
 [npm-image]: https://img.shields.io/npm/v/rc-tooltip.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/rc-tooltip
-[travis-image]: https://img.shields.io/travis/react-component/tooltip.svg?style=flat-square
-[travis-url]: https://travis-ci.org/react-component/tooltip
+[github-actions-image]: https://github.com/react-component/tooltip/workflows/CI/badge.svg
+[github-actions-url]: https://github.com/react-component/tooltip/actions
 [coveralls-image]: https://img.shields.io/coveralls/react-component/tooltip.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/react-component/tooltip?branch=master
 [gemnasium-image]: https://img.shields.io/gemnasium/react-component/tooltip.svg?style=flat-square
@@ -86,7 +80,7 @@ Online examples: <https://react-component.github.io/tooltip/examples/>
         </tr>
         <tr>
           <td>trigger</td>
-          <td>string[]</td>
+          <td>string | string[]</td>
           <td>['hover']</td>
           <td>which actions cause tooltip shown. enum of 'hover','click','focus'</td>
         </tr>
@@ -169,6 +163,12 @@ Online examples: <https://react-component.github.io/tooltip/examples/>
           <td>popup content</td>
         </tr>
         <tr>
+          <td>overlayInnerStyle</td>
+          <td>Object</td>
+          <td></td>
+          <td>set overlay inner style</td>
+        </tr>
+        <tr>
           <td>arrowContent</td>
           <td>React.Node</td>
           <td>null</td>
@@ -182,9 +182,9 @@ Online examples: <https://react-component.github.io/tooltip/examples/>
         </tr>
         <tr>
           <td>destroyTooltipOnHide</td>
-          <td>boolean</td>
+          <td>boolean | { keepParent: boolean }</td>
           <td>false</td>
-          <td>whether destroy tooltip when tooltip is hidden</td>
+          <td>whether destroy tooltip when tooltip is hidden.In general, destroyTooltipOnHide will only remove itself instead of parent container of it.Parent container will be removed include tooltip when keepParent is true</td>
         </tr>
         <tr>
           <td>id</td>
@@ -195,14 +195,14 @@ Online examples: <https://react-component.github.io/tooltip/examples/>
     </tbody>
 </table>
 
-## Note
+## Important Note
 
-`Tooltip` requires child node accepts `onMouseEnter`, `onMouseLeave`, `onFocus`, `onClick` event.
+`Tooltip` requires a child node that accepts an `onMouseEnter`, `onMouseLeave`, `onFocus`, `onClick` event. This means the child node must be a built-in component like `div` or `span`, or a custom component that passes its props to its built-in component child.
 
 ## Accessibility
 
 For accessibility purpose you can use the `id` prop to link your tooltip with another element. For example attaching it to an input element:
-```jsx
+```js
 <Tooltip
     ...
     id={this.props.name}>
