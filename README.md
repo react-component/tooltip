@@ -142,7 +142,7 @@ Online examples: <https://react-component.github.io/tooltip/examples/>
           <td>placement</td>
           <td>String</td>
           <td></td>
-          <td>one of ['left','right','top','bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight']</td>
+          <td>one of ['left','right','top','bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight', 'rightTop', 'rightBottom', 'leftTop', 'leftBottom']</td>
         </tr>
         <tr>
           <td>align</td>
