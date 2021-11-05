@@ -1,6 +1,6 @@
 import React from 'react';
-import Tooltip from '../src';
-import '../assets/bootstrap_white.less';
+import Tooltip from 'rc-tooltip';
+import '../../assets/bootstrap_white.less';
 
 const text = <span>Tooltip Text</span>;
 const styles = {
@@ -20,66 +20,66 @@ const rowStyle = {
 const Test = () => (
   <div style={{ display: 'table', padding: 120 }}>
     <div style={rowStyle}>
-      <Tooltip placement="left" overlay={text} arrowVisible={false}>
+      <Tooltip placement="left" overlay={text} showArrow={false}>
         <a href="#" style={styles}>
           Left
         </a>
       </Tooltip>
-      <Tooltip placement="top" overlay={text} arrowVisible={false}>
+      <Tooltip placement="top" overlay={text} showArrow={false}>
         <a href="#" style={styles}>
           Top
         </a>
       </Tooltip>
-      <Tooltip placement="bottom" overlay={text} arrowVisible={false}>
+      <Tooltip placement="bottom" overlay={text} showArrow={false}>
         <a href="#" style={styles}>
           Bottom
         </a>
       </Tooltip>
-      <Tooltip placement="right" overlay={text} arrowVisible={false}>
+      <Tooltip placement="right" overlay={text} showArrow={false}>
         <a href="#" style={styles}>
           Right
         </a>
       </Tooltip>
     </div>
     <div style={rowStyle}>
-      <Tooltip placement="leftTop" overlay={text} arrowVisible={false}>
+      <Tooltip placement="leftTop" overlay={text} showArrow={false}>
         <a href="#" style={styles}>
           Left Top
         </a>
       </Tooltip>
-      <Tooltip placement="leftBottom" overlay={text} arrowVisible={false}>
+      <Tooltip placement="leftBottom" overlay={text} showArrow={false}>
         <a href="#" style={styles}>
           Left Bottom
         </a>
       </Tooltip>
-      <Tooltip placement="rightTop" overlay={text} arrowVisible={false}>
+      <Tooltip placement="rightTop" overlay={text} showArrow={false}>
         <a href="#" style={styles}>
           Right Top
         </a>
       </Tooltip>
-      <Tooltip placement="rightBottom" overlay={text} arrowVisible={false}>
+      <Tooltip placement="rightBottom" overlay={text} showArrow={false}>
         <a href="#" style={styles}>
           Right Bottom
         </a>
       </Tooltip>
     </div>
     <div style={rowStyle}>
-      <Tooltip placement="topLeft" overlay={text} arrowVisible={false}>
+      <Tooltip placement="topLeft" overlay={text} showArrow={false}>
         <a href="#" style={styles}>
           Top Left
         </a>
       </Tooltip>
-      <Tooltip placement="topRight" overlay={text} arrowVisible={false}>
+      <Tooltip placement="topRight" overlay={text} showArrow={false}>
         <a href="#" style={styles}>
           Top Right
         </a>
       </Tooltip>
-      <Tooltip placement="bottomLeft" overlay={text} arrowVisible={false}>
+      <Tooltip placement="bottomLeft" overlay={text} showArrow={false}>
         <a href="#" style={styles}>
           Bottom Left
         </a>
       </Tooltip>
-      <Tooltip placement="bottomRight" overlay={text} arrowVisible={false}>
+      <Tooltip placement="bottomRight" overlay={text} showArrow={false}>
         <a href="#" style={styles}>
           Bottom Right
         </a>

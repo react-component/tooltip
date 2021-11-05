@@ -32,7 +32,7 @@ export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'built
         keepParent?: boolean;
       };
   align?: AlignType;
-  arrowVisible?: boolean;
+  showArrow?: boolean;
   arrowContent?: React.ReactNode;
   id?: string;
   children?: React.ReactElement;
@@ -73,9 +73,9 @@ const Tooltip = (props: TooltipProps, ref) => {
   }
 
   const getPopupElement = () => {
-    const { arrowVisible = true, arrowContent = null, overlay, id } = props;
+    const { showArrow = true, arrowContent = null, overlay, id } = props;
     return [
-      arrowVisible && (
+      showArrow && (
         <div className={`${prefixCls}-arrow`} key="arrow">
           {arrowContent}
         </div>

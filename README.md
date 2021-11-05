@@ -169,7 +169,7 @@ Online examples: <https://react-component.github.io/tooltip/examples/>
           <td>set overlay inner style</td>
         </tr>
         <tr>
-          <td>arrowVisible</td>
+          <td>showArrow</td>
           <td>boolean</td>
           <td>true</td>
           <td>arrow visible</td>

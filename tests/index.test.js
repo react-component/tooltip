@@ -169,9 +169,9 @@ describe('rc-tooltip', () => {
     );
 
     jest.useRealTimers();
-  })
+  });
 
-  describe('arrowVisible', () => {
+  describe('showArrow', () => {
     it('should show tooltip arrow default', () => {
       const wrapper = mount(
         <Tooltip
@@ -188,14 +188,14 @@ describe('rc-tooltip', () => {
         '<div class="rc-tooltip-content"><div class="rc-tooltip-arrow"></div><div class="rc-tooltip-inner" role="tooltip"><strong class="x-content">Tooltip content</strong></div></div>',
       );
     });
-    it('should show tooltip arrow when arrowVisible is true', () => {
+    it('should show tooltip arrow when showArrow is true', () => {
       const wrapper = mount(
         <Tooltip
           destroyTooltipOnHide={{ keepParent: false }}
           trigger={['click']}
           placement="left"
           overlay={<strong className="x-content">Tooltip content</strong>}
-          arrowVisible
+          showArrow
         >
           <div className="target">Click this</div>
         </Tooltip>,
@@ -205,14 +205,14 @@ describe('rc-tooltip', () => {
         '<div class="rc-tooltip-content"><div class="rc-tooltip-arrow"></div><div class="rc-tooltip-inner" role="tooltip"><strong class="x-content">Tooltip content</strong></div></div>',
       );
     });
-    it('should hide tooltip arrow when arrowVisible is false', () => {
+    it('should hide tooltip arrow when showArrow is false', () => {
       const wrapper = mount(
         <Tooltip
           destroyTooltipOnHide={{ keepParent: false }}
           trigger={['click']}
           placement="left"
           overlay={<strong className="x-content">Tooltip content</strong>}
-          arrowVisible={false}
+          showArrow={false}
         >
           <div className="target">Click this</div>
         </Tooltip>,
