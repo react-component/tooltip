@@ -170,4 +170,57 @@ describe('rc-tooltip', () => {
 
     jest.useRealTimers();
   });
+
+  describe('showArrow', () => {
+    it('should show tooltip arrow default', () => {
+      const wrapper = mount(
+        <Tooltip
+          destroyTooltipOnHide={{ keepParent: false }}
+          trigger={['click']}
+          placement="left"
+          overlay={<strong className="x-content">Tooltip content</strong>}
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+      wrapper.find('.target').simulate('click');
+      expect(wrapper.find('.rc-tooltip-content').html()).toBe(
+        '<div class="rc-tooltip-content"><div class="rc-tooltip-arrow"></div><div class="rc-tooltip-inner" role="tooltip"><strong class="x-content">Tooltip content</strong></div></div>',
+      );
+    });
+    it('should show tooltip arrow when showArrow is true', () => {
+      const wrapper = mount(
+        <Tooltip
+          destroyTooltipOnHide={{ keepParent: false }}
+          trigger={['click']}
+          placement="left"
+          overlay={<strong className="x-content">Tooltip content</strong>}
+          showArrow
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+      wrapper.find('.target').simulate('click');
+      expect(wrapper.find('.rc-tooltip-content').html()).toBe(
+        '<div class="rc-tooltip-content"><div class="rc-tooltip-arrow"></div><div class="rc-tooltip-inner" role="tooltip"><strong class="x-content">Tooltip content</strong></div></div>',
+      );
+    });
+    it('should hide tooltip arrow when showArrow is false', () => {
+      const wrapper = mount(
+        <Tooltip
+          destroyTooltipOnHide={{ keepParent: false }}
+          trigger={['click']}
+          placement="left"
+          overlay={<strong className="x-content">Tooltip content</strong>}
+          showArrow={false}
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+      wrapper.find('.target').simulate('click');
+      expect(wrapper.find('.rc-tooltip-content').html()).toBe(
+        '<div class="rc-tooltip-content"><div class="rc-tooltip-inner" role="tooltip"><strong class="x-content">Tooltip content</strong></div></div>',
+      );
+    });
+  });
 });
