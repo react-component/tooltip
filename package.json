@@ -42,7 +42,7 @@
     "rc-trigger": "^5.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.0",
+    "@types/jest": "^27.5.2",
     "@types/react": "^17.0.15",
     "@types/react-dom": "^16.9.2",
     "@types/warning": "^3.0.0",
