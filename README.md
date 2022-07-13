@@ -142,7 +142,7 @@ Online examples: <https://react-component.github.io/tooltip/examples/>
           <td>placement</td>
           <td>String</td>
           <td></td>
-          <td>one of ['left','right','top','bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight']</td>
+          <td>one of ['left','right','top','bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight', 'rightTop', 'rightBottom', 'leftTop', 'leftBottom']</td>
         </tr>
         <tr>
           <td>align</td>
@@ -169,6 +169,12 @@ Online examples: <https://react-component.github.io/tooltip/examples/>
           <td>set overlay inner style</td>
         </tr>
         <tr>
+          <td>showArrow</td>
+          <td>boolean</td>
+          <td>true</td>
+          <td>arrow visible</td>
+        </tr>
+        <tr>
           <td>arrowContent</td>
           <td>React.Node</td>
           <td>null</td>
@@ -184,7 +190,7 @@ Online examples: <https://react-component.github.io/tooltip/examples/>
           <td>destroyTooltipOnHide</td>
           <td>boolean | { keepParent: boolean }</td>
           <td>false</td>
-          <td>whether destroy tooltip when tooltip is hidden.In general, destroyTooltipOnHide will only remove itself instead of parent container of it.Parent container will be removed include tooltip when keepParent is true</td>
+          <td>whether destroy tooltip when tooltip is hidden.In general, destroyTooltipOnHide will only remove itself instead of parent container of it. Parent container will be removed include tooltip when keepParent is true</td>
         </tr>
         <tr>
           <td>id</td>

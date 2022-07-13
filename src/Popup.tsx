@@ -9,16 +9,28 @@ export interface ContentProps {
   arrowContent?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
+  showArrow?: boolean;
 }
 
 export default function Popup(props: ContentProps) {
-  const { arrowContent, children, prefixCls, id, overlayInnerStyle, className, style } = props;
+  const {
+    showArrow,
+    arrowContent,
+    children,
+    prefixCls,
+    id,
+    overlayInnerStyle,
+    className,
+    style,
+  } = props;
 
   let content = (
     <>
-      <div className={`${prefixCls}-arrow`} key="arrow">
-        {arrowContent}
-      </div>
+      {showArrow !== false && (
+        <div className={`${prefixCls}-arrow`} key="arrow">
+          {arrowContent}
+        </div>
+      )}
       <div className={`${prefixCls}-inner`} id={id} role="tooltip" style={overlayInnerStyle}>
         {typeof children === 'function' ? children() : children}
       </div>
