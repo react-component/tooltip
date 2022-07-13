@@ -4,7 +4,7 @@ import Trigger from 'rc-trigger';
 import type { TriggerProps } from 'rc-trigger';
 import type { AlignType, AnimationType, ActionType } from 'rc-trigger/lib/interface';
 import { placements } from './placements';
-import Content from './Content';
+import Popup from './Popup';
 
 export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'builtinPlacements'> {
   trigger?: ActionType | ActionType[];
@@ -60,6 +60,9 @@ const Tooltip = (props: TooltipProps, ref) => {
     defaultVisible,
     getTooltipContainer,
     overlayInnerStyle,
+    arrowContent,
+    overlay,
+    id,
     ...restProps
   } = props;
 
@@ -71,21 +74,17 @@ const Tooltip = (props: TooltipProps, ref) => {
     extraProps.popupVisible = props.visible;
   }
 
-  const getPopupElement = () => {
-    const { arrowContent = null, overlay, id } = props;
-    return [
-      <div className={`${prefixCls}-arrow`} key="arrow">
-        {arrowContent}
-      </div>,
-      <Content
-        key="content"
-        prefixCls={prefixCls}
-        id={id}
-        overlay={overlay}
-        overlayInnerStyle={overlayInnerStyle}
-      />,
-    ];
-  };
+  const getPopupElement = () => (
+    <Popup
+      arrowContent={arrowContent}
+      key="content"
+      prefixCls={prefixCls}
+      id={id}
+      overlayInnerStyle={overlayInnerStyle}
+    >
+      {overlay}
+    </Popup>
+  );
 
   let destroyTooltip = false;
   let autoDestroy = false;
