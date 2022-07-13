@@ -24,8 +24,8 @@ export default function Popup(props: ContentProps) {
     style,
   } = props;
 
-  let content = (
-    <>
+  return (
+    <div className={classNames(`${prefixCls}-content`, className)} style={style}>
       {showArrow !== false && (
         <div className={`${prefixCls}-arrow`} key="arrow">
           {arrowContent}
@@ -34,16 +34,6 @@ export default function Popup(props: ContentProps) {
       <div className={`${prefixCls}-inner`} id={id} role="tooltip" style={overlayInnerStyle}>
         {typeof children === 'function' ? children() : children}
       </div>
-    </>
+    </div>
   );
-
-  if (className || style) {
-    content = (
-      <div className={classNames(prefixCls, className)} style={style}>
-        {content}
-      </div>
-    );
-  }
-
-  return content;
 }
