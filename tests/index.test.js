@@ -223,4 +223,17 @@ describe('rc-tooltip', () => {
       );
     });
   });
+
+  it('visible', () => {
+    const wrapper = mount(
+      <Tooltip overlay={<strong className="x-content">Tooltip content</strong>} visible={false}>
+        <div />
+      </Tooltip>,
+    );
+
+    expect(wrapper.exists('.x-content')).toBeFalsy();
+
+    wrapper.setProps({ visible: true });
+    expect(wrapper.exists('.x-content')).toBeTruthy();
+  });
 });
