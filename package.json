@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.0",
-    "@types/react": "^17.0.15",
+    "@types/react": "^18.0.21",
     "@types/react-dom": "^16.9.2",
     "@types/warning": "^3.0.0",
     "cross-env": "^7.0.0",
