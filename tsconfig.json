@@ -9,8 +9,9 @@
     "esModuleInterop": true,
     "paths": {
       "@/*": ["src/*"],
-      "@@/*": ["src/.umi/*"],
+      "@@/*": [".dumi/tmp/*"],
       "rc-tooltip": ["src/index.tsx"]
     }
-  }
+  },
+  "include": [".dumi/**/*", ".dumirc.ts", "./src/**/*.ts", "./src/**/*.tsx", "./docs/**/*.tsx"]
 }
