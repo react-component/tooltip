@@ -101,7 +101,9 @@ const Tooltip = (props: TooltipProps, ref) => {
 
   return (
     <Trigger
-      popupClassName={overlayClassName}
+      popupClassName={`${overlayClassName ? overlayClassName : ''}${
+        showArrow !== false ? ` ${prefixCls}-show-arrow` : ''
+      }`}
       prefixCls={prefixCls}
       popup={getPopupElement}
       action={trigger}

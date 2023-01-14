@@ -66,5 +66,9 @@
   "peerDependencies": {
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
+  },
+  "resolutions": {
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0"
   }
 }
