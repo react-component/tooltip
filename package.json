@@ -43,15 +43,13 @@
     "rc-trigger": "^5.3.1"
   },
   "devDependencies": {
+    "@testing-library/react": "^13.4.0",
     "@types/jest": "^26.0.0",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
     "@types/warning": "^3.0.0",
     "cross-env": "^7.0.0",
     "dumi": "^2.1.1",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1",
-    "enzyme-to-json": "^3.4.3",
     "eslint": "^7.1.0",
     "father": "^2.23.1",
     "father-build": "^1.18.6",
