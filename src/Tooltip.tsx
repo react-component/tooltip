@@ -5,6 +5,7 @@ import type { TriggerProps } from 'rc-trigger';
 import type { AlignType, AnimationType, ActionType } from 'rc-trigger/lib/interface';
 import { placements } from './placements';
 import Popup from './Popup';
+import classNames from 'classnames';
 
 export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'builtinPlacements'> {
   trigger?: ActionType | ActionType[];
@@ -101,9 +102,10 @@ const Tooltip = (props: TooltipProps, ref) => {
 
   return (
     <Trigger
-      popupClassName={`${overlayClassName ? overlayClassName : ''}${
-        showArrow !== false ? ` ${prefixCls}-show-arrow` : ''
-      }`}
+      popupClassName={classNames({
+        [overlayClassName]: !!overlayClassName,
+        [`${prefixCls}-show-arrow`]: showArrow !== false,
+      })}
       prefixCls={prefixCls}
       popup={getPopupElement}
       action={trigger}
