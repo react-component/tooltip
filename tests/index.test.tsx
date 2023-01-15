@@ -1,21 +1,27 @@
-import React from 'react';
-import { mount } from 'enzyme';
+import React, { useState } from 'react';
+import { render, fireEvent } from '@testing-library/react';
 import Tooltip from '../src';
 
-const verifyContent = (wrapper, content) => {
-  expect(wrapper.find('.x-content').text()).toBe(content);
-  expect(wrapper.find('Trigger').instance().getPopupDomNode()).toBeTruthy();
-  wrapper.find('.target').simulate('click');
-  expect(wrapper.find('.rc-tooltip').hostNodes().hasClass('rc-tooltip-hidden')).toBe(true);
+const verifyContent = (wrapper: HTMLElement, content: string) => {
+  expect(wrapper.querySelector('.x-content').textContent).toBe(content);
+  fireEvent.click(wrapper.querySelector('.target'));
+  expect(wrapper.querySelector('.rc-tooltip').classList.contains('rc-tooltip-hidden')).toBe(true);
 };
 
 describe('rc-tooltip', () => {
   window.requestAnimationFrame = window.setTimeout;
   window.cancelAnimationFrame = window.clearTimeout;
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
 
   describe('shows and hides itself on click', () => {
     it('using an element overlay', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Tooltip
           trigger={['click']}
           placement="left"
@@ -24,12 +30,12 @@ describe('rc-tooltip', () => {
           <div className="target">Click this</div>
         </Tooltip>,
       );
-      wrapper.find('.target').simulate('click');
-      verifyContent(wrapper, 'Tooltip content');
+      fireEvent.click(container.querySelector('.target'));
+      verifyContent(container, 'Tooltip content');
     });
 
     it('using a function overlay', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Tooltip
           trigger={['click']}
           placement="left"
@@ -38,13 +44,13 @@ describe('rc-tooltip', () => {
           <div className="target">Click this</div>
         </Tooltip>,
       );
-      wrapper.find('.target').simulate('click');
-      verifyContent(wrapper, 'Tooltip content');
+      fireEvent.click(container.querySelector('.target'));
+      verifyContent(container, 'Tooltip content');
     });
 
     // https://github.com/ant-design/ant-design/pull/23155
     it('using style inner style', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Tooltip
           trigger={['click']}
           placement="left"
@@ -54,13 +60,15 @@ describe('rc-tooltip', () => {
           <div className="target">Click this</div>
         </Tooltip>,
       );
-      wrapper.find('.target').simulate('click');
-      expect(wrapper.find('.rc-tooltip-inner').props().style).toEqual({ background: 'red' });
+      fireEvent.click(container.querySelector('.target'));
+      expect(
+        (container.querySelector('.rc-tooltip-inner') as HTMLElement).style.background,
+      ).toEqual('red');
     });
 
     it('access of ref', () => {
       const domRef = React.createRef();
-      mount(
+      render(
         <Tooltip
           trigger={['click']}
           placement="left"
@@ -74,14 +82,13 @@ describe('rc-tooltip', () => {
     });
   });
   describe('destroyTooltipOnHide', () => {
-    const destroyVerifyContent = (wrapper, content) => {
-      wrapper.find('.target').simulate('click');
-      expect(wrapper.find('.x-content').text()).toBe(content);
-      expect(wrapper.find('Trigger').instance().getPopupDomNode()).toBeTruthy();
-      wrapper.find('.target').simulate('click');
+    const destroyVerifyContent = (wrapper: HTMLElement, content: string) => {
+      fireEvent.click(wrapper.querySelector('.target'));
+      expect(wrapper.querySelector('.x-content').textContent).toBe(content);
+      fireEvent.click(wrapper.querySelector('.target'));
     };
     it('default value', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Tooltip
           trigger={['click']}
           placement="left"
@@ -90,11 +97,11 @@ describe('rc-tooltip', () => {
           <div className="target">Click this</div>
         </Tooltip>,
       );
-      wrapper.find('.target').simulate('click');
-      verifyContent(wrapper, 'Tooltip content');
+      fireEvent.click(container.querySelector('.target'));
+      verifyContent(container, 'Tooltip content');
     });
     it('should only remove tooltip when value is true', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Tooltip
           destroyTooltipOnHide
           trigger={['click']}
@@ -104,11 +111,11 @@ describe('rc-tooltip', () => {
           <div className="target">Click this</div>
         </Tooltip>,
       );
-      destroyVerifyContent(wrapper, 'Tooltip content');
-      expect(wrapper.html()).toBe('<div class="target">Click this</div><div></div>');
+      destroyVerifyContent(container, 'Tooltip content');
+      expect(container.innerHTML).toBe('<div class="target">Click this</div><div></div>');
     });
     it('should only remove tooltip when keepParent is true', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Tooltip
           destroyTooltipOnHide={{ keepParent: true }}
           trigger={['click']}
@@ -118,11 +125,11 @@ describe('rc-tooltip', () => {
           <div className="target">Click this</div>
         </Tooltip>,
       );
-      destroyVerifyContent(wrapper, 'Tooltip content');
-      expect(wrapper.html()).toBe('<div class="target">Click this</div><div></div>');
+      destroyVerifyContent(container, 'Tooltip content');
+      expect(container.innerHTML).toBe('<div class="target">Click this</div><div></div>');
     });
     it('should remove tooltip and container when keepParent is false', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Tooltip
           destroyTooltipOnHide={{ keepParent: false }}
           trigger={['click']}
@@ -132,48 +139,31 @@ describe('rc-tooltip', () => {
           <div className="target">Click this</div>
         </Tooltip>,
       );
-      destroyVerifyContent(wrapper, 'Tooltip content');
-      expect(wrapper.html()).toBe('<div class="target">Click this</div>');
+      destroyVerifyContent(container, 'Tooltip content');
+      expect(container.innerHTML).toBe('<div class="target">Click this</div>');
     });
-  });
-
-  // This is only test for motion pass to internal rc-trigger
-  // It's safe to remove since meaningless to rc-tooltip if refactor
-  it('should motion props work', () => {
-    const wrapper = mount(
-      <Tooltip overlay="Light" motion={{ motionName: 'bamboo-is-light' }}>
-        <span>Bamboo</span>
-      </Tooltip>,
-    );
-
-    expect(wrapper.find('Trigger').props().popupMotion).toEqual({ motionName: 'bamboo-is-light' });
   });
 
   it('zIndex', () => {
     jest.useFakeTimers();
 
-    const wrapper = mount(
+    const { container } = render(
       <Tooltip trigger={['click']} zIndex={903} overlay="Bamboo">
         <div className="target">Light</div>
       </Tooltip>,
     );
-    wrapper.find('.target').simulate('click');
+    fireEvent.click(container.querySelector('.target'));
 
     jest.runAllTimers();
-    wrapper.update();
 
-    expect(wrapper.find('div.rc-tooltip').prop('style')).toEqual(
-      expect.objectContaining({
-        zIndex: 903,
-      }),
-    );
+    expect((container.querySelector('div.rc-tooltip') as HTMLElement).style.zIndex).toBe('903');
 
     jest.useRealTimers();
   });
 
   describe('showArrow', () => {
     it('should show tooltip arrow default', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Tooltip
           destroyTooltipOnHide={{ keepParent: false }}
           trigger={['click']}
@@ -183,13 +173,13 @@ describe('rc-tooltip', () => {
           <div className="target">Click this</div>
         </Tooltip>,
       );
-      wrapper.find('.target').simulate('click');
-      expect(wrapper.find('.rc-tooltip-content').html()).toBe(
+      fireEvent.click(container.querySelector('.target'));
+      expect(container.querySelector('.rc-tooltip-content').outerHTML).toBe(
         '<div class="rc-tooltip-content"><div class="rc-tooltip-arrow"></div><div class="rc-tooltip-inner" role="tooltip"><strong class="x-content">Tooltip content</strong></div></div>',
       );
     });
     it('should show tooltip arrow when showArrow is true', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Tooltip
           destroyTooltipOnHide={{ keepParent: false }}
           trigger={['click']}
@@ -200,13 +190,13 @@ describe('rc-tooltip', () => {
           <div className="target">Click this</div>
         </Tooltip>,
       );
-      wrapper.find('.target').simulate('click');
-      expect(wrapper.find('.rc-tooltip-content').html()).toBe(
+      fireEvent.click(container.querySelector('.target'));
+      expect(container.querySelector('.rc-tooltip-content').outerHTML).toBe(
         '<div class="rc-tooltip-content"><div class="rc-tooltip-arrow"></div><div class="rc-tooltip-inner" role="tooltip"><strong class="x-content">Tooltip content</strong></div></div>',
       );
     });
     it('should hide tooltip arrow when showArrow is false', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Tooltip
           destroyTooltipOnHide={{ keepParent: false }}
           trigger={['click']}
@@ -217,23 +207,32 @@ describe('rc-tooltip', () => {
           <div className="target">Click this</div>
         </Tooltip>,
       );
-      wrapper.find('.target').simulate('click');
-      expect(wrapper.find('.rc-tooltip-content').html()).toBe(
+      fireEvent.click(container.querySelector('.target'));
+      expect(container.querySelector('.rc-tooltip-content').outerHTML).toBe(
         '<div class="rc-tooltip-content"><div class="rc-tooltip-inner" role="tooltip"><strong class="x-content">Tooltip content</strong></div></div>',
       );
     });
   });
 
   it('visible', () => {
-    const wrapper = mount(
-      <Tooltip overlay={<strong className="x-content">Tooltip content</strong>} visible={false}>
-        <div />
-      </Tooltip>,
-    );
+    const App = () => {
+      const [open, setOpen] = useState(false);
+      return (
+        <Tooltip overlay={<strong className="x-content">Tooltip content</strong>} visible={open}>
+          <div
+            className="target"
+            onClick={() => {
+              setOpen(true);
+            }}
+          />
+        </Tooltip>
+      );
+    };
+    const { container } = render(<App />);
 
-    expect(wrapper.exists('.x-content')).toBeFalsy();
+    expect(container.querySelector('.x-content')).toBeFalsy();
 
-    wrapper.setProps({ visible: true });
-    expect(wrapper.exists('.x-content')).toBeTruthy();
+    fireEvent.click(container.querySelector('.target'));
+    expect(container.querySelector('.x-content')).toBeTruthy();
   });
 });
