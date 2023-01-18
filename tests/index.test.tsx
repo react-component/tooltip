@@ -174,7 +174,6 @@ describe('rc-tooltip', () => {
         </Tooltip>,
       );
       fireEvent.click(container.querySelector('.target'));
-      expect(container.querySelector('.rc-tooltip').classList).toContain('rc-tooltip-show-arrow');
       expect(container.querySelector('.rc-tooltip-content').outerHTML).toBe(
         '<div class="rc-tooltip-content"><div class="rc-tooltip-arrow"></div><div class="rc-tooltip-inner" role="tooltip"><strong class="x-content">Tooltip content</strong></div></div>',
       );
@@ -192,7 +191,6 @@ describe('rc-tooltip', () => {
         </Tooltip>,
       );
       fireEvent.click(container.querySelector('.target'));
-      expect(container.querySelector('.rc-tooltip').classList).toContain('rc-tooltip-show-arrow');
       expect(container.querySelector('.rc-tooltip-content').outerHTML).toBe(
         '<div class="rc-tooltip-content"><div class="rc-tooltip-arrow"></div><div class="rc-tooltip-inner" role="tooltip"><strong class="x-content">Tooltip content</strong></div></div>',
       );
