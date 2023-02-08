@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { act, fireEvent, render } from '@testing-library/react';
+import React from 'react';
 import Tooltip from '../src';
 
 const verifyContent = (wrapper: HTMLElement, content: string) => {
@@ -19,6 +19,15 @@ describe('rc-tooltip', () => {
     jest.useRealTimers();
   });
 
+  async function waitFakeTimers() {
+    for (let i = 0; i < 100; i += 1) {
+      await act(async () => {
+        jest.advanceTimersByTime(100);
+        await Promise.resolve();
+      });
+    }
+  }
+
   describe('shows and hides itself on click', () => {
     it('using an element overlay', () => {
       const { container } = render(
@@ -30,7 +39,9 @@ describe('rc-tooltip', () => {
           <div className="target">Click this</div>
         </Tooltip>,
       );
+
       fireEvent.click(container.querySelector('.target'));
+
       verifyContent(container, 'Tooltip content');
     });
 
@@ -81,11 +92,16 @@ describe('rc-tooltip', () => {
       expect(domRef.current).toBeTruthy();
     });
   });
+
   describe('destroyTooltipOnHide', () => {
-    const destroyVerifyContent = (wrapper: HTMLElement, content: string) => {
+    const destroyVerifyContent = async (wrapper: HTMLElement, content: string) => {
       fireEvent.click(wrapper.querySelector('.target'));
+      await waitFakeTimers();
+
       expect(wrapper.querySelector('.x-content').textContent).toBe(content);
+
       fireEvent.click(wrapper.querySelector('.target'));
+      await waitFakeTimers();
     };
     it('default value', () => {
       const { container } = render(
@@ -100,7 +116,8 @@ describe('rc-tooltip', () => {
       fireEvent.click(container.querySelector('.target'));
       verifyContent(container, 'Tooltip content');
     });
-    it('should only remove tooltip when value is true', () => {
+
+    it('should only remove tooltip when value is true', async () => {
       const { container } = render(
         <Tooltip
           destroyTooltipOnHide
@@ -111,36 +128,8 @@ describe('rc-tooltip', () => {
           <div className="target">Click this</div>
         </Tooltip>,
       );
-      destroyVerifyContent(container, 'Tooltip content');
-      expect(container.innerHTML).toBe('<div class="target">Click this</div><div></div>');
-    });
-    it('should only remove tooltip when keepParent is true', () => {
-      const { container } = render(
-        <Tooltip
-          destroyTooltipOnHide={{ keepParent: true }}
-          trigger={['click']}
-          placement="left"
-          overlay={<strong className="x-content">Tooltip content</strong>}
-        >
-          <div className="target">Click this</div>
-        </Tooltip>,
-      );
-      destroyVerifyContent(container, 'Tooltip content');
-      expect(container.innerHTML).toBe('<div class="target">Click this</div><div></div>');
-    });
-    it('should remove tooltip and container when keepParent is false', () => {
-      const { container } = render(
-        <Tooltip
-          destroyTooltipOnHide={{ keepParent: false }}
-          trigger={['click']}
-          placement="left"
-          overlay={<strong className="x-content">Tooltip content</strong>}
-        >
-          <div className="target">Click this</div>
-        </Tooltip>,
-      );
-      destroyVerifyContent(container, 'Tooltip content');
-      expect(container.innerHTML).toBe('<div class="target">Click this</div>');
+      await destroyVerifyContent(container, 'Tooltip content');
+      expect(document.querySelector('.x-content')).toBeFalsy();
     });
   });
 
@@ -165,7 +154,7 @@ describe('rc-tooltip', () => {
     it('should show tooltip arrow default', () => {
       const { container } = render(
         <Tooltip
-          destroyTooltipOnHide={{ keepParent: false }}
+          destroyTooltipOnHide
           trigger={['click']}
           placement="left"
           overlay={<strong className="x-content">Tooltip content</strong>}
@@ -174,14 +163,12 @@ describe('rc-tooltip', () => {
         </Tooltip>,
       );
       fireEvent.click(container.querySelector('.target'));
-      expect(container.querySelector('.rc-tooltip-content').outerHTML).toBe(
-        '<div class="rc-tooltip-content"><div class="rc-tooltip-arrow"></div><div class="rc-tooltip-inner" role="tooltip"><strong class="x-content">Tooltip content</strong></div></div>',
-      );
+      expect(container.querySelector('.rc-tooltip-arrow')).toBeTruthy();
     });
     it('should show tooltip arrow when showArrow is true', () => {
       const { container } = render(
         <Tooltip
-          destroyTooltipOnHide={{ keepParent: false }}
+          destroyTooltipOnHide
           trigger={['click']}
           placement="left"
           overlay={<strong className="x-content">Tooltip content</strong>}
@@ -191,14 +178,13 @@ describe('rc-tooltip', () => {
         </Tooltip>,
       );
       fireEvent.click(container.querySelector('.target'));
-      expect(container.querySelector('.rc-tooltip-content').outerHTML).toBe(
-        '<div class="rc-tooltip-content"><div class="rc-tooltip-arrow"></div><div class="rc-tooltip-inner" role="tooltip"><strong class="x-content">Tooltip content</strong></div></div>',
-      );
+      console.log(container.innerHTML);
+      expect(container.querySelector('.rc-tooltip-arrow')).toBeTruthy();
     });
     it('should hide tooltip arrow when showArrow is false', () => {
       const { container } = render(
         <Tooltip
-          destroyTooltipOnHide={{ keepParent: false }}
+          destroyTooltipOnHide
           trigger={['click']}
           placement="left"
           overlay={<strong className="x-content">Tooltip content</strong>}
@@ -211,15 +197,13 @@ describe('rc-tooltip', () => {
       expect(container.querySelector('.rc-tooltip').classList).not.toContain(
         'rc-tooltip-show-arrow',
       );
-      expect(container.querySelector('.rc-tooltip-content').outerHTML).toBe(
-        '<div class="rc-tooltip-content"><div class="rc-tooltip-inner" role="tooltip"><strong class="x-content">Tooltip content</strong></div></div>',
-      );
+      expect(container.querySelector('.rc-tooltip-arrow')).toBeFalsy();
     });
   });
 
   it('visible', () => {
     const App = () => {
-      const [open, setOpen] = useState(false);
+      const [open, setOpen] = React.useState(false);
       return (
         <Tooltip overlay={<strong className="x-content">Tooltip content</strong>} visible={open}>
           <div
