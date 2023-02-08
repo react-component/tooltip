@@ -26,11 +26,7 @@ export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'built
   mouseEnterDelay?: number;
   mouseLeaveDelay?: number;
   getTooltipContainer?: (node: HTMLElement) => HTMLElement;
-  destroyTooltipOnHide?:
-    | boolean
-    | {
-        keepParent?: boolean;
-      };
+  destroyTooltipOnHide?: boolean;
   align?: AlignType;
   showArrow?: boolean;
   arrowContent?: React.ReactNode;
@@ -77,27 +73,10 @@ const Tooltip = (props: TooltipProps, ref) => {
   }
 
   const getPopupElement = () => (
-    <Popup
-      showArrow={showArrow}
-      arrowContent={arrowContent}
-      key="content"
-      prefixCls={prefixCls}
-      id={id}
-      overlayInnerStyle={overlayInnerStyle}
-    >
+    <Popup key="content" prefixCls={prefixCls} id={id} overlayInnerStyle={overlayInnerStyle}>
       {overlay}
     </Popup>
   );
-
-  let destroyTooltip = false;
-  let autoDestroy = false;
-  if (typeof destroyTooltipOnHide === 'boolean') {
-    destroyTooltip = destroyTooltipOnHide;
-  } else if (destroyTooltipOnHide && typeof destroyTooltipOnHide === 'object') {
-    const { keepParent } = destroyTooltipOnHide;
-    destroyTooltip = keepParent === true;
-    autoDestroy = keepParent === false;
-  }
 
   return (
     <Trigger
@@ -116,8 +95,7 @@ const Tooltip = (props: TooltipProps, ref) => {
       popupAnimation={animation}
       popupMotion={motion}
       defaultPopupVisible={defaultVisible}
-      destroyPopupOnHide={destroyTooltip}
-      autoDestroy={autoDestroy}
+      autoDestroy={destroyTooltipOnHide}
       mouseLeaveDelay={mouseLeaveDelay}
       popupStyle={overlayStyle}
       mouseEnterDelay={mouseEnterDelay}
