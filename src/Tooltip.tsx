@@ -1,8 +1,8 @@
+import type { TriggerProps } from '@rc-component/trigger';
+import Trigger from '@rc-component/trigger';
+import type { ActionType, AlignType, AnimationType } from '@rc-component/trigger/lib/interface';
 import * as React from 'react';
-import { useRef, useImperativeHandle, forwardRef } from 'react';
-import Trigger from 'rc-trigger';
-import type { TriggerProps } from 'rc-trigger';
-import type { AlignType, AnimationType, ActionType } from 'rc-trigger/lib/interface';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { placements } from './placements';
 import Popup from './Popup';
 
@@ -121,6 +121,7 @@ const Tooltip = (props: TooltipProps, ref) => {
       mouseLeaveDelay={mouseLeaveDelay}
       popupStyle={overlayStyle}
       mouseEnterDelay={mouseEnterDelay}
+      arrow={showArrow}
       {...extraProps}
     >
       {children}
