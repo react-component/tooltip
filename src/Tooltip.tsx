@@ -1,4 +1,4 @@
-import type { TriggerProps } from '@rc-component/trigger';
+import type { TriggerProps, TriggerRef } from '@rc-component/trigger';
 import Trigger from '@rc-component/trigger';
 import type { ActionType, AlignType, AnimationType } from '@rc-component/trigger/lib/interface';
 import * as React from 'react';
@@ -37,7 +37,11 @@ export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'built
   zIndex?: number;
 }
 
-const Tooltip = (props: TooltipProps, ref) => {
+export interface TooltipRef {
+  forceAlign: VoidFunction;
+}
+
+const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
   const {
     overlayClassName,
     trigger = ['hover'],
@@ -64,8 +68,8 @@ const Tooltip = (props: TooltipProps, ref) => {
     ...restProps
   } = props;
 
-  const domRef = useRef(null);
-  useImperativeHandle(ref, () => domRef.current);
+  const triggerRef = useRef<TriggerRef>(null);
+  useImperativeHandle(ref, () => triggerRef.current);
 
   const extraProps = { ...restProps };
   if ('visible' in props) {
@@ -86,7 +90,7 @@ const Tooltip = (props: TooltipProps, ref) => {
       action={trigger}
       builtinPlacements={placements}
       popupPlacement={placement}
-      ref={domRef}
+      ref={triggerRef}
       popupAlign={align}
       getPopupContainer={getTooltipContainer}
       onPopupVisibleChange={onVisibleChange}
