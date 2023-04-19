@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
-    "@rc-component/trigger": "^1.0.4",
+    "@rc-component/trigger": "^1.10.0",
     "classnames": "^2.3.1"
   },
   "devDependencies": {

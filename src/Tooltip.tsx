@@ -1,4 +1,4 @@
-import type { TriggerProps, TriggerRef } from '@rc-component/trigger';
+import type { TriggerProps, TriggerRef, ArrowType } from '@rc-component/trigger';
 import Trigger from '@rc-component/trigger';
 import type { ActionType, AlignType, AnimationType } from '@rc-component/trigger/lib/interface';
 import * as React from 'react';
@@ -28,7 +28,7 @@ export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'built
   getTooltipContainer?: (node: HTMLElement) => HTMLElement;
   destroyTooltipOnHide?: boolean;
   align?: AlignType;
-  showArrow?: boolean;
+  showArrow?: boolean | ArrowType;
   arrowContent?: React.ReactNode;
   id?: string;
   children?: React.ReactElement;

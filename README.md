@@ -170,7 +170,7 @@ Online examples: <https://react-component.github.io/tooltip/examples/>
         </tr>
         <tr>
           <td>showArrow</td>
-          <td>boolean</td>
+          <td>boolean | { className?: string }</td>
           <td>true</td>
           <td>arrow visible</td>
         </tr>

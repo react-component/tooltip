@@ -181,6 +181,25 @@ describe('rc-tooltip', () => {
       console.log(container.innerHTML);
       expect(container.querySelector('.rc-tooltip-arrow')).toBeTruthy();
     });
+    it('should show tooltip arrow when showArrow is object', () => {
+      const { container } = render(
+        <Tooltip
+          destroyTooltipOnHide
+          trigger={['click']}
+          placement="left"
+          overlay={<strong className="x-content">Tooltip content</strong>}
+          showArrow={{
+            className: 'abc'
+          }}
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+      fireEvent.click(container.querySelector('.target'));
+      console.log(container.innerHTML);
+      expect(container.querySelector('.rc-tooltip-arrow')).toBeTruthy();
+      expect(container.querySelector('.rc-tooltip-arrow').classList.contains('abc')).toBeTruthy();
+    });
     it('should hide tooltip arrow when showArrow is false', () => {
       const { container } = render(
         <Tooltip
