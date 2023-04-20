@@ -178,7 +178,6 @@ describe('rc-tooltip', () => {
         </Tooltip>,
       );
       fireEvent.click(container.querySelector('.target'));
-      console.log(container.innerHTML);
       expect(container.querySelector('.rc-tooltip-arrow')).toBeTruthy();
     });
     it('should show tooltip arrow when showArrow is object', () => {
@@ -196,7 +195,6 @@ describe('rc-tooltip', () => {
         </Tooltip>,
       );
       fireEvent.click(container.querySelector('.target'));
-      console.log(container.innerHTML);
       expect(container.querySelector('.rc-tooltip-arrow')).toBeTruthy();
       expect(container.querySelector('.rc-tooltip-arrow').classList.contains('abc')).toBeTruthy();
     });
