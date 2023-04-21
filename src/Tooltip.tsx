@@ -1,4 +1,4 @@
-import type { TriggerProps, TriggerRef, ArrowType } from '@rc-component/trigger';
+import type { ArrowType, TriggerProps, TriggerRef } from '@rc-component/trigger';
 import Trigger from '@rc-component/trigger';
 import type { ActionType, AlignType, AnimationType } from '@rc-component/trigger/lib/interface';
 import * as React from 'react';
@@ -32,7 +32,6 @@ export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'built
   arrowContent?: React.ReactNode;
   id?: string;
   children?: React.ReactElement;
-  popupVisible?: boolean;
   overlayInnerStyle?: React.CSSProperties;
   zIndex?: number;
 }
@@ -71,7 +70,7 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
   const triggerRef = useRef<TriggerRef>(null);
   useImperativeHandle(ref, () => triggerRef.current);
 
-  const extraProps = { ...restProps };
+  const extraProps: Partial<TooltipProps & TriggerProps> = { ...restProps };
   if ('visible' in props) {
     extraProps.popupVisible = props.visible;
   }
