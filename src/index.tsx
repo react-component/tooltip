@@ -1,6 +1,6 @@
-import Tooltip from './Tooltip';
+import Tooltip, { TooltipRef } from './Tooltip';
 import Popup from './Popup';
 
-export { Popup };
+export { Popup, TooltipRef };
 
 export default Tooltip;
