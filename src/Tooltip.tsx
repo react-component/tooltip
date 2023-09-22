@@ -6,7 +6,8 @@ import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { placements } from './placements';
 import Popup from './Popup';
 
-export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'builtinPlacements'> {
+export interface TooltipProps
+  extends Pick<TriggerProps, 'onPopupAlign' | 'builtinPlacements' | 'fresh'> {
   trigger?: ActionType | ActionType[];
   defaultVisible?: boolean;
   visible?: boolean;
