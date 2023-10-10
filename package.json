@@ -23,7 +23,6 @@
   "main": "lib/index",
   "module": "es/index",
   "files": [
-    "dist",
     "lib",
     "es",
     "assets/*.css",
