@@ -7,7 +7,7 @@ import { placements } from './placements';
 import Popup from './Popup';
 
 export interface TooltipProps
-  extends Pick<TriggerProps, 'onPopupAlign' | 'builtinPlacements' | 'fresh'> {
+  extends Pick<TriggerProps, 'onPopupAlign' | 'builtinPlacements' | 'fresh' | 'children'> {
   trigger?: ActionType | ActionType[];
   defaultVisible?: boolean;
   visible?: boolean;
@@ -32,7 +32,6 @@ export interface TooltipProps
   showArrow?: boolean | ArrowType;
   arrowContent?: React.ReactNode;
   id?: string;
-  children?: React.ReactElement;
   overlayInnerStyle?: React.CSSProperties;
   zIndex?: number;
 }
