@@ -7,7 +7,16 @@ import { placements } from './placements';
 import Popup from './Popup';
 
 export interface TooltipProps
-  extends Pick<TriggerProps, 'onPopupAlign' | 'builtinPlacements' | 'fresh' | 'children'> {
+  extends Pick<
+    TriggerProps,
+    | 'onPopupAlign'
+    | 'builtinPlacements'
+    | 'fresh'
+    | 'children'
+    | 'mouseLeaveDelay'
+    | 'mouseEnterDelay'
+    | 'prefixCls'
+  > {
   trigger?: ActionType | ActionType[];
   defaultVisible?: boolean;
   visible?: boolean;
@@ -23,9 +32,6 @@ export interface TooltipProps
   overlay: (() => React.ReactNode) | React.ReactNode;
   overlayStyle?: React.CSSProperties;
   overlayClassName?: string;
-  prefixCls?: string;
-  mouseEnterDelay?: number;
-  mouseLeaveDelay?: number;
   getTooltipContainer?: (node: HTMLElement) => HTMLElement;
   destroyTooltipOnHide?: boolean;
   align?: AlignType;
