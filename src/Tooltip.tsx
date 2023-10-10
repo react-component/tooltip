@@ -32,7 +32,7 @@ export interface TooltipProps
   showArrow?: boolean | ArrowType;
   arrowContent?: React.ReactNode;
   id?: string;
-  children?: React.ReactElement;
+  children?: React.ReactNode;
   overlayInnerStyle?: React.CSSProperties;
   zIndex?: number;
 }
