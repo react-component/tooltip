@@ -2,20 +2,31 @@
 
 React Tooltip
 
-[![NPM version][npm-image]][npm-url] [![dumi](https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square)](https://github.com/umijs/dumi) [![build status][github-actions-image]][github-actions-url] [![Test coverage][coveralls-image]][coveralls-url] [![gemnasium deps][gemnasium-image]][gemnasium-url] [![node version][node-image]][node-url] [![npm download][download-image]][download-url]
+[![NPM version][npm-image]][npm-url]
+[![npm download][download-image]][download-url]
+[![build status][github-actions-image]][github-actions-url]
+[![Codecov][codecov-image]][codecov-url]
+[![bundle size][bundlephobia-image]][bundlephobia-url]
+[![dumi][dumi-image]][dumi-url]
 
-[npm-image]: https://img.shields.io/npm/v/rc-tooltip.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/rc-tooltip
+[npm-image]: http://img.shields.io/npm/v/rc-tooltip.svg?style=flat-square
+[npm-url]: http://npmjs.org/package/rc-tooltip
+[travis-image]: https://img.shields.io/travis/react-component/tooltip/master?style=flat-square
+[travis-url]: https://travis-ci.com/react-component/tooltip
 [github-actions-image]: https://github.com/react-component/tooltip/workflows/CI/badge.svg
 [github-actions-url]: https://github.com/react-component/tooltip/actions
-[coveralls-image]: https://img.shields.io/coveralls/react-component/tooltip.svg?style=flat-square
-[coveralls-url]: https://coveralls.io/r/react-component/tooltip?branch=master
-[gemnasium-image]: https://img.shields.io/gemnasium/react-component/tooltip.svg?style=flat-square
-[gemnasium-url]: https://gemnasium.com/react-component/tooltip
-[node-image]: https://img.shields.io/badge/node.js-%3E=_0.10-green.svg?style=flat-square
-[node-url]: https://nodejs.org/download/
+[codecov-image]: https://img.shields.io/codecov/c/github/react-component/tooltip/master.svg?style=flat-square
+[codecov-url]: https://app.codecov.io/gh/react-component/tooltip
+[david-url]: https://david-dm.org/react-component/tooltip
+[david-image]: https://david-dm.org/react-component/tooltip/status.svg?style=flat-square
+[david-dev-url]: https://david-dm.org/react-component/tooltip?type=dev
+[david-dev-image]: https://david-dm.org/react-component/tooltip/dev-status.svg?style=flat-square
 [download-image]: https://img.shields.io/npm/dm/rc-tooltip.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-tooltip
+[bundlephobia-url]: https://bundlephobia.com/package/rc-tooltip
+[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/rc-tooltip
+[dumi-url]: https://github.com/umijs/dumi
+[dumi-image]: https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square
 
 ## Screenshot
 
