@@ -74,7 +74,7 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
   } = props;
 
   const triggerRef = useRef<TriggerRef>(null);
-  useImperativeHandle(ref, () => triggerRef.current);
+  useImperativeHandle(ref, () => triggerRef.current as TriggerRef);
 
   const extraProps: Partial<TooltipProps & TriggerProps> = { ...restProps };
   if ('visible' in props) {
