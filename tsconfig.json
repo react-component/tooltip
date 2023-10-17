@@ -8,10 +8,22 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@@/*": [".dumi/tmp/*"],
-      "rc-tooltip": ["src/index.tsx"]
+      "@/*": [
+        "src/*"
+      ],
+      "@@/*": [
+        ".dumi/tmp/*"
+      ],
+      "rc-tooltip": [
+        "src/index.tsx"
+      ]
     }
   },
-  "include": [".dumi/**/*", ".dumirc.ts", "./src/**/*.ts", "./src/**/*.tsx", "./docs/**/*.tsx", "./tests/**/*.tsx"]
+  "include": [
+    ".dumirc.ts",
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./docs/**/*.tsx",
+    "./tests/**/*.tsx"
+  ]
 }

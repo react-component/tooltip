@@ -104,6 +104,7 @@
     margin-top: -@tooltip-arrow-width;
     border-width: @tooltip-arrow-width @tooltip-arrow-width @tooltip-arrow-width 0;
     border-right-color: @tooltip-arrow-color;
+    transform: translateX(calc(-100% + @tooltip-shadow-width));
   }
 
   &-placement-right &-arrow-inner,
@@ -135,6 +136,7 @@
     margin-top: -@tooltip-arrow-width;
     border-width: @tooltip-arrow-width 0 @tooltip-arrow-width @tooltip-arrow-width;
     border-left-color: @tooltip-arrow-color;
+    transform: translateX(calc(100% - @tooltip-shadow-width));
   }
 
   &-placement-left &-arrow-inner,
