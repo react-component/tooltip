@@ -66,7 +66,7 @@ ReactDOM.render(
 `npm start` and then go to
 <http://localhost:8000/demo/arrow-content>
 
-Online examples: <https://react-component.github.io/tooltip/demo/arrow-content>
+Online demo: <https://react-component.github.io/tooltip/demo/arrow-content>
 
 ## API
 
