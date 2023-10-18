@@ -30,6 +30,7 @@
   ],
   "scripts": {
     "compile": "father build && lessc assets/bootstrap.less assets/bootstrap.css && lessc assets/bootstrap_white.less assets/bootstrap_white.css",
+    "prepare": "dumi setup",
     "docs:build": "dumi build",
     "docs:deploy": "gh-pages -d dist",
     "lint": "eslint src/ --ext .tsx,.ts,.jsx,.js",
@@ -51,7 +52,7 @@
     "@types/react-dom": "^18.0.10",
     "@types/warning": "^3.0.0",
     "cross-env": "^7.0.0",
-    "dumi": "^2.1.1",
+    "dumi": "^2.2.13",
     "eslint": "^7.1.0",
     "father": "^4.0.0",
     "gh-pages": "^3.1.0",
