@@ -13,12 +13,12 @@ jobs:
       - name: checkout
         uses: actions/checkout@master
 
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
-          node-version: '12'
+          node-version: '18'
 
       - name: cache package-lock.json
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: package-temp-dir
           key: lock-${{ github.sha }}
@@ -35,7 +35,7 @@ jobs:
 
       - name: cache node_modules
         id: node_modules_cache_id
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: node_modules-${{ hashFiles('**/package-temp-dir/package-lock.json') }}
@@ -43,7 +43,7 @@ jobs:
       - name: install
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
         run: npm ci
-  
+
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -51,13 +51,13 @@ jobs:
         uses: actions/checkout@master
 
       - name: restore cache from package-lock.json
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: package-temp-dir
           key: lock-${{ github.sha }}
 
       - name: restore cache from node_modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: node_modules-${{ hashFiles('**/package-temp-dir/package-lock.json') }}
@@ -66,7 +66,7 @@ jobs:
         run: npm run lint
 
     needs: setup
-  
+
   compile:
     runs-on: ubuntu-latest
     steps:
@@ -74,13 +74,13 @@ jobs:
         uses: actions/checkout@master
 
       - name: restore cache from package-lock.json
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: package-temp-dir
           key: lock-${{ github.sha }}
 
       - name: restore cache from node_modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: node_modules-${{ hashFiles('**/package-temp-dir/package-lock.json') }}
@@ -89,7 +89,7 @@ jobs:
         run: npm run compile
 
     needs: setup
-  
+
   coverage:
     runs-on: ubuntu-latest
     steps:
@@ -97,13 +97,13 @@ jobs:
         uses: actions/checkout@master
 
       - name: restore cache from package-lock.json
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: package-temp-dir
           key: lock-${{ github.sha }}
 
       - name: restore cache from node_modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: node_modules-${{ hashFiles('**/package-temp-dir/package-lock.json') }}
