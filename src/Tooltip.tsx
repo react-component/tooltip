@@ -43,6 +43,7 @@ export interface TooltipProps
 }
 
 export interface TooltipRef {
+  nativeElement: HTMLElement;
   forceAlign: VoidFunction;
 }
 
@@ -74,7 +75,7 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
   } = props;
 
   const triggerRef = useRef<TriggerRef>(null);
-  useImperativeHandle(ref, () => triggerRef.current as TriggerRef);
+  useImperativeHandle(ref, () => triggerRef.current);
 
   const extraProps: Partial<TooltipProps & TriggerProps> = { ...restProps };
   if ('visible' in props) {
