@@ -1,4 +1,4 @@
-import type { TriggerProps, TriggerRef } from '@rc-component/trigger';
+import type { ArrowType, TriggerProps, TriggerRef } from '@rc-component/trigger';
 import Trigger from '@rc-component/trigger';
 import type { ActionType, AlignType, AnimationType } from '@rc-component/trigger/lib/interface';
 import * as React from 'react';
@@ -6,7 +6,17 @@ import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { placements } from './placements';
 import Popup from './Popup';
 
-export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'builtinPlacements'> {
+export interface TooltipProps
+  extends Pick<
+    TriggerProps,
+    | 'onPopupAlign'
+    | 'builtinPlacements'
+    | 'fresh'
+    | 'children'
+    | 'mouseLeaveDelay'
+    | 'mouseEnterDelay'
+    | 'prefixCls'
+  > {
   trigger?: ActionType | ActionType[];
   defaultVisible?: boolean;
   visible?: boolean;
@@ -22,22 +32,18 @@ export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'built
   overlay: (() => React.ReactNode) | React.ReactNode;
   overlayStyle?: React.CSSProperties;
   overlayClassName?: string;
-  prefixCls?: string;
-  mouseEnterDelay?: number;
-  mouseLeaveDelay?: number;
   getTooltipContainer?: (node: HTMLElement) => HTMLElement;
   destroyTooltipOnHide?: boolean;
   align?: AlignType;
-  showArrow?: boolean;
+  showArrow?: boolean | ArrowType;
   arrowContent?: React.ReactNode;
   id?: string;
-  children?: React.ReactElement;
-  popupVisible?: boolean;
   overlayInnerStyle?: React.CSSProperties;
   zIndex?: number;
 }
 
 export interface TooltipRef {
+  nativeElement: HTMLElement;
   forceAlign: VoidFunction;
 }
 
@@ -71,7 +77,7 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
   const triggerRef = useRef<TriggerRef>(null);
   useImperativeHandle(ref, () => triggerRef.current);
 
-  const extraProps = { ...restProps };
+  const extraProps: Partial<TooltipProps & TriggerProps> = { ...restProps };
   if ('visible' in props) {
     extraProps.popupVisible = props.visible;
   }

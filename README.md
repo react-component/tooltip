@@ -2,20 +2,31 @@
 
 React Tooltip
 
-[![NPM version][npm-image]][npm-url] [![dumi](https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square)](https://github.com/umijs/dumi) [![build status][github-actions-image]][github-actions-url]  [![Test coverage][coveralls-image]][coveralls-url] [![gemnasium deps][gemnasium-image]][gemnasium-url] [![node version][node-image]][node-url] [![npm download][download-image]][download-url]
+[![NPM version][npm-image]][npm-url]
+[![npm download][download-image]][download-url]
+[![build status][github-actions-image]][github-actions-url]
+[![Codecov][codecov-image]][codecov-url]
+[![bundle size][bundlephobia-image]][bundlephobia-url]
+[![dumi][dumi-image]][dumi-url]
 
-[npm-image]: https://img.shields.io/npm/v/rc-tooltip.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/rc-tooltip
+[npm-image]: http://img.shields.io/npm/v/rc-tooltip.svg?style=flat-square
+[npm-url]: http://npmjs.org/package/rc-tooltip
+[travis-image]: https://img.shields.io/travis/react-component/tooltip/master?style=flat-square
+[travis-url]: https://travis-ci.com/react-component/tooltip
 [github-actions-image]: https://github.com/react-component/tooltip/workflows/CI/badge.svg
 [github-actions-url]: https://github.com/react-component/tooltip/actions
-[coveralls-image]: https://img.shields.io/coveralls/react-component/tooltip.svg?style=flat-square
-[coveralls-url]: https://coveralls.io/r/react-component/tooltip?branch=master
-[gemnasium-image]: https://img.shields.io/gemnasium/react-component/tooltip.svg?style=flat-square
-[gemnasium-url]: https://gemnasium.com/react-component/tooltip
-[node-image]: https://img.shields.io/badge/node.js-%3E=_0.10-green.svg?style=flat-square
-[node-url]: https://nodejs.org/download/
+[codecov-image]: https://img.shields.io/codecov/c/github/react-component/tooltip/master.svg?style=flat-square
+[codecov-url]: https://app.codecov.io/gh/react-component/tooltip
+[david-url]: https://david-dm.org/react-component/tooltip
+[david-image]: https://david-dm.org/react-component/tooltip/status.svg?style=flat-square
+[david-dev-url]: https://david-dm.org/react-component/tooltip?type=dev
+[david-dev-image]: https://david-dm.org/react-component/tooltip/dev-status.svg?style=flat-square
 [download-image]: https://img.shields.io/npm/dm/rc-tooltip.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-tooltip
+[bundlephobia-url]: https://bundlephobia.com/package/rc-tooltip
+[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/rc-tooltip
+[dumi-url]: https://github.com/umijs/dumi
+[dumi-image]: https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square
 
 ## Screenshot
 
@@ -24,9 +35,8 @@ React Tooltip
 ## Browsers support
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
-| --------- | --------- | --------- | --------- | --------- |
-| IE 8 + ✔ | Firefox 31.0+ ✔ | Chrome 31.0+ ✔ | Safari 7.0+ ✔ | Opera 30.0+ ✔ |
-
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| IE 8 + ✔                                                                                                                                                                                                        | Firefox 31.0+ ✔                                                                                                                                                                                                   | Chrome 31.0+ ✔                                                                                                                                                                                                | Safari 7.0+ ✔                                                                                                                                                                                                 | Opera 30.0+ ✔                                                                                                                                                                                             |
 
 ## Install
 
@@ -47,159 +57,41 @@ ReactDOM.render(
   <Tooltip placement="left" trigger={['click']} overlay={<span>tooltip</span>}>
     <a href="#">hover</a>
   </Tooltip>,
-  container
+  container,
 );
 ```
 
 ## Examples
 
 `npm start` and then go to
-<http://localhost:8007/examples>
+<http://localhost:8000/demo>
 
-Online examples: <https://react-component.github.io/tooltip/examples/>
+Online demo: <https://react-component.github.io/tooltip/demo>
 
 ## API
 
 ### Props
 
-<table class="table table-bordered table-striped">
-    <thead>
-    <tr>
-        <th style="width: 100px;">name</th>
-        <th style="width: 50px;">type</th>
-        <th style="width: 50px;">default</th>
-        <th>description</th>
-    </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td>overlayClassName</td>
-          <td>string</td>
-          <td></td>
-          <td>additional className added to popup overlay</td>
-        </tr>
-        <tr>
-          <td>trigger</td>
-          <td>string | string[]</td>
-          <td>['hover']</td>
-          <td>which actions cause tooltip shown. enum of 'hover','click','focus'</td>
-        </tr>
-        <tr>
-          <td>mouseEnterDelay</td>
-          <td>number</td>
-          <td>0</td>
-          <td>delay time to show when mouse enter.unit: s.</td>
-        </tr>
-        <tr>
-          <td>mouseLeaveDelay</td>
-          <td>number</td>
-          <td>0.1</td>
-          <td>delay time to hide when mouse leave.unit: s.</td>
-        </tr>
-        <tr>
-          <td>overlayStyle</td>
-          <td>Object</td>
-          <td></td>
-          <td>additional style of overlay node</td>
-        </tr>
-        <tr>
-          <td>prefixCls</td>
-          <td>String</td>
-          <td>rc-tooltip</td>
-          <td>prefix class name</td>
-        </tr>
-        <tr>
-          <td>transitionName</td>
-          <td>String|Object</td>
-          <td></td>
-          <td>same as https://github.com/react-component/animate</td>
-        </tr>
-        <tr>
-          <td>onVisibleChange</td>
-          <td>Function</td>
-          <td></td>
-          <td>call when visible is changed</td>
-        </tr>
-        <tr>
-          <td>afterVisibleChange</td>
-          <td>Function</td>
-          <td></td>
-          <td>call after visible is changed</td>
-        </tr>
-        <tr>
-          <td>visible</td>
-          <td>boolean</td>
-          <td></td>
-          <td>whether tooltip is visible</td>
-        </tr>
-        <tr>
-          <td>defaultVisible</td>
-          <td>boolean</td>
-          <td></td>
-          <td>whether tooltip is visible initially</td>
-        </tr>
-        <tr>
-          <td>placement</td>
-          <td>String</td>
-          <td></td>
-          <td>one of ['left','right','top','bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight', 'rightTop', 'rightBottom', 'leftTop', 'leftBottom']</td>
-        </tr>
-        <tr>
-          <td>align</td>
-          <td>Object: alignConfig of [dom-align](https://github.com/yiminghe/dom-align)</td>
-          <td></td>
-          <td>value will be merged into placement's config</td>
-        </tr>
-        <tr>
-          <td>onPopupAlign</td>
-          <td>function(popupDomNode, align)</td>
-          <td></td>
-          <td>callback when popup node is aligned</td>
-        </tr>
-        <tr>
-          <td>overlay</td>
-          <td>React.Element | () => React.Element</td>
-          <td></td>
-          <td>popup content</td>
-        </tr>
-        <tr>
-          <td>overlayInnerStyle</td>
-          <td>Object</td>
-          <td></td>
-          <td>set overlay inner style</td>
-        </tr>
-        <tr>
-          <td>showArrow</td>
-          <td>boolean</td>
-          <td>true</td>
-          <td>arrow visible</td>
-        </tr>
-        <tr>
-          <td>arrowContent</td>
-          <td>React.Node</td>
-          <td>null</td>
-          <td>arrow content</td>
-        </tr>
-        <tr>
-          <td>getTooltipContainer</td>
-          <td>function</td>
-          <td></td>
-          <td>Function returning html node which will act as tooltip container. By default the tooltip attaches to the body. If you want to change the container, simply return a new element.</td>
-        </tr>
-        <tr>
-          <td>destroyTooltipOnHide</td>
-          <td>boolean | { keepParent: boolean }</td>
-          <td>false</td>
-          <td>whether destroy tooltip when tooltip is hidden.In general, destroyTooltipOnHide will only remove itself instead of parent container of it. Parent container will be removed include tooltip when keepParent is true</td>
-        </tr>
-        <tr>
-          <td>id</td>
-          <td>String</td>
-          <td></td>
-          <td>Id which gets attached to the tooltip content. Can be used with aria-describedby to achieve Screenreader-Support.</td>
-        </tr>
-    </tbody>
-</table>
+| name                 | type                                      | default             | description                                                                                                                                                      |
+| -------------------- | ----------------------------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| trigger              | string \| string\[]                       | 'hover'             | which actions cause tooltip shown. enum of 'hover','click','focus'                                                                                               |
+| visible              | boolean                                   | false               | whether tooltip is visible                                                                                                                                       |
+| defaultVisible       | boolean                                   | false               | whether tooltip is visible by default                                                                                                                            |
+| placement            | string                                    | 'right'             | tooltip placement. enum of 'top','left','right','bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight', 'leftTop', 'leftBottom', 'rightTop', 'rightBottom' |
+| motion               | object                                    |                     | Config popup motion. Please ref demo for example                                                                                                                 |
+| onVisibleChange      | (visible: boolean) => void;               |                     | Callback when visible change                                                                                                                                     |
+| afterVisibleChange   | (visible: boolean) => void;               |                     | Callback after visible change                                                                                                                                    |
+| overlay              | ReactNode \| () => ReactNode              |                     | tooltip overlay content                                                                                                                                          |
+| overlayStyle         | object                                    |                     | style of tooltip overlay                                                                                                                                         |
+| overlayClassName     | string                                    |                     | className of tooltip overlay                                                                                                                                     |
+| prefixCls            | string                                    | 'rc-tooltip'        | prefix class name of tooltip                                                                                                                                     |
+| mouseEnterDelay      | number                                    | 0                   | delay time (in second) before tooltip shows when mouse enter                                                                                                     |
+| mouseLeaveDelay      | number                                    | 0.1                 | delay time (in second) before tooltip hides when mouse leave                                                                                                     |
+| getTooltipContainer  | (triggerNode: HTMLElement) => HTMLElement | () => document.body | get container of tooltip, default to body                                                                                                                        |
+| destroyTooltipOnHide | boolean                                   | false               | destroy tooltip when it is hidden                                                                                                                                |
+| align                | object                                    |                     | align config of tooltip. Please ref demo for usage example                                                                                                       |
+| showArrow            | boolean \| object                         | false               | whether to show arrow of tooltip                                                                                                                                 |
+| zIndex               | number                                    |                     | config popup tooltip zIndex                                                                                                                                      |
 
 ## Important Note
 
@@ -208,6 +100,7 @@ Online examples: <https://react-component.github.io/tooltip/examples/>
 ## Accessibility
 
 For accessibility purpose you can use the `id` prop to link your tooltip with another element. For example attaching it to an input element:
+
 ```js
 <Tooltip
     ...
@@ -217,6 +110,7 @@ For accessibility purpose you can use the `id` prop to link your tooltip with an
            aria-describedby={this.props.name}/>
 </Tooltip>
 ```
+
 If you do it like this, a screenreader would read the content of your tooltip if you focus the input element.
 
 **NOTE:** `role="tooltip"` is also added to expose the purpose of the tooltip element to a screenreader.

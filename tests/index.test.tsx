@@ -1,6 +1,6 @@
 import { act, fireEvent, render } from '@testing-library/react';
 import React from 'react';
-import Tooltip from '../src';
+import Tooltip, { TooltipRef } from '../src';
 
 const verifyContent = (wrapper: HTMLElement, content: string) => {
   expect(wrapper.querySelector('.x-content').textContent).toBe(content);
@@ -178,8 +178,25 @@ describe('rc-tooltip', () => {
         </Tooltip>,
       );
       fireEvent.click(container.querySelector('.target'));
-      console.log(container.innerHTML);
       expect(container.querySelector('.rc-tooltip-arrow')).toBeTruthy();
+    });
+    it('should show tooltip arrow when showArrow is object', () => {
+      const { container } = render(
+        <Tooltip
+          destroyTooltipOnHide
+          trigger={['click']}
+          placement="left"
+          overlay={<strong className="x-content">Tooltip content</strong>}
+          showArrow={{
+            className: 'abc',
+          }}
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+      fireEvent.click(container.querySelector('.target'));
+      expect(container.querySelector('.rc-tooltip-arrow')).toBeTruthy();
+      expect(container.querySelector('.rc-tooltip-arrow').classList.contains('abc')).toBeTruthy();
     });
     it('should hide tooltip arrow when showArrow is false', () => {
       const { container } = render(
@@ -221,5 +238,17 @@ describe('rc-tooltip', () => {
 
     fireEvent.click(container.querySelector('.target'));
     expect(container.querySelector('.x-content')).toBeTruthy();
+  });
+
+  it('ref support nativeElement', () => {
+    const nodeRef = React.createRef<TooltipRef>();
+
+    const { container } = render(
+      <Tooltip ref={nodeRef} overlay={<div />}>
+        <button />
+      </Tooltip>,
+    );
+
+    expect(nodeRef.current.nativeElement).toBe(container.querySelector('button'));
   });
 });
