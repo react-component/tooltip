@@ -1,82 +1,84 @@
-import { BuildInPlacements } from 'rc-trigger';
+import type { BuildInPlacements } from '@rc-component/trigger';
 
-const autoAdjustOverflow = {
-  adjustX: 1,
+const autoAdjustOverflowTopBottom = {
+  shiftX: 64,
   adjustY: 1,
 };
+
+const autoAdjustOverflowLeftRight = { adjustX: 1, shiftY: true };
 
 const targetOffset = [0, 0];
 
 export const placements: BuildInPlacements = {
   left: {
     points: ['cr', 'cl'],
-    overflow: autoAdjustOverflow,
+    overflow: autoAdjustOverflowLeftRight,
     offset: [-4, 0],
     targetOffset,
   },
   right: {
     points: ['cl', 'cr'],
-    overflow: autoAdjustOverflow,
+    overflow: autoAdjustOverflowLeftRight,
     offset: [4, 0],
     targetOffset,
   },
   top: {
     points: ['bc', 'tc'],
-    overflow: autoAdjustOverflow,
+    overflow: autoAdjustOverflowTopBottom,
     offset: [0, -4],
     targetOffset,
   },
   bottom: {
     points: ['tc', 'bc'],
-    overflow: autoAdjustOverflow,
+    overflow: autoAdjustOverflowTopBottom,
     offset: [0, 4],
     targetOffset,
   },
   topLeft: {
     points: ['bl', 'tl'],
-    overflow: autoAdjustOverflow,
+    overflow: autoAdjustOverflowTopBottom,
     offset: [0, -4],
     targetOffset,
   },
   leftTop: {
     points: ['tr', 'tl'],
-    overflow: autoAdjustOverflow,
+    overflow: autoAdjustOverflowLeftRight,
     offset: [-4, 0],
     targetOffset,
   },
   topRight: {
     points: ['br', 'tr'],
-    overflow: autoAdjustOverflow,
+    overflow: autoAdjustOverflowTopBottom,
     offset: [0, -4],
     targetOffset,
   },
   rightTop: {
     points: ['tl', 'tr'],
-    overflow: autoAdjustOverflow,
+    overflow: autoAdjustOverflowLeftRight,
     offset: [4, 0],
     targetOffset,
   },
   bottomRight: {
     points: ['tr', 'br'],
-    overflow: autoAdjustOverflow,
+    overflow: autoAdjustOverflowTopBottom,
     offset: [0, 4],
     targetOffset,
   },
   rightBottom: {
     points: ['bl', 'br'],
-    overflow: autoAdjustOverflow,
+    overflow: autoAdjustOverflowLeftRight,
     offset: [4, 0],
     targetOffset,
   },
   bottomLeft: {
     points: ['tl', 'bl'],
-    overflow: autoAdjustOverflow,
+    overflow: autoAdjustOverflowTopBottom,
     offset: [0, 4],
     targetOffset,
   },
   leftBottom: {
     points: ['br', 'bl'],
-    overflow: autoAdjustOverflow,
+    overflow: autoAdjustOverflowLeftRight,
     offset: [-4, 0],
     targetOffset,
   },

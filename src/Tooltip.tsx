@@ -1,12 +1,22 @@
+import type { ArrowType, TriggerProps, TriggerRef } from '@rc-component/trigger';
+import Trigger from '@rc-component/trigger';
+import type { ActionType, AlignType, AnimationType } from '@rc-component/trigger/lib/interface';
 import * as React from 'react';
-import { useRef, useImperativeHandle, forwardRef } from 'react';
-import Trigger from 'rc-trigger';
-import type { TriggerProps } from 'rc-trigger';
-import type { AlignType, AnimationType, ActionType } from 'rc-trigger/lib/interface';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { placements } from './placements';
-import Content from './Content';
+import Popup from './Popup';
 
-export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'builtinPlacements'> {
+export interface TooltipProps
+  extends Pick<
+    TriggerProps,
+    | 'onPopupAlign'
+    | 'builtinPlacements'
+    | 'fresh'
+    | 'children'
+    | 'mouseLeaveDelay'
+    | 'mouseEnterDelay'
+    | 'prefixCls'
+  > {
   trigger?: ActionType | ActionType[];
   defaultVisible?: boolean;
   visible?: boolean;
@@ -22,25 +32,22 @@ export interface TooltipProps extends Pick<TriggerProps, 'onPopupAlign' | 'built
   overlay: (() => React.ReactNode) | React.ReactNode;
   overlayStyle?: React.CSSProperties;
   overlayClassName?: string;
-  prefixCls?: string;
-  mouseEnterDelay?: number;
-  mouseLeaveDelay?: number;
   getTooltipContainer?: (node: HTMLElement) => HTMLElement;
-  destroyTooltipOnHide?:
-    | boolean
-    | {
-        keepParent?: boolean;
-      };
+  destroyTooltipOnHide?: boolean;
   align?: AlignType;
+  showArrow?: boolean | ArrowType;
   arrowContent?: React.ReactNode;
   id?: string;
-  children?: React.ReactElement;
-  popupVisible?: boolean;
   overlayInnerStyle?: React.CSSProperties;
   zIndex?: number;
 }
 
-const Tooltip = (props: TooltipProps, ref) => {
+export interface TooltipRef {
+  nativeElement: HTMLElement;
+  forceAlign: VoidFunction;
+}
+
+const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
   const {
     overlayClassName,
     trigger = ['hover'],
@@ -60,42 +67,26 @@ const Tooltip = (props: TooltipProps, ref) => {
     defaultVisible,
     getTooltipContainer,
     overlayInnerStyle,
+    arrowContent,
+    overlay,
+    id,
+    showArrow = true,
     ...restProps
   } = props;
 
-  const domRef = useRef(null);
-  useImperativeHandle(ref, () => domRef.current);
+  const triggerRef = useRef<TriggerRef>(null);
+  useImperativeHandle(ref, () => triggerRef.current);
 
-  const extraProps = { ...restProps };
+  const extraProps: Partial<TooltipProps & TriggerProps> = { ...restProps };
   if ('visible' in props) {
     extraProps.popupVisible = props.visible;
   }
 
-  const getPopupElement = () => {
-    const { arrowContent = null, overlay, id } = props;
-    return [
-      <div className={`${prefixCls}-arrow`} key="arrow">
-        {arrowContent}
-      </div>,
-      <Content
-        key="content"
-        prefixCls={prefixCls}
-        id={id}
-        overlay={overlay}
-        overlayInnerStyle={overlayInnerStyle}
-      />,
-    ];
-  };
-
-  let destroyTooltip = false;
-  let autoDestroy = false;
-  if (typeof destroyTooltipOnHide === 'boolean') {
-    destroyTooltip = destroyTooltipOnHide;
-  } else if (destroyTooltipOnHide && typeof destroyTooltipOnHide === 'object') {
-    const { keepParent } = destroyTooltipOnHide;
-    destroyTooltip = keepParent === true;
-    autoDestroy = keepParent === false;
-  }
+  const getPopupElement = () => (
+    <Popup key="content" prefixCls={prefixCls} id={id} overlayInnerStyle={overlayInnerStyle}>
+      {overlay}
+    </Popup>
+  );
 
   return (
     <Trigger
@@ -105,7 +96,7 @@ const Tooltip = (props: TooltipProps, ref) => {
       action={trigger}
       builtinPlacements={placements}
       popupPlacement={placement}
-      ref={domRef}
+      ref={triggerRef}
       popupAlign={align}
       getPopupContainer={getTooltipContainer}
       onPopupVisibleChange={onVisibleChange}
@@ -114,11 +105,11 @@ const Tooltip = (props: TooltipProps, ref) => {
       popupAnimation={animation}
       popupMotion={motion}
       defaultPopupVisible={defaultVisible}
-      destroyPopupOnHide={destroyTooltip}
-      autoDestroy={autoDestroy}
+      autoDestroy={destroyTooltipOnHide}
       mouseLeaveDelay={mouseLeaveDelay}
       popupStyle={overlayStyle}
       mouseEnterDelay={mouseEnterDelay}
+      arrow={showArrow}
       {...extraProps}
     >
       {children}

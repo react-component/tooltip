@@ -3,14 +3,27 @@
     "target": "esnext",
     "moduleResolution": "node",
     "baseUrl": "./",
-    "jsx": "preserve",
+    "jsx": "react",
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@@/*": ["src/.umi/*"],
-      "rc-tooltip": ["src/index.tsx"]
+      "@/*": [
+        "src/*"
+      ],
+      "@@/*": [
+        ".dumi/tmp/*"
+      ],
+      "rc-tooltip": [
+        "src/index.tsx"
+      ]
     }
-  }
+  },
+  "include": [
+    ".dumirc.ts",
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./docs/**/*.tsx",
+    "./tests/**/*.tsx"
+  ]
 }
