@@ -16,6 +16,7 @@ export interface TooltipProps
     | 'mouseLeaveDelay'
     | 'mouseEnterDelay'
     | 'prefixCls'
+    | 'forceRender'
   > {
   trigger?: ActionType | ActionType[];
   defaultVisible?: boolean;
