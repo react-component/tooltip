@@ -30,10 +30,11 @@
   ],
   "scripts": {
     "compile": "father build && lessc assets/bootstrap.less assets/bootstrap.css && lessc assets/bootstrap_white.less assets/bootstrap_white.css",
-    "prepare": "dumi setup",
     "docs:build": "dumi build",
     "docs:deploy": "gh-pages -d dist",
     "lint": "eslint src/ --ext .tsx,.ts,.jsx,.js",
+    "now-build": "npm run docs:build",
+    "prepare": "dumi setup",
     "prepublishOnly": "npm run compile && np --no-cleanup --yolo --no-publish",
     "postpublish": "npm run docs:build && npm run docs:deploy",
     "start": "dumi dev",
@@ -41,7 +42,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
-    "@rc-component/trigger": "^1.18.0",
+    "@rc-component/trigger": "^2.0.0",
     "classnames": "^2.3.1"
   },
   "devDependencies": {
