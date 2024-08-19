@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import React from 'react';
 import Tooltip from 'rc-tooltip';
 import '../../assets/bootstrap_white.less';
@@ -11,7 +12,7 @@ const styles = {
   background: '#f6f6f6',
   verticalAlign: 'middle',
   border: '5px solid white',
-};
+} as CSSProperties;
 
 const rowStyle = {
   display: 'table-row',

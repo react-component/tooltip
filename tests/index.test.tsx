@@ -78,7 +78,7 @@ describe('rc-tooltip', () => {
     });
 
     it('access of ref', () => {
-      const domRef = React.createRef();
+      const domRef = React.createRef<TooltipRef>();
       render(
         <Tooltip
           trigger={['click']}
