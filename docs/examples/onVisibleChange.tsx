@@ -6,10 +6,15 @@ function preventDefault(e) {
   e.preventDefault();
 }
 
+interface TestState {
+    visible: boolean;
+    destroy?: boolean;
+  }
+
 class Test extends Component {
   state = {
     visible: false,
-  };
+  } as TestState;
 
   onVisibleChange = visible => {
     this.setState({

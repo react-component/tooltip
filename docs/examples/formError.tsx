@@ -1,12 +1,17 @@
-import React, { Component } from 'react';
 import Tooltip from 'rc-tooltip';
+import React, { Component } from 'react';
 
 import '../../assets/bootstrap.less';
+
+interface TestState {
+  visible: boolean;
+  destroy?: boolean;
+}
 
 class Test extends Component {
   state = {
     visible: false,
-  };
+  } as TestState;
 
   handleDestroy = () => {
     this.setState({
@@ -14,7 +19,7 @@ class Test extends Component {
     });
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({
       visible: !e.target.value,
     });

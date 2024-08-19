@@ -40,3 +40,5 @@ package-lock.json
 # dumi
 .dumi/tmp
 .dumi/tmp-production
+
+bun.lockb

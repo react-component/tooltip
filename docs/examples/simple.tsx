@@ -1,9 +1,23 @@
-import React, { Component } from 'react';
+import type { ActionType } from '@rc-component/trigger';
+import type { OffsetType } from '@rc-component/trigger/lib/interface';
 import Tooltip from 'rc-tooltip';
+import type { CSSProperties } from 'react';
+import React, { Component } from 'react';
 import '../../assets/bootstrap.less';
 import { placements } from '../../src/placements';
 
-class Test extends Component {
+interface TestState {
+  destroyTooltipOnHide: boolean;
+  destroyTooltipOptions: { name: string; value: number }[];
+  placement: string;
+  transitionName: string;
+  trigger: Record<ActionType, number>;
+  offsetX?: OffsetType;
+  offsetY?: OffsetType;
+  overlayInnerStyle?: CSSProperties;
+}
+
+class Test extends Component<any, TestState> {
   state = {
     destroyTooltipOnHide: false,
     destroyTooltipOptions: [
@@ -24,13 +38,15 @@ class Test extends Component {
     transitionName: 'rc-tooltip-zoom',
     trigger: {
       hover: 1,
-    },
+      click: 0,
+      focus: 0,
+    } as Record<ActionType, number>,
     offsetX: placements.right.offset[0],
     offsetY: placements.right.offset[1],
     overlayInnerStyle: undefined,
   };
 
-  onPlacementChange = e => {
+  onPlacementChange = (e) => {
     const placement = e.target.value;
     const { offset } = placements[placement];
     this.setState({
@@ -40,13 +56,13 @@ class Test extends Component {
     });
   };
 
-  onTransitionChange = e => {
+  onTransitionChange = (e) => {
     this.setState({
       transitionName: e.target.checked ? e.target.value : '',
     });
   };
 
-  onTriggerChange = e => {
+  onTriggerChange = (e) => {
     const { trigger } = this.state;
     if (e.target.checked) {
       trigger[e.target.value] = 1;
@@ -58,38 +74,38 @@ class Test extends Component {
     });
   };
 
-  onOffsetXChange = e => {
+  onOffsetXChange = (e) => {
     const targetValue = e.target.value;
     this.setState({
       offsetX: targetValue || undefined,
     });
   };
 
-  onOffsetYChange = e => {
+  onOffsetYChange = (e) => {
     const targetValue = e.target.value;
     this.setState({
       offsetY: targetValue || undefined,
     });
   };
 
-  onVisibleChange = visible => {
+  onVisibleChange = (visible) => {
     console.log('tooltip', visible); // eslint-disable-line no-console
   };
 
-  onDestroyChange = e => {
+  onDestroyChange = (e) => {
     const { value } = e.target;
     this.setState({
-      destroyTooltipOnHide: [false, { keepParent: false }, { keepParent: true }][value],
+      destroyTooltipOnHide: [false, { keepParent: false }, { keepParent: true }][value] as boolean,
     });
   };
 
   onOverlayInnerStyleChange = () => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       overlayInnerStyle: prevState.overlayInnerStyle ? undefined : { background: 'red' },
     }));
   };
 
-  preventDefault = e => {
+  preventDefault = (e) => {
     e.preventDefault();
   };
 
@@ -102,7 +118,7 @@ class Test extends Component {
           <label>
             placement:
             <select value={this.state.placement} onChange={this.onPlacementChange}>
-              {Object.keys(placements).map(p => (
+              {Object.keys(placements).map((p) => (
                 <option key={p} value={p}>
                   {p}
                 </option>
@@ -134,7 +150,7 @@ class Test extends Component {
           <label>
             <input
               value="hover"
-              checked={trigger.hover}
+              checked={!!trigger.hover}
               type="checkbox"
               onChange={this.onTriggerChange}
             />
@@ -143,7 +159,7 @@ class Test extends Component {
           <label>
             <input
               value="focus"
-              checked={trigger.focus}
+              checked={!!trigger.focus}
               type="checkbox"
               onChange={this.onTriggerChange}
             />
@@ -152,7 +168,7 @@ class Test extends Component {
           <label>
             <input
               value="click"
-              checked={trigger.click}
+              checked={!!trigger.click}
               type="checkbox"
               onChange={this.onTriggerChange}
             />
@@ -194,7 +210,7 @@ class Test extends Component {
             mouseEnterDelay={0}
             mouseLeaveDelay={0.1}
             destroyTooltipOnHide={this.state.destroyTooltipOnHide}
-            trigger={Object.keys(this.state.trigger)}
+            trigger={Object.keys(this.state.trigger) as ActionType[]}
             onVisibleChange={this.onVisibleChange}
             overlay={<div style={{ height: 50, width: 50 }}>i am a tooltip</div>}
             align={{
