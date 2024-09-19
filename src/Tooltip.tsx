@@ -44,10 +44,7 @@ export interface TooltipProps
   zIndex?: number;
 }
 
-export interface TooltipRef {
-  nativeElement: HTMLElement;
-  forceAlign: VoidFunction;
-}
+export interface TooltipRef extends TriggerRef {}
 
 const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
   const {
