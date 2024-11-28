@@ -251,4 +251,35 @@ describe('rc-tooltip', () => {
 
     expect(nodeRef.current.nativeElement).toBe(container.querySelector('button'));
   });
+  it('should apply custom styles to Tooltip', () => {
+    const customClassNames = {
+      inner: 'custom-inner',
+      root: 'custom-root',
+    };
+
+    const customStyles = {
+      inner: { color: 'red' },
+      root: { backgroundColor: 'blue' },
+    };
+
+    const { container } = render(
+      <Tooltip classNames={customClassNames} overlay={<div />} styles={customStyles} visible>
+        <button />
+      </Tooltip>,
+    );
+
+    const tooltipElement = container.querySelector('.rc-tooltip');
+    const tooltipInnerElement = container.querySelector('.rc-tooltip-inner');
+
+    // 验证 classNames
+    expect(tooltipElement.classList).toContain('custom-root');
+    expect(tooltipInnerElement.classList).toContain('custom-inner');
+
+    // 验证 styles
+    const tooltipElementStyle = getComputedStyle(tooltipElement);
+    const tooltipInnerElementStyle = getComputedStyle(tooltipInnerElement);
+
+    expect(tooltipElementStyle.backgroundColor).toBe('blue');
+    expect(tooltipInnerElementStyle.color).toBe('red');
+  });
 });

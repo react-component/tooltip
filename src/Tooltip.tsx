@@ -5,6 +5,7 @@ import * as React from 'react';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { placements } from './placements';
 import Popup from './Popup';
+import classNames from 'classnames';
 
 export interface TooltipProps
   extends Pick<
@@ -42,6 +43,18 @@ export interface TooltipProps
   id?: string;
   overlayInnerStyle?: React.CSSProperties;
   zIndex?: number;
+  styles?: TootipStyles;
+  classNames?: TooltipClassNames;
+}
+
+export interface TootipStyles {
+  root?: React.CSSProperties;
+  inner?: React.CSSProperties;
+}
+
+export interface TooltipClassNames {
+  root?: string;
+  inner?: string;
 }
 
 export interface TooltipRef extends TriggerRef {}
@@ -70,6 +83,8 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
     overlay,
     id,
     showArrow = true,
+    classNames: tooltipClassNames,
+    styles: tooltipStyles,
     ...restProps
   } = props;
 
@@ -82,14 +97,20 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
   }
 
   const getPopupElement = () => (
-    <Popup key="content" prefixCls={prefixCls} id={id} overlayInnerStyle={overlayInnerStyle}>
+    <Popup
+      key="content"
+      prefixCls={prefixCls}
+      id={id}
+      overlayInnerClassName={tooltipClassNames?.inner}
+      overlayInnerStyle={{ ...overlayInnerStyle, ...tooltipStyles?.inner }}
+    >
       {overlay}
     </Popup>
   );
 
   return (
     <Trigger
-      popupClassName={overlayClassName}
+      popupClassName={classNames(overlayClassName, tooltipClassNames?.root)}
       prefixCls={prefixCls}
       popup={getPopupElement}
       action={trigger}
@@ -106,7 +127,7 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
       defaultPopupVisible={defaultVisible}
       autoDestroy={destroyTooltipOnHide}
       mouseLeaveDelay={mouseLeaveDelay}
-      popupStyle={overlayStyle}
+      popupStyle={{ ...overlayStyle, ...tooltipStyles?.root }}
       mouseEnterDelay={mouseEnterDelay}
       arrow={showArrow}
       {...extraProps}
