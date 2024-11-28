@@ -43,11 +43,11 @@ export interface TooltipProps
   id?: string;
   overlayInnerStyle?: React.CSSProperties;
   zIndex?: number;
-  styles?: TootipStyles;
+  styles?: TooltipStyles;
   classNames?: TooltipClassNames;
 }
 
-export interface TootipStyles {
+export interface TooltipStyles {
   root?: React.CSSProperties;
   inner?: React.CSSProperties;
 }
