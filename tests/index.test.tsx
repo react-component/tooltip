@@ -268,18 +268,15 @@ describe('rc-tooltip', () => {
       </Tooltip>,
     );
 
-    const tooltipElement = container.querySelector('.rc-tooltip');
-    const tooltipInnerElement = container.querySelector('.rc-tooltip-inner');
+    const tooltipElement = container.querySelector('.rc-tooltip') as HTMLElement;
+    const tooltipInnerElement = container.querySelector('.rc-tooltip-inner') as HTMLElement;
 
     // 验证 classNames
     expect(tooltipElement.classList).toContain('custom-root');
     expect(tooltipInnerElement.classList).toContain('custom-inner');
 
     // 验证 styles
-    const tooltipElementStyle = getComputedStyle(tooltipElement);
-    const tooltipInnerElementStyle = getComputedStyle(tooltipInnerElement);
-
-    expect(tooltipElementStyle.backgroundColor).toBe('blue');
-    expect(tooltipInnerElementStyle.color).toBe('red');
+    expect(tooltipElement.style.backgroundColor).toBe('blue');
+    expect(tooltipInnerElement.style.color).toBe('red');
   });
 });
