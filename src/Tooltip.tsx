@@ -101,7 +101,7 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
       key="content"
       prefixCls={prefixCls}
       id={id}
-      overlayInnerClassName={tooltipClassNames?.inner}
+      innerClassName={tooltipClassNames?.inner}
       overlayInnerStyle={{ ...overlayInnerStyle, ...tooltipStyles?.inner }}
     >
       {overlay}

@@ -8,20 +8,20 @@ export interface ContentProps {
   overlayInnerStyle?: React.CSSProperties;
   className?: string;
   style?: React.CSSProperties;
-  overlayInnerClassName?: string;
+  innerClassName?: string;
 }
 
 export default function Popup(props: ContentProps) {
-  const { children, prefixCls, id, overlayInnerStyle, overlayInnerClassName, className, style } =
+  const { children, prefixCls, id, overlayInnerStyle: innerStyle, innerClassName, className, style } =
     props;
 
   return (
     <div className={classNames(`${prefixCls}-content`, className)} style={style}>
       <div
-        className={classNames(`${prefixCls}-inner`, overlayInnerClassName)}
+        className={classNames(`${prefixCls}-inner`, innerClassName)}
         id={id}
         role="tooltip"
-        style={overlayInnerStyle}
+        style={innerStyle}
       >
         {typeof children === 'function' ? children() : children}
       </div>
