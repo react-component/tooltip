@@ -82,7 +82,7 @@ Online demo: <https://react-component.github.io/tooltip/demo>
 | onVisibleChange      | (visible: boolean) => void;               |                     | Callback when visible change                                                                                                                                     |
 | afterVisibleChange   | (visible: boolean) => void;               |                     | Callback after visible change                                                                                                                                    |
 | overlay              | ReactNode \| () => ReactNode              |                     | tooltip overlay content                                                                                                                                          |
-| overlayStyle         | object                                    |                     | style of tooltip overlay                                                                                                                                         |
+| overlayStyle         | object                                    |                     | deprecated, Please use `styles={{ root: {} }}`                                                                                                                                         |
 | overlayClassName     | string                                    |                     | className of tooltip overlay                                                                                                                                     |
 | prefixCls            | string                                    | 'rc-tooltip'        | prefix class name of tooltip                                                                                                                                     |
 | mouseEnterDelay      | number                                    | 0                   | delay time (in second) before tooltip shows when mouse enter                                                                                                     |
@@ -92,6 +92,8 @@ Online demo: <https://react-component.github.io/tooltip/demo>
 | align                | object                                    |                     | align config of tooltip. Please ref demo for usage example                                                                                                       |
 | showArrow            | boolean \| object                         | false               | whether to show arrow of tooltip                                                                                                                                 |
 | zIndex               | number                                    |                     | config popup tooltip zIndex                                                                                                                                      |
+| classNames           | classNames?: { root?: string; inner?: string;};            |                     | Semantic DOM class                                                                                                                                               |
+| styles               | styles?: {root?: React.CSSProperties;inner?: React.CSSProperties;};     |                     | Semantic DOM styles                                                                                                                                              |
 
 ## Important Note
 

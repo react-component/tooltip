@@ -33,6 +33,7 @@ export interface TooltipProps
   onVisibleChange?: (visible: boolean) => void;
   afterVisibleChange?: (visible: boolean) => void;
   overlay: (() => React.ReactNode) | React.ReactNode;
+  /** @deprecated Please use `styles={{ root: {} }}` */
   overlayStyle?: React.CSSProperties;
   overlayClassName?: string;
   getTooltipContainer?: (node: HTMLElement) => HTMLElement;
@@ -41,6 +42,7 @@ export interface TooltipProps
   showArrow?: boolean | ArrowType;
   arrowContent?: React.ReactNode;
   id?: string;
+  /** @deprecated Please use `styles={{ inner: {} }}` */
   overlayInnerStyle?: React.CSSProperties;
   zIndex?: number;
   styles?: TooltipStyles;
