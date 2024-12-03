@@ -35,6 +35,7 @@ export interface TooltipProps
   overlay: (() => React.ReactNode) | React.ReactNode;
   /** @deprecated Please use `styles={{ root: {} }}` */
   overlayStyle?: React.CSSProperties;
+  /** @deprecated Please use `classNames={{ root: {} }}` */
   overlayClassName?: string;
   getTooltipContainer?: (node: HTMLElement) => HTMLElement;
   destroyTooltipOnHide?: boolean;
