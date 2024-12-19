@@ -92,8 +92,8 @@ Online demo: <https://react-component.github.io/tooltip/demo>
 | align                | object                                    |                     | align config of tooltip. Please ref demo for usage example                                                                                                       |
 | showArrow            | boolean \| object                         | false               | whether to show arrow of tooltip                                                                                                                                 |
 | zIndex               | number                                    |                     | config popup tooltip zIndex                                                                                                                                      |
-| classNames           | classNames?: { root?: string; inner?: string;};            |                     | Semantic DOM class                                                                                                                                               |
-| styles               | styles?: {root?: React.CSSProperties;inner?: React.CSSProperties;};     |                     | Semantic DOM styles                                                                                                                                              |
+| classNames           | classNames?: { root?: string; body?: string;};            |                     | Semantic DOM class                                                                                                                                               |
+| styles               | styles?: {root?: React.CSSProperties;body?: React.CSSProperties;};     |                     | Semantic DOM styles                                                                                                                                              |
 
 ## Important Note
 
