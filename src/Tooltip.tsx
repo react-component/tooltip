@@ -43,7 +43,7 @@ export interface TooltipProps
   showArrow?: boolean | ArrowType;
   arrowContent?: React.ReactNode;
   id?: string;
-  /** @deprecated Please use `styles={{ inner: {} }}` */
+  /** @deprecated Please use `styles={{ body: {} }}` */
   overlayInnerStyle?: React.CSSProperties;
   zIndex?: number;
   styles?: TooltipStyles;
@@ -52,12 +52,12 @@ export interface TooltipProps
 
 export interface TooltipStyles {
   root?: React.CSSProperties;
-  inner?: React.CSSProperties;
+  body?: React.CSSProperties;
 }
 
 export interface TooltipClassNames {
   root?: string;
-  inner?: string;
+  body?: string;
 }
 
 export interface TooltipRef extends TriggerRef {}
@@ -104,8 +104,8 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
       key="content"
       prefixCls={prefixCls}
       id={id}
-      innerClassName={tooltipClassNames?.inner}
-      overlayInnerStyle={{ ...overlayInnerStyle, ...tooltipStyles?.inner }}
+      bodyClassName={tooltipClassNames?.body}
+      overlayInnerStyle={{ ...overlayInnerStyle, ...tooltipStyles?.body }}
     >
       {overlay}
     </Popup>

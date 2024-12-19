@@ -253,12 +253,12 @@ describe('rc-tooltip', () => {
   });
   it('should apply custom styles to Tooltip', () => {
     const customClassNames = {
-      inner: 'custom-inner',
+      body: 'custom-body',
       root: 'custom-root',
     };
 
     const customStyles = {
-      inner: { color: 'red' },
+      body: { color: 'red' },
       root: { backgroundColor: 'blue' },
     };
 
@@ -269,14 +269,14 @@ describe('rc-tooltip', () => {
     );
 
     const tooltipElement = container.querySelector('.rc-tooltip') as HTMLElement;
-    const tooltipInnerElement = container.querySelector('.rc-tooltip-inner') as HTMLElement;
+    const tooltipBodyElement = container.querySelector('.rc-tooltip-inner') as HTMLElement;
 
     // 验证 classNames
     expect(tooltipElement.classList).toContain('custom-root');
-    expect(tooltipInnerElement.classList).toContain('custom-inner');
+    expect(tooltipBodyElement.classList).toContain('custom-body');
 
     // 验证 styles
     expect(tooltipElement.style.backgroundColor).toBe('blue');
-    expect(tooltipInnerElement.style.color).toBe('red');
+    expect(tooltipBodyElement.style.color).toBe('red');
   });
 });
