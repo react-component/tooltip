@@ -1,4 +1,4 @@
-import Popup from '../src/Popup';
+import { Popup } from '../src';
 
 describe('Popup', () => {
   // Used in antd for C2D2C
