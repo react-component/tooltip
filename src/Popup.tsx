@@ -16,17 +16,15 @@ export default function Popup(props: ContentProps) {
     props;
 
   return (
-    <>
-      <div className={classNames(`${prefixCls}-content`, className)} style={style}>
-        <div
-          id={id}
-          role="tooltip"
-          className={classNames(`${prefixCls}-inner`, bodyClassName)}
-          style={innerStyle}
-        >
-          {typeof children === 'function' ? children() : children}
-        </div>
+    <div className={classNames(`${prefixCls}-content`, className)} style={style}>
+      <div
+        id={id}
+        role="tooltip"
+        className={classNames(`${prefixCls}-inner`, bodyClassName)}
+        style={innerStyle}
+      >
+        {typeof children === 'function' ? children() : children}
       </div>
-    </>
+    </div>
   );
 }
