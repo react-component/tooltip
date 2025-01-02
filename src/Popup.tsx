@@ -29,6 +29,8 @@ const getTextContent = (node: (() => React.ReactNode) | React.ReactNode): string
   if (React.isValidElement(resolvedNode)) {
     return getTextContent(resolvedNode.props.children);
   }
+
+  return '';
 };
 
 export default function Popup(props: ContentProps) {
