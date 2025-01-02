@@ -3,7 +3,7 @@ import Trigger from '@rc-component/trigger';
 import type { ActionType, AlignType, AnimationType } from '@rc-component/trigger/lib/interface';
 import classNames from 'classnames';
 import * as React from 'react';
-import { forwardRef, useImperativeHandle, useRef, cloneElement, isValidElement } from 'react';
+import { forwardRef, useImperativeHandle, useRef, cloneElement } from 'react';
 import { placements } from './placements';
 import Popup from './Popup';
 import useId from 'rc-util/lib/hooks/useId';
