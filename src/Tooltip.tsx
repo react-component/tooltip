@@ -94,6 +94,8 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
 
   const mergedId = useId(id);
   const triggerRef = useRef<TriggerRef>(null);
+  const child = React.Children.only(children) as React.ReactElement;
+
   useImperativeHandle(ref, () => triggerRef.current);
 
   const extraProps: Partial<TooltipProps & TriggerProps> = { ...restProps };
@@ -114,17 +116,14 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
   );
 
   const getChildren = () => {
-    if (!isValidElement(children)) {
-      return children;
-    }
-    const originalProps = (children as React.ReactElement)?.props || {};
+    const originalProps = (child as React.ReactElement)?.props || {};
 
     const childProps = {
       ...originalProps,
-      'aria-describedby': overlay ? id : null,
+      'aria-describedby': overlay ? mergedId : null,
     };
 
-    return cloneElement(children, childProps);
+    return cloneElement(child, childProps);
   };
 
   return (
