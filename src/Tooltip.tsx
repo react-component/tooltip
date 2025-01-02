@@ -1,11 +1,12 @@
 import type { ArrowType, TriggerProps, TriggerRef } from '@rc-component/trigger';
 import Trigger from '@rc-component/trigger';
 import type { ActionType, AlignType, AnimationType } from '@rc-component/trigger/lib/interface';
+import classNames from 'classnames';
 import * as React from 'react';
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef, isValidElement, cloneElement } from 'react';
 import { placements } from './placements';
 import Popup from './Popup';
-import classNames from 'classnames';
+import useId from 'rc-util/lib/hooks/useId';
 
 export interface TooltipProps
   extends Pick<
@@ -60,9 +61,11 @@ export interface TooltipClassNames {
   body?: string;
 }
 
-export interface TooltipRef extends TriggerRef {}
+export interface TooltipRef extends TriggerRef { }
 
 const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
+  const defaultId = useId();
+
   const {
     overlayClassName,
     trigger = ['hover'],
@@ -84,7 +87,7 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
     overlayInnerStyle,
     arrowContent,
     overlay,
-    id,
+    id = defaultId,
     showArrow = true,
     classNames: tooltipClassNames,
     styles: tooltipStyles,
@@ -111,6 +114,17 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
     </Popup>
   );
 
+  const getChildren = () => {
+    const originalProps = (children as React.ReactElement)?.props || {};
+
+    const childProps = {
+      ...originalProps,
+      'aria-describedby': overlay ? id : null,
+    };
+
+    return cloneElement(children, childProps);
+  };
+
   return (
     <Trigger
       popupClassName={classNames(overlayClassName, tooltipClassNames?.root)}
@@ -135,7 +149,7 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
       arrow={showArrow}
       {...extraProps}
     >
-      {children}
+      {getChildren()}
     </Trigger>
   );
 };
