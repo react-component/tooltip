@@ -18,9 +18,9 @@ export default function Popup(props: ContentProps) {
   return (
     <div className={classNames(`${prefixCls}-content`, className)} style={style}>
       <div
+        className={classNames(`${prefixCls}-inner`, bodyClassName)}
         id={id}
         role="tooltip"
-        className={classNames(`${prefixCls}-inner`, bodyClassName)}
         style={innerStyle}
       >
         {typeof children === 'function' ? children() : children}

@@ -3,7 +3,7 @@ import Trigger from '@rc-component/trigger';
 import type { ActionType, AlignType, AnimationType } from '@rc-component/trigger/lib/interface';
 import classNames from 'classnames';
 import * as React from 'react';
-import { forwardRef, useImperativeHandle, useRef, cloneElement } from 'react';
+import { forwardRef, useImperativeHandle, useRef, cloneElement, isValidElement } from 'react';
 import { placements } from './placements';
 import Popup from './Popup';
 import useId from 'rc-util/lib/hooks/useId';
@@ -115,6 +115,9 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
   );
 
   const getChildren = () => {
+    if (!isValidElement(children)) {
+      return children;
+    }
     const originalProps = (children as React.ReactElement)?.props || {};
 
     const childProps = {

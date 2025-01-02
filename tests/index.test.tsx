@@ -280,3 +280,67 @@ describe('rc-tooltip', () => {
     expect(tooltipBodyElement.style.color).toBe('red');
   });
 });
+
+describe('children validation', () => {
+  it('should return non-React element children directly', () => {
+    // Test string
+    const { container: stringContainer } = render(
+      // @ts-expect-error
+      <Tooltip overlay="tooltip content">
+        plain text
+      </Tooltip>
+    );
+    expect(stringContainer.textContent).toBe('plain text');
+
+    // Test number
+    const { container: numberContainer } = render(
+      <Tooltip overlay="tooltip content">
+        {/* @ts-expect-error */}
+        {42}
+      </Tooltip>
+    );
+    expect(numberContainer.textContent).toBe('42');
+
+    // Test null
+    const { container: nullContainer } = render(
+      <Tooltip overlay="tooltip content">
+        {null}
+      </Tooltip>
+    );
+    expect(nullContainer.textContent).toBe('');
+
+    // Test undefined
+    const { container: undefinedContainer } = render(
+      <Tooltip overlay="tooltip content">
+        {undefined}
+      </Tooltip>
+    );
+    expect(undefinedContainer.textContent).toBe('');
+
+    // Test array of strings
+    const { container: arrayContainer } = render(
+      <Tooltip overlay="tooltip content">
+        {/* @ts-expect-error */}
+        {['text1', 'text2']}
+      </Tooltip>
+    );
+    expect(arrayContainer.textContent).toBe('text1text2');
+  });
+
+  it('should process valid React element normally', () => {
+    const { container } = render(
+      <Tooltip
+        trigger={['click']}
+        overlay="tooltip content"
+      >
+        <div className="target">Valid React Element</div>
+      </Tooltip>
+    );
+
+    expect(container.querySelector('.target')).toBeTruthy();
+
+    fireEvent.click(container.querySelector('.target'));
+    expect(container.querySelector('.rc-tooltip')).toBeTruthy();
+  });
+});
+
