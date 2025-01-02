@@ -64,8 +64,6 @@ export interface TooltipClassNames {
 export interface TooltipRef extends TriggerRef { }
 
 const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
-  const defaultId = useId();
-
   const {
     overlayClassName,
     trigger = ['hover'],
@@ -87,13 +85,14 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
     overlayInnerStyle,
     arrowContent,
     overlay,
-    id = defaultId,
+    id,
     showArrow = true,
     classNames: tooltipClassNames,
     styles: tooltipStyles,
     ...restProps
   } = props;
 
+  const mergedId = useId(id);
   const triggerRef = useRef<TriggerRef>(null);
   useImperativeHandle(ref, () => triggerRef.current);
 
@@ -106,7 +105,7 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
     <Popup
       key="content"
       prefixCls={prefixCls}
-      id={id}
+      id={mergedId}
       bodyClassName={tooltipClassNames?.body}
       overlayInnerStyle={{ ...overlayInnerStyle, ...tooltipStyles?.body }}
     >
