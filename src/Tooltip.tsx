@@ -115,10 +115,6 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
   );
 
   const getChildren = () => {
-    if (!React.isValidElement(children)) {
-      return <span>{children}</span>;
-    }
-
     const originalProps = (children as React.ReactElement)?.props || {};
 
     const childProps = {
