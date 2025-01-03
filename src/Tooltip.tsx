@@ -115,7 +115,8 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
   );
 
   const getChildren = () => {
-    const originalProps = (children as React.ReactElement)?.props || {};
+    const child = React.Children.only(children);
+    const originalProps = child?.props || {};
 
     const childProps = {
       ...originalProps,
