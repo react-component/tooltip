@@ -279,5 +279,35 @@ describe('rc-tooltip', () => {
     expect(tooltipElement.style.backgroundColor).toBe('blue');
     expect(tooltipBodyElement.style.color).toBe('red');
   });
+
+  it('should wrap invalid children with span', () => {
+    const { container } = render(
+      // @ts-expect-error
+      <Tooltip overlay="tip">
+        plain text
+      </Tooltip>,
+    );
+
+    const span = container.querySelector('span');
+    expect(span).toBeTruthy();
+    expect(span.textContent).toBe('plain text');
+  });
+
+  it('should handle null and false children', () => {
+    const { container: container1 } = render(
+      <Tooltip overlay="tip">
+        {null}
+      </Tooltip>,
+    );
+    expect(container1.querySelector('span')).toBeTruthy();
+
+    const { container: container2 } = render(
+      <Tooltip overlay="tip">
+        {/* @ts-expect-error */}
+        {false}
+      </Tooltip>,
+    );
+    expect(container2.querySelector('span')).toBeTruthy();
+  });
 });
 
