@@ -11,7 +11,7 @@ if (typeof window !== 'undefined') {
     global.window.innerHeight = height || global.window.innerHeight;
     global.window.dispatchEvent(new Event('resize'));
   };
-  global.window.scrollTo = () => { };
+  global.window.scrollTo = () => {};
   // ref: https://github.com/ant-design/ant-design/issues/18774
   if (!window.matchMedia) {
     Object.defineProperty(global.window, 'matchMedia', {
