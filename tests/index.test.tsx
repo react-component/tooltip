@@ -279,5 +279,62 @@ describe('rc-tooltip', () => {
     expect(tooltipElement.style.backgroundColor).toBe('blue');
     expect(tooltipBodyElement.style.color).toBe('red');
   });
+
+  describe('children handling', () => {
+    it('should pass aria-describedby to child element when overlay exists', () => {
+      const { container } = render(
+        <Tooltip id="test-id" overlay="tooltip content">
+          <button>Click me</button>
+        </Tooltip>,
+      );
+
+      expect(container.querySelector('button')).toHaveAttribute('aria-describedby', 'test-id');
+    });
+
+    it('should not pass aria-describedby when overlay is empty', () => {
+      const { container } = render(
+        <Tooltip id="test-id" overlay={null}>
+          <button>Click me</button>
+        </Tooltip>,
+      );
+
+      expect(container.querySelector('button')).not.toHaveAttribute('aria-describedby');
+    });
+
+    it('should preserve original props of children', () => {
+      const onMouseEnter = jest.fn();
+
+      const { container } = render(
+        <Tooltip overlay="tip">
+          <button className="custom-btn" onMouseEnter={onMouseEnter}>
+            Click me
+          </button>
+        </Tooltip>,
+      );
+
+      const btn = container.querySelector('button');
+      expect(btn).toHaveClass('custom-btn');
+
+      // 触发原始事件处理器
+      fireEvent.mouseEnter(btn);
+      expect(onMouseEnter).toHaveBeenCalled();
+    });
+
+    it('should throw error when multiple children provided', () => {
+      const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => { });
+
+      expect(() => {
+        render(
+          // @ts-expect-error
+          <Tooltip overlay="tip" >
+            <button>First</button>
+            <button>Second</button>
+          </Tooltip>,
+        );
+      }).toThrow();
+
+      errorSpy.mockRestore();
+    });
+  });
 });
 
