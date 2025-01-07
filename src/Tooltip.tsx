@@ -1,11 +1,12 @@
 import type { ArrowType, TriggerProps, TriggerRef } from '@rc-component/trigger';
 import Trigger from '@rc-component/trigger';
 import type { ActionType, AlignType, AnimationType } from '@rc-component/trigger/lib/interface';
+import classNames from 'classnames';
 import * as React from 'react';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { placements } from './placements';
 import Popup from './Popup';
-import classNames from 'classnames';
+import useId from 'rc-util/lib/hooks/useId';
 
 export interface TooltipProps
   extends Pick<
@@ -60,7 +61,7 @@ export interface TooltipClassNames {
   body?: string;
 }
 
-export interface TooltipRef extends TriggerRef {}
+export interface TooltipRef extends TriggerRef { }
 
 const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
   const {
@@ -91,7 +92,9 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
     ...restProps
   } = props;
 
+  const mergedId = useId(id);
   const triggerRef = useRef<TriggerRef>(null);
+
   useImperativeHandle(ref, () => triggerRef.current);
 
   const extraProps: Partial<TooltipProps & TriggerProps> = { ...restProps };
@@ -103,13 +106,25 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
     <Popup
       key="content"
       prefixCls={prefixCls}
-      id={id}
+      id={mergedId}
       bodyClassName={tooltipClassNames?.body}
       overlayInnerStyle={{ ...overlayInnerStyle, ...tooltipStyles?.body }}
     >
       {overlay}
     </Popup>
   );
+
+  const getChildren = () => {
+    const child = React.Children.only(children);
+    const originalProps = child?.props || {};
+
+    const childProps = {
+      ...originalProps,
+      'aria-describedby': overlay ? mergedId : null,
+    };
+
+    return React.cloneElement(children, childProps);
+  };
 
   return (
     <Trigger
@@ -135,7 +150,7 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
       arrow={showArrow}
       {...extraProps}
     >
-      {children}
+      {getChildren()}
     </Trigger>
   );
 };
