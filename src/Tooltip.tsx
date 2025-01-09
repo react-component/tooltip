@@ -1,6 +1,6 @@
 import type { ArrowType, TriggerProps, TriggerRef } from '@rc-component/trigger';
 import Trigger from '@rc-component/trigger';
-import type { ActionType, AlignType, AnimationType } from '@rc-component/trigger/lib/interface';
+import type { ActionType, AlignType } from '@rc-component/trigger/lib/interface';
 import classNames from 'classnames';
 import * as React from 'react';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
@@ -25,10 +25,6 @@ export interface TooltipProps
   defaultVisible?: boolean;
   visible?: boolean;
   placement?: string;
-  /** @deprecated Use `motion` instead */
-  transitionName?: string;
-  /** @deprecated Use `motion` instead */
-  animation?: AnimationType;
   /** Config popup motion */
   motion?: TriggerProps['popupMotion'];
   onVisibleChange?: (visible: boolean) => void;
@@ -74,8 +70,6 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
     children,
     onVisibleChange,
     afterVisibleChange,
-    transitionName,
-    animation,
     motion,
     placement = 'right',
     align = {},
@@ -139,8 +133,6 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
       getPopupContainer={getTooltipContainer}
       onPopupVisibleChange={onVisibleChange}
       afterPopupVisibleChange={afterVisibleChange}
-      popupTransitionName={transitionName}
-      popupAnimation={animation}
       popupMotion={motion}
       defaultPopupVisible={defaultVisible}
       autoDestroy={destroyTooltipOnHide}

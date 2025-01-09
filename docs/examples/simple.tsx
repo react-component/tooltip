@@ -216,7 +216,7 @@ class Test extends Component<any, TestState> {
             align={{
               offset: [this.state.offsetX, this.state.offsetY],
             }}
-            transitionName={this.state.transitionName}
+            motion={{ motionName: this.state.transitionName }}
             overlayInnerStyle={state.overlayInnerStyle}
           >
             <div style={{ height: 100, width: 100, border: '1px solid red' }}>trigger</div>
