@@ -1,12 +1,12 @@
 import type { ArrowType, TriggerProps, TriggerRef } from '@rc-component/trigger';
 import Trigger from '@rc-component/trigger';
 import type { ActionType, AlignType } from '@rc-component/trigger/lib/interface';
+import useId from '@rc-component/util/lib/hooks/useId';
 import classNames from 'classnames';
 import * as React from 'react';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { placements } from './placements';
 import Popup from './Popup';
-import useId from 'rc-util/lib/hooks/useId';
 
 export interface TooltipProps
   extends Pick<
@@ -57,7 +57,7 @@ export interface TooltipClassNames {
   body?: string;
 }
 
-export interface TooltipRef extends TriggerRef { }
+export interface TooltipRef extends TriggerRef {}
 
 const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
   const {
