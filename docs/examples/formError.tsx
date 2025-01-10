@@ -34,7 +34,7 @@ class Test extends Component {
         <div style={{ marginTop: 100, marginLeft: 100, marginBottom: 100 }}>
           <Tooltip
             visible={this.state.visible}
-            animation="zoom"
+            motion={{ motionName: 'rc-tooltip-zoom' }}
             trigger={[]}
             overlayStyle={{ zIndex: 1000 }}
             overlay={<span>required!</span>}

@@ -7,9 +7,9 @@ function preventDefault(e) {
 }
 
 interface TestState {
-    visible: boolean;
-    destroy?: boolean;
-  }
+  visible: boolean;
+  destroy?: boolean;
+}
 
 class Test extends Component {
   state = {
@@ -37,7 +37,7 @@ class Test extends Component {
         <div style={{ marginTop: 300, marginLeft: 100, marginBottom: 100 }}>
           <Tooltip
             visible={this.state.visible}
-            animation="zoom"
+            motion={{ motionName: 'rc-tooltip-zoom' }}
             onVisibleChange={this.onVisibleChange}
             trigger="click"
             overlay={<span>I am a tooltip</span>}
