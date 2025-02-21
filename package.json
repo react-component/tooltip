@@ -35,19 +35,19 @@
     "lint": "eslint src/ --ext .tsx,.ts,.jsx,.js",
     "now-build": "npm run docs:build",
     "prepare": "dumi setup",
-    "prepublishOnly": "npm run compile && np --no-cleanup --yolo --no-publish",
+    "prepublishOnly": "npm run compile && rc-np",
     "postpublish": "npm run docs:build && npm run docs:deploy",
     "start": "dumi dev",
     "test": "rc-test"
   },
   "dependencies": {
-    "@babel/runtime": "^7.11.2",
     "@rc-component/father-plugin": "^2.0.1",
-    "@rc-component/trigger": "^2.0.0",
+    "@rc-component/trigger": "^3.0.0",
     "@rc-component/util": "^1.0.1",
     "classnames": "^2.3.1"
   },
   "devDependencies": {
+    "@rc-component/np": "^1.0.3",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.4.0",
     "@types/react": "^18.0.26",
@@ -60,7 +60,6 @@
     "father": "^4.0.0",
     "gh-pages": "^3.1.0",
     "less": "^4.1.1",
-    "np": "^7.1.0",
     "rc-test": "^7.0.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
