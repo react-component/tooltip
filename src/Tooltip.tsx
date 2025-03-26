@@ -27,8 +27,8 @@ export interface TooltipProps
   placement?: string;
   /** Config popup motion */
   motion?: TriggerProps['popupMotion'];
-  onVisibleChange?: (visible: boolean) => void;
-  afterVisibleChange?: (visible: boolean) => void;
+  onOpenChange?: (visible: boolean) => void;
+  afterOpenChange?: (visible: boolean) => void;
   overlay: (() => React.ReactNode) | React.ReactNode;
   /** @deprecated Please use `styles={{ root: {} }}` */
   overlayStyle?: React.CSSProperties;
@@ -68,8 +68,8 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
     overlayStyle,
     prefixCls = 'rc-tooltip',
     children,
-    onVisibleChange,
-    afterVisibleChange,
+    onOpenChange,
+    afterOpenChange,
     motion,
     placement = 'right',
     align = {},
@@ -131,8 +131,8 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
       ref={triggerRef}
       popupAlign={align}
       getPopupContainer={getTooltipContainer}
-      onPopupVisibleChange={onVisibleChange}
-      afterPopupVisibleChange={afterVisibleChange}
+      onOpenChange={onOpenChange}
+      afterOpenChange={afterOpenChange}
       popupMotion={motion}
       defaultPopupVisible={defaultVisible}
       autoDestroy={destroyTooltipOnHide}

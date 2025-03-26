@@ -42,3 +42,4 @@ package-lock.json
 .dumi/tmp-production
 
 bun.lockb
+.vscode/
