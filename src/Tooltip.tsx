@@ -23,12 +23,12 @@ export interface TooltipProps
   > {
   trigger?: ActionType | ActionType[];
   defaultVisible?: boolean;
-  visible?: boolean;
+  open?: boolean;
   placement?: string;
   /** Config popup motion */
   motion?: TriggerProps['popupMotion'];
-  onOpenChange?: (visible: boolean) => void;
-  afterOpenChange?: (visible: boolean) => void;
+  onOpenChange?: (open: boolean) => void;
+  afterOpenChange?: (open: boolean) => void;
   overlay: (() => React.ReactNode) | React.ReactNode;
   /** @deprecated Please use `styles={{ root: {} }}` */
   overlayStyle?: React.CSSProperties;
@@ -83,6 +83,7 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
     showArrow = true,
     classNames: tooltipClassNames,
     styles: tooltipStyles,
+    open,
     ...restProps
   } = props;
 
@@ -90,11 +91,6 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
   const triggerRef = useRef<TriggerRef>(null);
 
   useImperativeHandle(ref, () => triggerRef.current);
-
-  const extraProps: Partial<TooltipProps & TriggerProps> = { ...restProps };
-  if ('visible' in props) {
-    extraProps.popupVisible = props.visible;
-  }
 
   const getPopupElement = () => (
     <Popup
@@ -140,7 +136,8 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
       popupStyle={{ ...overlayStyle, ...tooltipStyles?.root }}
       mouseEnterDelay={mouseEnterDelay}
       arrow={showArrow}
-      {...extraProps}
+      popupVisible={open}
+      {...restProps}
     >
       {getChildren()}
     </Trigger>

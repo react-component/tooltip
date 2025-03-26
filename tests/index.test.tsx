@@ -222,7 +222,7 @@ describe('rc-tooltip', () => {
     const App = () => {
       const [open, setOpen] = React.useState(false);
       return (
-        <Tooltip overlay={<strong className="x-content">Tooltip content</strong>} visible={open}>
+        <Tooltip overlay={<strong className="x-content">Tooltip content</strong>} open={open}>
           <div
             className="target"
             onClick={() => {
@@ -263,7 +263,7 @@ describe('rc-tooltip', () => {
     };
 
     const { container } = render(
-      <Tooltip classNames={customClassNames} overlay={<div />} styles={customStyles} visible>
+      <Tooltip classNames={customClassNames} overlay={<div />} styles={customStyles} open>
         <button />
       </Tooltip>,
     );
