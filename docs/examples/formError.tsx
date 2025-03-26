@@ -4,13 +4,13 @@ import React, { Component } from 'react';
 import '../../assets/bootstrap.less';
 
 interface TestState {
-  visible: boolean;
+  open: boolean;
   destroy?: boolean;
 }
 
 class Test extends Component {
   state = {
-    visible: false,
+    open: false,
   } as TestState;
 
   handleDestroy = () => {
@@ -33,7 +33,7 @@ class Test extends Component {
       <div>
         <div style={{ marginTop: 100, marginLeft: 100, marginBottom: 100 }}>
           <Tooltip
-            visible={this.state.visible}
+            open={this.state.open}
             motion={{ motionName: 'rc-tooltip-zoom' }}
             trigger={[]}
             overlayStyle={{ zIndex: 1000 }}

@@ -88,7 +88,7 @@ class Test extends Component<any, TestState> {
     });
   };
 
-  onVisibleChange = (visible) => {
+  onOpenChange = (visible) => {
     console.log('tooltip', visible); // eslint-disable-line no-console
   };
 
@@ -211,7 +211,7 @@ class Test extends Component<any, TestState> {
             mouseLeaveDelay={0.1}
             destroyTooltipOnHide={this.state.destroyTooltipOnHide}
             trigger={Object.keys(this.state.trigger) as ActionType[]}
-            onVisibleChange={this.onVisibleChange}
+            onOpenChange={this.onOpenChange}
             overlay={<div style={{ height: 50, width: 50 }}>i am a tooltip</div>}
             align={{
               offset: [this.state.offsetX, this.state.offsetY],
