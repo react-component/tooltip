@@ -7,7 +7,7 @@ import '../../assets/bootstrap.less';
 import { placements } from '../../src/placements';
 
 interface TestState {
-  destroyTooltipOnHide: boolean;
+  destroyOnHidden: boolean;
   destroyTooltipOptions: { name: string; value: number }[];
   placement: string;
   transitionName: string;
@@ -19,7 +19,7 @@ interface TestState {
 
 class Test extends Component<any, TestState> {
   state = {
-    destroyTooltipOnHide: false,
+    destroyOnHidden: false,
     destroyTooltipOptions: [
       {
         name: "don't destroy",
@@ -95,7 +95,7 @@ class Test extends Component<any, TestState> {
   onDestroyChange = (e) => {
     const { value } = e.target;
     this.setState({
-      destroyTooltipOnHide: [false, { keepParent: false }, { keepParent: true }][value] as boolean,
+      destroyOnHidden: [false, { keepParent: false }, { keepParent: true }][value] as boolean,
     });
   };
 
@@ -137,7 +137,7 @@ class Test extends Component<any, TestState> {
           </label>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <label>
-            destroyTooltipOnHide:
+            destroyOnHidden:
             <select onChange={this.onDestroyChange}>
               {this.state.destroyTooltipOptions.map(({ name, value }) => (
                 <option key={value} value={value}>
@@ -209,7 +209,7 @@ class Test extends Component<any, TestState> {
             placement={this.state.placement}
             mouseEnterDelay={0}
             mouseLeaveDelay={0.1}
-            destroyTooltipOnHide={this.state.destroyTooltipOnHide}
+            destroyOnHidden={this.state.destroyOnHidden}
             trigger={Object.keys(this.state.trigger) as ActionType[]}
             onVisibleChange={this.onVisibleChange}
             overlay={<div style={{ height: 50, width: 50 }}>i am a tooltip</div>}

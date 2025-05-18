@@ -4,8 +4,8 @@ import '../../assets/bootstrap_white.less';
 
 const text = <span>Tooltip Text</span>;
 
-const Test = () => {
-  const scrollRef = React.useRef<HTMLDivElement>();
+const Test: React.FC = () => {
+  const scrollRef = React.useRef<HTMLDivElement>(null);
 
   return (
     <div style={{ padding: 10 }}>

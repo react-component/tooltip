@@ -4,6 +4,7 @@ import '../../assets/bootstrap.less';
 import Popup from '../../src/Popup';
 
 const text = <span>Tooltip Text</span>;
+
 const styles: React.CSSProperties = {
   display: 'table-cell',
   height: '60px',
@@ -14,11 +15,11 @@ const styles: React.CSSProperties = {
   border: '5px solid white',
 };
 
-const rowStyle = {
+const rowStyle: React.CSSProperties = {
   display: 'table-row',
 };
 
-const Test = () => (
+const Test: React.FC = () => (
   <>
     <div style={{ display: 'table', padding: 120 }}>
       <div style={rowStyle}>

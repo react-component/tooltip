@@ -19,10 +19,8 @@ class Test extends Component {
     });
   };
 
-  handleChange = (e) => {
-    this.setState({
-      visible: !e.target.value,
-    });
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ visible: !e.target.value });
   };
 
   render() {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Tooltip from 'rc-tooltip';
 import '../../assets/bootstrap.less';
 
-function preventDefault(e) {
+function preventDefault(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
   e.preventDefault();
 }
 
@@ -16,10 +16,8 @@ class Test extends Component {
     visible: false,
   } as TestState;
 
-  onVisibleChange = visible => {
-    this.setState({
-      visible,
-    });
+  onVisibleChange = (visible: boolean) => {
+    this.setState({ visible });
   };
 
   onDestroy = () => {

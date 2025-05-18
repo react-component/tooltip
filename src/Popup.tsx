@@ -11,9 +11,16 @@ export interface ContentProps {
   bodyClassName?: string;
 }
 
-export default function Popup(props: ContentProps) {
-  const { children, prefixCls, id, overlayInnerStyle: innerStyle, bodyClassName, className, style } =
-    props;
+const Popup: React.FC<ContentProps> = (props) => {
+  const {
+    children,
+    prefixCls,
+    id,
+    overlayInnerStyle: innerStyle,
+    bodyClassName,
+    className,
+    style,
+  } = props;
 
   return (
     <div className={classNames(`${prefixCls}-content`, className)} style={style}>
@@ -27,4 +34,6 @@ export default function Popup(props: ContentProps) {
       </div>
     </div>
   );
-}
+};
+
+export default Popup;

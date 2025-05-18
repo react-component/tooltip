@@ -93,7 +93,7 @@ describe('rc-tooltip', () => {
     });
   });
 
-  describe('destroyTooltipOnHide', () => {
+  describe('destroyOnHidden', () => {
     const destroyVerifyContent = async (wrapper: HTMLElement, content: string) => {
       fireEvent.click(wrapper.querySelector('.target'));
       await waitFakeTimers();
@@ -120,7 +120,7 @@ describe('rc-tooltip', () => {
     it('should only remove tooltip when value is true', async () => {
       const { container } = render(
         <Tooltip
-          destroyTooltipOnHide
+          destroyOnHidden
           trigger={['click']}
           placement="left"
           overlay={<strong className="x-content">Tooltip content</strong>}
@@ -154,7 +154,7 @@ describe('rc-tooltip', () => {
     it('should show tooltip arrow default', () => {
       const { container } = render(
         <Tooltip
-          destroyTooltipOnHide
+          destroyOnHidden
           trigger={['click']}
           placement="left"
           overlay={<strong className="x-content">Tooltip content</strong>}
@@ -168,7 +168,7 @@ describe('rc-tooltip', () => {
     it('should show tooltip arrow when showArrow is true', () => {
       const { container } = render(
         <Tooltip
-          destroyTooltipOnHide
+          destroyOnHidden
           trigger={['click']}
           placement="left"
           overlay={<strong className="x-content">Tooltip content</strong>}
@@ -183,7 +183,7 @@ describe('rc-tooltip', () => {
     it('should show tooltip arrow when showArrow is object', () => {
       const { container } = render(
         <Tooltip
-          destroyTooltipOnHide
+          destroyOnHidden
           trigger={['click']}
           placement="left"
           overlay={<strong className="x-content">Tooltip content</strong>}
@@ -201,7 +201,7 @@ describe('rc-tooltip', () => {
     it('should hide tooltip arrow when showArrow is false', () => {
       const { container } = render(
         <Tooltip
-          destroyTooltipOnHide
+          destroyOnHidden
           trigger={['click']}
           placement="left"
           overlay={<strong className="x-content">Tooltip content</strong>}
@@ -321,12 +321,12 @@ describe('rc-tooltip', () => {
     });
 
     it('should throw error when multiple children provided', () => {
-      const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => { });
+      const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
       expect(() => {
         render(
           // @ts-expect-error
-          <Tooltip overlay="tip" >
+          <Tooltip overlay="tip">
             <button>First</button>
             <button>Second</button>
           </Tooltip>,
@@ -337,4 +337,3 @@ describe('rc-tooltip', () => {
     });
   });
 });
-
