@@ -4,7 +4,7 @@ import type { ActionType, AlignType } from '@rc-component/trigger/lib/interface'
 import useId from '@rc-component/util/lib/hooks/useId';
 import classNames from 'classnames';
 import * as React from 'react';
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { useImperativeHandle, useRef } from 'react';
 import { placements } from './placements';
 import Popup from './Popup';
 
