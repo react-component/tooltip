@@ -1,4 +1,4 @@
-"use strict";(self.webpackChunk_rc_component_tooltip=self.webpackChunk_rc_component_tooltip||[]).push([[904],{31256:function(r,n,t){t.r(n),t.d(n,{demos:function(){return s}});var a=t(21739),o=t(63488),s={}},37905:function(r,n,t){var a;t.r(n),t.d(n,{demos:function(){return d}});var o=t(7557),s=t.n(o),_=t(41498),u=t.n(_),l=t(21739),g=t(68876),h=t(80563),i=t(18126),d={"docs-demo-arrow-content-demo-arrowcontent":{component:l.memo(l.lazy(function(){return t.e(433).then(t.bind(t,89320))})),asset:{type:"BLOCK",id:"docs-demo-arrow-content-demo-arrowcontent",refAtomIds:[],dependencies:{"index.tsx":{type:"FILE",value:t(16545).Z},react:{type:"NPM",value:"18.3.1"},"@rc-component/tooltip":{type:"NPM",value:"1.1.0"},"../../assets/bootstrap_white.less":{type:"FILE",value:t(52969).Z}},entry:"index.tsx"},context:{"../../assets/bootstrap_white.less":i,react:a||(a=t.t(l,2)),"rc-tooltip":h,"/Users/jilin/projects/antd/rc-tooltip/assets/bootstrap_white.less":i},renderOpts:{compile:function(){var c=u()(s()().mark(function f(){var p,m=arguments;return s()().wrap(function(e){for(;;)switch(e.prev=e.next){case 0:return e.next=2,t.e(106).then(t.bind(t,79106));case 2:return e.abrupt("return",(p=e.sent).default.apply(p,m));case 3:case"end":return e.stop()}},f)}));function v(){return c.apply(this,arguments)}return v}()}}}},77958:function(r,n,t){var a;t.r(n),t.d(n,{demos:function(){return d}});var o=t(7557),s=t.n(o),_=t(41498),u=t.n(_),l=t(21739),g=t(76391),h=t(80563),i=t(63927),d={"docs-demo-form-error-demo-formerror":{component:l.memo(l.lazy(function(){return t.e(433).then(t.bind(t,86712))})),asset:{type:"BLOCK",id:"docs-demo-form-error-demo-formerror",refAtomIds:[],dependencies:{"index.tsx":{type:"FILE",value:t(80905).Z},"@rc-component/tooltip":{type:"NPM",value:"1.1.0"},react:{type:"NPM",value:"18.3.1"},"../../assets/bootstrap.less":{type:"FILE",value:t(26460).Z}},entry:"index.tsx"},context:{"../../assets/bootstrap.less":i,"rc-tooltip":h,react:a||(a=t.t(l,2)),"/Users/jilin/projects/antd/rc-tooltip/assets/bootstrap.less":i},renderOpts:{compile:function(){var c=u()(s()().mark(function f(){var p,m=arguments;return s()().wrap(function(e){for(;;)switch(e.prev=e.next){case 0:return e.next=2,t.e(106).then(t.bind(t,79106));case 2:return e.abrupt("return",(p=e.sent).default.apply(p,m));case 3:case"end":return e.stop()}},f)}));function v(){return c.apply(this,arguments)}return v}()}}}},20913:function(r,n,t){var a;t.r(n),t.d(n,{demos:function(){return d}});var o=t(7557),s=t.n(o),_=t(41498),u=t.n(_),l=t(21739),g=t(9138),h=t(80563),i=t(63927),d={"docs-demo-on-visible-change-demo-onvisiblechange":{component:l.memo(l.lazy(function(){return t.e(433).then(t.bind(t,81715))})),asset:{type:"BLOCK",id:"docs-demo-on-visible-change-demo-onvisiblechange",refAtomIds:[],dependencies:{"index.tsx":{type:"FILE",value:t(39632).Z},react:{type:"NPM",value:"18.3.1"},"@rc-component/tooltip":{type:"NPM",value:"1.1.0"},"../../assets/bootstrap.less":{type:"FILE",value:t(26460).Z}},entry:"index.tsx"},context:{"../../assets/bootstrap.less":i,react:a||(a=t.t(l,2)),"rc-tooltip":h,"/Users/jilin/projects/antd/rc-tooltip/assets/bootstrap.less":i},renderOpts:{compile:function(){var c=u()(s()().mark(function f(){var p,m=arguments;return s()().wrap(function(e){for(;;)switch(e.prev=e.next){case 0:return e.next=2,t.e(106).then(t.bind(t,79106));case 2:return e.abrupt("return",(p=e.sent).default.apply(p,m));case 3:case"end":return e.stop()}},f)}));function v(){return c.apply(this,arguments)}return v}()}}}},21693:function(r,n,t){var a;t.r(n),t.d(n,{demos:function(){return f}});var o=t(7557),s=t.n(o),_=t(41498),u=t.n(_),l=t(21739),g=t(31930),h=t(80563),i=t(65583),d=t(63927),c=t(92310),v=t.n(c),f={"docs-demo-placement-demo-placement":{component:l.memo(l.lazy(function(){return t.e(433).then(t.bind(t,61844))})),asset:{type:"BLOCK",id:"docs-demo-placement-demo-placement",refAtomIds:[],dependencies:{"index.tsx":{type:"FILE",value:t(23359).Z},react:{type:"NPM",value:"18.3.1"},"@rc-component/tooltip":{type:"NPM",value:"1.1.0"},"../../src/Popup.tsx":{type:"FILE",value:t(69489).Z},"../../assets/bootstrap.less":{type:"FILE",value:t(26460).Z},classnames:{type:"NPM",value:"2.5.1"}},entry:"index.tsx"},context:{"../../src/Popup.tsx":i,"../../assets/bootstrap.less":d,react:a||(a=t.t(l,2)),"rc-tooltip":h,"/Users/jilin/projects/antd/rc-tooltip/src/Popup.tsx":i,"/Users/jilin/projects/antd/rc-tooltip/assets/bootstrap.less":d,classnames:c},renderOpts:{compile:function(){var p=u()(s()().mark(function I(){var e,y=arguments;return s()().wrap(function(b){for(;;)switch(b.prev=b.next){case 0:return b.next=2,t.e(106).then(t.bind(t,79106));case 2:return b.abrupt("return",(e=b.sent).default.apply(e,y));case 3:case"end":return b.stop()}},I)}));function m(){return p.apply(this,arguments)}return m}()}}}},43821:function(r,n,t){var a;t.r(n),t.d(n,{demos:function(){return d}});var o=t(7557),s=t.n(o),_=t(41498),u=t.n(_),l=t(21739),g=t(57021),h=t(80563),i=t(18126),d={"docs-demo-point-demo-point":{component:l.memo(l.lazy(function(){return t.e(433).then(t.bind(t,5572))})),asset:{type:"BLOCK",id:"docs-demo-point-demo-point",refAtomIds:[],dependencies:{"index.tsx":{type:"FILE",value:t(22977).Z},"@rc-component/tooltip":{type:"NPM",value:"1.1.0"},react:{type:"NPM",value:"18.3.1"},"../../assets/bootstrap_white.less":{type:"FILE",value:t(52969).Z}},entry:"index.tsx"},context:{"../../assets/bootstrap_white.less":i,"rc-tooltip":h,react:a||(a=t.t(l,2)),"/Users/jilin/projects/antd/rc-tooltip/assets/bootstrap_white.less":i},renderOpts:{compile:function(){var c=u()(s()().mark(function f(){var p,m=arguments;return s()().wrap(function(e){for(;;)switch(e.prev=e.next){case 0:return e.next=2,t.e(106).then(t.bind(t,79106));case 2:return e.abrupt("return",(p=e.sent).default.apply(p,m));case 3:case"end":return e.stop()}},f)}));function v(){return c.apply(this,arguments)}return v}()}}}},61773:function(r,n,t){var a;t.r(n),t.d(n,{demos:function(){return d}});var o=t(7557),s=t.n(o),_=t(41498),u=t.n(_),l=t(21739),g=t(23587),h=t(80563),i=t(18126),d={"docs-demo-show-arrow-demo-showarrow":{component:l.memo(l.lazy(function(){return t.e(433).then(t.bind(t,77596))})),asset:{type:"BLOCK",id:"docs-demo-show-arrow-demo-showarrow",refAtomIds:[],dependencies:{"index.tsx":{type:"FILE",value:t(51221).Z},react:{type:"NPM",value:"18.3.1"},"@rc-component/tooltip":{type:"NPM",value:"1.1.0"},"../../assets/bootstrap_white.less":{type:"FILE",value:t(52969).Z}},entry:"index.tsx"},context:{"../../assets/bootstrap_white.less":i,react:a||(a=t.t(l,2)),"rc-tooltip":h,"/Users/jilin/projects/antd/rc-tooltip/assets/bootstrap_white.less":i},renderOpts:{compile:function(){var c=u()(s()().mark(function f(){var p,m=arguments;return s()().wrap(function(e){for(;;)switch(e.prev=e.next){case 0:return e.next=2,t.e(106).then(t.bind(t,79106));case 2:return e.abrupt("return",(p=e.sent).default.apply(p,m));case 3:case"end":return e.stop()}},f)}));function v(){return c.apply(this,arguments)}return v}()}}}},84431:function(r,n,t){var a;t.r(n),t.d(n,{demos:function(){return c}});var o=t(7557),s=t.n(o),_=t(41498),u=t.n(_),l=t(21739),g=t(62795),h=t(80563),i=t(45936),d=t(63927),c={"docs-demo-simple-demo-simple":{component:l.memo(l.lazy(function(){return t.e(433).then(t.bind(t,88338))})),asset:{type:"BLOCK",id:"docs-demo-simple-demo-simple",refAtomIds:[],dependencies:{"index.tsx":{type:"FILE",value:t(99818).Z},"@rc-component/tooltip":{type:"NPM",value:"1.1.0"},react:{type:"NPM",value:"18.3.1"},"../../src/placements.tsx":{type:"FILE",value:t(38918).Z},"../../assets/bootstrap.less":{type:"FILE",value:t(26460).Z}},entry:"index.tsx"},context:{"../../src/placements.tsx":i,"../../assets/bootstrap.less":d,"rc-tooltip":h,react:a||(a=t.t(l,2)),"/Users/jilin/projects/antd/rc-tooltip/src/placements.tsx":i,"/Users/jilin/projects/antd/rc-tooltip/assets/bootstrap.less":d},renderOpts:{compile:function(){var v=u()(s()().mark(function p(){var m,I=arguments;return s()().wrap(function(y){for(;;)switch(y.prev=y.next){case 0:return y.next=2,t.e(106).then(t.bind(t,79106));case 2:return y.abrupt("return",(m=y.sent).default.apply(m,I));case 3:case"end":return y.stop()}},p)}));function f(){return v.apply(this,arguments)}return f}()}}}},81059:function(r,n,t){t.r(n),t.d(n,{demos:function(){return s}});var a=t(21739),o=t(8210),s={}},63927:function(r,n,t){t.r(n)},18126:function(r,n,t){t.r(n)},89244:function(r,n,t){t.r(n),t.d(n,{texts:function(){return o}});var a=t(63488);const o=[{value:"Support React 16.",paraId:0,tocIndex:1},{value:"Add id for ARIA.",paraId:1,tocIndex:2},{value:"Fix babel-runtime module not found",paraId:2,tocIndex:3},{value:"Fix ",paraId:3,tocIndex:4},{value:"createClass",paraId:3,tocIndex:4},{value:" and ",paraId:3,tocIndex:4},{value:"PropTypes",paraId:3,tocIndex:4},{value:" warning.",paraId:3,tocIndex:4},{value:"allow overlay prop as function type",paraId:4,tocIndex:5},{value:"support arrowContent prop",paraId:5,tocIndex:6},{value:"support destroyTooltipOnHide prop",paraId:6,tocIndex:7},{value:"only support react 0.14",paraId:7,tocIndex:8},{value:"add align prop to allow set offset and targetOffset when placement's type is String",paraId:7,tocIndex:8},{value:"auto adjust align if current tooltip is not visible",paraId:8,tocIndex:9},{value:"support 'topLeft', 'topRight', 'bottomLeft', 'bottomRight' for placement",paraId:9,tocIndex:10},{value:"add getTooltipContainer prop",paraId:10,tocIndex:11},{value:"add overlayClassName prop #16",paraId:11,tocIndex:12},{value:"split delay into mouseEnterDelay and mouseLeaveDelay #15",paraId:11,tocIndex:12},{value:"remove renderOverlayToBody prop. defaults to true",paraId:12,tocIndex:13},{value:"use rc-animate & rc-align",paraId:13,tocIndex:14},{value:"revert to document click and fix focus/click conflict ",paraId:14,tocIndex:15},{value:"#13",paraId:14,tocIndex:15},{value:"new",paraId:15,tocIndex:16},{value:" ",paraId:15,tocIndex:16},{value:"#7",paraId:15,tocIndex:16},{value:" support delay prop",paraId:15,tocIndex:16},{value:"use mask instead of document click",paraId:16,tocIndex:17},{value:"support overlayStyle props",paraId:17,tocIndex:18},{value:"support wrapStyle props",paraId:17,tocIndex:18},{value:"support click document to hide",paraId:18,tocIndex:19},{value:"support animation props",paraId:18,tocIndex:19},{value:"support renderPopupToBody props",paraId:18,tocIndex:19},{value:"add defaultVisible and onVisibleChange",paraId:19,tocIndex:20}]},54908:function(r,n,t){t.r(n),t.d(n,{texts:function(){return o}});var a=t(68876);const o=[]},59333:function(r,n,t){t.r(n),t.d(n,{texts:function(){return o}});var a=t(76391);const o=[]},37917:function(r,n,t){t.r(n),t.d(n,{texts:function(){return o}});var a=t(9138);const o=[]},44787:function(r,n,t){t.r(n),t.d(n,{texts:function(){return o}});var a=t(31930);const o=[]},99183:function(r,n,t){t.r(n),t.d(n,{texts:function(){return o}});var a=t(57021);const o=[]},73845:function(r,n,t){t.r(n),t.d(n,{texts:function(){return o}});var a=t(23587);const o=[]},9037:function(r,n,t){t.r(n),t.d(n,{texts:function(){return o}});var a=t(62795);const o=[]},99944:function(r,n,t){t.r(n),t.d(n,{texts:function(){return o}});var a=t(8210);const o=[{value:"React Tooltip",paraId:0,tocIndex:0},{value:"IE / Edge",paraId:1,tocIndex:2},{value:"Firefox",paraId:1,tocIndex:2},{value:"Chrome",paraId:1,tocIndex:2},{value:"Safari",paraId:1,tocIndex:2},{value:"Opera",paraId:1,tocIndex:2},{value:"IE 8 + \u2714",paraId:1,tocIndex:2},{value:"Firefox 31.0+ \u2714",paraId:1,tocIndex:2},{value:"Chrome 31.0+ \u2714",paraId:1,tocIndex:2},{value:"Safari 7.0+ \u2714",paraId:1,tocIndex:2},{value:"Opera 30.0+ \u2714",paraId:1,tocIndex:2},{value:`var Tooltip = require('rc-tooltip');
+"use strict";(self.webpackChunk_rc_component_tooltip=self.webpackChunk_rc_component_tooltip||[]).push([[904],{36750:function(a,e,t){t.r(e),t.d(e,{demos:function(){return p}});var n=t(67294),p={}},50568:function(a,e,t){var n;t.r(e),t.d(e,{demos:function(){return d}});var p=t(15009),l=t.n(p),u=t(99289),f=t.n(u),r=t(67294),h=t(35239),s=t(20441),d={"docs-demo-arrow-content-demo-arrowcontent":{component:r.memo(r.lazy(function(){return t.e(433).then(t.bind(t,80574))})),asset:{type:"BLOCK",id:"docs-demo-arrow-content-demo-arrowcontent",refAtomIds:[],dependencies:{"index.tsx":{type:"FILE",value:t(91652).Z},react:{type:"NPM",value:"19.1.0"},"@rc-component/tooltip":{type:"NPM",value:"1.2.0"},"../../assets/bootstrap_white.less":{type:"FILE",value:t(51023).Z}},entry:"index.tsx"},context:{"../../assets/bootstrap_white.less":s,react:n||(n=t.t(r,2)),"rc-tooltip":h,"/Users/jilin/projects/antd/rc-tooltip/assets/bootstrap_white.less":s},renderOpts:{compile:function(){var c=f()(l()().mark(function v(){var i,m=arguments;return l()().wrap(function(o){for(;;)switch(o.prev=o.next){case 0:return o.next=2,t.e(19).then(t.bind(t,4019));case 2:return o.abrupt("return",(i=o.sent).default.apply(i,m));case 3:case"end":return o.stop()}},v)}));function _(){return c.apply(this,arguments)}return _}()}}}},1126:function(a,e,t){var n;t.r(e),t.d(e,{demos:function(){return d}});var p=t(15009),l=t.n(p),u=t(99289),f=t.n(u),r=t(67294),h=t(35239),s=t(47114),d={"docs-demo-form-error-demo-formerror":{component:r.memo(r.lazy(function(){return t.e(433).then(t.bind(t,24076))})),asset:{type:"BLOCK",id:"docs-demo-form-error-demo-formerror",refAtomIds:[],dependencies:{"index.tsx":{type:"FILE",value:t(97816).Z},"@rc-component/tooltip":{type:"NPM",value:"1.2.0"},react:{type:"NPM",value:"19.1.0"},"../../assets/bootstrap.less":{type:"FILE",value:t(74177).Z}},entry:"index.tsx"},context:{"../../assets/bootstrap.less":s,"rc-tooltip":h,react:n||(n=t.t(r,2)),"/Users/jilin/projects/antd/rc-tooltip/assets/bootstrap.less":s},renderOpts:{compile:function(){var c=f()(l()().mark(function v(){var i,m=arguments;return l()().wrap(function(o){for(;;)switch(o.prev=o.next){case 0:return o.next=2,t.e(19).then(t.bind(t,4019));case 2:return o.abrupt("return",(i=o.sent).default.apply(i,m));case 3:case"end":return o.stop()}},v)}));function _(){return c.apply(this,arguments)}return _}()}}}},13955:function(a,e,t){var n;t.r(e),t.d(e,{demos:function(){return d}});var p=t(15009),l=t.n(p),u=t(99289),f=t.n(u),r=t(67294),h=t(35239),s=t(47114),d={"docs-demo-on-visible-change-demo-onvisiblechange":{component:r.memo(r.lazy(function(){return t.e(433).then(t.bind(t,72333))})),asset:{type:"BLOCK",id:"docs-demo-on-visible-change-demo-onvisiblechange",refAtomIds:[],dependencies:{"index.tsx":{type:"FILE",value:t(50803).Z},react:{type:"NPM",value:"19.1.0"},"@rc-component/tooltip":{type:"NPM",value:"1.2.0"},"../../assets/bootstrap.less":{type:"FILE",value:t(74177).Z}},entry:"index.tsx"},context:{"../../assets/bootstrap.less":s,react:n||(n=t.t(r,2)),"rc-tooltip":h,"/Users/jilin/projects/antd/rc-tooltip/assets/bootstrap.less":s},renderOpts:{compile:function(){var c=f()(l()().mark(function v(){var i,m=arguments;return l()().wrap(function(o){for(;;)switch(o.prev=o.next){case 0:return o.next=2,t.e(19).then(t.bind(t,4019));case 2:return o.abrupt("return",(i=o.sent).default.apply(i,m));case 3:case"end":return o.stop()}},v)}));function _(){return c.apply(this,arguments)}return _}()}}}},42075:function(a,e,t){var n;t.r(e),t.d(e,{demos:function(){return v}});var p=t(15009),l=t.n(p),u=t(99289),f=t.n(u),r=t(67294),h=t(35239),s=t(47114),d=t(81950),c=t(93967),_=t.n(c),v={"docs-demo-placement-demo-placement":{component:r.memo(r.lazy(function(){return t.e(433).then(t.bind(t,61977))})),asset:{type:"BLOCK",id:"docs-demo-placement-demo-placement",refAtomIds:[],dependencies:{"index.tsx":{type:"FILE",value:t(45759).Z},react:{type:"NPM",value:"19.1.0"},"@rc-component/tooltip":{type:"NPM",value:"1.2.0"},"../../assets/bootstrap.less":{type:"FILE",value:t(74177).Z},"../../src/Popup.tsx":{type:"FILE",value:t(99417).Z},classnames:{type:"NPM",value:"2.5.1"}},entry:"index.tsx"},context:{"../../assets/bootstrap.less":s,"../../src/Popup.tsx":d,react:n||(n=t.t(r,2)),"rc-tooltip":h,"/Users/jilin/projects/antd/rc-tooltip/assets/bootstrap.less":s,"/Users/jilin/projects/antd/rc-tooltip/src/Popup.tsx":d,classnames:c},renderOpts:{compile:function(){var i=f()(l()().mark(function I(){var o,y=arguments;return l()().wrap(function(g){for(;;)switch(g.prev=g.next){case 0:return g.next=2,t.e(19).then(t.bind(t,4019));case 2:return g.abrupt("return",(o=g.sent).default.apply(o,y));case 3:case"end":return g.stop()}},I)}));function m(){return i.apply(this,arguments)}return m}()}}}},31362:function(a,e,t){var n;t.r(e),t.d(e,{demos:function(){return d}});var p=t(15009),l=t.n(p),u=t(99289),f=t.n(u),r=t(67294),h=t(35239),s=t(20441),d={"docs-demo-point-demo-point":{component:r.memo(r.lazy(function(){return t.e(433).then(t.bind(t,92940))})),asset:{type:"BLOCK",id:"docs-demo-point-demo-point",refAtomIds:[],dependencies:{"index.tsx":{type:"FILE",value:t(14107).Z},"@rc-component/tooltip":{type:"NPM",value:"1.2.0"},react:{type:"NPM",value:"19.1.0"},"../../assets/bootstrap_white.less":{type:"FILE",value:t(51023).Z}},entry:"index.tsx"},context:{"../../assets/bootstrap_white.less":s,"rc-tooltip":h,react:n||(n=t.t(r,2)),"/Users/jilin/projects/antd/rc-tooltip/assets/bootstrap_white.less":s},renderOpts:{compile:function(){var c=f()(l()().mark(function v(){var i,m=arguments;return l()().wrap(function(o){for(;;)switch(o.prev=o.next){case 0:return o.next=2,t.e(19).then(t.bind(t,4019));case 2:return o.abrupt("return",(i=o.sent).default.apply(i,m));case 3:case"end":return o.stop()}},v)}));function _(){return c.apply(this,arguments)}return _}()}}}},60399:function(a,e,t){var n;t.r(e),t.d(e,{demos:function(){return d}});var p=t(15009),l=t.n(p),u=t(99289),f=t.n(u),r=t(67294),h=t(35239),s=t(20441),d={"docs-demo-show-arrow-demo-showarrow":{component:r.memo(r.lazy(function(){return t.e(433).then(t.bind(t,79165))})),asset:{type:"BLOCK",id:"docs-demo-show-arrow-demo-showarrow",refAtomIds:[],dependencies:{"index.tsx":{type:"FILE",value:t(43391).Z},react:{type:"NPM",value:"19.1.0"},"@rc-component/tooltip":{type:"NPM",value:"1.2.0"},"../../assets/bootstrap_white.less":{type:"FILE",value:t(51023).Z}},entry:"index.tsx"},context:{"../../assets/bootstrap_white.less":s,react:n||(n=t.t(r,2)),"rc-tooltip":h,"/Users/jilin/projects/antd/rc-tooltip/assets/bootstrap_white.less":s},renderOpts:{compile:function(){var c=f()(l()().mark(function v(){var i,m=arguments;return l()().wrap(function(o){for(;;)switch(o.prev=o.next){case 0:return o.next=2,t.e(19).then(t.bind(t,4019));case 2:return o.abrupt("return",(i=o.sent).default.apply(i,m));case 3:case"end":return o.stop()}},v)}));function _(){return c.apply(this,arguments)}return _}()}}}},19128:function(a,e,t){var n;t.r(e),t.d(e,{demos:function(){return c}});var p=t(15009),l=t.n(p),u=t(99289),f=t.n(u),r=t(67294),h=t(35239),s=t(46617),d=t(47114),c={"docs-demo-simple-demo-simple":{component:r.memo(r.lazy(function(){return t.e(433).then(t.bind(t,23527))})),asset:{type:"BLOCK",id:"docs-demo-simple-demo-simple",refAtomIds:[],dependencies:{"index.tsx":{type:"FILE",value:t(25133).Z},"@rc-component/tooltip":{type:"NPM",value:"1.2.0"},react:{type:"NPM",value:"19.1.0"},"../../src/placements.tsx":{type:"FILE",value:t(67130).Z},"../../assets/bootstrap.less":{type:"FILE",value:t(74177).Z}},entry:"index.tsx"},context:{"../../src/placements.tsx":s,"../../assets/bootstrap.less":d,"rc-tooltip":h,react:n||(n=t.t(r,2)),"/Users/jilin/projects/antd/rc-tooltip/src/placements.tsx":s,"/Users/jilin/projects/antd/rc-tooltip/assets/bootstrap.less":d},renderOpts:{compile:function(){var _=f()(l()().mark(function i(){var m,I=arguments;return l()().wrap(function(y){for(;;)switch(y.prev=y.next){case 0:return y.next=2,t.e(19).then(t.bind(t,4019));case 2:return y.abrupt("return",(m=y.sent).default.apply(m,I));case 3:case"end":return y.stop()}},i)}));function v(){return _.apply(this,arguments)}return v}()}}}},11171:function(a,e,t){t.r(e),t.d(e,{demos:function(){return p}});var n=t(67294),p={}},47114:function(a,e,t){t.r(e)},20441:function(a,e,t){t.r(e)},40717:function(a,e,t){t.r(e),t.d(e,{texts:function(){return n}});const n=[{value:"Support React 16.",paraId:0,tocIndex:1},{value:"Add id for ARIA.",paraId:1,tocIndex:2},{value:"Fix babel-runtime module not found",paraId:2,tocIndex:3},{value:"Fix ",paraId:3,tocIndex:4},{value:"createClass",paraId:3,tocIndex:4},{value:" and ",paraId:3,tocIndex:4},{value:"PropTypes",paraId:3,tocIndex:4},{value:" warning.",paraId:3,tocIndex:4},{value:"allow overlay prop as function type",paraId:4,tocIndex:5},{value:"support arrowContent prop",paraId:5,tocIndex:6},{value:"support destroyTooltipOnHide prop",paraId:6,tocIndex:7},{value:"only support react 0.14",paraId:7,tocIndex:8},{value:"add align prop to allow set offset and targetOffset when placement's type is String",paraId:7,tocIndex:8},{value:"auto adjust align if current tooltip is not visible",paraId:8,tocIndex:9},{value:"support 'topLeft', 'topRight', 'bottomLeft', 'bottomRight' for placement",paraId:9,tocIndex:10},{value:"add getTooltipContainer prop",paraId:10,tocIndex:11},{value:"add overlayClassName prop #16",paraId:11,tocIndex:12},{value:"split delay into mouseEnterDelay and mouseLeaveDelay #15",paraId:11,tocIndex:12},{value:"remove renderOverlayToBody prop. defaults to true",paraId:12,tocIndex:13},{value:"use rc-animate & rc-align",paraId:13,tocIndex:14},{value:"revert to document click and fix focus/click conflict ",paraId:14,tocIndex:15},{value:"#13",paraId:14,tocIndex:15},{value:"new",paraId:15,tocIndex:16},{value:" ",paraId:15,tocIndex:16},{value:"#7",paraId:15,tocIndex:16},{value:" support delay prop",paraId:15,tocIndex:16},{value:"use mask instead of document click",paraId:16,tocIndex:17},{value:"support overlayStyle props",paraId:17,tocIndex:18},{value:"support wrapStyle props",paraId:17,tocIndex:18},{value:"support click document to hide",paraId:18,tocIndex:19},{value:"support animation props",paraId:18,tocIndex:19},{value:"support renderPopupToBody props",paraId:18,tocIndex:19},{value:"add defaultVisible and onVisibleChange",paraId:19,tocIndex:20}]},13830:function(a,e,t){t.r(e),t.d(e,{texts:function(){return n}});const n=[]},97390:function(a,e,t){t.r(e),t.d(e,{texts:function(){return n}});const n=[]},30485:function(a,e,t){t.r(e),t.d(e,{texts:function(){return n}});const n=[]},22288:function(a,e,t){t.r(e),t.d(e,{texts:function(){return n}});const n=[]},13134:function(a,e,t){t.r(e),t.d(e,{texts:function(){return n}});const n=[]},11920:function(a,e,t){t.r(e),t.d(e,{texts:function(){return n}});const n=[]},49726:function(a,e,t){t.r(e),t.d(e,{texts:function(){return n}});const n=[]},51446:function(a,e,t){t.r(e),t.d(e,{texts:function(){return n}});const n=[{value:"React Tooltip",paraId:0,tocIndex:0},{value:"IE / Edge",paraId:1,tocIndex:2},{value:"Firefox",paraId:1,tocIndex:2},{value:"Chrome",paraId:1,tocIndex:2},{value:"Safari",paraId:1,tocIndex:2},{value:"Opera",paraId:1,tocIndex:2},{value:"IE 8 + \u2714",paraId:1,tocIndex:2},{value:"Firefox 31.0+ \u2714",paraId:1,tocIndex:2},{value:"Chrome 31.0+ \u2714",paraId:1,tocIndex:2},{value:"Safari 7.0+ \u2714",paraId:1,tocIndex:2},{value:"Opera 30.0+ \u2714",paraId:1,tocIndex:2},{value:`var Tooltip = require('rc-tooltip');
 var React = require('react');
 var ReactDOM = require('react-dom');
 
@@ -13,7 +13,7 @@ ReactDOM.render(
   container,
 );
 `,paraId:2,tocIndex:4},{value:"npm start",paraId:3,tocIndex:5},{value:` and then go to
-`,paraId:3,tocIndex:5},{value:"http://localhost:8000/demo",paraId:3,tocIndex:5},{value:"Online demo: ",paraId:4,tocIndex:5},{value:"https://react-component.github.io/tooltip/demo",paraId:4,tocIndex:5},{value:"name",paraId:5,tocIndex:7},{value:"type",paraId:5,tocIndex:7},{value:"default",paraId:5,tocIndex:7},{value:"description",paraId:5,tocIndex:7},{value:"trigger",paraId:5,tocIndex:7},{value:"string | string[]",paraId:5,tocIndex:7},{value:"'hover'",paraId:5,tocIndex:7},{value:"which actions cause tooltip shown. enum of 'hover','click','focus'",paraId:5,tocIndex:7},{value:"visible",paraId:5,tocIndex:7},{value:"boolean",paraId:5,tocIndex:7},{value:"false",paraId:5,tocIndex:7},{value:"whether tooltip is visible",paraId:5,tocIndex:7},{value:"defaultVisible",paraId:5,tocIndex:7},{value:"boolean",paraId:5,tocIndex:7},{value:"false",paraId:5,tocIndex:7},{value:"whether tooltip is visible by default",paraId:5,tocIndex:7},{value:"placement",paraId:5,tocIndex:7},{value:"string",paraId:5,tocIndex:7},{value:"'right'",paraId:5,tocIndex:7},{value:"tooltip placement. enum of 'top','left','right','bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight', 'leftTop', 'leftBottom', 'rightTop', 'rightBottom'",paraId:5,tocIndex:7},{value:"motion",paraId:5,tocIndex:7},{value:"object",paraId:5,tocIndex:7},{value:"Config popup motion. Please ref demo for example",paraId:5,tocIndex:7},{value:"onVisibleChange",paraId:5,tocIndex:7},{value:"(visible: boolean) => void;",paraId:5,tocIndex:7},{value:"Callback when visible change",paraId:5,tocIndex:7},{value:"afterVisibleChange",paraId:5,tocIndex:7},{value:"(visible: boolean) => void;",paraId:5,tocIndex:7},{value:"Callback after visible change",paraId:5,tocIndex:7},{value:"overlay",paraId:5,tocIndex:7},{value:"ReactNode | () => ReactNode",paraId:5,tocIndex:7},{value:"tooltip overlay content",paraId:5,tocIndex:7},{value:"overlayStyle",paraId:5,tocIndex:7},{value:"object",paraId:5,tocIndex:7},{value:"deprecated, Please use ",paraId:5,tocIndex:7},{value:"styles={{ root: {} }}",paraId:5,tocIndex:7},{value:"overlayClassName",paraId:5,tocIndex:7},{value:"string",paraId:5,tocIndex:7},{value:"deprecated, Please use ",paraId:5,tocIndex:7},{value:"classNames={{ root: {} }}",paraId:5,tocIndex:7},{value:"prefixCls",paraId:5,tocIndex:7},{value:"string",paraId:5,tocIndex:7},{value:"'rc-tooltip'",paraId:5,tocIndex:7},{value:"prefix class name of tooltip",paraId:5,tocIndex:7},{value:"mouseEnterDelay",paraId:5,tocIndex:7},{value:"number",paraId:5,tocIndex:7},{value:"0",paraId:5,tocIndex:7},{value:"delay time (in second) before tooltip shows when mouse enter",paraId:5,tocIndex:7},{value:"mouseLeaveDelay",paraId:5,tocIndex:7},{value:"number",paraId:5,tocIndex:7},{value:"0.1",paraId:5,tocIndex:7},{value:"delay time (in second) before tooltip hides when mouse leave",paraId:5,tocIndex:7},{value:"getTooltipContainer",paraId:5,tocIndex:7},{value:"(triggerNode: HTMLElement) => HTMLElement",paraId:5,tocIndex:7},{value:"() => document.body",paraId:5,tocIndex:7},{value:"get container of tooltip, default to body",paraId:5,tocIndex:7},{value:"destroyTooltipOnHide",paraId:5,tocIndex:7},{value:"boolean",paraId:5,tocIndex:7},{value:"false",paraId:5,tocIndex:7},{value:"destroy tooltip when it is hidden",paraId:5,tocIndex:7},{value:"align",paraId:5,tocIndex:7},{value:"object",paraId:5,tocIndex:7},{value:"align config of tooltip. Please ref demo for usage example",paraId:5,tocIndex:7},{value:"showArrow",paraId:5,tocIndex:7},{value:"boolean | object",paraId:5,tocIndex:7},{value:"false",paraId:5,tocIndex:7},{value:"whether to show arrow of tooltip",paraId:5,tocIndex:7},{value:"zIndex",paraId:5,tocIndex:7},{value:"number",paraId:5,tocIndex:7},{value:"config popup tooltip zIndex",paraId:5,tocIndex:7},{value:"classNames",paraId:5,tocIndex:7},{value:"classNames?: { root?: string; body?: string;};",paraId:5,tocIndex:7},{value:"Semantic DOM class",paraId:5,tocIndex:7},{value:"styles",paraId:5,tocIndex:7},{value:"styles?: {root?: React.CSSProperties;body?: React.CSSProperties;};",paraId:5,tocIndex:7},{value:"Semantic DOM styles",paraId:5,tocIndex:7},{value:"Tooltip",paraId:6,tocIndex:8},{value:" requires a child node that accepts an ",paraId:6,tocIndex:8},{value:"onMouseEnter",paraId:6,tocIndex:8},{value:", ",paraId:6,tocIndex:8},{value:"onMouseLeave",paraId:6,tocIndex:8},{value:", ",paraId:6,tocIndex:8},{value:"onFocus",paraId:6,tocIndex:8},{value:", ",paraId:6,tocIndex:8},{value:"onClick",paraId:6,tocIndex:8},{value:" event. This means the child node must be a built-in component like ",paraId:6,tocIndex:8},{value:"div",paraId:6,tocIndex:8},{value:" or ",paraId:6,tocIndex:8},{value:"span",paraId:6,tocIndex:8},{value:", or a custom component that passes its props to its built-in component child.",paraId:6,tocIndex:8},{value:"For accessibility purpose you can use the ",paraId:7,tocIndex:9},{value:"id",paraId:7,tocIndex:9},{value:" prop to link your tooltip with another element. For example attaching it to an input element:",paraId:7,tocIndex:9},{value:`<Tooltip
+`,paraId:3,tocIndex:5},{value:"http://localhost:8000/demo",paraId:3,tocIndex:5},{value:"Online demo: ",paraId:4,tocIndex:5},{value:"https://react-component.github.io/tooltip/demo",paraId:4,tocIndex:5},{value:"name",paraId:5,tocIndex:7},{value:"type",paraId:5,tocIndex:7},{value:"default",paraId:5,tocIndex:7},{value:"description",paraId:5,tocIndex:7},{value:"trigger",paraId:5,tocIndex:7},{value:"string | string[]",paraId:5,tocIndex:7},{value:"'hover'",paraId:5,tocIndex:7},{value:"which actions cause tooltip shown. enum of 'hover','click','focus'",paraId:5,tocIndex:7},{value:"visible",paraId:5,tocIndex:7},{value:"boolean",paraId:5,tocIndex:7},{value:"false",paraId:5,tocIndex:7},{value:"whether tooltip is visible",paraId:5,tocIndex:7},{value:"defaultVisible",paraId:5,tocIndex:7},{value:"boolean",paraId:5,tocIndex:7},{value:"false",paraId:5,tocIndex:7},{value:"whether tooltip is visible by default",paraId:5,tocIndex:7},{value:"placement",paraId:5,tocIndex:7},{value:"string",paraId:5,tocIndex:7},{value:"'right'",paraId:5,tocIndex:7},{value:"tooltip placement. enum of 'top','left','right','bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight', 'leftTop', 'leftBottom', 'rightTop', 'rightBottom'",paraId:5,tocIndex:7},{value:"motion",paraId:5,tocIndex:7},{value:"object",paraId:5,tocIndex:7},{value:"Config popup motion. Please ref demo for example",paraId:5,tocIndex:7},{value:"onVisibleChange",paraId:5,tocIndex:7},{value:"(visible: boolean) => void;",paraId:5,tocIndex:7},{value:"Callback when visible change",paraId:5,tocIndex:7},{value:"afterVisibleChange",paraId:5,tocIndex:7},{value:"(visible: boolean) => void;",paraId:5,tocIndex:7},{value:"Callback after visible change",paraId:5,tocIndex:7},{value:"overlay",paraId:5,tocIndex:7},{value:"ReactNode | () => ReactNode",paraId:5,tocIndex:7},{value:"tooltip overlay content",paraId:5,tocIndex:7},{value:"overlayStyle",paraId:5,tocIndex:7},{value:"object",paraId:5,tocIndex:7},{value:"deprecated, Please use ",paraId:5,tocIndex:7},{value:"styles={{ root: {} }}",paraId:5,tocIndex:7},{value:"overlayClassName",paraId:5,tocIndex:7},{value:"string",paraId:5,tocIndex:7},{value:"deprecated, Please use ",paraId:5,tocIndex:7},{value:"classNames={{ root: {} }}",paraId:5,tocIndex:7},{value:"prefixCls",paraId:5,tocIndex:7},{value:"string",paraId:5,tocIndex:7},{value:"'rc-tooltip'",paraId:5,tocIndex:7},{value:"prefix class name of tooltip",paraId:5,tocIndex:7},{value:"mouseEnterDelay",paraId:5,tocIndex:7},{value:"number",paraId:5,tocIndex:7},{value:"0",paraId:5,tocIndex:7},{value:"delay time (in second) before tooltip shows when mouse enter",paraId:5,tocIndex:7},{value:"mouseLeaveDelay",paraId:5,tocIndex:7},{value:"number",paraId:5,tocIndex:7},{value:"0.1",paraId:5,tocIndex:7},{value:"delay time (in second) before tooltip hides when mouse leave",paraId:5,tocIndex:7},{value:"getTooltipContainer",paraId:5,tocIndex:7},{value:"(triggerNode: HTMLElement) => HTMLElement",paraId:5,tocIndex:7},{value:"() => document.body",paraId:5,tocIndex:7},{value:"get container of tooltip, default to body",paraId:5,tocIndex:7},{value:"destroyOnHidden",paraId:5,tocIndex:7},{value:"boolean",paraId:5,tocIndex:7},{value:"false",paraId:5,tocIndex:7},{value:"destroy tooltip when it is hidden",paraId:5,tocIndex:7},{value:"align",paraId:5,tocIndex:7},{value:"object",paraId:5,tocIndex:7},{value:"align config of tooltip. Please ref demo for usage example",paraId:5,tocIndex:7},{value:"showArrow",paraId:5,tocIndex:7},{value:"boolean | object",paraId:5,tocIndex:7},{value:"false",paraId:5,tocIndex:7},{value:"whether to show arrow of tooltip",paraId:5,tocIndex:7},{value:"zIndex",paraId:5,tocIndex:7},{value:"number",paraId:5,tocIndex:7},{value:"config popup tooltip zIndex",paraId:5,tocIndex:7},{value:"classNames",paraId:5,tocIndex:7},{value:"classNames?: { root?: string; body?: string;};",paraId:5,tocIndex:7},{value:"Semantic DOM class",paraId:5,tocIndex:7},{value:"styles",paraId:5,tocIndex:7},{value:"styles?: {root?: React.CSSProperties;body?: React.CSSProperties;};",paraId:5,tocIndex:7},{value:"Semantic DOM styles",paraId:5,tocIndex:7},{value:"Tooltip",paraId:6,tocIndex:8},{value:" requires a child node that accepts an ",paraId:6,tocIndex:8},{value:"onMouseEnter",paraId:6,tocIndex:8},{value:", ",paraId:6,tocIndex:8},{value:"onMouseLeave",paraId:6,tocIndex:8},{value:", ",paraId:6,tocIndex:8},{value:"onFocus",paraId:6,tocIndex:8},{value:", ",paraId:6,tocIndex:8},{value:"onClick",paraId:6,tocIndex:8},{value:" event. This means the child node must be a built-in component like ",paraId:6,tocIndex:8},{value:"div",paraId:6,tocIndex:8},{value:" or ",paraId:6,tocIndex:8},{value:"span",paraId:6,tocIndex:8},{value:", or a custom component that passes its props to its built-in component child.",paraId:6,tocIndex:8},{value:"For accessibility purpose you can use the ",paraId:7,tocIndex:9},{value:"id",paraId:7,tocIndex:9},{value:" prop to link your tooltip with another element. For example attaching it to an input element:",paraId:7,tocIndex:9},{value:`<Tooltip
     ...
     id={this.props.name}>
     <input type="text"
@@ -25,7 +25,7 @@ npm start
 `,paraId:11,tocIndex:10},{value:`npm test
 npm run chrome-test
 `,paraId:12,tocIndex:11},{value:`npm run coverage
-`,paraId:13,tocIndex:12},{value:"rc-tooltip",paraId:14,tocIndex:13},{value:" is released under the MIT license.",paraId:14,tocIndex:13}]},26460:function(r,n){n.Z=`@import "./boostrap/anim.less";
+`,paraId:13,tocIndex:12},{value:"rc-tooltip",paraId:14,tocIndex:13},{value:" is released under the MIT license.",paraId:14,tocIndex:13}]},74177:function(a,e){e.Z=`@import "./boostrap/anim.less";
 
 @tooltip-prefix-cls: rc-tooltip;
 
@@ -189,7 +189,7 @@ npm run chrome-test
   }
 }
 
-`},52969:function(r,n){n.Z=`@import "./boostrap/anim.less";
+`},51023:function(a,e){e.Z=`@import "./boostrap/anim.less";
 
 @tooltip-prefix-cls: rc-tooltip;
 
@@ -383,12 +383,13 @@ npm run chrome-test
     right: 15%;
   }
 }
-`},16545:function(r,n){n.Z=`import React, { CSSProperties } from 'react';
+`},91652:function(a,e){e.Z=`import React, { CSSProperties } from 'react';
 import Tooltip from 'rc-tooltip';
 import '../../assets/bootstrap_white.less';
 
 const text = <span>Tooltip Text</span>;
-const styles = {
+
+const styles: React.CSSProperties = {
   display: 'table-cell',
   height: '60px',
   width: '80px',
@@ -396,13 +397,13 @@ const styles = {
   background: '#f6f6f6',
   verticalAlign: 'middle',
   border: '5px solid white',
-} as CSSProperties;
+};
 
-const rowStyle = {
+const rowStyle: React.CSSProperties = {
   display: 'table-row',
 };
 
-const Test = () => (
+const Test: React.FC = () => (
   <div style={{ display: 'table', padding: 120 }}>
     <div style={rowStyle}>
       <Tooltip
@@ -522,7 +523,7 @@ const Test = () => (
 );
 
 export default Test;
-`},80905:function(r,n){n.Z=`import Tooltip from 'rc-tooltip';
+`},97816:function(a,e){e.Z=`import Tooltip from 'rc-tooltip';
 import React, { Component } from 'react';
 
 import '../../assets/bootstrap.less';
@@ -543,10 +544,8 @@ class Test extends Component {
     });
   };
 
-  handleChange = (e) => {
-    this.setState({
-      visible: !e.target.value,
-    });
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ visible: !e.target.value });
   };
 
   render() {
@@ -575,11 +574,11 @@ class Test extends Component {
 }
 
 export default Test;
-`},39632:function(r,n){n.Z=`import React, { Component } from 'react';
+`},50803:function(a,e){e.Z=`import React, { Component } from 'react';
 import Tooltip from 'rc-tooltip';
 import '../../assets/bootstrap.less';
 
-function preventDefault(e) {
+function preventDefault(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
   e.preventDefault();
 }
 
@@ -593,10 +592,8 @@ class Test extends Component {
     visible: false,
   } as TestState;
 
-  onVisibleChange = visible => {
-    this.setState({
-      visible,
-    });
+  onVisibleChange = (visible: boolean) => {
+    this.setState({ visible });
   };
 
   onDestroy = () => {
@@ -633,12 +630,13 @@ class Test extends Component {
 }
 
 export default Test;
-`},23359:function(r,n){n.Z=`import React from 'react';
+`},45759:function(a,e){e.Z=`import React from 'react';
 import Tooltip from 'rc-tooltip';
 import '../../assets/bootstrap.less';
 import Popup from '../../src/Popup';
 
 const text = <span>Tooltip Text</span>;
+
 const styles: React.CSSProperties = {
   display: 'table-cell',
   height: '60px',
@@ -649,11 +647,11 @@ const styles: React.CSSProperties = {
   border: '5px solid white',
 };
 
-const rowStyle = {
+const rowStyle: React.CSSProperties = {
   display: 'table-row',
 };
 
-const Test = () => (
+const Test: React.FC = () => (
   <>
     <div style={{ display: 'table', padding: 120 }}>
       <div style={rowStyle}>
@@ -738,14 +736,14 @@ const Test = () => (
 );
 
 export default Test;
-`},22977:function(r,n){n.Z=`import Tooltip from 'rc-tooltip';
+`},14107:function(a,e){e.Z=`import Tooltip from 'rc-tooltip';
 import React from 'react';
 import '../../assets/bootstrap_white.less';
 
 const text = <span>Tooltip Text</span>;
 
-const Test = () => {
-  const scrollRef = React.useRef<HTMLDivElement>();
+const Test: React.FC = () => {
+  const scrollRef = React.useRef<HTMLDivElement>(null);
 
   return (
     <div style={{ padding: 10 }}>
@@ -794,13 +792,13 @@ const Test = () => {
 };
 
 export default Test;
-`},51221:function(r,n){n.Z=`import type { CSSProperties } from 'react';
-import React from 'react';
+`},43391:function(a,e){e.Z=`import React from 'react';
 import Tooltip from 'rc-tooltip';
 import '../../assets/bootstrap_white.less';
 
 const text = <span>Tooltip Text</span>;
-const styles = {
+
+const styles: React.CSSProperties = {
   display: 'table-cell',
   height: '60px',
   width: '80px',
@@ -808,13 +806,13 @@ const styles = {
   background: '#f6f6f6',
   verticalAlign: 'middle',
   border: '5px solid white',
-} as CSSProperties;
+};
 
-const rowStyle = {
+const rowStyle: React.CSSProperties = {
   display: 'table-row',
 };
 
-const Test = () => (
+const Test: React.FC = () => (
   <div style={{ display: 'table', padding: 120 }}>
     <div style={rowStyle}>
       <Tooltip placement="left" overlay={text} showArrow={false}>
@@ -886,7 +884,7 @@ const Test = () => (
 );
 
 export default Test;
-`},99818:function(r,n){n.Z=`import type { ActionType } from '@rc-component/trigger';
+`},25133:function(a,e){e.Z=`import type { ActionType } from '@rc-component/trigger';
 import type { OffsetType } from '@rc-component/trigger/lib/interface';
 import Tooltip from 'rc-tooltip';
 import type { CSSProperties } from 'react';
@@ -895,7 +893,7 @@ import '../../assets/bootstrap.less';
 import { placements } from '../../src/placements';
 
 interface TestState {
-  destroyTooltipOnHide: boolean;
+  destroyOnHidden: boolean;
   destroyTooltipOptions: { name: string; value: number }[];
   placement: string;
   transitionName: string;
@@ -907,7 +905,7 @@ interface TestState {
 
 class Test extends Component<any, TestState> {
   state = {
-    destroyTooltipOnHide: false,
+    destroyOnHidden: false,
     destroyTooltipOptions: [
       {
         name: "don't destroy",
@@ -983,7 +981,7 @@ class Test extends Component<any, TestState> {
   onDestroyChange = (e) => {
     const { value } = e.target;
     this.setState({
-      destroyTooltipOnHide: [false, { keepParent: false }, { keepParent: true }][value] as boolean,
+      destroyOnHidden: [false, { keepParent: false }, { keepParent: true }][value] as boolean,
     });
   };
 
@@ -1025,7 +1023,7 @@ class Test extends Component<any, TestState> {
           </label>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <label>
-            destroyTooltipOnHide:
+            destroyOnHidden:
             <select onChange={this.onDestroyChange}>
               {this.state.destroyTooltipOptions.map(({ name, value }) => (
                 <option key={value} value={value}>
@@ -1097,7 +1095,7 @@ class Test extends Component<any, TestState> {
             placement={this.state.placement}
             mouseEnterDelay={0}
             mouseLeaveDelay={0.1}
-            destroyTooltipOnHide={this.state.destroyTooltipOnHide}
+            destroyOnHidden={this.state.destroyOnHidden}
             trigger={Object.keys(this.state.trigger) as ActionType[]}
             onVisibleChange={this.onVisibleChange}
             overlay={<div style={{ height: 50, width: 50 }}>i am a tooltip</div>}
@@ -1116,7 +1114,7 @@ class Test extends Component<any, TestState> {
 }
 
 export default Test;
-`},69489:function(r,n){n.Z=`import classNames from 'classnames';
+`},99417:function(a,e){e.Z=`import classNames from 'classnames';
 import * as React from 'react';
 
 export interface ContentProps {
@@ -1129,9 +1127,16 @@ export interface ContentProps {
   bodyClassName?: string;
 }
 
-export default function Popup(props: ContentProps) {
-  const { children, prefixCls, id, overlayInnerStyle: innerStyle, bodyClassName, className, style } =
-    props;
+const Popup: React.FC<ContentProps> = (props) => {
+  const {
+    children,
+    prefixCls,
+    id,
+    overlayInnerStyle: innerStyle,
+    bodyClassName,
+    className,
+    style,
+  } = props;
 
   return (
     <div className={classNames(\`\${prefixCls}-content\`, className)} style={style}>
@@ -1145,8 +1150,10 @@ export default function Popup(props: ContentProps) {
       </div>
     </div>
   );
-}
-`},38918:function(r,n){n.Z=`import type { BuildInPlacements } from '@rc-component/trigger';
+};
+
+export default Popup;
+`},67130:function(a,e){e.Z=`import type { BuildInPlacements } from '@rc-component/trigger';
 
 const autoAdjustOverflowTopBottom = {
   shiftX: 64,
