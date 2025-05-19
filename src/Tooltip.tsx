@@ -4,7 +4,7 @@ import type { ActionType, AlignType } from '@rc-component/trigger/lib/interface'
 import useId from '@rc-component/util/lib/hooks/useId';
 import classNames from 'classnames';
 import * as React from 'react';
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { useImperativeHandle, useRef } from 'react';
 import { placements } from './placements';
 import Popup from './Popup';
 
@@ -35,7 +35,7 @@ export interface TooltipProps
   /** @deprecated Please use `classNames={{ root: {} }}` */
   overlayClassName?: string;
   getTooltipContainer?: (node: HTMLElement) => HTMLElement;
-  destroyTooltipOnHide?: boolean;
+  destroyOnHidden?: boolean;
   align?: AlignType;
   showArrow?: boolean | ArrowType;
   arrowContent?: React.ReactNode;
@@ -59,7 +59,7 @@ export interface TooltipClassNames {
 
 export interface TooltipRef extends TriggerRef {}
 
-const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
+const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
   const {
     overlayClassName,
     trigger = ['hover'],
@@ -73,7 +73,7 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
     motion,
     placement = 'right',
     align = {},
-    destroyTooltipOnHide = false,
+    destroyOnHidden = false,
     defaultVisible,
     getTooltipContainer,
     overlayInnerStyle,
@@ -92,6 +92,7 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
   useImperativeHandle(ref, () => triggerRef.current);
 
   const extraProps: Partial<TooltipProps & TriggerProps> = { ...restProps };
+
   if ('visible' in props) {
     extraProps.popupVisible = props.visible;
   }
@@ -111,13 +112,11 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
   const getChildren = () => {
     const child = React.Children.only(children);
     const originalProps = child?.props || {};
-
     const childProps = {
       ...originalProps,
       'aria-describedby': overlay ? mergedId : null,
     };
-
-    return React.cloneElement(children, childProps);
+    return React.cloneElement<any>(children, childProps) as any;
   };
 
   return (
@@ -131,11 +130,11 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
       ref={triggerRef}
       popupAlign={align}
       getPopupContainer={getTooltipContainer}
-      onPopupVisibleChange={onVisibleChange}
-      afterPopupVisibleChange={afterVisibleChange}
+      onOpenChange={onVisibleChange}
+      afterOpenChange={afterVisibleChange}
       popupMotion={motion}
       defaultPopupVisible={defaultVisible}
-      autoDestroy={destroyTooltipOnHide}
+      autoDestroy={destroyOnHidden}
       mouseLeaveDelay={mouseLeaveDelay}
       popupStyle={{ ...overlayStyle, ...tooltipStyles?.root }}
       mouseEnterDelay={mouseEnterDelay}
@@ -145,6 +144,6 @@ const Tooltip = (props: TooltipProps, ref: React.Ref<TooltipRef>) => {
       {getChildren()}
     </Trigger>
   );
-};
+});
 
-export default forwardRef(Tooltip);
+export default Tooltip;

@@ -1,10 +1,10 @@
-import type { CSSProperties } from 'react';
 import React from 'react';
 import Tooltip from 'rc-tooltip';
 import '../../assets/bootstrap_white.less';
 
 const text = <span>Tooltip Text</span>;
-const styles = {
+
+const styles: React.CSSProperties = {
   display: 'table-cell',
   height: '60px',
   width: '80px',
@@ -12,13 +12,13 @@ const styles = {
   background: '#f6f6f6',
   verticalAlign: 'middle',
   border: '5px solid white',
-} as CSSProperties;
+};
 
-const rowStyle = {
+const rowStyle: React.CSSProperties = {
   display: 'table-row',
 };
 
-const Test = () => (
+const Test: React.FC = () => (
   <div style={{ display: 'table', padding: 120 }}>
     <div style={rowStyle}>
       <Tooltip placement="left" overlay={text} showArrow={false}>
