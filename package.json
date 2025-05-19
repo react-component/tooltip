@@ -31,7 +31,7 @@
   "scripts": {
     "compile": "father build && lessc assets/bootstrap.less assets/bootstrap.css && lessc assets/bootstrap_white.less assets/bootstrap_white.css",
     "docs:build": "dumi build",
-    "docs:deploy": "gh-pages -d dist",
+    "docs:deploy": "npm run docs:build && gh-pages -d dist",
     "lint": "eslint src/ --ext .tsx,.ts,.jsx,.js",
     "now-build": "npm run docs:build",
     "prepare": "dumi setup",
@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@rc-component/np": "^1.0.3",
-    "@testing-library/react": "^14.0.0",
+    "@testing-library/react": "^16.3.0",
     "@types/jest": "^29.4.0",
     "@types/node": "^22.15.18",
     "@types/react": "^19.1.4",
