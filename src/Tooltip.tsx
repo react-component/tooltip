@@ -45,6 +45,11 @@ export interface TooltipProps
   zIndex?: number;
   styles?: TooltipStyles;
   classNames?: TooltipClassNames;
+  /**
+   * Configures Tooltip to reuse the background for transition usage.
+   * This is an experimental API and may not be stable.
+   */
+  unique?: TriggerProps['unique'];
 }
 
 export interface TooltipStyles {
