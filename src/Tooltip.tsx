@@ -46,8 +46,8 @@ export interface TooltipProps
   styles?: TooltipStyles;
   classNames?: TooltipClassNames;
   /**
-   * Config Tooltip can reuse of the bg for transition usage.
-   * This is a experimental API, may be not stable.
+   * Configures Tooltip to reuse the background for transition usage.
+   * This is an experimental API and may not be stable.
    */
   unique?: TriggerProps['unique'];
 }
