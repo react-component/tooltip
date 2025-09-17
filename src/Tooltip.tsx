@@ -45,6 +45,11 @@ export interface TooltipProps
   zIndex?: number;
   styles?: TooltipStyles;
   classNames?: TooltipClassNames;
+  /**
+   * Config Tooltip can reuse of the bg for transition usage.
+   * This is a experimental API, may be not stable.
+   */
+  unique?: TriggerProps['unique'];
 }
 
 export interface TooltipStyles {
