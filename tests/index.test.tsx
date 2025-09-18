@@ -368,11 +368,9 @@ describe('rc-tooltip', () => {
       const tooltipArrowElement = container.querySelector('.rc-tooltip-arrow') as HTMLElement;
 
       // Verify styles
-      expect(tooltipElement.style.backgroundColor).toBe('blue');
-      expect(tooltipElement.style.zIndex).toBe('1000');
-      expect(tooltipBodyElement.style.color).toBe('red');
-      expect(tooltipBodyElement.style.fontSize).toBe('14px');
-      expect(tooltipArrowElement.style.borderColor).toBe('green');
+      expect(tooltipElement).toHaveStyle({ backgroundColor: 'blue', zIndex: '1000' });
+      expect(tooltipBodyElement).toHaveStyle({ color: 'red', fontSize: '14px' });
+      expect(tooltipArrowElement).toHaveStyle({ borderColor: 'green' });
     });
 
     it('should apply both classNames and styles simultaneously', () => {
@@ -406,11 +404,11 @@ describe('rc-tooltip', () => {
 
       // Verify that classNames and styles work simultaneously
       expect(tooltipElement).toHaveClass('custom-root');
-      expect(tooltipElement.style.backgroundColor).toBe('blue');
+      expect(tooltipElement).toHaveStyle({ backgroundColor: 'blue' });
       expect(tooltipBodyElement).toHaveClass('custom-body');
-      expect(tooltipBodyElement.style.color).toBe('red');
+      expect(tooltipBodyElement).toHaveStyle({ color: 'red' });
       expect(tooltipArrowElement).toHaveClass('custom-arrow');
-      expect(tooltipArrowElement.style.borderColor).toBe('green');
+      expect(tooltipArrowElement).toHaveStyle({ borderColor: 'green' });
     });
 
     it('should work with partial classNames and styles', () => {
@@ -439,7 +437,7 @@ describe('rc-tooltip', () => {
       const tooltipArrowElement = container.querySelector('.rc-tooltip-arrow') as HTMLElement;
 
       // Verify partial configuration takes effect
-      expect(tooltipElement.style.backgroundColor).toBe('blue');
+      expect(tooltipElement).toHaveStyle({ backgroundColor: 'blue' });
       expect(tooltipBodyElement).toHaveClass('custom-body');
       
       // Verify that unconfigured elements don't have custom class names or styles
@@ -481,9 +479,9 @@ describe('rc-tooltip', () => {
       
       // Other styles still take effect
       expect(tooltipElement).toHaveClass('custom-root');
-      expect(tooltipElement.style.backgroundColor).toBe('blue');
+      expect(tooltipElement).toHaveStyle({ backgroundColor: 'blue' });
       expect(tooltipBodyElement).toHaveClass('custom-body');
-      expect(tooltipBodyElement.style.color).toBe('red');
+      expect(tooltipBodyElement).toHaveStyle({ color: 'red' });
     });
   });
 
