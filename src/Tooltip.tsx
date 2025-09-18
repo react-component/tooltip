@@ -107,9 +107,10 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
     return {
       ...arrowConfig,
       className: cls(arrowConfig.className, classNames?.arrow),
-      content: arrowConfig.content || arrowContent,
+      style: { ...arrowConfig.style, ...styles?.arrow },
+      content: arrowConfig.content ?? arrowContent,
     };
-  }, [showArrow, classNames?.arrow, arrowContent]);
+  }, [showArrow, classNames?.arrow, styles?.arrow, arrowContent]);
 
   // ======================== Children ========================
   const getChildren = () => {

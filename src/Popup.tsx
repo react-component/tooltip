@@ -17,7 +17,7 @@ const Popup: React.FC<ContentProps> = (props) => {
     <div
       id={id}
       className={cls(`${prefixCls}-body`, classNames?.body)}
-      style={styles.body}
+      style={styles?.body}
       role="tooltip"
     >
       {typeof children === 'function' ? children() : children}
