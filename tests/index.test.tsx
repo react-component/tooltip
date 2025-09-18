@@ -339,7 +339,7 @@ describe('rc-tooltip', () => {
       const tooltipBodyElement = container.querySelector('.rc-tooltip-body') as HTMLElement;
       const tooltipArrowElement = container.querySelector('.rc-tooltip-arrow') as HTMLElement;
 
-      // 验证 classNames
+      // Verify classNames
       expect(tooltipElement).toHaveClass('custom-root');
       expect(tooltipBodyElement).toHaveClass('custom-body');
       expect(tooltipArrowElement).toHaveClass('custom-arrow');
@@ -367,7 +367,7 @@ describe('rc-tooltip', () => {
       const tooltipBodyElement = container.querySelector('.rc-tooltip-body') as HTMLElement;
       const tooltipArrowElement = container.querySelector('.rc-tooltip-arrow') as HTMLElement;
 
-      // 验证 styles
+      // Verify styles
       expect(tooltipElement.style.backgroundColor).toBe('blue');
       expect(tooltipElement.style.zIndex).toBe('1000');
       expect(tooltipBodyElement.style.color).toBe('red');
@@ -404,7 +404,7 @@ describe('rc-tooltip', () => {
       const tooltipBodyElement = container.querySelector('.rc-tooltip-body') as HTMLElement;
       const tooltipArrowElement = container.querySelector('.rc-tooltip-arrow') as HTMLElement;
 
-      // 验证 classNames 和 styles 同时生效
+      // Verify that classNames and styles work simultaneously
       expect(tooltipElement).toHaveClass('custom-root');
       expect(tooltipElement.style.backgroundColor).toBe('blue');
       expect(tooltipBodyElement).toHaveClass('custom-body');
@@ -438,11 +438,11 @@ describe('rc-tooltip', () => {
       const tooltipBodyElement = container.querySelector('.rc-tooltip-body') as HTMLElement;
       const tooltipArrowElement = container.querySelector('.rc-tooltip-arrow') as HTMLElement;
 
-      // 验证部分配置生效
+      // Verify partial configuration takes effect
       expect(tooltipElement.style.backgroundColor).toBe('blue');
       expect(tooltipBodyElement).toHaveClass('custom-body');
       
-      // 验证未配置的不会有自定义类名或样式
+      // Verify that unconfigured elements don't have custom class names or styles
       expect(tooltipElement).not.toHaveClass('custom-root');
       expect(tooltipArrowElement).not.toHaveClass('custom-arrow');
     });
@@ -476,10 +476,10 @@ describe('rc-tooltip', () => {
       const tooltipBodyElement = container.querySelector('.rc-tooltip-body') as HTMLElement;
       const tooltipArrowElement = container.querySelector('.rc-tooltip-arrow');
 
-      // 验证没有箭头时
+      // Verify when arrow is not shown
       expect(tooltipArrowElement).toBeFalsy();
       
-      // 其他样式仍然生效
+      // Other styles still take effect
       expect(tooltipElement).toHaveClass('custom-root');
       expect(tooltipElement.style.backgroundColor).toBe('blue');
       expect(tooltipBodyElement).toHaveClass('custom-body');
@@ -522,7 +522,7 @@ describe('rc-tooltip', () => {
       const btn = container.querySelector('button');
       expect(btn).toHaveClass('custom-btn');
 
-      // 触发原始事件处理器
+      // Trigger original event handler
       fireEvent.mouseEnter(btn);
       expect(onMouseEnter).toHaveBeenCalled();
     });
