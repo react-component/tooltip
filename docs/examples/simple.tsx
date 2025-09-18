@@ -217,7 +217,7 @@ class Test extends Component<any, TestState> {
               offset: [this.state.offsetX, this.state.offsetY],
             }}
             motion={{ motionName: this.state.transitionName }}
-            overlayInnerStyle={state.overlayInnerStyle}
+            styles={{ body: state.overlayInnerStyle }}
           >
             <div style={{ height: 100, width: 100, border: '1px solid red' }}>trigger</div>
           </Tooltip>

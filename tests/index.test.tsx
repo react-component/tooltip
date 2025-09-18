@@ -1,6 +1,6 @@
 import { act, fireEvent, render } from '@testing-library/react';
 import React from 'react';
-import Tooltip, { TooltipRef } from '../src';
+import Tooltip, { type TooltipRef } from '../src';
 
 const verifyContent = (wrapper: HTMLElement, content: string) => {
   expect(wrapper.querySelector('.x-content').textContent).toBe(content);
@@ -59,23 +59,7 @@ describe('rc-tooltip', () => {
       verifyContent(container, 'Tooltip content');
     });
 
-    // https://github.com/ant-design/ant-design/pull/23155
-    it('using style inner style', () => {
-      const { container } = render(
-        <Tooltip
-          trigger={['click']}
-          placement="left"
-          overlay={() => <strong className="x-content">Tooltip content</strong>}
-          overlayInnerStyle={{ background: 'red' }}
-        >
-          <div className="target">Click this</div>
-        </Tooltip>,
-      );
-      fireEvent.click(container.querySelector('.target'));
-      expect(
-        (container.querySelector('.rc-tooltip-inner') as HTMLElement).style.background,
-      ).toEqual('red');
-    });
+
 
     it('access of ref', () => {
       const domRef = React.createRef<TooltipRef>();
@@ -216,6 +200,87 @@ describe('rc-tooltip', () => {
       );
       expect(container.querySelector('.rc-tooltip-arrow')).toBeFalsy();
     });
+
+    it('should merge arrow className from showArrow and classNames.arrow', () => {
+      const { container } = render(
+        <Tooltip
+          trigger={['click']}
+          placement="left"
+          overlay={<strong className="x-content">Tooltip content</strong>}
+          showArrow={{
+            className: 'from-showArrow',
+          }}
+          classNames={{
+            arrow: 'from-classNames',
+          }}
+          visible
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+
+      const arrowElement = container.querySelector('.rc-tooltip-arrow');
+      expect(arrowElement).toHaveClass('from-showArrow');
+      expect(arrowElement).toHaveClass('from-classNames');
+    });
+
+    it('should use arrowContent from showArrow object', () => {
+      const { container } = render(
+        <Tooltip
+          trigger={['click']}
+          placement="left"
+          overlay={<strong className="x-content">Tooltip content</strong>}
+          showArrow={{
+            content: <span className="custom-arrow-content">↑</span>,
+          }}
+          visible
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+
+      expect(container.querySelector('.custom-arrow-content')).toBeTruthy();
+      expect(container.querySelector('.custom-arrow-content').textContent).toBe('↑');
+    });
+
+    it('should use arrowContent prop when showArrow has no content', () => {
+      const { container } = render(
+        <Tooltip
+          trigger={['click']}
+          placement="left"
+          overlay={<strong className="x-content">Tooltip content</strong>}
+          showArrow
+          arrowContent={<span className="prop-arrow-content">→</span>}
+          visible
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+
+      expect(container.querySelector('.prop-arrow-content')).toBeTruthy();
+      expect(container.querySelector('.prop-arrow-content').textContent).toBe('→');
+    });
+
+    it('should prioritize showArrow.content over arrowContent prop', () => {
+      const { container } = render(
+        <Tooltip
+          trigger={['click']}
+          placement="left"
+          overlay={<strong className="x-content">Tooltip content</strong>}
+          showArrow={{
+            content: <span className="showArrow-content">↑</span>,
+          }}
+          arrowContent={<span className="prop-content">→</span>}
+          visible
+        >
+          <div className="target">Click this</div>
+        </Tooltip>,
+      );
+
+      expect(container.querySelector('.showArrow-content')).toBeTruthy();
+      expect(container.querySelector('.prop-content')).toBeFalsy();
+      expect(container.querySelector('.showArrow-content').textContent).toBe('↑');
+    });
   });
 
   it('visible', () => {
@@ -251,33 +316,173 @@ describe('rc-tooltip', () => {
 
     expect(nodeRef.current.nativeElement).toBe(container.querySelector('button'));
   });
-  it('should apply custom styles to Tooltip', () => {
-    const customClassNames = {
-      body: 'custom-body',
-      root: 'custom-root',
-    };
+  describe('classNames and styles', () => {
+    it('should apply custom classNames to all semantic elements', () => {
+      const customClassNames = {
+        root: 'custom-root',
+        body: 'custom-body',
+        arrow: 'custom-arrow',
+      };
 
-    const customStyles = {
-      body: { color: 'red' },
-      root: { backgroundColor: 'blue' },
-    };
+      const { container } = render(
+        <Tooltip
+          classNames={customClassNames}
+          overlay={<div>Tooltip content</div>}
+          visible
+          showArrow
+        >
+          <button>Trigger</button>
+        </Tooltip>,
+      );
 
-    const { container } = render(
-      <Tooltip classNames={customClassNames} overlay={<div />} styles={customStyles} visible>
-        <button />
-      </Tooltip>,
-    );
+      const tooltipElement = container.querySelector('.rc-tooltip') as HTMLElement;
+      const tooltipBodyElement = container.querySelector('.rc-tooltip-body') as HTMLElement;
+      const tooltipArrowElement = container.querySelector('.rc-tooltip-arrow') as HTMLElement;
 
-    const tooltipElement = container.querySelector('.rc-tooltip') as HTMLElement;
-    const tooltipBodyElement = container.querySelector('.rc-tooltip-inner') as HTMLElement;
+      // Verify classNames
+      expect(tooltipElement).toHaveClass('custom-root');
+      expect(tooltipBodyElement).toHaveClass('custom-body');
+      expect(tooltipArrowElement).toHaveClass('custom-arrow');
+    });
 
-    // 验证 classNames
-    expect(tooltipElement.classList).toContain('custom-root');
-    expect(tooltipBodyElement.classList).toContain('custom-body');
+    it('should apply custom styles to all semantic elements', () => {
+      const customStyles = {
+        root: { backgroundColor: 'blue', zIndex: 1000 },
+        body: { color: 'red', fontSize: '14px' },
+        arrow: { borderColor: 'green' },
+      };
 
-    // 验证 styles
-    expect(tooltipElement.style.backgroundColor).toBe('blue');
-    expect(tooltipBodyElement.style.color).toBe('red');
+      const { container } = render(
+        <Tooltip
+          styles={customStyles}
+          overlay={<div>Tooltip content</div>}
+          visible
+          showArrow
+        >
+          <button>Trigger</button>
+        </Tooltip>,
+      );
+
+      const tooltipElement = container.querySelector('.rc-tooltip') as HTMLElement;
+      const tooltipBodyElement = container.querySelector('.rc-tooltip-body') as HTMLElement;
+      const tooltipArrowElement = container.querySelector('.rc-tooltip-arrow') as HTMLElement;
+
+      // Verify styles
+      expect(tooltipElement).toHaveStyle({ backgroundColor: 'blue', zIndex: '1000' });
+      expect(tooltipBodyElement).toHaveStyle({ color: 'red', fontSize: '14px' });
+      expect(tooltipArrowElement).toHaveStyle({ borderColor: 'green' });
+    });
+
+    it('should apply both classNames and styles simultaneously', () => {
+      const customClassNames = {
+        root: 'custom-root',
+        body: 'custom-body',
+        arrow: 'custom-arrow',
+      };
+
+      const customStyles = {
+        root: { backgroundColor: 'blue' },
+        body: { color: 'red' },
+        arrow: { borderColor: 'green' },
+      };
+
+      const { container } = render(
+        <Tooltip
+          classNames={customClassNames}
+          styles={customStyles}
+          overlay={<div>Tooltip content</div>}
+          visible
+          showArrow
+        >
+          <button>Trigger</button>
+        </Tooltip>,
+      );
+
+      const tooltipElement = container.querySelector('.rc-tooltip') as HTMLElement;
+      const tooltipBodyElement = container.querySelector('.rc-tooltip-body') as HTMLElement;
+      const tooltipArrowElement = container.querySelector('.rc-tooltip-arrow') as HTMLElement;
+
+      // Verify that classNames and styles work simultaneously
+      expect(tooltipElement).toHaveClass('custom-root');
+      expect(tooltipElement).toHaveStyle({ backgroundColor: 'blue' });
+      expect(tooltipBodyElement).toHaveClass('custom-body');
+      expect(tooltipBodyElement).toHaveStyle({ color: 'red' });
+      expect(tooltipArrowElement).toHaveClass('custom-arrow');
+      expect(tooltipArrowElement).toHaveStyle({ borderColor: 'green' });
+    });
+
+    it('should work with partial classNames and styles', () => {
+      const partialClassNames = {
+        body: 'custom-body',
+      };
+
+      const partialStyles = {
+        root: { backgroundColor: 'blue' },
+      };
+
+      const { container } = render(
+        <Tooltip
+          classNames={partialClassNames}
+          styles={partialStyles}
+          overlay={<div>Tooltip content</div>}
+          visible
+          showArrow
+        >
+          <button>Trigger</button>
+        </Tooltip>,
+      );
+
+      const tooltipElement = container.querySelector('.rc-tooltip') as HTMLElement;
+      const tooltipBodyElement = container.querySelector('.rc-tooltip-body') as HTMLElement;
+      const tooltipArrowElement = container.querySelector('.rc-tooltip-arrow') as HTMLElement;
+
+      // Verify partial configuration takes effect
+      expect(tooltipElement).toHaveStyle({ backgroundColor: 'blue' });
+      expect(tooltipBodyElement).toHaveClass('custom-body');
+      
+      // Verify that unconfigured elements don't have custom class names or styles
+      expect(tooltipElement).not.toHaveClass('custom-root');
+      expect(tooltipArrowElement).not.toHaveClass('custom-arrow');
+    });
+
+    it('should not break when showArrow is false', () => {
+      const customClassNames = {
+        root: 'custom-root',
+        body: 'custom-body',
+        arrow: 'custom-arrow', // 即使配置了arrow，但不显示箭头时不应该报错
+      };
+
+      const customStyles = {
+        root: { backgroundColor: 'blue' },
+        body: { color: 'red' },
+        arrow: { borderColor: 'green' },
+      };
+
+      const { container } = render(
+        <Tooltip
+          classNames={customClassNames}
+          styles={customStyles}
+          overlay={<div>Tooltip content</div>}
+          visible
+          showArrow={false}
+        >
+          <button>Trigger</button>
+        </Tooltip>,
+      );
+
+      const tooltipElement = container.querySelector('.rc-tooltip') as HTMLElement;
+      const tooltipBodyElement = container.querySelector('.rc-tooltip-body') as HTMLElement;
+      const tooltipArrowElement = container.querySelector('.rc-tooltip-arrow');
+
+      // Verify when arrow is not shown
+      expect(tooltipArrowElement).toBeFalsy();
+      
+      // Other styles still take effect
+      expect(tooltipElement).toHaveClass('custom-root');
+      expect(tooltipElement).toHaveStyle({ backgroundColor: 'blue' });
+      expect(tooltipBodyElement).toHaveClass('custom-body');
+      expect(tooltipBodyElement).toHaveStyle({ color: 'red' });
+    });
   });
 
   describe('children handling', () => {
@@ -315,7 +520,7 @@ describe('rc-tooltip', () => {
       const btn = container.querySelector('button');
       expect(btn).toHaveClass('custom-btn');
 
-      // 触发原始事件处理器
+      // Trigger original event handler
       fireEvent.mouseEnter(btn);
       expect(onMouseEnter).toHaveBeenCalled();
     });
