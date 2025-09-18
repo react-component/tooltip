@@ -12,26 +12,16 @@ export interface ContentProps {
 }
 
 const Popup: React.FC<ContentProps> = (props) => {
-  const {
-    children,
-    prefixCls,
-    id,
-    overlayInnerStyle: innerStyle,
-    bodyClassName,
-    className,
-    style,
-  } = props;
+  const { children, prefixCls, id, className, style, bodyClassName, overlayInnerStyle } = props;
 
   return (
-    <div className={classNames(`${prefixCls}-content`, className)} style={style}>
-      <div
-        className={classNames(`${prefixCls}-inner`, bodyClassName)}
-        id={id}
-        role="tooltip"
-        style={innerStyle}
-      >
-        {typeof children === 'function' ? children() : children}
-      </div>
+    <div
+      id={id}
+      className={classNames(`${prefixCls}-body`, className, bodyClassName)}
+      style={{ ...overlayInnerStyle, ...style }}
+      role="tooltip"
+    >
+      {typeof children === 'function' ? children() : children}
     </div>
   );
 };

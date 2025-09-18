@@ -1,6 +1,6 @@
 import { act, fireEvent, render } from '@testing-library/react';
 import React from 'react';
-import Tooltip, { TooltipRef } from '../src';
+import Tooltip, { type TooltipRef } from '../src';
 
 const verifyContent = (wrapper: HTMLElement, content: string) => {
   expect(wrapper.querySelector('.x-content').textContent).toBe(content);
@@ -73,7 +73,7 @@ describe('rc-tooltip', () => {
       );
       fireEvent.click(container.querySelector('.target'));
       expect(
-        (container.querySelector('.rc-tooltip-inner') as HTMLElement).style.background,
+        (container.querySelector('.rc-tooltip-body') as HTMLElement).style.background,
       ).toEqual('red');
     });
 
@@ -269,11 +269,11 @@ describe('rc-tooltip', () => {
     );
 
     const tooltipElement = container.querySelector('.rc-tooltip') as HTMLElement;
-    const tooltipBodyElement = container.querySelector('.rc-tooltip-inner') as HTMLElement;
+    const tooltipBodyElement = container.querySelector('.rc-tooltip-body') as HTMLElement;
 
     // 验证 classNames
-    expect(tooltipElement.classList).toContain('custom-root');
-    expect(tooltipBodyElement.classList).toContain('custom-body');
+    expect(tooltipElement).toHaveClass('custom-root');
+    expect(tooltipBodyElement).toHaveClass('custom-body');
 
     // 验证 styles
     expect(tooltipElement.style.backgroundColor).toBe('blue');

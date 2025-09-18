@@ -8,6 +8,8 @@ import { useImperativeHandle, useRef } from 'react';
 import { placements } from './placements';
 import Popup from './Popup';
 
+export type SemanticName = 'root' | 'arrow' | 'body';
+
 export interface TooltipProps
   extends Pick<
     TriggerProps,
@@ -21,45 +23,44 @@ export interface TooltipProps
     | 'forceRender'
     | 'popupVisible'
   > {
-  trigger?: ActionType | ActionType[];
-  defaultVisible?: boolean;
-  visible?: boolean;
-  placement?: string;
+  // Style
+  classNames?: Partial<Record<SemanticName, string>>;
+  styles?: Partial<Record<SemanticName, React.CSSProperties>>;
+
   /** Config popup motion */
   motion?: TriggerProps['popupMotion'];
-  onVisibleChange?: (visible: boolean) => void;
-  afterVisibleChange?: (visible: boolean) => void;
-  overlay: (() => React.ReactNode) | React.ReactNode;
+
   /** @deprecated Please use `styles={{ root: {} }}` */
   overlayStyle?: React.CSSProperties;
   /** @deprecated Please use `classNames={{ root: '' }}` */
   overlayClassName?: string;
+  /** @deprecated Please use `styles={{ body: {} }}` */
+  overlayInnerStyle?: React.CSSProperties;
+
+  // Rest
+  trigger?: ActionType | ActionType[];
+  defaultVisible?: boolean;
+  visible?: boolean;
+  placement?: string;
+
+  onVisibleChange?: (visible: boolean) => void;
+  afterVisibleChange?: (visible: boolean) => void;
+  overlay: (() => React.ReactNode) | React.ReactNode;
+
   getTooltipContainer?: (node: HTMLElement) => HTMLElement;
   destroyOnHidden?: boolean;
   align?: AlignType;
   showArrow?: boolean | ArrowType;
   arrowContent?: React.ReactNode;
   id?: string;
-  /** @deprecated Please use `styles={{ body: {} }}` */
-  overlayInnerStyle?: React.CSSProperties;
+
   zIndex?: number;
-  styles?: TooltipStyles;
-  classNames?: TooltipClassNames;
+
   /**
    * Configures Tooltip to reuse the background for transition usage.
    * This is an experimental API and may not be stable.
    */
   unique?: TriggerProps['unique'];
-}
-
-export interface TooltipStyles {
-  root?: React.CSSProperties;
-  body?: React.CSSProperties;
-}
-
-export interface TooltipClassNames {
-  root?: string;
-  body?: string;
 }
 
 export interface TooltipRef extends TriggerRef {}
@@ -108,7 +109,8 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
       prefixCls={prefixCls}
       id={mergedId}
       bodyClassName={tooltipClassNames?.body}
-      overlayInnerStyle={{ ...overlayInnerStyle, ...tooltipStyles?.body }}
+      overlayInnerStyle={overlayInnerStyle}
+      style={tooltipStyles?.body}
     >
       {overlay}
     </Popup>
@@ -122,6 +124,23 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
       'aria-describedby': overlay ? mergedId : null,
     };
     return React.cloneElement<any>(children, childProps) as any;
+  };
+
+  // Process arrow configuration
+  const getArrowConfig = () => {
+    if (!showArrow) {
+      return false;
+    }
+
+    // Convert true to object for unified processing
+    const arrowConfig = showArrow === true ? {} : showArrow;
+
+    // Apply semantic styles with unified logic
+    return {
+      ...arrowConfig,
+      className: classNames(arrowConfig.className, tooltipClassNames?.arrow),
+      content: arrowConfig.content || arrowContent,
+    };
   };
 
   return (
@@ -143,7 +162,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
       mouseLeaveDelay={mouseLeaveDelay}
       popupStyle={{ ...overlayStyle, ...tooltipStyles?.root }}
       mouseEnterDelay={mouseEnterDelay}
-      arrow={showArrow}
+      arrow={getArrowConfig()}
       {...extraProps}
     >
       {getChildren()}
