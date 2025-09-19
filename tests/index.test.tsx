@@ -455,8 +455,6 @@ describe('rc-tooltip', () => {
         </UniqueProvider>,
       );
 
-      console.log(document.body.innerHTML);
-
       // Test that uniqueBody doesn't break the normal tooltip functionality
       expect(document.querySelector('.unique-body-class')).toHaveStyle({
         color: 'red',
