@@ -1,3 +1,4 @@
+import { UniqueProvider } from '@rc-component/trigger';
 import { act, fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import Tooltip, { type TooltipRef } from '../src';
@@ -58,8 +59,6 @@ describe('rc-tooltip', () => {
       fireEvent.click(container.querySelector('.target'));
       verifyContent(container, 'Tooltip content');
     });
-
-
 
     it('access of ref', () => {
       const domRef = React.createRef<TooltipRef>();
@@ -353,12 +352,7 @@ describe('rc-tooltip', () => {
       };
 
       const { container } = render(
-        <Tooltip
-          styles={customStyles}
-          overlay={<div>Tooltip content</div>}
-          visible
-          showArrow
-        >
+        <Tooltip styles={customStyles} overlay={<div>Tooltip content</div>} visible showArrow>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -439,10 +433,32 @@ describe('rc-tooltip', () => {
       // Verify partial configuration takes effect
       expect(tooltipElement).toHaveStyle({ backgroundColor: 'blue' });
       expect(tooltipBodyElement).toHaveClass('custom-body');
-      
+
       // Verify that unconfigured elements don't have custom class names or styles
       expect(tooltipElement).not.toHaveClass('custom-root');
       expect(tooltipArrowElement).not.toHaveClass('custom-arrow');
+    });
+
+    it('should pass uniqueBody to Trigger as uniqueBgClassName and uniqueBgStyle', () => {
+      // Test that the component renders without errors when uniqueBody is provided
+      render(
+        <UniqueProvider>
+          <Tooltip
+            classNames={{ uniqueBody: 'unique-body-class' }}
+            styles={{ uniqueBody: { color: 'red' } }}
+            overlay={<div>Tooltip content</div>}
+            visible
+            unique
+          >
+            <button>Trigger</button>
+          </Tooltip>
+        </UniqueProvider>,
+      );
+
+      // Test that uniqueBody doesn't break the normal tooltip functionality
+      expect(document.querySelector('.unique-body-class')).toHaveStyle({
+        color: 'red',
+      });
     });
 
     it('should not break when showArrow is false', () => {
@@ -476,7 +492,7 @@ describe('rc-tooltip', () => {
 
       // Verify when arrow is not shown
       expect(tooltipArrowElement).toBeFalsy();
-      
+
       // Other styles still take effect
       expect(tooltipElement).toHaveClass('custom-root');
       expect(tooltipElement).toHaveStyle({ backgroundColor: 'blue' });
