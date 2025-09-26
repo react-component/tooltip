@@ -8,7 +8,7 @@ import { useImperativeHandle, useRef } from 'react';
 import { placements } from './placements';
 import Popup from './Popup';
 
-export type SemanticName = 'root' | 'arrow' | 'body' | 'uniqueBody';
+export type SemanticName = 'root' | 'arrow' | 'container' | 'uniqueBody';
 
 export interface TooltipProps
   extends Pick<

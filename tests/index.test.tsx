@@ -319,7 +319,7 @@ describe('rc-tooltip', () => {
     it('should apply custom classNames to all semantic elements', () => {
       const customClassNames = {
         root: 'custom-root',
-        body: 'custom-body',
+        container: 'custom-body',
         arrow: 'custom-arrow',
       };
 
@@ -335,7 +335,7 @@ describe('rc-tooltip', () => {
       );
 
       const tooltipElement = container.querySelector('.rc-tooltip') as HTMLElement;
-      const tooltipBodyElement = container.querySelector('.rc-tooltip-body') as HTMLElement;
+      const tooltipBodyElement = container.querySelector('.rc-tooltip-container') as HTMLElement;
       const tooltipArrowElement = container.querySelector('.rc-tooltip-arrow') as HTMLElement;
 
       // Verify classNames
@@ -347,7 +347,7 @@ describe('rc-tooltip', () => {
     it('should apply custom styles to all semantic elements', () => {
       const customStyles = {
         root: { backgroundColor: 'blue', zIndex: 1000 },
-        body: { color: 'red', fontSize: '14px' },
+        container: { color: 'red', fontSize: '14px' },
         arrow: { borderColor: 'green' },
       };
 
@@ -358,7 +358,7 @@ describe('rc-tooltip', () => {
       );
 
       const tooltipElement = container.querySelector('.rc-tooltip') as HTMLElement;
-      const tooltipBodyElement = container.querySelector('.rc-tooltip-body') as HTMLElement;
+      const tooltipBodyElement = container.querySelector('.rc-tooltip-container') as HTMLElement;
       const tooltipArrowElement = container.querySelector('.rc-tooltip-arrow') as HTMLElement;
 
       // Verify styles
@@ -370,13 +370,13 @@ describe('rc-tooltip', () => {
     it('should apply both classNames and styles simultaneously', () => {
       const customClassNames = {
         root: 'custom-root',
-        body: 'custom-body',
+        container: 'custom-body',
         arrow: 'custom-arrow',
       };
 
       const customStyles = {
         root: { backgroundColor: 'blue' },
-        body: { color: 'red' },
+        container: { color: 'red' },
         arrow: { borderColor: 'green' },
       };
 
@@ -393,7 +393,7 @@ describe('rc-tooltip', () => {
       );
 
       const tooltipElement = container.querySelector('.rc-tooltip') as HTMLElement;
-      const tooltipBodyElement = container.querySelector('.rc-tooltip-body') as HTMLElement;
+      const tooltipBodyElement = container.querySelector('.rc-tooltip-container') as HTMLElement;
       const tooltipArrowElement = container.querySelector('.rc-tooltip-arrow') as HTMLElement;
 
       // Verify that classNames and styles work simultaneously
@@ -407,7 +407,7 @@ describe('rc-tooltip', () => {
 
     it('should work with partial classNames and styles', () => {
       const partialClassNames = {
-        body: 'custom-body',
+        container: 'custom-body',
       };
 
       const partialStyles = {
@@ -427,7 +427,7 @@ describe('rc-tooltip', () => {
       );
 
       const tooltipElement = container.querySelector('.rc-tooltip') as HTMLElement;
-      const tooltipBodyElement = container.querySelector('.rc-tooltip-body') as HTMLElement;
+      const tooltipBodyElement = container.querySelector('.rc-tooltip-container') as HTMLElement;
       const tooltipArrowElement = container.querySelector('.rc-tooltip-arrow') as HTMLElement;
 
       // Verify partial configuration takes effect
@@ -464,13 +464,13 @@ describe('rc-tooltip', () => {
     it('should not break when showArrow is false', () => {
       const customClassNames = {
         root: 'custom-root',
-        body: 'custom-body',
+        container: 'custom-body',
         arrow: 'custom-arrow', // 即使配置了arrow，但不显示箭头时不应该报错
       };
 
       const customStyles = {
         root: { backgroundColor: 'blue' },
-        body: { color: 'red' },
+        container: { color: 'red' },
         arrow: { borderColor: 'green' },
       };
 
@@ -487,7 +487,7 @@ describe('rc-tooltip', () => {
       );
 
       const tooltipElement = container.querySelector('.rc-tooltip') as HTMLElement;
-      const tooltipBodyElement = container.querySelector('.rc-tooltip-body') as HTMLElement;
+      const tooltipBodyElement = container.querySelector('.rc-tooltip-container') as HTMLElement;
       const tooltipArrowElement = container.querySelector('.rc-tooltip-arrow');
 
       // Verify when arrow is not shown
