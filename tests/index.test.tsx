@@ -319,7 +319,7 @@ describe('rc-tooltip', () => {
     it('should apply custom classNames to all semantic elements', () => {
       const customClassNames = {
         root: 'custom-root',
-        container: 'custom-body',
+        container: 'custom-container',
         arrow: 'custom-arrow',
       };
 
@@ -340,7 +340,7 @@ describe('rc-tooltip', () => {
 
       // Verify classNames
       expect(tooltipElement).toHaveClass('custom-root');
-      expect(tooltipBodyElement).toHaveClass('custom-body');
+      expect(tooltipBodyElement).toHaveClass('custom-container');
       expect(tooltipArrowElement).toHaveClass('custom-arrow');
     });
 
@@ -370,7 +370,7 @@ describe('rc-tooltip', () => {
     it('should apply both classNames and styles simultaneously', () => {
       const customClassNames = {
         root: 'custom-root',
-        container: 'custom-body',
+        container: 'custom-container',
         arrow: 'custom-arrow',
       };
 
@@ -399,7 +399,7 @@ describe('rc-tooltip', () => {
       // Verify that classNames and styles work simultaneously
       expect(tooltipElement).toHaveClass('custom-root');
       expect(tooltipElement).toHaveStyle({ backgroundColor: 'blue' });
-      expect(tooltipBodyElement).toHaveClass('custom-body');
+      expect(tooltipBodyElement).toHaveClass('custom-container');
       expect(tooltipBodyElement).toHaveStyle({ color: 'red' });
       expect(tooltipArrowElement).toHaveClass('custom-arrow');
       expect(tooltipArrowElement).toHaveStyle({ borderColor: 'green' });
@@ -407,7 +407,7 @@ describe('rc-tooltip', () => {
 
     it('should work with partial classNames and styles', () => {
       const partialClassNames = {
-        container: 'custom-body',
+        container: 'custom-container',
       };
 
       const partialStyles = {
@@ -432,7 +432,7 @@ describe('rc-tooltip', () => {
 
       // Verify partial configuration takes effect
       expect(tooltipElement).toHaveStyle({ backgroundColor: 'blue' });
-      expect(tooltipBodyElement).toHaveClass('custom-body');
+      expect(tooltipBodyElement).toHaveClass('custom-container');
 
       // Verify that unconfigured elements don't have custom class names or styles
       expect(tooltipElement).not.toHaveClass('custom-root');
@@ -445,7 +445,7 @@ describe('rc-tooltip', () => {
         render(
           <UniqueProvider>
             <Tooltip
-              classNames={{ uniqueContainer: 'unique-body-class' }}
+              classNames={{ uniqueContainer: 'unique-container-class' }}
               styles={{ uniqueContainer: { color: 'red' } }}
               overlay={<div>Tooltip content</div>}
               visible
@@ -464,7 +464,7 @@ describe('rc-tooltip', () => {
     it('should not break when showArrow is false', () => {
       const customClassNames = {
         root: 'custom-root',
-        container: 'custom-body',
+        container: 'custom-container',
         arrow: 'custom-arrow', // 即使配置了arrow，但不显示箭头时不应该报错
       };
 
@@ -496,7 +496,7 @@ describe('rc-tooltip', () => {
       // Other styles still take effect
       expect(tooltipElement).toHaveClass('custom-root');
       expect(tooltipElement).toHaveStyle({ backgroundColor: 'blue' });
-      expect(tooltipBodyElement).toHaveClass('custom-body');
+      expect(tooltipBodyElement).toHaveClass('custom-container');
       expect(tooltipBodyElement).toHaveStyle({ color: 'red' });
     });
   });
