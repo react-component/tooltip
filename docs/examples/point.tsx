@@ -30,7 +30,7 @@ const Test: React.FC = () => {
           <Tooltip
             placement="top"
             overlay={text}
-            styles={{ body: { width: 300, height: 50 } }}
+            styles={{ container: { width: 300, height: 50 } }}
             popupVisible
             arrowContent={<div className="rc-tooltip-arrow-inner" />}
           >

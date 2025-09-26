@@ -8,7 +8,7 @@ import { useImperativeHandle, useRef } from 'react';
 import { placements } from './placements';
 import Popup from './Popup';
 
-export type SemanticName = 'root' | 'arrow' | 'body' | 'uniqueBody';
+export type SemanticName = 'root' | 'arrow' | 'container' | 'uniqueContainer';
 
 export interface TooltipProps
   extends Pick<
@@ -154,8 +154,8 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
       popupStyle={styles?.root}
       mouseEnterDelay={mouseEnterDelay}
       arrow={mergedArrow}
-      uniqueBgClassName={classNames?.uniqueBody}
-      uniqueBgStyle={styles?.uniqueBody}
+      uniqueContainerClassName={classNames?.uniqueContainer}
+      uniqueContainerStyle={styles?.uniqueContainer}
       {...extraProps}
     >
       {getChildren()}

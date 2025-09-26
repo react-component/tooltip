@@ -94,8 +94,8 @@ const Test: React.FC = () => (
       <h5>Debug Usage</h5>
       <Popup
         prefixCls="rc-tooltip"
-        classNames={{ body: 'rc-tooltip-placement-top' }}
-        styles={{ body: { display: 'inline-block', position: 'relative' } }}
+        classNames={{ container: 'rc-tooltip-placement-top' }}
+        styles={{ container: { display: 'inline-block', position: 'relative' } }}
       >
         Test
       </Popup>
