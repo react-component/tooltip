@@ -154,10 +154,8 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
       popupStyle={styles?.root}
       mouseEnterDelay={mouseEnterDelay}
       arrow={mergedArrow}
-      {...(({
-        uniqueContainerClassName: classNames?.uniqueContainer,
-        uniqueContainerStyle: styles?.uniqueContainer,
-      } as any))}
+      uniqueContainerClassName={classNames?.uniqueContainer}
+      uniqueContainerStyle={styles?.uniqueContainer}
       {...extraProps}
     >
       {getChildren()}
