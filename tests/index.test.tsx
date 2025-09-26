@@ -439,7 +439,7 @@ describe('rc-tooltip', () => {
       expect(tooltipArrowElement).not.toHaveClass('custom-arrow');
     });
 
-    it('should pass uniqueContainer to Trigger as uniqueBgClassName and uniqueBgStyle', () => {
+    it('should pass uniqueContainer to Trigger as uniqueContainerClassName and uniqueContainerStyle', () => {
       // Test that the component renders without errors when uniqueContainer is provided
       expect(() => {
         render(

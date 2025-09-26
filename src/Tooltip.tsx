@@ -155,8 +155,8 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
       mouseEnterDelay={mouseEnterDelay}
       arrow={mergedArrow}
       {...(({
-        uniqueBgClassName: classNames?.uniqueContainer,
-        uniqueBgStyle: styles?.uniqueContainer,
+        uniqueContainerClassName: classNames?.uniqueContainer,
+        uniqueContainerStyle: styles?.uniqueContainer,
       } as any))}
       {...extraProps}
     >
