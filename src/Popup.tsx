@@ -1,4 +1,4 @@
-import cls from 'classnames';
+import { clsx } from 'clsx';
 import * as React from 'react';
 import type { TooltipProps } from './Tooltip';
 
@@ -18,7 +18,7 @@ const Popup: React.FC<ContentProps> = (props) => {
   return (
     <div
       id={id}
-      className={cls(`${prefixCls}-container`, classNames?.container, className)}
+      className={clsx(`${prefixCls}-container`, classNames?.container, className)}
       style={{ ...styles?.container, ...style }}
       role="tooltip"
     >

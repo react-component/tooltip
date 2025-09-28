@@ -2,7 +2,7 @@ import type { ArrowType, TriggerProps, TriggerRef } from '@rc-component/trigger'
 import Trigger from '@rc-component/trigger';
 import type { ActionType, AlignType } from '@rc-component/trigger/lib/interface';
 import useId from '@rc-component/util/lib/hooks/useId';
-import cls from 'classnames';
+import { clsx } from 'clsx';
 import * as React from 'react';
 import { useImperativeHandle, useRef } from 'react';
 import { placements } from './placements';
@@ -106,7 +106,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
     // Apply semantic styles with unified logic
     return {
       ...arrowConfig,
-      className: cls(arrowConfig.className, classNames?.arrow),
+      className: clsx(arrowConfig.className, classNames?.arrow),
       style: { ...arrowConfig.style, ...styles?.arrow },
       content: arrowConfig.content ?? arrowContent,
     };
