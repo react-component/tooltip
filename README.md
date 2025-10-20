@@ -13,14 +13,10 @@ React Tooltip
 [npm-url]: http://npmjs.org/package/rc-tooltip
 [travis-image]: https://img.shields.io/travis/react-component/tooltip/master?style=flat-square
 [travis-url]: https://travis-ci.com/react-component/tooltip
-[github-actions-image]: https://github.com/react-component/tooltip/workflows/CI/badge.svg
-[github-actions-url]: https://github.com/react-component/tooltip/actions
+[github-actions-image]: https://github.com/react-component/tooltip/actions/workflows/react-component-ci.yml/badge.svg
+[github-actions-url]: https://github.com/react-component/tooltip/actions/workflows/react-component-ci.yml
 [codecov-image]: https://img.shields.io/codecov/c/github/react-component/tooltip/master.svg?style=flat-square
 [codecov-url]: https://app.codecov.io/gh/react-component/tooltip
-[david-url]: https://david-dm.org/react-component/tooltip
-[david-image]: https://david-dm.org/react-component/tooltip/status.svg?style=flat-square
-[david-dev-url]: https://david-dm.org/react-component/tooltip?type=dev
-[david-dev-image]: https://david-dm.org/react-component/tooltip/dev-status.svg?style=flat-square
 [download-image]: https://img.shields.io/npm/dm/rc-tooltip.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-tooltip
 [bundlephobia-url]: https://bundlephobia.com/package/rc-tooltip
@@ -66,7 +62,7 @@ ReactDOM.render(
 `npm start` and then go to
 <http://localhost:8000/demo>
 
-Online demo: <https://react-component.github.io/tooltip/demo>
+Online demo: https://tooltip-react-component.vercel.app/
 
 ## API
 
