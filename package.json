@@ -54,7 +54,6 @@
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
     "@types/warning": "^3.0.0",
-    "cross-env": "^7.0.0",
     "dumi": "^2.2.13",
     "eslint": "^8.56.0",
     "eslint-plugin-unicorn": "^55.0.0",
