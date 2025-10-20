@@ -13,7 +13,7 @@ React Tooltip
 [npm-url]: http://npmjs.org/package/rc-tooltip
 [travis-image]: https://img.shields.io/travis/react-component/tooltip/master?style=flat-square
 [travis-url]: https://travis-ci.com/react-component/tooltip
-[github-actions-image]: https://github.com/react-component/upload/actions/workflows/react-component-ci.yml/badge.svg
+[github-actions-image]: https://github.com/react-component/tooltip/actions/workflows/react-component-ci.yml/badge.svg
 [github-actions-url]: https://github.com/react-component/tooltip/actions/workflows/react-component-ci.yml
 [codecov-image]: https://img.shields.io/codecov/c/github/react-component/tooltip/master.svg?style=flat-square
 [codecov-url]: https://app.codecov.io/gh/react-component/tooltip
