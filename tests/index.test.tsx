@@ -502,14 +502,24 @@ describe('rc-tooltip', () => {
   });
 
   describe('children handling', () => {
-    it('should pass aria-describedby to child element when overlay exists', () => {
+    it('should only set aria-describedby once popup is mounted', async () => {
       const { container } = render(
-        <Tooltip id="test-id" overlay="tooltip content">
+        <Tooltip trigger={['click']} overlay="tooltip content">
           <button>Click me</button>
         </Tooltip>,
       );
 
-      expect(container.querySelector('button')).toHaveAttribute('aria-describedby', 'test-id');
+      const btn = container.querySelector('button');
+      expect(btn).not.toHaveAttribute('aria-describedby');
+
+      fireEvent.click(btn);
+      await waitFakeTimers();
+      const describedby = btn.getAttribute('aria-describedby');
+      expect(describedby).toBeTruthy();
+
+      fireEvent.click(btn);
+      await waitFakeTimers();
+      expect(btn).toHaveAttribute('aria-describedby', describedby);
     });
 
     it('should not pass aria-describedby when overlay is empty', () => {
@@ -520,6 +530,45 @@ describe('rc-tooltip', () => {
       );
 
       expect(container.querySelector('button')).not.toHaveAttribute('aria-describedby');
+    });
+
+    it('should set aria-describedby immediately when defaultVisible is true', () => {
+      const { container } = render(
+        <Tooltip defaultVisible overlay="tooltip content">
+          <button>Click me</button>
+        </Tooltip>,
+      );
+
+      expect(container.querySelector('button')).toHaveAttribute('aria-describedby');
+    });
+
+    it('should set aria-describedby immediately when forceRender is true', () => {
+      const { container } = render(
+        <Tooltip forceRender overlay="tooltip content">
+          <button>Click me</button>
+        </Tooltip>,
+      );
+
+      expect(container.querySelector('button')).toHaveAttribute('aria-describedby');
+    });
+
+    it('should remove aria-describedby when popup is destroyed on hide', async () => {
+      const { container } = render(
+        <Tooltip destroyOnHidden trigger={['click']} overlay="tooltip content">
+          <button>Click me</button>
+        </Tooltip>,
+      );
+
+      const btn = container.querySelector('button');
+      expect(btn).not.toHaveAttribute('aria-describedby');
+
+      fireEvent.click(btn);
+      await waitFakeTimers();
+      expect(btn).toHaveAttribute('aria-describedby');
+
+      fireEvent.click(btn);
+      await waitFakeTimers();
+      expect(btn).not.toHaveAttribute('aria-describedby');
     });
 
     it('should preserve original props of children', () => {

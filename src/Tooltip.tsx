@@ -60,7 +60,7 @@ export interface TooltipRef extends TriggerRef {}
 
 const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
   const {
-    trigger = ['hover'],
+    trigger = ['hover','focus'],
     mouseEnterDelay = 0,
     mouseLeaveDelay = 0.1,
     prefixCls = 'rc-tooltip',
@@ -79,6 +79,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
     showArrow = true,
     classNames,
     styles,
+    forceRender,
     ...restProps
   } = props;
 
@@ -92,6 +93,51 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
   if ('visible' in props) {
     extraProps.popupVisible = props.visible;
   }
+
+  const isControlled = 'visible' in props;
+  const mergedVisible = props.visible;
+  const [popupMounted, setPopupMounted] = React.useState(() => {
+    if (forceRender) {
+      return true;
+    }
+    if (isControlled) {
+      return mergedVisible;
+    }
+    return defaultVisible;
+  });
+
+  const updatePopupMounted = React.useCallback(
+    (nextVisible: boolean) => {
+      setPopupMounted((prev) => {
+        if (nextVisible) {
+          return true;
+        }
+
+        if (destroyOnHidden) {
+          return false;
+        }
+
+        return prev;
+      });
+    },
+    [forceRender, destroyOnHidden],
+  );
+
+  const handleVisibleChange = (nextVisible: boolean) => {
+    updatePopupMounted(nextVisible);
+    onVisibleChange?.(nextVisible);
+  };
+
+  React.useEffect(() => {
+    if (forceRender) {
+      setPopupMounted(true);
+      return;
+    }
+
+    if (isControlled) {
+      setPopupMounted(mergedVisible);
+    }
+  }, [forceRender, isControlled, mergedVisible]);
 
   // ========================= Arrow ==========================
   // Process arrow configuration
@@ -118,7 +164,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
     const originalProps = child?.props || {};
     const childProps = {
       ...originalProps,
-      'aria-describedby': overlay ? mergedId : null,
+      'aria-describedby': overlay && popupMounted ? mergedId : null,
     };
     return React.cloneElement<any>(children, childProps) as any;
   };
@@ -145,10 +191,11 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
       ref={triggerRef}
       popupAlign={align}
       getPopupContainer={getTooltipContainer}
-      onOpenChange={onVisibleChange}
+      onOpenChange={handleVisibleChange}
       afterOpenChange={afterVisibleChange}
       popupMotion={motion}
       defaultPopupVisible={defaultVisible}
+      forceRender={forceRender}
       autoDestroy={destroyOnHidden}
       mouseLeaveDelay={mouseLeaveDelay}
       popupStyle={styles?.root}
