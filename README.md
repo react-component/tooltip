@@ -11,12 +11,12 @@ React Tooltip
 
 [npm-image]: http://img.shields.io/npm/v/@rc-component/tooltip.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/@rc-component/tooltip
-[travis-image]: https://img.shields.io/travis/@rc-component/tooltip/master?style=flat-square
-[travis-url]: https://travis-ci.com/@rc-component/tooltip
-[github-actions-image]: https://github.com/@rc-component/tooltip/actions/workflows/react-component-ci.yml/badge.svg
-[github-actions-url]: https://github.com/@rc-component/tooltip/actions/workflows/react-component-ci.yml
-[codecov-image]: https://img.shields.io/codecov/c/github/@rc-component/tooltip/master.svg?style=flat-square
-[codecov-url]: https://app.codecov.io/gh/@rc-component/tooltip
+[travis-image]: https://img.shields.io/travis/react-component/tooltip/master?style=flat-square
+[travis-url]: https://travis-ci.com/react-component/tooltip
+[github-actions-image]: https://github.com/react-component/tooltip/actions/workflows/react-component-ci.yml/badge.svg
+[github-actions-url]: https://github.com/react-component/tooltip/actions/workflows/react-component-ci.yml
+[codecov-image]: https://img.shields.io/codecov/c/github/react-component/tooltip/master.svg?style=flat-square
+[codecov-url]: https://app.codecov.io/gh/react-component/tooltip
 [download-image]: https://img.shields.io/npm/dm/@rc-component/tooltip.svg?style=flat-square
 [download-url]: https://npmjs.org/package/@rc-component/tooltip
 [bundlephobia-url]: https://bundlephobia.com/package/@rc-component/tooltip
