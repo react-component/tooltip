@@ -135,9 +135,9 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
     }
 
     if (isControlled) {
-      setPopupMounted(mergedVisible);
+      updatePopupMounted(mergedVisible);
     }
-  }, [forceRender, isControlled, mergedVisible]);
+  }, [forceRender, isControlled, mergedVisible, updatePopupMounted]);
 
   // ========================= Arrow ==========================
   // Process arrow configuration

@@ -552,6 +552,25 @@ describe('rc-tooltip', () => {
       expect(container.querySelector('button')).toHaveAttribute('aria-describedby');
     });
 
+    it('should keep aria-describedby when controlled hidden without destroy', () => {
+      const overlay = 'tooltip content';
+      const { container, rerender } = render(
+        <Tooltip overlay={overlay} visible>
+          <button>Click me</button>
+        </Tooltip>,
+      );
+
+      expect(container.querySelector('button')).toHaveAttribute('aria-describedby');
+
+      rerender(
+        <Tooltip overlay={overlay} visible={false}>
+          <button>Click me</button>
+        </Tooltip>,
+      );
+
+      expect(container.querySelector('button')).toHaveAttribute('aria-describedby');
+    });
+
     it('should remove aria-describedby when popup is destroyed on hide', async () => {
       const { container } = render(
         <Tooltip destroyOnHidden trigger={['click']} overlay="tooltip content">
