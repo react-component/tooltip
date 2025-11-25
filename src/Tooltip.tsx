@@ -4,7 +4,7 @@ import type { ActionType, AlignType } from '@rc-component/trigger/lib/interface'
 import useId from '@rc-component/util/lib/hooks/useId';
 import { clsx } from 'clsx';
 import * as React from 'react';
-import { useImperativeHandle, useRef } from 'react';
+import { useImperativeHandle, useRef, useEffect, useCallback } from 'react';
 import { placements } from './placements';
 import Popup from './Popup';
 
@@ -60,7 +60,7 @@ export interface TooltipRef extends TriggerRef {}
 
 const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
   const {
-    trigger = ['hover','focus'],
+    trigger = ['hover', 'focus'],
     mouseEnterDelay = 0,
     mouseLeaveDelay = 0.1,
     prefixCls = 'rc-tooltip',
@@ -106,7 +106,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
     return defaultVisible;
   });
 
-  const updatePopupMounted = React.useCallback(
+  const updatePopupMounted = useCallback(
     (nextVisible: boolean) => {
       setPopupMounted((prev) => {
         if (nextVisible) {
@@ -120,7 +120,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
         return prev;
       });
     },
-    [forceRender, destroyOnHidden],
+    [destroyOnHidden],
   );
 
   const handleVisibleChange = (nextVisible: boolean) => {
@@ -128,7 +128,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
     onVisibleChange?.(nextVisible);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (forceRender) {
       setPopupMounted(true);
       return;
