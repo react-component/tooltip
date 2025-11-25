@@ -60,7 +60,7 @@ export interface TooltipRef extends TriggerRef {}
 
 const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
   const {
-    trigger = ['hover', 'focus'],
+    trigger = ['hover'],
     mouseEnterDelay = 0,
     mouseLeaveDelay = 0.1,
     prefixCls = 'rc-tooltip',
