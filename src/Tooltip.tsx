@@ -94,10 +94,6 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
     extraProps.popupVisible = props.visible;
   }
 
-  const handleVisibleChange = (nextVisible: boolean) => {
-    onVisibleChange?.(nextVisible);
-  };
-
   // ========================= Arrow ==========================
   // Process arrow configuration
   const mergedArrow = React.useMemo(() => {
@@ -148,7 +144,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
       ref={triggerRef}
       popupAlign={align}
       getPopupContainer={getTooltipContainer}
-      onOpenChange={handleVisibleChange}
+      onOpenChange={onVisibleChange}
       afterOpenChange={afterVisibleChange}
       popupMotion={motion}
       defaultPopupVisible={defaultVisible}
