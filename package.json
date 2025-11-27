@@ -41,7 +41,7 @@
     "test": "rc-test"
   },
   "dependencies": {
-    "@rc-component/trigger": "^3.6.15",
+    "@rc-component/trigger": "^3.7.1",
     "@rc-component/util": "^1.3.0",
     "clsx": "^2.1.1"
   },

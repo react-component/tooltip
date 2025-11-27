@@ -114,7 +114,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
   }, [showArrow, classNames?.arrow, styles?.arrow, arrowContent]);
 
   // ======================== Children ========================
-  const getChildren = (open: boolean) => {
+  const getChildren: TriggerProps['children'] = ({ open }) => {
     const child = React.Children.only(children);
     const ariaProps: React.AriaAttributes = {
       'aria-describedby': overlay && open ? mergedId : undefined,
@@ -158,7 +158,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
       uniqueContainerStyle={styles?.uniqueContainer}
       {...extraProps}
     >
-      {({ open }) => getChildren(open)}
+      {getChildren}
     </Trigger>
   );
 });
