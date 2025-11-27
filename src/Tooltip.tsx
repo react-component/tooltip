@@ -4,7 +4,7 @@ import type { ActionType, AlignType } from '@rc-component/trigger/lib/interface'
 import useId from '@rc-component/util/lib/hooks/useId';
 import { clsx } from 'clsx';
 import * as React from 'react';
-import { useImperativeHandle, useRef, useEffect, useCallback } from 'react';
+import { useImperativeHandle, useRef, useState } from 'react';
 import { placements } from './placements';
 import Popup from './Popup';
 
@@ -90,54 +90,21 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
 
   const extraProps: Partial<TooltipProps & TriggerProps> = { ...restProps };
 
-  if ('visible' in props) {
+  const isControlled = 'visible' in props;
+
+  if (isControlled) {
     extraProps.popupVisible = props.visible;
   }
 
-  const isControlled = 'visible' in props;
-  const mergedVisible = props.visible;
-  const [popupMounted, setPopupMounted] = React.useState(() => {
-    if (forceRender) {
-      return true;
-    }
-    if (isControlled) {
-      return mergedVisible;
-    }
-    return defaultVisible;
-  });
-
-  const updatePopupMounted = useCallback(
-    (nextVisible: boolean) => {
-      setPopupMounted((prev) => {
-        if (nextVisible) {
-          return true;
-        }
-
-        if (destroyOnHidden) {
-          return false;
-        }
-
-        return prev;
-      });
-    },
-    [destroyOnHidden],
-  );
+  const [innerVisible, setInnerVisible] = useState(() => defaultVisible || false);
+  const mergedVisible = isControlled ? props.visible : innerVisible;
 
   const handleVisibleChange = (nextVisible: boolean) => {
-    updatePopupMounted(nextVisible);
+    if (!isControlled) {
+      setInnerVisible(nextVisible);
+    }
     onVisibleChange?.(nextVisible);
   };
-
-  useEffect(() => {
-    if (forceRender) {
-      setPopupMounted(true);
-      return;
-    }
-
-    if (isControlled) {
-      updatePopupMounted(mergedVisible);
-    }
-  }, [forceRender, isControlled, mergedVisible, updatePopupMounted]);
 
   // ========================= Arrow ==========================
   // Process arrow configuration
@@ -164,7 +131,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
     const originalProps = child?.props || {};
     const childProps = {
       ...originalProps,
-      'aria-describedby': overlay && popupMounted ? mergedId : null,
+      'aria-describedby': overlay && mergedVisible ? mergedId : null,
     };
     return React.cloneElement<any>(children, childProps) as any;
   };

@@ -502,7 +502,7 @@ describe('rc-tooltip', () => {
   });
 
   describe('children handling', () => {
-    it('should only set aria-describedby once popup is mounted', async () => {
+    it('should toggle aria-describedby with visibility', async () => {
       const { container } = render(
         <Tooltip trigger={['click']} overlay="tooltip content">
           <button>Click me</button>
@@ -519,7 +519,7 @@ describe('rc-tooltip', () => {
 
       fireEvent.click(btn);
       await waitFakeTimers();
-      expect(btn).toHaveAttribute('aria-describedby', describedby);
+      expect(btn).not.toHaveAttribute('aria-describedby');
     });
 
     it('should not pass aria-describedby when overlay is empty', () => {
@@ -542,17 +542,22 @@ describe('rc-tooltip', () => {
       expect(container.querySelector('button')).toHaveAttribute('aria-describedby');
     });
 
-    it('should set aria-describedby immediately when forceRender is true', () => {
+    it('should only set aria-describedby for forceRender after visible', async () => {
       const { container } = render(
-        <Tooltip forceRender overlay="tooltip content">
+        <Tooltip forceRender trigger={['click']} overlay="tooltip content">
           <button>Click me</button>
         </Tooltip>,
       );
 
-      expect(container.querySelector('button')).toHaveAttribute('aria-describedby');
+      const btn = container.querySelector('button');
+      expect(btn).not.toHaveAttribute('aria-describedby');
+
+      fireEvent.click(btn);
+      await waitFakeTimers();
+      expect(btn).toHaveAttribute('aria-describedby');
     });
 
-    it('should keep aria-describedby when controlled hidden without destroy', () => {
+    it('should remove aria-describedby when controlled hidden without destroy', () => {
       const overlay = 'tooltip content';
       const { container, rerender } = render(
         <Tooltip overlay={overlay} visible>
@@ -568,7 +573,7 @@ describe('rc-tooltip', () => {
         </Tooltip>,
       );
 
-      expect(container.querySelector('button')).toHaveAttribute('aria-describedby');
+      expect(container.querySelector('button')).not.toHaveAttribute('aria-describedby');
     });
 
     it('should remove aria-describedby when popup is destroyed on hide', async () => {
