@@ -4,7 +4,7 @@ import type { ActionType, AlignType } from '@rc-component/trigger/lib/interface'
 import useId from '@rc-component/util/lib/hooks/useId';
 import { clsx } from 'clsx';
 import * as React from 'react';
-import { useImperativeHandle, useRef, useState } from 'react';
+import { useImperativeHandle, useRef } from 'react';
 import { placements } from './placements';
 import Popup from './Popup';
 
@@ -16,13 +16,13 @@ export interface TooltipProps
     | 'onPopupAlign'
     | 'builtinPlacements'
     | 'fresh'
-    | 'children'
     | 'mouseLeaveDelay'
     | 'mouseEnterDelay'
     | 'prefixCls'
     | 'forceRender'
     | 'popupVisible'
   > {
+  children: React.ReactElement;
   // Style
   classNames?: Partial<Record<SemanticName, string>>;
   styles?: Partial<Record<SemanticName, React.CSSProperties>>;
@@ -90,19 +90,11 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
 
   const extraProps: Partial<TooltipProps & TriggerProps> = { ...restProps };
 
-  const isControlled = 'visible' in props;
-
-  if (isControlled) {
+  if ('visible' in props) {
     extraProps.popupVisible = props.visible;
   }
 
-  const [innerVisible, setInnerVisible] = useState(() => defaultVisible || false);
-  const mergedVisible = isControlled ? props.visible : innerVisible;
-
   const handleVisibleChange = (nextVisible: boolean) => {
-    if (!isControlled) {
-      setInnerVisible(nextVisible);
-    }
     onVisibleChange?.(nextVisible);
   };
 
@@ -126,14 +118,12 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
   }, [showArrow, classNames?.arrow, styles?.arrow, arrowContent]);
 
   // ======================== Children ========================
-  const getChildren = () => {
+  const getChildren = (open: boolean) => {
     const child = React.Children.only(children);
-    const originalProps = child?.props || {};
-    const childProps = {
-      ...originalProps,
-      'aria-describedby': overlay && mergedVisible ? mergedId : null,
+    const ariaProps: React.AriaAttributes = {
+      'aria-describedby': overlay && open ? mergedId : undefined,
     };
-    return React.cloneElement<any>(children, childProps) as any;
+    return React.cloneElement(child, ariaProps);
   };
 
   // ========================= Render =========================
@@ -172,7 +162,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
       uniqueContainerStyle={styles?.uniqueContainer}
       {...extraProps}
     >
-      {getChildren()}
+      {({ open }) => getChildren(open)}
     </Trigger>
   );
 });
