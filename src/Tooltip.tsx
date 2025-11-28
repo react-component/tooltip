@@ -79,7 +79,6 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
     showArrow = true,
     classNames,
     styles,
-    forceRender,
     ...restProps
   } = props;
 
@@ -148,7 +147,6 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
       afterOpenChange={afterVisibleChange}
       popupMotion={motion}
       defaultPopupVisible={defaultVisible}
-      forceRender={forceRender}
       autoDestroy={destroyOnHidden}
       mouseLeaveDelay={mouseLeaveDelay}
       popupStyle={styles?.root}
