@@ -502,19 +502,28 @@ describe('rc-tooltip', () => {
   });
 
   describe('children handling', () => {
-    it('should pass aria-describedby to child element when overlay exists', () => {
+    it('should set aria-describedby immediately when defaultVisible is true', () => {
       const { container } = render(
-        <Tooltip id="test-id" overlay="tooltip content">
+        <Tooltip defaultVisible overlay="tooltip content">
           <button>Click me</button>
         </Tooltip>,
       );
 
-      expect(container.querySelector('button')).toHaveAttribute('aria-describedby', 'test-id');
+      expect(container.querySelector('button')).toHaveAttribute('aria-describedby');
     });
 
-    it('should not pass aria-describedby when overlay is empty', () => {
-      const { container } = render(
-        <Tooltip id="test-id" overlay={null}>
+    it('should remove aria-describedby when controlled hidden', () => {
+      const overlay = 'tooltip content';
+      const { container, rerender } = render(
+        <Tooltip overlay={overlay} visible>
+          <button>Click me</button>
+        </Tooltip>,
+      );
+
+      expect(container.querySelector('button')).toHaveAttribute('aria-describedby');
+
+      rerender(
+        <Tooltip overlay={overlay} visible={false}>
           <button>Click me</button>
         </Tooltip>,
       );

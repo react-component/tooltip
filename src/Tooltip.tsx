@@ -16,13 +16,13 @@ export interface TooltipProps
     | 'onPopupAlign'
     | 'builtinPlacements'
     | 'fresh'
-    | 'children'
     | 'mouseLeaveDelay'
     | 'mouseEnterDelay'
     | 'prefixCls'
     | 'forceRender'
     | 'popupVisible'
   > {
+  children: React.ReactElement;
   // Style
   classNames?: Partial<Record<SemanticName, string>>;
   styles?: Partial<Record<SemanticName, React.CSSProperties>>;
@@ -113,14 +113,12 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
   }, [showArrow, classNames?.arrow, styles?.arrow, arrowContent]);
 
   // ======================== Children ========================
-  const getChildren = () => {
+  const getChildren: TriggerProps['children'] = ({ open }) => {
     const child = React.Children.only(children);
-    const originalProps = child?.props || {};
-    const childProps = {
-      ...originalProps,
-      'aria-describedby': overlay ? mergedId : null,
+    const ariaProps: React.AriaAttributes = {
+      'aria-describedby': overlay && open ? mergedId : undefined,
     };
-    return React.cloneElement<any>(children, childProps) as any;
+    return React.cloneElement(child, ariaProps);
   };
 
   // ========================= Render =========================
@@ -158,7 +156,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
       uniqueContainerStyle={styles?.uniqueContainer}
       {...extraProps}
     >
-      {getChildren()}
+      {getChildren}
     </Trigger>
   );
 });

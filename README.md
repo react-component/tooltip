@@ -1,4 +1,4 @@
-# rc-tooltip
+# @rc-component/tooltip
 
 React Tooltip
 
@@ -9,18 +9,16 @@ React Tooltip
 [![bundle size][bundlephobia-image]][bundlephobia-url]
 [![dumi][dumi-image]][dumi-url]
 
-[npm-image]: http://img.shields.io/npm/v/rc-tooltip.svg?style=flat-square
-[npm-url]: http://npmjs.org/package/rc-tooltip
-[travis-image]: https://img.shields.io/travis/react-component/tooltip/master?style=flat-square
-[travis-url]: https://travis-ci.com/react-component/tooltip
+[npm-image]: http://img.shields.io/npm/v/@rc-component/tooltip.svg?style=flat-square
+[npm-url]: http://npmjs.org/package/@rc-component/tooltip
 [github-actions-image]: https://github.com/react-component/tooltip/actions/workflows/react-component-ci.yml/badge.svg
 [github-actions-url]: https://github.com/react-component/tooltip/actions/workflows/react-component-ci.yml
 [codecov-image]: https://img.shields.io/codecov/c/github/react-component/tooltip/master.svg?style=flat-square
 [codecov-url]: https://app.codecov.io/gh/react-component/tooltip
-[download-image]: https://img.shields.io/npm/dm/rc-tooltip.svg?style=flat-square
-[download-url]: https://npmjs.org/package/rc-tooltip
-[bundlephobia-url]: https://bundlephobia.com/package/rc-tooltip
-[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/rc-tooltip
+[download-image]: https://img.shields.io/npm/dm/@rc-component/tooltip.svg?style=flat-square
+[download-url]: https://npmjs.org/package/@rc-component/tooltip
+[bundlephobia-url]: https://bundlephobia.com/package/@rc-component/tooltip
+[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/@rc-component/tooltip
 [dumi-url]: https://github.com/umijs/dumi
 [dumi-image]: https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square
 
@@ -36,18 +34,18 @@ React Tooltip
 
 ## Install
 
-[![rc-tooltip](https://nodei.co/npm/rc-tooltip.png)](https://npmjs.org/package/rc-tooltip)
+[![@rc-component/tooltip](https://nodei.co/npm/@rc-component/tooltip.png)](https://npmjs.org/package/@rc-component/tooltip)
 
 ## Usage
 
 ```js
-var Tooltip = require('rc-tooltip');
+var Tooltip = require('@rc-component/tooltip');
 var React = require('react');
 var ReactDOM = require('react-dom');
 
 // By default, the tooltip has no style.
 // Consider importing the stylesheet it comes with:
-// 'rc-tooltip/assets/bootstrap_white.css'
+// '@rc-component/tooltip/assets/bootstrap_white.css'
 
 ReactDOM.render(
   <Tooltip placement="left" trigger={['click']} overlay={<span>tooltip</span>}>
@@ -135,4 +133,4 @@ npm run coverage
 
 ## License
 
-`rc-tooltip` is released under the MIT license.
+`@rc-component/tooltip` is released under the MIT license.
