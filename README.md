@@ -89,7 +89,7 @@ Online demo: https://tooltip-react-component.vercel.app/
 | classNames          | classNames?: { root?: string; container?: string;};                     |                     | Semantic DOM class                                                                                                                                               |
 | styles              | styles?: {root?: React.CSSProperties;container?: React.CSSProperties;}; |                     | Semantic DOM styles                                                                                                                                              |
 
-### align.overflow
+### Align Overflow
 
 The `align` prop accepts an object that may include an `overflow` field to control how the tooltip adjusts when it overflows the visible area. This is powered by [dom-align](https://github.com/yiminghe/dom-align).
 
