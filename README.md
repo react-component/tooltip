@@ -83,11 +83,35 @@ Online demo: https://tooltip-react-component.vercel.app/
 | mouseLeaveDelay     | number                                                             | 0.1                 | delay time (in second) before tooltip hides when mouse leave                                                                                                     |
 | getTooltipContainer | (triggerNode: HTMLElement) => HTMLElement                          | () => document.body | get container of tooltip, default to body                                                                                                                        |
 | destroyOnHidden     | boolean                                                            | false               | destroy tooltip when it is hidden                                                                                                                                |
-| align               | object                                                             |                     | align config of tooltip. Please ref demo for usage example                                                                                                       |
+| align               | object                                                             |                     | align config of tooltip, ref [dom-align](https://github.com/yiminghe/dom-align). See [Align Overflow](#align-overflow) below                                     |
 | showArrow           | boolean \| object                                                  | false               | whether to show arrow of tooltip                                                                                                                                 |
 | zIndex              | number                                                             |                     | config popup tooltip zIndex                                                                                                                                      |
 | classNames          | classNames?: { root?: string; container?: string;};                     |                     | Semantic DOM class                                                                                                                                               |
 | styles              | styles?: {root?: React.CSSProperties;container?: React.CSSProperties;}; |                     | Semantic DOM styles                                                                                                                                              |
+
+### Align Overflow
+
+The `align` prop accepts an object that may include an `overflow` field to control how the tooltip adjusts when it overflows the visible area. This is powered by [dom-align](https://github.com/yiminghe/dom-align).
+
+| name             | type             | default | description                                                                                              |
+| ---------------- | ---------------- | ------- | -------------------------------------------------------------------------------------------------------- |
+| adjustX          | boolean \| number | false   | adjust tooltip position in the X direction when it overflows                                             |
+| adjustY          | boolean \| number | false   | adjust tooltip position in the Y direction when it overflows                                             |
+| alwaysByViewport | boolean          | false   | when `true`, always adjusts position based on the viewport rather than the scrollable parent container   |
+
+```jsx
+<Tooltip
+  placement="top"
+  align={{
+    overflow: { adjustX: true, adjustY: true, alwaysByViewport: true },
+  }}
+  overlay={<span>tooltip content</span>}
+>
+  <button>hover me</button>
+</Tooltip>
+```
+
+When `alwaysByViewport` is `true`, the tooltip will reposition itself to stay within the browser viewport. This is particularly useful when the trigger element is inside a scrollable container and you want the tooltip to always be visible on screen.
 
 ## Important Note
 
