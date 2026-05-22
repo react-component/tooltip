@@ -1,7 +1,12 @@
-import type { ArrowType, TriggerProps, TriggerRef } from '@rc-component/trigger';
+import type {
+  ActionType,
+  AlignType,
+  ArrowType,
+  TriggerProps,
+  TriggerRef,
+} from '@rc-component/trigger';
 import Trigger from '@rc-component/trigger';
-import type { ActionType, AlignType } from '@rc-component/trigger/lib/interface';
-import useId from '@rc-component/util/lib/hooks/useId';
+import { useId } from '@rc-component/util';
 import { clsx } from 'clsx';
 import * as React from 'react';
 import { useImperativeHandle, useRef } from 'react';
@@ -10,18 +15,17 @@ import Popup from './Popup';
 
 export type SemanticName = 'root' | 'arrow' | 'container' | 'uniqueContainer';
 
-export interface TooltipProps
-  extends Pick<
-    TriggerProps,
-    | 'onPopupAlign'
-    | 'builtinPlacements'
-    | 'fresh'
-    | 'mouseLeaveDelay'
-    | 'mouseEnterDelay'
-    | 'prefixCls'
-    | 'forceRender'
-    | 'popupVisible'
-  > {
+export interface TooltipProps extends Pick<
+  TriggerProps,
+  | 'onPopupAlign'
+  | 'builtinPlacements'
+  | 'fresh'
+  | 'mouseLeaveDelay'
+  | 'mouseEnterDelay'
+  | 'prefixCls'
+  | 'forceRender'
+  | 'popupVisible'
+> {
   children: React.ReactElement;
   // Style
   classNames?: Partial<Record<SemanticName, string>>;

@@ -1,10 +1,11 @@
-import type { ActionType } from '@rc-component/trigger';
-import type { OffsetType } from '@rc-component/trigger/lib/interface';
+import type { ActionType, AlignType } from '@rc-component/trigger';
 import Tooltip from 'rc-tooltip';
 import type { CSSProperties } from 'react';
 import React, { Component } from 'react';
 import '../../assets/bootstrap.less';
 import { placements } from '../../src/placements';
+
+type OffsetType = NonNullable<AlignType['offset']>[number];
 
 interface TestState {
   destroyOnHidden: boolean;
