@@ -1,10 +1,11 @@
 import type { ActionType } from '@rc-component/trigger';
-import type { OffsetType } from '@rc-component/trigger/lib/interface';
 import Tooltip from 'rc-tooltip';
 import type { CSSProperties } from 'react';
 import React, { Component } from 'react';
 import '../../assets/bootstrap.less';
 import { placements } from '../../src/placements';
+
+type OffsetType = string | number;
 
 interface TestState {
   destroyOnHidden: boolean;
