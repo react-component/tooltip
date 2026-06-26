@@ -1,8 +1,5 @@
 ---
-hero:
-  title: rc-tooltip
-  description: React Tooltip
+title: '@rc-component/tooltip'
 ---
-
 
 <embed src="../README.md"></embed>

@@ -9,22 +9,13 @@
     "esModuleInterop": true,
     "types": ["@testing-library/jest-dom"],
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@@/*": [
-        ".dumi/tmp/*"
-      ],
-      "rc-tooltip": [
-        "src/index.tsx"
-      ]
+      "@/*": ["src/*"],
+      "@@/*": [".dumi/tmp/*"],
+      "@rc-component/tooltip": ["src/index.tsx"],
+      "@rc-component/tooltip/es": ["src"],
+      "@rc-component/tooltip/es/*": ["src/*"]
     }
   },
-  "include": [
-    ".dumirc.ts",
-    "./src/**/*.ts",
-    "./src/**/*.tsx",
-    "./docs/**/*.tsx",
-    "./tests/**/*.tsx"
-  ]
+  "include": [".dumirc.ts", "src", "tests", "docs/examples"],
+  "exclude": ["docs-dist", "lib", "es"]
 }

@@ -1,7 +1,7 @@
 import { UniqueProvider } from '@rc-component/trigger';
 import React from 'react';
 import '../../assets/bootstrap.less';
-import Tooltip from '../../src';
+import Tooltip from '@rc-component/tooltip';
 
 const TwoButtonsDemo = () => (
   <UniqueProvider>
