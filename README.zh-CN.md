@@ -64,22 +64,22 @@ npm start
 | `afterVisibleChange`  | `(visible: boolean) => void`                         | -                   | 弹层窗口可见性更改后调用。                     |
 | `align`               | AlignType                                            | `{}`                | 额外弹层对齐配置。                              |
 | `arrowContent`        | React.ReactNode                                      | -                   | 自定义箭头内容。                                      |
-| `builtinPlacements`   | TriggerProps['builtinPlacements']                    | built in placements | 放置图传递给触发器。                           |
+| `builtinPlacements`   | TriggerProps['builtinPlacements']                    | built-in placements | 传递给触发器的放置映射。                           |
 | `children`            | React.ReactElement                                   | -                   | 所需的触发元素。                                  |
-| `classNames`          | `Partial<Record<SemanticName, string>>`              | -                   | 根节点、箭头节点和容器节点的语义className称。 |
+| `classNames`          | `Partial<Record<SemanticName, string>>`              | -                   | 根节点、箭头节点和容器节点的语义化类名。 |
 | `defaultVisible`      | boolean                                              | -                   | 初始不受控制的可见状态。                        |
 | `destroyOnHidden`     | boolean                                              | false               | 隐藏时销毁弹层 DOM。                             |
 | `fresh`               | boolean                                              | -                   | 关闭时保持弹层内容新鲜。                      |
-| `getTooltipContainer` | `(node: HTMLElement) => HTMLElement`                 | -                   | 解决弹层容器。                                   |
+| `getTooltipContainer` | `(node: HTMLElement) => HTMLElement`                 | -                   | 指定弹层容器。                                   |
 | `id`                  | string                                               | generated id        | 用于辅助功能的工具提示 ID。                         |
 | `motion`              | TriggerProps['popupMotion']                          | -                   | 弹层运动配置。                                       |
-| `mouseEnterDelay`     | number                                               | 0                   | 在鼠标输入时显示之前的延迟（以秒为单位）。            |
-| `mouseLeaveDelay`     | number                                               | 0.1                 | 在鼠标离开隐藏之前延迟几秒钟。             |
+| `mouseEnterDelay`     | number                                               | 0                   | 鼠标移入后显示的延迟（秒）。            |
+| `mouseLeaveDelay`     | number                                               | 0.1                 | 鼠标移出后隐藏的延迟（秒）。             |
 | `onPopupAlign`        | TriggerProps['onPopupAlign']                         | -                   | 弹层对齐后调用。                              |
 | `onVisibleChange`     | `(visible: boolean) => void`                         | -                   | 当可见性发生变化时调用。                            |
 | `overlay`             | React.ReactNode \| `() => React.ReactNode`           | -                   | 提示内容。                                           |
-| `placement`           | string                                               | `'right'`           | 弹层窗口放置。                                           |
-| `prefixCls`           | string                                               | `'rc-tooltip'`      | 前缀className。                                         |
+| `placement`           | string                                               | `'right'`           | 弹层放置。                                           |
+| `prefixCls`           | string                                               | `'rc-tooltip'`      | 前缀 className。                                         |
 | `showArrow`           | boolean \| ArrowType                                 | true                | 是否显示箭头，或提供箭头配置。             |
 | `styles`              | `Partial<Record<SemanticName, React.CSSProperties>>` | -                   | 根节点、箭头节点和容器节点的语义样式。      |
 | `trigger`             | ActionType \| ActionType[]                           | `['hover']`         | 显示提示的触发行为。                             |

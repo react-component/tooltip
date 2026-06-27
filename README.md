@@ -64,7 +64,7 @@ Then open `http://localhost:8000`.
 | `afterVisibleChange`  | `(visible: boolean) => void`                         | -                   | Called after popup visibility changes.                     |
 | `align`               | AlignType                                            | `{}`                | Extra popup alignment config.                              |
 | `arrowContent`        | React.ReactNode                                      | -                   | Custom arrow content.                                      |
-| `builtinPlacements`   | TriggerProps['builtinPlacements']                    | built in placements | Placement map passed to trigger.                           |
+| `builtinPlacements`   | TriggerProps['builtinPlacements']                    | built-in placements | Placement map passed to trigger.                           |
 | `children`            | React.ReactElement                                   | -                   | Required trigger element.                                  |
 | `classNames`          | `Partial<Record<SemanticName, string>>`              | -                   | Semantic class names for root, arrow, and container nodes. |
 | `defaultVisible`      | boolean                                              | -                   | Initial uncontrolled visible state.                        |
