@@ -1,7 +1,7 @@
 <div align="center">
   <h1>@rc-component/tooltip</h1>
-  <p><sub>Part of the Ant Design ecosystem.</sub></p>
-  <p>💡 Positioned React tooltip for hover, focus, click, and controlled popup flows.</p>
+  <p><sub>Ant Design 生态的一部分。</sub></p>
+  <p>💡 React 文字提示组件，基于 trigger 定位和弹层能力构建。</p>
 
   <p>
     <a href="https://www.npmjs.com/package/@rc-component/tooltip"><img src="https://img.shields.io/npm/v/@rc-component/tooltip.svg?style=flat-square" alt="npm version" /></a>
@@ -13,23 +13,23 @@
   </p>
 </div>
 
-<p align="center">English | <a href="./README.zh-CN.md">简体中文</a></p>
+<p align="center"><a href="./README.md">English</a> | 简体中文</p>
 
 
-## Highlights
+## 特性
 
-- Supports hover, focus, click, and controlled visibility through one trigger layer.
-- Provides built-in placements, custom alignment, delays, arrows, and popup motion.
-- Exposes semantic `classNames` and `styles` slots for root, arrow, and container nodes.
-- Keeps accessibility wiring through generated tooltip ids and `aria-describedby`.
+- 支持 hover, focus, click, and controlled visibility through one trigger layer.
+- 提供 built-in placements, custom alignment, delays, arrows, and popup motion.
+- 暴露 semantic `classNames` and `styles` slots for root, arrow, and container nodes.
+- 保留 accessibility wiring through generated tooltip ids and `aria-describedby`.
 
-## Install
+## 安装
 
 ```bash
 npm install @rc-component/tooltip
 ```
 
-## Usage
+## 使用
 
 ```tsx pure
 import Tooltip from '@rc-component/tooltip';
@@ -48,7 +48,7 @@ Online preview: https://tooltip.react-component.vercel.app/
 
 ### Tooltip
 
-| Name                  | Type                                                 | Default             | Description                                                |
+| 名称                  | 类型                                                 | 默认值             | 说明                                                |
 | --------------------- | ---------------------------------------------------- | ------------------- | ---------------------------------------------------------- |
 | `afterVisibleChange`  | `(visible: boolean) => void`                         | -                   | Called after popup visibility changes.                     |
 | `align`               | AlignType                                            | `{}`                | Extra popup alignment config.                              |
@@ -76,7 +76,7 @@ Online preview: https://tooltip.react-component.vercel.app/
 | `visible`             | boolean                                              | -                   | Controlled visible state.                                  |
 | `zIndex`              | number                                               | -                   | Popup z-index.                                             |
 
-## Development
+## 本地开发
 
 ```bash
 npm install
@@ -87,7 +87,7 @@ npm run compile
 npm run build
 ```
 
-## Release
+## 发布
 
 ```bash
 npm run prepublishOnly
@@ -95,6 +95,6 @@ npm run prepublishOnly
 
 The release flow is handled by `@rc-component/np` through the `rc-np` command after the package build.
 
-## License
+## 许可证
 
 @rc-component/tooltip is released under the [MIT](./LICENSE) license.
