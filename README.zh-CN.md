@@ -1,7 +1,6 @@
 <div align="center">
   <h1>@rc-component/tooltip</h1>
-  <p><sub>Ant Design 生态的一部分。</sub></p>
-  <img alt="Ant Design" height="32" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
+  <p><sub><img alt="Ant Design" height="14" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" style="vertical-align: -0.125em;" /> Ant Design 生态的一部分。</sub></p>
   <p>💡 React 文字提示组件，基于 trigger 定位和弹层能力构建。</p>
 
   <p>
@@ -19,10 +18,10 @@
 
 ## 特性
 
-- 支持 hover, focus, click, and controlled visibility through one trigger layer.
-- 提供 built-in placements, custom alignment, delays, arrows, and popup motion.
-- 暴露 semantic `classNames` and `styles` slots for root, arrow, and container nodes.
-- 保留 accessibility wiring through generated tooltip ids and `aria-describedby`.
+- 支持悬停、聚焦、单击以及通过一个触发层控制可见性。
+- 提供内置放置、自定义对齐、延迟、箭头和弹层动作。
+- 为根节点、箭头节点和容器节点引入语义 `classNames` 和 `styles` 槽。
+- 通过生成的工具提示 id 和 `aria-describedby` 保留可访问性连接。
 
 ## 安装
 
@@ -43,7 +42,7 @@ export default () => (
 );
 ```
 
-Online preview: https://tooltip.react-component.vercel.app/
+在线预览：https://tooltip.react-component.vercel.app/
 
 ## API
 
@@ -51,31 +50,31 @@ Online preview: https://tooltip.react-component.vercel.app/
 
 | 名称                  | 类型                                                 | 默认值             | 说明                                                |
 | --------------------- | ---------------------------------------------------- | ------------------- | ---------------------------------------------------------- |
-| `afterVisibleChange`  | `(visible: boolean) => void`                         | -                   | Called after popup visibility changes.                     |
-| `align`               | AlignType                                            | `{}`                | Extra popup alignment config.                              |
-| `arrowContent`        | React.ReactNode                                      | -                   | Custom arrow content.                                      |
-| `builtinPlacements`   | TriggerProps['builtinPlacements']                    | built in placements | Placement map passed to trigger.                           |
-| `children`            | React.ReactElement                                   | -                   | Required trigger element.                                  |
-| `classNames`          | `Partial<Record<SemanticName, string>>`              | -                   | Semantic class names for root, arrow, and container nodes. |
-| `defaultVisible`      | boolean                                              | -                   | Initial uncontrolled visible state.                        |
-| `destroyOnHidden`     | boolean                                              | false               | Destroy popup DOM when hidden.                             |
-| `fresh`               | boolean                                              | -                   | Keep popup content fresh when closed.                      |
-| `getTooltipContainer` | `(node: HTMLElement) => HTMLElement`                 | -                   | Resolve popup container.                                   |
-| `id`                  | string                                               | generated id        | Tooltip id used for accessibility.                         |
-| `motion`              | TriggerProps['popupMotion']                          | -                   | Popup motion config.                                       |
-| `mouseEnterDelay`     | number                                               | 0                   | Delay in seconds before showing on mouse enter.            |
-| `mouseLeaveDelay`     | number                                               | 0.1                 | Delay in seconds before hiding on mouse leave.             |
-| `onPopupAlign`        | TriggerProps['onPopupAlign']                         | -                   | Called after popup alignment.                              |
-| `onVisibleChange`     | `(visible: boolean) => void`                         | -                   | Called when visibility changes.                            |
-| `overlay`             | React.ReactNode \| `() => React.ReactNode`           | -                   | Tooltip content.                                           |
-| `placement`           | string                                               | `'right'`           | Popup placement.                                           |
-| `prefixCls`           | string                                               | `'rc-tooltip'`      | Prefix class name.                                         |
-| `showArrow`           | boolean \| ArrowType                                 | true                | Whether to show arrow or provide arrow config.             |
-| `styles`              | `Partial<Record<SemanticName, React.CSSProperties>>` | -                   | Semantic styles for root, arrow, and container nodes.      |
-| `trigger`             | ActionType \| ActionType[]                           | `['hover']`         | Actions that show the tooltip.                             |
-| `unique`              | TriggerProps['unique']                               | -                   | Experimental unique container reuse config.                |
-| `visible`             | boolean                                              | -                   | Controlled visible state.                                  |
-| `zIndex`              | number                                               | -                   | Popup z-index.                                             |
+| `afterVisibleChange`  | `(visible: boolean) => void`                         | -                   | 弹层窗口可见性更改后调用。                     |
+| `align`               | AlignType                                            | `{}`                | 额外弹层对齐配置。                              |
+| `arrowContent`        | React.ReactNode                                      | -                   | 自定义箭头内容。                                      |
+| `builtinPlacements`   | TriggerProps['builtinPlacements']                    | built in placements | 放置图传递给触发器。                           |
+| `children`            | React.ReactElement                                   | -                   | 所需的触发元素。                                  |
+| `classNames`          | `Partial<Record<SemanticName, string>>`              | -                   | 根节点、箭头节点和容器节点的语义className称。 |
+| `defaultVisible`      | boolean                                              | -                   | 初始不受控制的可见状态。                        |
+| `destroyOnHidden`     | boolean                                              | false               | 隐藏时销毁弹层 DOM。                             |
+| `fresh`               | boolean                                              | -                   | 关闭时保持弹层内容新鲜。                      |
+| `getTooltipContainer` | `(node: HTMLElement) => HTMLElement`                 | -                   | 解决弹层容器。                                   |
+| `id`                  | string                                               | generated id        | 用于辅助功能的工具提示 ID。                         |
+| `motion`              | TriggerProps['popupMotion']                          | -                   | 弹层运动配置。                                       |
+| `mouseEnterDelay`     | number                                               | 0                   | 在鼠标输入时显示之前的延迟（以秒为单位）。            |
+| `mouseLeaveDelay`     | number                                               | 0.1                 | 在鼠标离开隐藏之前延迟几秒钟。             |
+| `onPopupAlign`        | TriggerProps['onPopupAlign']                         | -                   | 弹层对齐后调用。                              |
+| `onVisibleChange`     | `(visible: boolean) => void`                         | -                   | 当可见性发生变化时调用。                            |
+| `overlay`             | React.ReactNode \| `() => React.ReactNode`           | -                   | 提示内容。                                           |
+| `placement`           | string                                               | `'right'`           | 弹层窗口放置。                                           |
+| `prefixCls`           | string                                               | `'rc-tooltip'`      | 前缀className。                                         |
+| `showArrow`           | boolean \| ArrowType                                 | true                | 是否显示箭头，或提供箭头配置。             |
+| `styles`              | `Partial<Record<SemanticName, React.CSSProperties>>` | -                   | 根节点、箭头节点和容器节点的语义样式。      |
+| `trigger`             | ActionType \| ActionType[]                           | `['hover']`         | 显示提示的触发行为。                             |
+| `unique`              | TriggerProps['unique']                               | -                   | 实验性独特的容器重用配置。                |
+| `visible`             | boolean                                              | -                   | 受控可见状态。                                  |
+| `zIndex`              | number                                               | -                   | 弹层 z 索引。                                             |
 
 ## 本地开发
 
@@ -94,8 +93,8 @@ npm run build
 npm run prepublishOnly
 ```
 
-The release flow is handled by `@rc-component/np` through the `rc-np` command after the package build.
+包构建完成后，发布流程由 `@rc-component/np` 通过 `rc-np` 命令处理。
 
 ## 许可证
 
-@rc-component/tooltip is released under the [MIT](./LICENSE) license.
+@rc-component/tooltip 基于 [MIT](./LICENSE) 许可证发布。
