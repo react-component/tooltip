@@ -1,6 +1,7 @@
 <div align="center">
   <h1>@rc-component/tooltip</h1>
   <p><sub>Part of the Ant Design ecosystem.</sub></p>
+  <img alt="Ant Design" height="32" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
   <p>💡 Positioned React tooltip for hover, focus, click, and controlled popup flows.</p>
 
   <p>
