@@ -46,3 +46,6 @@ tmp/
 
 bun.lockb
 bun.lock
+coverage
+.dumi/tmp
+.dumi/tmp-production
