@@ -4,12 +4,12 @@
   <p>💡 Positioned React tooltip for hover, focus, click, and controlled popup flows.</p>
 
   <p>
-    <a href="https://www.npmjs.com/package/@rc-component/tooltip"><img src="https://img.shields.io/npm/v/@rc-component/tooltip.svg?style=flat-square" alt="npm version" /></a>
-    <a href="https://www.npmjs.com/package/@rc-component/tooltip"><img src="https://img.shields.io/npm/dm/@rc-component/tooltip.svg?style=flat-square" alt="npm downloads" /></a>
-    <a href="https://github.com/react-component/tooltip/actions"><img src="https://github.com/react-component/tooltip/actions/workflows/react-component-ci.yml/badge.svg" alt="CI" /></a>
-    <a href="https://codecov.io/gh/react-component/tooltip"><img src="https://img.shields.io/codecov/c/github/react-component/tooltip/master.svg?style=flat-square" alt="Codecov" /></a>
-    <a href="https://bundlephobia.com/package/@rc-component/tooltip"><img src="https://badgen.net/bundlephobia/minzip/@rc-component/tooltip" alt="bundle size" /></a>
-    <a href="https://github.com/umijs/dumi"><img src="https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square" alt="dumi" /></a>
+    <a href="https://npmjs.org/package/@rc-component/tooltip"><img alt="NPM version" src="https://img.shields.io/npm/v/@rc-component/tooltip.svg?style=flat-square"></a>
+    <a href="https://npmjs.org/package/@rc-component/tooltip"><img alt="npm downloads" src="https://img.shields.io/npm/dm/@rc-component/tooltip.svg?style=flat-square"></a>
+    <a href="https://github.com/react-component/tooltip/actions/workflows/react-component-ci.yml"><img alt="build status" src="https://github.com/react-component/tooltip/actions/workflows/react-component-ci.yml/badge.svg"></a>
+    <a href="https://app.codecov.io/gh/react-component/tooltip"><img alt="Codecov" src="https://img.shields.io/codecov/c/github/react-component/tooltip/master.svg?style=flat-square"></a>
+    <a href="https://bundlephobia.com/package/@rc-component/tooltip"><img alt="bundle size" src="https://img.shields.io/bundlephobia/minzip/@rc-component/tooltip?style=flat-square"></a>
+    <a href="https://github.com/umijs/dumi"><img alt="dumi" src="https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square"></a>
   </p>
 </div>
 
