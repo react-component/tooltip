@@ -10,11 +10,11 @@
   ],
   "homepage": "https://react-component.github.io/tooltip",
   "bugs": {
-    "url": "http://github.com/react-component/tooltip/issues"
+    "url": "https://github.com/react-component/tooltip/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:react-component/tooltip.git"
+    "url": "https://github.com/react-component/tooltip.git"
   },
   "license": "MIT",
   "maintainers": [
@@ -74,5 +74,8 @@
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   },
-  "types": "./lib/index.d.ts"
+  "types": "./lib/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  }
 }
