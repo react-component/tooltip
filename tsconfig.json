@@ -7,7 +7,9 @@
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "types": ["@testing-library/jest-dom"],
+    "types": [
+      "@testing-library/jest-dom"
+    ],
     "paths": {
       "@/*": [
         "src/*"
@@ -15,16 +17,28 @@
       "@@/*": [
         ".dumi/tmp/*"
       ],
-      "rc-tooltip": [
+      "@rc-component/tooltip": [
         "src/index.tsx"
+      ],
+      "@rc-component/tooltip/es": [
+        "src"
+      ],
+      "@rc-component/tooltip/es/*": [
+        "src/*"
       ]
-    }
+    },
+    "ignoreDeprecations": "5.0"
   },
   "include": [
     ".dumirc.ts",
-    "./src/**/*.ts",
-    "./src/**/*.tsx",
-    "./docs/**/*.tsx",
-    "./tests/**/*.tsx"
+    ".fatherrc.ts",
+    "src",
+    "tests",
+    "docs/examples"
+  ],
+  "exclude": [
+    "docs-dist",
+    "lib",
+    "es"
   ]
 }

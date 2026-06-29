@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import Tooltip from 'rc-tooltip';
+import Tooltip from '@rc-component/tooltip';
 import '../../assets/bootstrap_white.less';
 
 const text = <span>Tooltip Text</span>;

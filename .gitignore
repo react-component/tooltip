@@ -1,4 +1,3 @@
-.storybook
 *.iml
 *.log
 *.log.*
@@ -27,19 +26,26 @@ assets/**/*.css
 build
 lib
 es
-coverage
+/coverage
 yarn.lock
 package-lock.json
 pnpm-lock.yaml
+.doc
+docs-dist
+.vercel
+.storybook
+tmp/
+.history
 
 # umi
 .umi
 .umi-production
 .umi-test
 .env.local
-
-# dumi
-.dumi/tmp
-.dumi/tmp-production
+.dumi/
 
 bun.lockb
+bun.lock
+coverage
+.dumi/tmp
+.dumi/tmp-production

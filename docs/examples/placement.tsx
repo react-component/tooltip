@@ -1,7 +1,7 @@
 import React from 'react';
-import Tooltip from 'rc-tooltip';
+import Tooltip from '@rc-component/tooltip';
 import '../../assets/bootstrap.less';
-import Popup from '../../src/Popup';
+import Popup from '@rc-component/tooltip/es/Popup';
 
 const text = <span>Tooltip Text</span>;
 

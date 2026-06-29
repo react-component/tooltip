@@ -1,4 +1,4 @@
-import Tooltip from 'rc-tooltip';
+import Tooltip from '@rc-component/tooltip';
 import React from 'react';
 import '../../assets/bootstrap_white.less';
 

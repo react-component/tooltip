@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Tooltip from 'rc-tooltip';
+import Tooltip from '@rc-component/tooltip';
 import '../../assets/bootstrap.less';
 
 function preventDefault(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {

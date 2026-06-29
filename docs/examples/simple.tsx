@@ -1,9 +1,9 @@
 import type { ActionType } from '@rc-component/trigger';
-import Tooltip from 'rc-tooltip';
+import Tooltip from '@rc-component/tooltip';
 import type { CSSProperties } from 'react';
 import React, { Component } from 'react';
 import '../../assets/bootstrap.less';
-import { placements } from '../../src/placements';
+import { placements } from '@rc-component/tooltip/es/placements';
 
 type OffsetType = string | number;
 

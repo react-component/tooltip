@@ -1,27 +1,27 @@
 {
   "name": "@rc-component/tooltip",
   "version": "1.4.0",
-  "description": "React Tooltip",
+  "description": "Tooltip UI component for React",
   "keywords": [
     "react",
     "react-component",
     "react-tooltip",
     "tooltip"
   ],
-  "homepage": "http://github.com/react-component/tooltip",
+  "homepage": "https://react-component.github.io/tooltip",
   "bugs": {
-    "url": "http://github.com/react-component/tooltip/issues"
+    "url": "https://github.com/react-component/tooltip/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:react-component/tooltip.git"
+    "url": "https://github.com/react-component/tooltip.git"
   },
   "license": "MIT",
   "maintainers": [
     "yiminghe@gmail.com"
   ],
-  "main": "lib/index",
-  "module": "es/index",
+  "main": "./lib/index",
+  "module": "./es/index",
   "files": [
     "lib",
     "es",
@@ -29,16 +29,20 @@
     "assets/*.less"
   ],
   "scripts": {
+    "build": "npm run compile && npm run docs:build",
     "compile": "father build && lessc assets/bootstrap.less assets/bootstrap.css && lessc assets/bootstrap_white.less assets/bootstrap_white.css",
+    "coverage": "rc-test --coverage",
     "docs:build": "dumi build",
-    "docs:deploy": "npm run docs:build && gh-pages -d dist",
+    "docs:deploy": "gh-pages -d docs-dist",
+    "deploy": "npm run gh-pages",
+    "gh-pages": "npm run compile && cross-env GH_PAGES=1 npm run docs:build && npm run docs:deploy",
     "lint": "eslint src/ --ext .tsx,.ts,.jsx,.js",
-    "now-build": "npm run docs:build",
-    "prepare": "dumi setup",
     "prepublishOnly": "npm run compile && rc-np",
-    "postpublish": "npm run docs:build && npm run docs:deploy",
+    "prettier": "prettier --write --ignore-unknown .",
     "start": "dumi dev",
-    "test": "rc-test"
+    "test": "rc-test",
+    "tsc": "tsc --noEmit",
+    "prepare": "husky"
   },
   "dependencies": {
     "@rc-component/trigger": "^3.7.1",
@@ -47,27 +51,37 @@
   },
   "devDependencies": {
     "@rc-component/father-plugin": "^2.2.0",
-    "@rc-component/np": "^1.0.3",
+    "@rc-component/np": "^1.0.4",
     "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.0",
-    "@types/jest": "^29.4.0",
-    "@types/node": "^22.15.18",
-    "@types/react": "^19.1.4",
-    "@types/react-dom": "^19.1.5",
-    "@types/warning": "^3.0.0",
-    "dumi": "^2.2.13",
-    "eslint": "^8.56.0",
-    "father": "^4.0.0",
-    "gh-pages": "^6.1.1",
-    "less": "^4.1.1",
-    "prettier": "^3.6.2",
-    "rc-test": "^7.0.9",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "typescript": "^4.0.5"
+    "@testing-library/react": "^15.0.7",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^26.0.1",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@types/warning": "^3.0.4",
+    "dumi": "^2.4.35",
+    "eslint": "^8.57.1",
+    "father": "^4.6.23",
+    "gh-pages": "^6.3.0",
+    "less": "^4.6.7",
+    "prettier": "^3.9.0",
+    "rc-test": "^7.1.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.9.3",
+    "cross-env": "^10.1.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
+  },
+  "types": "./es/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "lint-staged": {
+    "*": "prettier --write --ignore-unknown"
   }
 }

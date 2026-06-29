@@ -1,4 +1,4 @@
-import Tooltip from 'rc-tooltip';
+import Tooltip from '@rc-component/tooltip';
 import React, { Component } from 'react';
 
 import '../../assets/bootstrap.less';
