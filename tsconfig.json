@@ -1,37 +1,36 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "moduleResolution": "node",
-    "baseUrl": "./",
+    "moduleResolution": "bundler",
     "jsx": "react",
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "paths": {
       "@/*": [
-        "src/*"
+        "./src/*"
       ],
       "@@/*": [
-        ".dumi/tmp/*"
+        "./.dumi/tmp/*"
       ],
       "@rc-component/tooltip": [
-        "src/index.tsx"
+        "./src/index.tsx"
       ],
       "@rc-component/tooltip/es": [
-        "src"
+        "./src"
       ],
       "@rc-component/tooltip/es/*": [
-        "src/*"
+        "./src/*"
       ]
     },
-    "ignoreDeprecations": "6.0",
     "noImplicitAny": false,
     "strictNullChecks": false,
     "strictPropertyInitialization": false,
     "strictFunctionTypes": false,
     "strict": false,
     "noImplicitThis": false,
-    "strictBindCallApply": false
+    "strictBindCallApply": false,
+    "module": "ESNext"
   },
   "include": [
     "react-compat.d.ts",
