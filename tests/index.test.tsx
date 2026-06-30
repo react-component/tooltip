@@ -1,5 +1,6 @@
+import { fireEvent } from '@testing-library/dom';
 import { UniqueProvider } from '@rc-component/trigger';
-import { act, fireEvent, render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import React from 'react';
 import Tooltip, { type TooltipRef } from '../src';
 
