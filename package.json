@@ -86,8 +86,8 @@
     "typescript": "^6.0.3"
   },
   "peerDependencies": {
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
   "types": "./es/index.d.ts",
   "publishConfig": {
