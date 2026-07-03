@@ -1,35 +1,33 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "moduleResolution": "node",
-    "baseUrl": "./",
+    "moduleResolution": "bundler",
     "jsx": "react",
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "types": [
-      "@testing-library/jest-dom"
-    ],
     "paths": {
       "@/*": [
-        "src/*"
+        "./src/*"
       ],
       "@@/*": [
-        ".dumi/tmp/*"
+        "./.dumi/tmp/*"
       ],
       "@rc-component/tooltip": [
-        "src/index.tsx"
+        "./src/index.tsx"
       ],
       "@rc-component/tooltip/es": [
-        "src"
+        "./src"
       ],
       "@rc-component/tooltip/es/*": [
-        "src/*"
+        "./src/*"
       ]
     },
-    "ignoreDeprecations": "5.0"
+    "strict": false,
+    "module": "ESNext"
   },
   "include": [
+    "global.d.ts",
     ".dumirc.ts",
     ".fatherrc.ts",
     "src",
