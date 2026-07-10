@@ -304,6 +304,32 @@ describe('rc-tooltip', () => {
     expect(container.querySelector('.x-content')).toBeTruthy();
   });
 
+  it('temporarily hides while disabled and restores without mouse leave', () => {
+    const App = () => {
+      const [disabled, setDisabled] = React.useState(false);
+
+      return (
+        <Tooltip disabled={disabled} overlay="Tooltip content">
+          <button type="button" onClick={() => setDisabled((value) => !value)}>
+            Toggle disabled
+          </button>
+        </Tooltip>
+      );
+    };
+
+    const { container } = render(<App />);
+    const button = container.querySelector('button');
+
+    fireEvent.mouseEnter(button);
+    expect(container.querySelector('.rc-tooltip')).not.toHaveClass('rc-tooltip-hidden');
+
+    fireEvent.click(button);
+    expect(container.querySelector('.rc-tooltip')).toHaveClass('rc-tooltip-hidden');
+
+    fireEvent.click(button);
+    expect(container.querySelector('.rc-tooltip')).not.toHaveClass('rc-tooltip-hidden');
+  });
+
   it('ref support nativeElement', () => {
     const nodeRef = React.createRef<TooltipRef>();
 

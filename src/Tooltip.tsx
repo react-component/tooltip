@@ -19,6 +19,7 @@ export interface TooltipProps extends Pick<
   TriggerProps,
   | 'onPopupAlign'
   | 'builtinPlacements'
+  | 'disabled'
   | 'fresh'
   | 'mouseLeaveDelay'
   | 'mouseEnterDelay'
