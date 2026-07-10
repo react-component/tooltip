@@ -45,7 +45,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@rc-component/trigger": "^3.7.1",
+    "@rc-component/trigger": "^3.10.0",
     "@rc-component/util": "^1.11.1",
     "clsx": "^2.1.1"
   },

@@ -69,6 +69,7 @@ Then open `http://localhost:8000`.
 | `classNames`          | `Partial<Record<SemanticName, string>>`              | -                   | Semantic class names for root, arrow, and container nodes. |
 | `defaultVisible`      | boolean                                              | -                   | Initial uncontrolled visible state.                        |
 | `destroyOnHidden`     | boolean                                              | false               | Destroy popup DOM when hidden.                             |
+| `disabled`            | boolean                                              | false               | Temporarily hide tooltip while preserving visible state.   |
 | `fresh`               | boolean                                              | -                   | Keep popup content fresh when closed.                      |
 | `getTooltipContainer` | `(node: HTMLElement) => HTMLElement`                 | -                   | Resolve popup container.                                   |
 | `id`                  | string                                               | generated id        | Tooltip id used for accessibility.                         |
