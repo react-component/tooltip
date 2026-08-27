@@ -6,7 +6,7 @@ import type {
   TriggerRef,
 } from '@rc-component/trigger';
 import Trigger from '@rc-component/trigger';
-import { useControlledState, useEvent, useId } from '@rc-component/util';
+import { useId } from '@rc-component/util';
 import { clsx } from 'clsx';
 import * as React from 'react';
 import { useImperativeHandle, useRef } from 'react';
@@ -77,8 +77,6 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
     align = {},
     destroyOnHidden = false,
     defaultVisible,
-    visible,
-    popupVisible,
     getTooltipContainer,
     arrowContent,
     overlay,
@@ -91,36 +89,14 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
 
   const mergedId = useId(id);
   const triggerRef = useRef<TriggerRef>(null);
-  const controlledVisible = 'visible' in props ? visible : popupVisible;
-  const [mergedVisible, setMergedVisible] = useControlledState(
-    defaultVisible ?? false,
-    controlledVisible,
-  );
-
-  const onInternalVisibleChange = useEvent((nextVisible: boolean) => {
-    setMergedVisible(nextVisible);
-    onVisibleChange?.(nextVisible);
-  });
 
   useImperativeHandle(ref, () => triggerRef.current);
 
   const extraProps: Partial<TooltipProps & TriggerProps> = { ...restProps };
 
-  React.useEffect(() => {
-    if (!mergedVisible) {
-      return undefined;
-    }
-
-    const targetWindow = triggerRef.current?.nativeElement?.ownerDocument.defaultView;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        onInternalVisibleChange(false);
-      }
-    };
-
-    targetWindow?.addEventListener('keydown', onKeyDown);
-    return () => targetWindow?.removeEventListener('keydown', onKeyDown);
-  }, [mergedVisible, onInternalVisibleChange]);
+  if ('visible' in props) {
+    extraProps.popupVisible = props.visible;
+  }
 
   // ========================= Arrow ==========================
   // Process arrow configuration
@@ -172,8 +148,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
       ref={triggerRef}
       popupAlign={align}
       getPopupContainer={getTooltipContainer}
-      popupVisible={mergedVisible}
-      onOpenChange={onInternalVisibleChange}
+      onOpenChange={onVisibleChange}
       afterOpenChange={afterVisibleChange}
       popupMotion={motion}
       defaultPopupVisible={defaultVisible}

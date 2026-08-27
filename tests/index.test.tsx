@@ -74,47 +74,6 @@ describe('rc-tooltip', () => {
       );
       expect(domRef.current).toBeTruthy();
     });
-
-    it('closes an uncontrolled tooltip with Escape', () => {
-      const onVisibleChange = jest.fn();
-      const { container } = render(
-        <Tooltip trigger={['click']} overlay="Tooltip content" onVisibleChange={onVisibleChange}>
-          <button type="button">Show tooltip</button>
-        </Tooltip>,
-      );
-
-      fireEvent.click(container.querySelector('button'));
-      expect(onVisibleChange).toHaveBeenLastCalledWith(true);
-      expect(container.querySelector('.rc-tooltip')).not.toHaveClass('rc-tooltip-hidden');
-
-      fireEvent.keyDown(window, { key: 'Escape' });
-      expect(onVisibleChange).toHaveBeenLastCalledWith(false);
-      expect(container.querySelector('.rc-tooltip')).toHaveClass('rc-tooltip-hidden');
-
-      fireEvent.click(container.querySelector('button'));
-      expect(onVisibleChange).toHaveBeenLastCalledWith(true);
-      expect(container.querySelector('.rc-tooltip')).not.toHaveClass('rc-tooltip-hidden');
-    });
-
-    it('requests closure without overriding controlled visibility', () => {
-      const onVisibleChange = jest.fn();
-      const { container, rerender } = render(
-        <Tooltip visible overlay="Tooltip content" onVisibleChange={onVisibleChange}>
-          <button type="button">Show tooltip</button>
-        </Tooltip>,
-      );
-
-      fireEvent.keyDown(window, { key: 'Escape' });
-      expect(onVisibleChange).toHaveBeenLastCalledWith(false);
-      expect(container.querySelector('.rc-tooltip')).not.toHaveClass('rc-tooltip-hidden');
-
-      rerender(
-        <Tooltip visible={false} overlay="Tooltip content" onVisibleChange={onVisibleChange}>
-          <button type="button">Show tooltip</button>
-        </Tooltip>,
-      );
-      expect(container.querySelector('.rc-tooltip')).toHaveClass('rc-tooltip-hidden');
-    });
   });
 
   describe('destroyOnHidden', () => {
