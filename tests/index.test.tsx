@@ -528,6 +528,24 @@ describe('rc-tooltip', () => {
   });
 
   describe('children handling', () => {
+    it('should expose tooltip content when the default trigger receives focus', () => {
+      const { container } = render(
+        <Tooltip overlay="tooltip content">
+          <button>Trigger</button>
+        </Tooltip>,
+      );
+
+      const trigger = container.querySelector('button');
+      fireEvent.focus(trigger);
+
+      const describedBy = trigger.getAttribute('aria-describedby');
+      expect(describedBy).toBeTruthy();
+      expect(document.getElementById(describedBy)).toHaveTextContent('tooltip content');
+
+      fireEvent.blur(trigger);
+      expect(trigger).not.toHaveAttribute('aria-describedby');
+    });
+
     it('should set aria-describedby immediately when defaultVisible is true', () => {
       const { container } = render(
         <Tooltip defaultVisible overlay="tooltip content">
