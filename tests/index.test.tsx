@@ -575,6 +575,28 @@ describe('rc-tooltip', () => {
       expect(container.querySelector('button')).not.toHaveAttribute('aria-describedby');
     });
 
+    it('should preserve the child aria-describedby across visibility changes', () => {
+      const overlay = 'tooltip content';
+      const renderTooltip = (visible: boolean) => (
+        <Tooltip id="tooltip-description" overlay={overlay} visible={visible}>
+          <button aria-describedby="existing-description">Click me</button>
+        </Tooltip>
+      );
+      const { container, rerender } = render(renderTooltip(false));
+      const trigger = container.querySelector('button');
+
+      expect(trigger).toHaveAttribute('aria-describedby', 'existing-description');
+
+      rerender(renderTooltip(true));
+      expect(trigger).toHaveAttribute(
+        'aria-describedby',
+        'existing-description tooltip-description',
+      );
+
+      rerender(renderTooltip(false));
+      expect(trigger).toHaveAttribute('aria-describedby', 'existing-description');
+    });
+
     it('should preserve original props of children', () => {
       const onMouseEnter = jest.fn();
 
