@@ -121,7 +121,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
   const getChildren: TriggerProps['children'] = ({ open }) => {
     const child = React.Children.only(children);
     const childAriaDescribedBy = (child.props as React.AriaAttributes)['aria-describedby'];
-    const ariaDescribedBy = [childAriaDescribedBy, overlay && open ? mergedId : undefined]
+    const ariaDescribedBy = [childAriaDescribedBy, overlay != null && open ? mergedId : undefined]
       .filter(Boolean)
       .join(' ');
     const ariaProps: React.AriaAttributes = {

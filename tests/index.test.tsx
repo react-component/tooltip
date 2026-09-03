@@ -597,6 +597,35 @@ describe('rc-tooltip', () => {
       expect(trigger).toHaveAttribute('aria-describedby', 'existing-description');
     });
 
+    it('should set aria-describedby when overlay is a falsy but valid node like 0', () => {
+      const { container } = render(
+        <Tooltip overlay={0} visible>
+          <button>Click me</button>
+        </Tooltip>,
+      );
+
+      const trigger = container.querySelector('button');
+      const describedBy = trigger.getAttribute('aria-describedby');
+      expect(describedBy).toBeTruthy();
+      expect(document.getElementById(describedBy)).toHaveTextContent('0');
+    });
+
+    it('should not set aria-describedby when overlay is null or undefined', () => {
+      const { container: nullContainer } = render(
+        <Tooltip overlay={null} visible>
+          <button>Click me</button>
+        </Tooltip>,
+      );
+      expect(nullContainer.querySelector('button')).not.toHaveAttribute('aria-describedby');
+
+      const { container: undefinedContainer } = render(
+        <Tooltip overlay={undefined} visible>
+          <button>Click me</button>
+        </Tooltip>,
+      );
+      expect(undefinedContainer.querySelector('button')).not.toHaveAttribute('aria-describedby');
+    });
+
     it('should preserve original props of children', () => {
       const onMouseEnter = jest.fn();
 
