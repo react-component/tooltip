@@ -6,7 +6,7 @@ import type {
   TriggerRef,
 } from '@rc-component/trigger';
 import Trigger from '@rc-component/trigger';
-import { useId } from '@rc-component/util';
+import { isNonNullable, useId } from '@rc-component/util';
 import { clsx } from 'clsx';
 import * as React from 'react';
 import { useImperativeHandle, useRef } from 'react';
@@ -121,7 +121,10 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
   const getChildren: TriggerProps['children'] = ({ open }) => {
     const child = React.Children.only(children);
     const childAriaDescribedBy = (child.props as React.AriaAttributes)['aria-describedby'];
-    const ariaDescribedBy = [childAriaDescribedBy, overlay != null && open ? mergedId : undefined]
+    const ariaDescribedBy = [
+      childAriaDescribedBy,
+      isNonNullable(overlay) && open ? mergedId : undefined,
+    ]
       .filter(Boolean)
       .join(' ');
     const ariaProps: React.AriaAttributes = {
