@@ -26,6 +26,8 @@ export interface TooltipProps extends Pick<
   | 'prefixCls'
   | 'forceRender'
   | 'popupVisible'
+  | 'popupClassName'
+  | 'popupStyle'
 > {
   children: React.ReactElement;
   // Style
@@ -133,7 +135,6 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
   // ========================= Render =========================
   return (
     <Trigger
-      popupClassName={classNames?.root}
       prefixCls={prefixCls}
       popup={
         <Popup
@@ -158,12 +159,13 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
       defaultPopupVisible={defaultVisible}
       autoDestroy={destroyOnHidden}
       mouseLeaveDelay={mouseLeaveDelay}
-      popupStyle={styles?.root}
       mouseEnterDelay={mouseEnterDelay}
       arrow={mergedArrow}
       uniqueContainerClassName={classNames?.uniqueContainer}
       uniqueContainerStyle={styles?.uniqueContainer}
       {...extraProps}
+      popupClassName={clsx(classNames?.root, extraProps.popupClassName)}
+      popupStyle={{ ...styles?.root, ...extraProps.popupStyle }}
     >
       {getChildren}
     </Trigger>

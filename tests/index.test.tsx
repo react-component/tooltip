@@ -431,6 +431,29 @@ describe('rc-tooltip', () => {
       expect(tooltipArrowElement).toHaveStyle({ borderColor: 'green' });
     });
 
+    it('should merge classNames.root and popupClassName, and styles.root and popupStyle', () => {
+      const { container } = render(
+        <Tooltip
+          overlay={<span>content</span>}
+          visible
+          popupClassName="legacy-popup"
+          classNames={{ root: 'semantic-root' }}
+          popupStyle={{ color: 'red' }}
+          styles={{ root: { backgroundColor: 'blue' } }}
+        >
+          <span>target</span>
+        </Tooltip>,
+      );
+
+      const tooltipElement = container.querySelector('.rc-tooltip') as HTMLElement;
+      expect(tooltipElement).toHaveClass('legacy-popup');
+      expect(tooltipElement).toHaveClass('semantic-root');
+      expect(tooltipElement).toHaveStyle({
+        color: 'red',
+        backgroundColor: 'blue',
+      });
+    });
+
     it('should work with partial classNames and styles', () => {
       const partialClassNames = {
         container: 'custom-container',
