@@ -26,6 +26,8 @@ export interface TooltipProps extends Pick<
   | 'prefixCls'
   | 'forceRender'
   | 'popupVisible'
+  | 'popupClassName'
+  | 'popupStyle'
 > {
   children: React.ReactElement;
   // Style
